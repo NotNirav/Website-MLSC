@@ -17,47 +17,10 @@ The total page layout gracefully spans the 2500px gradient canvas, structured in
 
 | Section | Height Target | Description | Purpose |
 | :--- | :--- | :--- | :--- |
-| **0. Navigation** | Floating / Fixed (~64px) | Minimalist glassmorphic navbar | Brand logo, section anchors, CTA |
 | **1. Hero Section** | **Full Screen (`100vh`)** (~800–900px) | First visual impression on landing | Tagline, mission statement, primary CTAs, scroll prompt |
 | **2. About Now Section** | **Full Screen (`100vh`)** (~800–900px) | Complete second screen revealed on scroll | What MLSC is doing *now*, community pillars, key metrics |
 | **3. Explore Section** | **Compact (~300px)** | Low-profile interactive hub | Quick cards to dive into Domains, Events, Projects |
 | **4. Footer** | **Appropriate (~220–250px)** | Clean, balanced conclusion | Social links, copyright, newsletter/contact, campus credit |
-
-### Visual Height Flow Diagram
-
-```
-+-------------------------------------------------------------+
-|  [Navbar: Logo, Links (About, Explore), Join Button]        |
-|                                                             |
-|  1. HERO SECTION (100vh - Full Screen)                      |
-|     • Impactful Typography: "Empowering Next-Gen Innovators"|
-|     • Subtitle: MLSC Community & Tech Chapter               |
-|     • Action Buttons: [Explore Now] [Join Community]        |
-|     • Animated Subtle Down-Scroll Indicator ⌄              |
-+-------------------------------------------------------------+
-                              ↓ (Scroll)
-+-------------------------------------------------------------+
-|  2. ABOUT NOW SECTION (100vh - Full Screen)                 |
-|     • Section Header: "About Now" / "What Drives Us"        |
-|     • Narrative: Current initiatives, workshops & mission   |
-|     • 3 or 4 Feature Pillars / Stat Cards (Glassmorphic)    |
-|       - 500+ Members | 20+ Workshops | 15+ Live Projects    |
-+-------------------------------------------------------------+
-                              ↓ (Scroll)
-+-------------------------------------------------------------+
-|  3. EXPLORE SECTION (~300px Height)                         |
-|     • Section Subhead: "Dive Deeper"                        |
-|     • Compact 3-Card Carousel / Grid (~220px card height):  |
-|       [ AI & Web Domains ] [ Upcoming Hackathons ] [ Repos ]|
-+-------------------------------------------------------------+
-                              ↓ (Scroll)
-+-------------------------------------------------------------+
-|  4. FOOTER (~220px Height)                                  |
-|     • MLSC Logo & brief closing line                        |
-|     • Social Icons (GitHub, LinkedIn, Discord, Instagram)   |
-|     • Quick Navigation Links & Copyright © 2026 MLSC        |
-+-------------------------------------------------------------+
-```
 
 ---
 
