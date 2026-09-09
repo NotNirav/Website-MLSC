@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MLSC — 1200px Blank Gradient Canvas</title>
+  <meta name="description" content="A premium 1200px height blank canvas featuring a subtle dark gradient from #0c0c0c to #171717 for the MLSC website.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Floating Control Bar -->
+  <header class="toolbar" id="main-toolbar">
+    <div class="brand-badge">
+      <span class="brand-dot"></span>
+      <span>MLSC Canvas</span>
+    </div>
+
+    <div class="dimension-badge" id="badge-dimensions">
+      <span>H: 1200px</span>
+    </div>
+
+    <div class="color-pills" id="badge-colors">
+      <span class="color-swatch">
+        <span class="swatch-color" style="background-color: #0c0c0c;"></span>
+        #0c0c0c
+      </span>
+      <span class="arrow-divider">➔</span>
+      <span class="color-swatch">
+        <span class="swatch-color" style="background-color: #171717;"></span>
+        #171717
+      </span>
+    </div>
+
+    <div class="actions-group">
+      <button type="button" class="btn" id="btn-direction" title="Change Gradient Angle">Vertical (180°)</button>
+      <button type="button" class="btn" id="btn-grid" title="Toggle Grid Overlay">Grid</button>
+      <button type="button" class="btn active" id="btn-ruler" title="Toggle Height Ruler">Ruler</button>
+      <button type="button" class="btn" id="btn-copy-css" title="Copy CSS to Clipboard">Copy CSS</button>
+      <button type="button" class="btn btn-primary" id="btn-export" title="Export 1200px PNG">Export PNG</button>
+    </div>
+  </header>
+
+  <!-- Canvas Viewport -->
+  <main class="canvas-viewport" id="canvas-viewport">
+    <div class="canvas-container" id="canvas-container">
+      
+      <!-- HTML5 Canvas Rendering Surface (Exactly 1200px Height) -->
+      <canvas id="gradient-canvas" height="1200"></canvas>
+
+      <!-- Grid Overlay (Toggleable) -->
+      <div class="grid-overlay" id="grid-overlay"></div>
+
+      <!-- Height Ruler / Markers -->
+      <aside class="height-ruler" id="height-ruler" aria-label="Height measurement ruler">
+        <div class="ruler-marker key-marker">
+          <span>0px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker">
+          <span>150px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker key-marker">
+          <span>300px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker">
+          <span>450px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker key-marker">
+          <span>600px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker">
+          <span>750px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker key-marker">
+          <span>900px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker">
+          <span>1050px</span>
+          <div class="ruler-line"></div>
+        </div>
+        <div class="ruler-marker key-marker">
+          <span>1200px</span>
+          <div class="ruler-line"></div>
+        </div>
+      </aside>
+
+      <!-- Center Minimal Title Watermark -->
+      <div class="canvas-info-watermark" id="canvas-info-watermark">
+        <h1 class="watermark-title">Blank Canvas</h1>
+        <p class="watermark-sub">1200PX HEIGHT &bull; #0C0C0C &rarr; #171717</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
