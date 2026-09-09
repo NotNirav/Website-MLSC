@@ -9,46 +9,14 @@
 </head>
 <body>
 
-  <!-- Floating Control Bar -->
-  <header class="toolbar" id="main-toolbar">
-    <div class="brand-badge">
-      <span class="brand-dot"></span>
-      <span>MLSC Canvas</span>
-    </div>
-
-    <div class="dimension-badge" id="badge-dimensions">
-      <span>H: 2500px</span>
-    </div>
-
-    <div class="color-pills" id="badge-colors">
-      <span class="color-swatch">
-        <span class="swatch-color" style="background-color: #0c0c0c;"></span>
-        #0c0c0c
-      </span>
-      <span class="arrow-divider">➔</span>
-      <span class="color-swatch">
-        <span class="swatch-color" style="background-color: #171717;"></span>
-        #171717
-      </span>
-    </div>
-
-    <div class="actions-group">
-      <button type="button" class="btn" id="btn-direction" title="Change Gradient Angle">Vertical (180°)</button>
-      <button type="button" class="btn" id="btn-grid" title="Toggle Grid Overlay">Grid</button>
-      <button type="button" class="btn active" id="btn-ruler" title="Toggle Height Ruler">Ruler</button>
-      <button type="button" class="btn" id="btn-copy-css" title="Copy CSS to Clipboard">Copy CSS</button>
-      <button type="button" class="btn btn-primary" id="btn-export" title="Export 2500px PNG">Export PNG</button>
-    </div>
-  </header>
-
   <!-- Canvas Viewport -->
   <main class="canvas-viewport" id="canvas-viewport">
     <div class="canvas-container" id="canvas-container">
       
-      <!-- HTML5 Canvas Rendering Surface (Exactly 2500px Height) -->
-      <canvas id="gradient-canvas" height="2500"></canvas>
+      <!-- HTML5 Canvas Rendering Surface (Dynamic & Scaled) -->
+      <canvas id="gradient-canvas"></canvas>
 
-      <!-- Grid Overlay (Toggleable) -->
+      <!-- Grid Overlay -->
       <div class="grid-overlay" id="grid-overlay"></div>
 
       <!-- Height Ruler / Markers -->
@@ -99,11 +67,156 @@
         </div>
       </aside>
 
-      <!-- Center Minimal Title Watermark -->
-      <div class="canvas-info-watermark" id="canvas-info-watermark">
-        <h1 class="watermark-title">Blank Canvas</h1>
-        <p class="watermark-sub">2500PX HEIGHT &bull; #0C0C0C &rarr; #171717</p>
-      </div>
+      <!-- MAIN WEBSITE CONTENT OVERLAY -->
+      <div class="site-content" id="site-content">
+        
+        <!-- ========================================================= -->
+        <!-- SECTION 1: HERO (100vh / Full Viewport)                   -->
+        <!-- ========================================================= -->
+        <section class="screen-section hero-section" id="hero" aria-label="Hero Section">
+          <h1 class="hero-raw-title">MLSC</h1>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 2: ABOUT NOW (100vh / Full Viewport)              -->
+        <!-- ========================================================= -->
+        <section class="screen-section about-section" id="about" aria-label="About Now Section">
+          <div class="ambient-glow glow-center"></div>
+
+          <div class="section-container">
+            <header class="section-header">
+              <div class="section-eyebrow">01 // ABOUT NOW</div>
+              <h2 class="section-heading">
+                Where passion meets <span class="text-gradient">real-world technology</span>.
+              </h2>
+              <p class="section-subheading">
+                We're currently bridging the gap between theoretical classroom learning and high-impact software engineering with active tracks in AI, Cloud, and Web.
+              </p>
+            </header>
+
+            <div class="about-grid">
+              <!-- Feature Card 1 -->
+              <article class="glass-card about-card">
+                <div class="card-icon-wrap icon-cyan">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/></svg>
+                </div>
+                <h3 class="card-title">Applied AI & Machine Learning</h3>
+                <p class="card-desc">
+                  Building deep learning models, fine-tuning LLMs, and deploying scalable computer vision solutions to solve university and community challenges.
+                </p>
+                <div class="card-tag">Active Spring 2026 Cohort</div>
+              </article>
+
+              <!-- Feature Card 2 -->
+              <article class="glass-card about-card">
+                <div class="card-icon-wrap icon-emerald">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+                </div>
+                <h3 class="card-title">Cloud & Systems Architecture</h3>
+                <p class="card-desc">
+                  Mastering Microsoft Azure, Kubernetes, serverless microservices, and CI/CD automation pipelines for robust production environments.
+                </p>
+                <div class="card-tag">Weekly Hands-on Labs</div>
+              </article>
+
+              <!-- Feature Card 3 -->
+              <article class="glass-card about-card">
+                <div class="card-icon-wrap icon-purple">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="card-title">Open-Source & Hackathons</h3>
+                <p class="card-desc">
+                  Forming cross-disciplinary sprint teams to build open-source tools, organize regional hackathons, and mentor early-stage developers.
+                </p>
+                <div class="card-tag">Community & Mentorship</div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 3: EXPLORE (~300px Compact Height)               -->
+        <!-- ========================================================= -->
+        <section class="compact-section explore-section" id="explore" aria-label="Explore Section">
+          <div class="compact-container">
+            <div class="explore-header-row">
+              <div>
+                <span class="compact-tag">02 // EXPLORE</span>
+                <h2 class="compact-title">Dive into our ecosystem</h2>
+              </div>
+              <p class="compact-desc">Jump straight into our core initiatives, upcoming hackathons, or project repositories.</p>
+            </div>
+
+            <div class="explore-card-row">
+              <!-- Explore 1 -->
+              <a href="#about" class="explore-card">
+                <div class="explore-card-badge">Domains</div>
+                <h3 class="explore-card-title">Technical Tracks</h3>
+                <p class="explore-card-text">AI/ML, Web3, Cloud Dev & UI/UX Design</p>
+                <span class="explore-link-arrow">Explore Tracks &rarr;</span>
+              </a>
+
+              <!-- Explore 2 -->
+              <a href="#about" class="explore-card">
+                <div class="explore-card-badge">Events</div>
+                <h3 class="explore-card-title">Upcoming Sprints</h3>
+                <p class="explore-card-text">Flagship Hackathons, Tech Talks & Workshops</p>
+                <span class="explore-link-arrow">View Schedule &rarr;</span>
+              </a>
+
+              <!-- Explore 3 -->
+              <a href="#about" class="explore-card">
+                <div class="explore-card-badge">Showcase</div>
+                <h3 class="explore-card-title">Open Repositories</h3>
+                <p class="explore-card-text">Explore student-built open-source codebases</p>
+                <span class="explore-link-arrow">Browse Code &rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 4: FOOTER (~220px Proportional Height)           -->
+        <!-- ========================================================= -->
+        <footer class="site-footer" id="footer" aria-label="Site Footer">
+          <div class="footer-container">
+            <div class="footer-top">
+              <div class="footer-brand">
+                <div class="brand-badge-footer">
+                  <span class="brand-dot"></span>
+                  <span class="footer-brand-title">MLSC</span>
+                </div>
+                <p class="footer-tagline">
+                  Microsoft Learn Student Chapter &bull; Fueling student developer innovation and tech leadership.
+                </p>
+              </div>
+
+              <div class="footer-links-group">
+                <div class="footer-col">
+                  <span class="footer-heading">Navigation</span>
+                  <a href="#hero">Home</a>
+                  <a href="#about">About Now</a>
+                  <a href="#explore">Explore</a>
+                </div>
+                <div class="footer-col">
+                  <span class="footer-heading">Community</span>
+                  <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                  <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="footer-bottom">
+              <p class="footer-copy">&copy; 2026 Microsoft Learn Student Chapter. All rights reserved.</p>
+              <div class="footer-badges">
+                <span class="status-indicator">● Gradient Canvas 2500px</span>
+              </div>
+            </div>
+          </div>
+        </footer>
+
+      </div><!-- /.site-content -->
 
     </div>
   </main>
