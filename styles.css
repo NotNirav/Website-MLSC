@@ -182,6 +182,23 @@ body {
   text-transform: uppercase;
 }
 
+/* MLSC Letter Brand Solid Colors (Matched to Microsoft Learn Chapter banner) */
+.letter-m {
+  color: #f25022; /* Microsoft Orange / Red */
+}
+
+.letter-l {
+  color: #7fba00; /* Microsoft Green */
+}
+
+.letter-s {
+  color: #ffb900; /* Microsoft Yellow / Amber */
+}
+
+.letter-c {
+  color: #00a4ef; /* Microsoft Blue */
+}
+
 /* ========================================================= */
 /* SECTION 2: ABOUT NOW SECTION (100vh)                      */
 /* ========================================================= */
