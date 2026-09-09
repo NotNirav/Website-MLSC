@@ -3,7 +3,7 @@
 :root {
   --color-start: #0c0c0c;
   --color-end: #171717;
-  --canvas-height: 1500px;
+  --canvas-height: 2500px;
   --bg-app: #080808;
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
@@ -192,7 +192,7 @@ body {
 /* The Exact 1200px Height Canvas Container */
 .canvas-container {
   width: 100%;
-  height: var(--canvas-height); /* Strictly 1500px */
+  height: var(--canvas-height); /* Strictly 2500px */
   position: relative;
   overflow: hidden;
   background: linear-gradient(180deg, var(--color-start) 0%, var(--color-end) 100%);
@@ -229,7 +229,7 @@ body {
   position: absolute;
   top: 0;
   right: 16px;
-  height: 1500px;
+  height: 2500px;
   width: 60px;
   display: flex;
   flex-direction: column;

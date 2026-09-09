@@ -1,6 +1,6 @@
 /**
  * MLSC Blank Canvas Script
- * Initializes and manages the 1500px height gradient canvas
+ * Initializes and manages the 2500px height gradient canvas
  * Gradient: #0c0c0c -> #171717
  */
 
@@ -9,7 +9,7 @@
 
   const COLOR_START = '#0c0c0c';
   const COLOR_END = '#171717';
-  const CANVAS_HEIGHT = 1500;
+  const CANVAS_HEIGHT = 2500;
 
   const canvas = document.getElementById('gradient-canvas');
   const canvasContainer = document.getElementById('canvas-container');
@@ -135,10 +135,10 @@
     });
   }
 
-  // Export 1500px PNG
+  // Export 2500px PNG
   if (btnExport) {
     btnExport.addEventListener('click', () => {
-      // Create clean offline canvas for 1920x1500 export
+      // Create clean offline canvas for 1920x2500 export
       const exportCanvas = document.createElement('canvas');
       exportCanvas.width = 1920;
       exportCanvas.height = CANVAS_HEIGHT;
@@ -154,7 +154,7 @@
         grad.addColorStop(0, COLOR_START);
         grad.addColorStop(1, COLOR_END);
       } else {
-        grad = exportCtx.createRadialGradient(960, 750, 0, 960, 750, 1200);
+        grad = exportCtx.createRadialGradient(960, 1250, 0, 960, 1250, 1800);
         grad.addColorStop(0, COLOR_END);
         grad.addColorStop(1, COLOR_START);
       }
@@ -163,11 +163,11 @@
       exportCtx.fillRect(0, 0, 1920, CANVAS_HEIGHT);
 
       const link = document.createElement('a');
-      link.download = `mlsc-canvas-1500px-${currentDirection}.png`;
+      link.download = `mlsc-canvas-2500px-${currentDirection}.png`;
       link.href = exportCanvas.toDataURL('image/png');
       link.click();
 
-      showToast('1500px Canvas downloaded as PNG!');
+      showToast('2500px Canvas downloaded as PNG!');
     });
   }
 
