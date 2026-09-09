@@ -72,18 +72,11 @@ The total page layout gracefully spans the 2500px gradient canvas, structured in
 
 ---
 
-### Section 2: About Now Section (`100vh`)
-- **Visual Style**: Clean modern layout balancing storytelling and metrics without feeling cluttered.
-- **Layout**: Split 2-column layout or structured grid:
-  - **Left / Top**:
-    - Tag: `[ 01 // ABOUT NOW ]`
-    - Header: *"Where passion meets practical technology."*
-    - Narrative: Explaining what MLSC is focusing on currently—hands-on open source, AI workshops, collaborative hackathons, and peer mentoring.
-  - **Right / Bottom Cards**:
-    - **Pillar 1 — Learn & Build**: Hands-on technical sessions covering modern cloud, AI, and web development.
-    - **Pillar 2 — Open Collaboration**: Cross-domain project teams turning ideas into deployable software.
-    - **Pillar 3 — Community First**: Inclusive networking, mentorship from seniors and industry alumni.
-  - **Metrics Strip**: Key milestone badges (e.g., `500+ Active Members`, `12+ Flagship Events`, `100% Student Led`).
+### Section 2: About Now Section (`100vh` / Full Viewport)
+- **Header**: Clean `"About Now"` text title.
+- **Glassmorphic Showcase Box**: A large, empty rectangular greyish glassmorphism box (`.about-glass-box`) with frosted blur (`backdrop-filter: blur(28px)`) and subtle border/lighting.
+- **Glassmorphism Scope**: Confined exclusively to this box — no other components or cards on the page use glassmorphism.
+- **Content**: Kept empty as a placeholder container to be filled with data in subsequent steps.
 
 ---
 
