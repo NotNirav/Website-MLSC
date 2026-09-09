@@ -56,8 +56,93 @@
     });
   });
 
+  // =========================================================
+  // Hamburger Visibility (2nd Viewport & Onwards) & Sidebar
+  // =========================================================
+  const hero = document.getElementById('hero');
+  const hamburger = document.getElementById('nav-hamburger');
+  const sidebarDrawer = document.getElementById('sidebar-drawer');
+  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+  const sidebarClose = document.getElementById('sidebar-close');
+  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+  function updateHamburgerVisibility() {
+    if (!hero || !hamburger) return;
+    const heroRect = hero.getBoundingClientRect();
+    // Hamburger only shows from 2nd viewport and onwards (when hero is scrolled out of view)
+    const inSecondViewportOrBeyond = heroRect.bottom <= 120;
+    if (inSecondViewportOrBeyond) {
+      hamburger.classList.add('visible');
+    } else {
+      hamburger.classList.remove('visible');
+      closeSidebar();
+    }
+  }
+
+  function openSidebar() {
+    if (!sidebarDrawer) return;
+    sidebarDrawer.classList.add('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.add('open');
+    if (hamburger) {
+      hamburger.classList.add('open');
+      hamburger.setAttribute('aria-expanded', 'true');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    if (!sidebarDrawer) return;
+    sidebarDrawer.classList.remove('open');
+    if (sidebarBackdrop) sidebarBackdrop.classList.remove('open');
+    if (hamburger) {
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function toggleSidebar() {
+    if (!sidebarDrawer) return;
+    if (sidebarDrawer.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
+  }
+
+  if (hamburger) {
+    hamburger.addEventListener('click', toggleSidebar);
+  }
+
+  if (sidebarClose) {
+    sidebarClose.addEventListener('click', closeSidebar);
+  }
+
+  if (sidebarBackdrop) {
+    sidebarBackdrop.addEventListener('click', closeSidebar);
+  }
+
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeSidebar();
+    });
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebarDrawer && sidebarDrawer.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  window.addEventListener('scroll', updateHamburgerVisibility, { passive: true });
+  window.addEventListener('resize', updateHamburgerVisibility);
+
   // Initial draw & resize listeners
   window.addEventListener('resize', renderCanvas);
-  window.addEventListener('DOMContentLoaded', renderCanvas);
+  window.addEventListener('DOMContentLoaded', () => {
+    renderCanvas();
+    updateHamburgerVisibility();
+  });
   renderCanvas();
+  updateHamburgerVisibility();
 })();

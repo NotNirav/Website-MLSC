@@ -9,6 +9,53 @@
 </head>
 <body>
 
+  <!-- Floating Top-Left Hamburger (Active from 2nd Viewport onwards) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="sidebar-drawer">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <!-- Left Sidebar Drawer & Backdrop -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Navigation Menu">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="brand-dot"></span>
+        <span class="sidebar-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span class="letter-s">S</span><span class="letter-c">C</span></span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#hero" class="sidebar-link">
+        <span class="link-index">01</span>
+        <span class="link-label">Home</span>
+      </a>
+      <a href="#about" class="sidebar-link active">
+        <span class="link-index">02</span>
+        <span class="link-label">About Now</span>
+      </a>
+      <a href="#explore" class="sidebar-link">
+        <span class="link-index">03</span>
+        <span class="link-label">Explore</span>
+      </a>
+      <a href="#footer" class="sidebar-link">
+        <span class="link-index">04</span>
+        <span class="link-label">Community</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p class="sidebar-note">Microsoft Learn Student Chapter</p>
+      <div class="sidebar-social-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+      </div>
+    </div>
+  </aside>
+
   <!-- Canvas Viewport -->
   <main class="canvas-viewport" id="canvas-viewport">
     <div class="canvas-container" id="canvas-container">
