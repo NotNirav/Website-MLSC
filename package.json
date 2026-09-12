@@ -4,6 +4,8 @@
   "description": "",
   "main": "script.js",
   "scripts": {
+    "start": "npx serve -l 3000",
+    "dev": "npx serve -l 3000",
     "build:fluid-glass": "esbuild fluid-glass-mount.jsx --bundle --outfile=fluid-glass-bundle.js --format=iife --target=es2020 --platform=browser --define:global=globalThis --jsx=automatic --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
