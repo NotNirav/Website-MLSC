@@ -66,15 +66,20 @@
 
   let cachedHeroHeight = window.innerHeight;
   function measureHero() {
-    if (hero) cachedHeroHeight = hero.offsetHeight || window.innerHeight;
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      cachedHeroHeight = aboutSection.offsetTop;
+    } else if (hero) {
+      cachedHeroHeight = hero.offsetHeight || window.innerHeight;
+    }
   }
 
   function updateNavbarVisibility(scrollTop) {
     if (!hero || !glassNavbar) return;
     const currentY = typeof scrollTop === 'number' ? scrollTop : window.scrollY;
-    // Navbar pops up at below-fold page (when hero is scrolled out of view)
-    const inSecondViewportOrBeyond = currentY >= (cachedHeroHeight - 120);
-    if (inSecondViewportOrBeyond) {
+    // Navbar appears right when the below-fold page just appears (at the white reference line)
+    const inBelowFold = currentY >= cachedHeroHeight;
+    if (inBelowFold) {
       if (!glassNavbar.classList.contains('visible')) {
         glassNavbar.classList.add('visible');
       }
