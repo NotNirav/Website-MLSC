@@ -119,6 +119,7 @@
 
   // =========================================================
   // Global Lenis Smooth Scroll (Whole Website)
+  // Calibrated for ultra-luxurious, weighted liquid inertia
   // =========================================================
   let globalLenis = null;
 
@@ -126,26 +127,107 @@
     if (globalLenis || typeof Lenis === 'undefined') return globalLenis;
     try {
       globalLenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
+        lerp: 0.06, // Liquid inertia damping — gives that silky, weighty Awwwards-style glide
+        wheelMultiplier: 0.72, // Calibrated pace so scrolling doesn't fly through content
+        touchMultiplier: 1.2,
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.4,
         infinite: false,
-        syncTouch: false
+        orientation: 'vertical',
+        gestureOrientation: 'vertical'
       });
 
-      function raf(time) {
-        globalLenis.raf(time);
+      // Synchronize Lenis with GSAP Ticker if available for zero-jitter rendering
+      if (typeof gsap !== 'undefined') {
+        if (typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          globalLenis.on('scroll', ScrollTrigger.update);
+        }
+        gsap.ticker.add((time) => {
+          globalLenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      } else {
+        function raf(time) {
+          globalLenis.raf(time);
+          requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
       }
-      requestAnimationFrame(raf);
     } catch (err) {
       console.warn('Global Lenis init error:', err);
     }
     return globalLenis;
+  }
+
+  // =========================================================
+  // Cinematic ScrollTrigger Parallax & Depth Animations
+  // =========================================================
+  function initScrollAnimations() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    // 1. Hero Title: Cinematic Parallax & Scale-down on scroll
+    const heroTitle = document.querySelector('.hero-raw-title');
+    const heroSection = document.getElementById('hero');
+    if (heroTitle && heroSection) {
+      gsap.to(heroTitle, {
+        scrollTrigger: {
+          trigger: heroSection,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
+          invalidateOnRefresh: true
+        },
+        y: 110,
+        scale: 0.86,
+        opacity: 0.08,
+        ease: 'power1.out'
+      });
+    }
+
+    // 2. About Us Section: Silky Elevation & Reveal
+    const aboutContainer = document.querySelector('.about-container');
+    const aboutSection = document.getElementById('about');
+    if (aboutContainer && aboutSection) {
+      gsap.fromTo(
+        aboutContainer,
+        { opacity: 0.7, y: 40, scale: 0.98 },
+        {
+          scrollTrigger: {
+            trigger: aboutSection,
+            start: 'top 85%',
+            end: 'top 30%',
+            scrub: 1.2,
+            invalidateOnRefresh: true
+          },
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: 'power2.out'
+        }
+      );
+    }
+
+    // 3. Explore Header: Gentle Slide & Focus
+    const exploreHeader = document.querySelector('.explore-header-row');
+    const exploreSection = document.getElementById('explore');
+    if (exploreHeader && exploreSection) {
+      gsap.fromTo(
+        exploreHeader,
+        { opacity: 0.6, y: 30 },
+        {
+          scrollTrigger: {
+            trigger: exploreSection,
+            start: 'top 82%',
+            end: 'top 48%',
+            scrub: 1,
+            invalidateOnRefresh: true
+          },
+          opacity: 1,
+          y: 0,
+          ease: 'power2.out'
+        }
+      );
+    }
   }
 
   // =========================================================
@@ -259,13 +341,15 @@
           translateY = pinEnd - cardTop + stackOffset;
         }
 
-        const roundedY = Math.round(translateY * 10) / 10;
-        const roundedScale = Math.round(scale * 1000) / 1000;
-
-        const last = lastTransforms.get(i);
-        if (!last || Math.abs(last.translateY - roundedY) > 0.1 || Math.abs(last.scale - roundedScale) > 0.001) {
-          card.style.transform = `translate3d(0, ${roundedY}px, 0) scale(${roundedScale})`;
-          lastTransforms.set(i, { translateY: roundedY, scale: roundedScale });
+        if (typeof gsap !== 'undefined') {
+          gsap.set(card, {
+            y: translateY,
+            scale: scale,
+            force3D: true,
+            overwrite: 'auto'
+          });
+        } else {
+          card.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
         }
 
         if (i === cachedCards.length - 1) {
@@ -300,6 +384,12 @@
   function onResizeHandler() {
     renderCanvas();
     measureHero();
+    if (globalLenis) {
+      globalLenis.resize();
+    }
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
     if (scrollStackInstance) {
       scrollStackInstance.measure();
       scrollStackInstance.update(window.scrollY);
@@ -316,6 +406,7 @@
     renderCanvas();
     const lenis = initGlobalLenis();
     scrollStackInstance = initScrollStack();
+    initScrollAnimations();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
@@ -324,6 +415,12 @@
     }
 
     window.addEventListener('resize', onResizeHandler);
+    window.addEventListener('load', () => {
+      if (globalLenis) globalLenis.resize();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+      onResizeHandler();
+    });
+
     onScrollHandler({ scroll: window.scrollY });
   }
 
