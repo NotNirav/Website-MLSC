@@ -1,18 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MLSC — 2500px Blank Gradient Canvas</title>
-  <meta name="description" content="A premium 2500px height blank canvas featuring a subtle dark gradient from #0c0c0c to #171717 for the MLSC website.">
+  <meta name="description"
+    content="A premium 2500px height blank canvas featuring a subtle dark gradient from #0c0c0c to #171717 for the MLSC website.">
   <link rel="stylesheet" href="styles.css">
+  <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
+
 <body>
+
+  <!-- Floating Top-Left Hamburger (Active from 2nd Viewport onwards) -->
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false"
+    aria-controls="sidebar-drawer">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <!-- Left Sidebar Drawer & Backdrop -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Navigation Menu">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="brand-dot"></span>
+        <span class="sidebar-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span
+            class="letter-s">S</span><span class="letter-c">C</span></span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#hero" class="sidebar-link active">
+        <span class="link-index">01</span>
+        <span class="link-label">Home</span>
+      </a>
+      <a href="teams.html" class="sidebar-link">
+        <span class="link-index">02</span>
+        <span class="link-label">Team</span>
+      </a>
+      <a href="events.html" class="sidebar-link">
+        <span class="link-index">03</span>
+        <span class="link-label">Events</span>
+      </a>
+      <a href="games.html" class="sidebar-link">
+        <span class="link-index">04</span>
+        <span class="link-label">Games</span>
+      </a>
+      <a href="contact.html" class="sidebar-link">
+        <span class="link-index">05</span>
+        <span class="link-label">Contact us</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p class="sidebar-note">Microsoft Learn Student Chapter</p>
+      <div class="sidebar-social-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+      </div>
+    </div>
+  </aside>
 
   <!-- Canvas Viewport -->
   <main class="canvas-viewport" id="canvas-viewport">
     <div class="canvas-container" id="canvas-container">
-      
+
       <!-- HTML5 Canvas Rendering Surface (Dynamic & Scaled) -->
       <canvas id="gradient-canvas"></canvas>
 
@@ -69,108 +128,71 @@
 
       <!-- MAIN WEBSITE CONTENT OVERLAY -->
       <div class="site-content" id="site-content">
-        
+
         <!-- ========================================================= -->
         <!-- SECTION 1: HERO (100vh / Full Viewport)                   -->
         <!-- ========================================================= -->
         <section class="screen-section hero-section" id="hero" aria-label="Hero Section">
-          <h1 class="hero-raw-title"><span class="letter-m">M</span><span class="letter-l">L</span><span class="letter-s">S</span><span class="letter-c">C</span></h1>
+          <h1 class="hero-raw-title"><span class="letter-m">M</span><span class="letter-l">L</span><span
+              class="letter-s">S</span><span class="letter-c">C</span></h1>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SECTION 2: ABOUT NOW (100vh / Full Viewport)              -->
+        <!-- SECTION 2: ABOUT US SECTION                              -->
         <!-- ========================================================= -->
-        <section class="screen-section about-section" id="about" aria-label="About Now Section">
-          <div class="ambient-glow glow-center"></div>
-
-          <div class="section-container">
-            <header class="section-header">
-              <div class="section-eyebrow">01 // ABOUT NOW</div>
-              <h2 class="section-heading">
-                Where passion meets <span class="text-gradient">real-world technology</span>.
-              </h2>
-              <p class="section-subheading">
-                We're currently bridging the gap between theoretical classroom learning and high-impact software engineering with active tracks in AI, Cloud, and Web.
+        <section class="screen-section about-section" id="about" aria-label="About Us Section">
+          <div class="about-container">
+            <h2 class="about-title">About Us</h2>
+            <div class="about-glass-box" id="about-glass-box">
+              <p class="about-text">
+                We’re a community of student builders, passionate coders, and the team behind BlueBit, our flagship
+                hackathon where creators turn crazy ideas into reality over 36 hours of pure adrenaline. We host
+                legendary competitions, build cool stuff from scratch, break our code, fix it , and find our tribe along
+                the way. MLSC is more than just screen time — it’s where you turn shower thoughts into full-stack
+                projects, form your dream team, and grow alongside people who actually get your obscure tech jokes.
               </p>
-            </header>
-
-            <div class="about-grid">
-              <!-- Feature Card 1 -->
-              <article class="glass-card about-card">
-                <div class="card-icon-wrap icon-cyan">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20"/><path d="m17 5-5-3-5 3"/><path d="m17 19-5 3-5-3"/><path d="M2 12h20"/><path d="m5 7-3 5 3 5"/><path d="m19 7 3 5-3 5"/></svg>
-                </div>
-                <h3 class="card-title">Applied AI & Machine Learning</h3>
-                <p class="card-desc">
-                  Building deep learning models, fine-tuning LLMs, and deploying scalable computer vision solutions to solve university and community challenges.
-                </p>
-                <div class="card-tag">Active Spring 2026 Cohort</div>
-              </article>
-
-              <!-- Feature Card 2 -->
-              <article class="glass-card about-card">
-                <div class="card-icon-wrap icon-emerald">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
-                </div>
-                <h3 class="card-title">Cloud & Systems Architecture</h3>
-                <p class="card-desc">
-                  Mastering Microsoft Azure, Kubernetes, serverless microservices, and CI/CD automation pipelines for robust production environments.
-                </p>
-                <div class="card-tag">Weekly Hands-on Labs</div>
-              </article>
-
-              <!-- Feature Card 3 -->
-              <article class="glass-card about-card">
-                <div class="card-icon-wrap icon-purple">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                </div>
-                <h3 class="card-title">Open-Source & Hackathons</h3>
-                <p class="card-desc">
-                  Forming cross-disciplinary sprint teams to build open-source tools, organize regional hackathons, and mentor early-stage developers.
-                </p>
-                <div class="card-tag">Community & Mentorship</div>
-              </article>
+              <p class="about-highlight">
+                No gatekeeping, no boring lectures — just cool projects and great vibes.
+              </p>
             </div>
           </div>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SECTION 3: EXPLORE (~300px Compact Height)               -->
         <!-- ========================================================= -->
-        <section class="compact-section explore-section" id="explore" aria-label="Explore Section">
-          <div class="compact-container">
+        <!-- SECTION 3: EXPLORE (Native Window ScrollStack - 5 Cards)  -->
+        <!-- ========================================================= -->
+        <section class="explore-section" id="explore" aria-label="Explore Section">
+          <div class="explore-container">
             <div class="explore-header-row">
               <div>
-                <span class="compact-tag">02 // EXPLORE</span>
-                <h2 class="compact-title">Dive into our ecosystem</h2>
+                <h2 class="compact-title">Explore the pages..</h2>
               </div>
-              <p class="compact-desc">Jump straight into our core initiatives, upcoming hackathons, or project repositories.</p>
             </div>
 
-            <div class="explore-card-row">
-              <!-- Explore 1 -->
-              <a href="#about" class="explore-card">
-                <div class="explore-card-badge">Domains</div>
-                <h3 class="explore-card-title">Technical Tracks</h3>
-                <p class="explore-card-text">AI/ML, Web3, Cloud Dev & UI/UX Design</p>
-                <span class="explore-link-arrow">Explore Tracks &rarr;</span>
-              </a>
-
-              <!-- Explore 2 -->
-              <a href="#about" class="explore-card">
-                <div class="explore-card-badge">Events</div>
-                <h3 class="explore-card-title">Upcoming Sprints</h3>
-                <p class="explore-card-text">Flagship Hackathons, Tech Talks & Workshops</p>
-                <span class="explore-link-arrow">View Schedule &rarr;</span>
-              </a>
-
-              <!-- Explore 3 -->
-              <a href="#about" class="explore-card">
-                <div class="explore-card-badge">Showcase</div>
-                <h3 class="explore-card-title">Open Repositories</h3>
-                <p class="explore-card-text">Explore student-built open-source codebases</p>
-                <span class="explore-link-arrow">Browse Code &rarr;</span>
-              </a>
+            <!-- React Bits: Native Window ScrollStack (5 Cards) -->
+            <div class="scroll-stack-inner" id="scroll-stack-container">
+              <div class="scroll-stack-card card-1">
+                <h2>Events</h2>
+                <p>Where we code, create, and innovate: BlueBit, Praxis, and Techroom</p>
+              </div>
+              <div class="scroll-stack-card card-2">
+                <h2>Teams</h2>
+                <p>The coders and creators behind MLSC</p>
+              </div>
+              <div class="scroll-stack-card card-3">
+                <h2>Games</h2>
+                <p>Take a break and play quick mini-games</p>
+              </div>
+              <div class="scroll-stack-card card-4">
+                <h2>Contact</h2>
+                <p>Join MLSC: Connect, Collaborate, and Innovate</p>
+              </div>
+              <div class="scroll-stack-card card-5">
+                <h2>That's all..</h2>
+              </div>
+              <!-- Spacer so the last pin can release cleanly before footer -->
+              <div class="scroll-stack-end"></div>
             </div>
           </div>
         </section>
@@ -182,36 +204,54 @@
           <div class="footer-container">
             <div class="footer-top">
               <div class="footer-brand">
-                <div class="brand-badge-footer">
-                  <span class="brand-dot"></span>
-                  <span class="footer-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span class="letter-s">S</span><span class="letter-c">C</span></span>
-                </div>
-                <p class="footer-tagline">
-                  Microsoft Learn Student Chapter &bull; Fueling student developer innovation and tech leadership.
-                </p>
+                <a href="#hero" class="footer-brand-header" aria-label="Microsoft Learn Student Chapter Home">
+                  <svg class="mlsc-logo-icon" width="43" height="28" viewBox="0 0 43 28" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <!-- Top row: col 2 (Orange), col 3 (Green) -->
+                    <rect x="15" y="0" width="13" height="13" rx="1.5" fill="#F25022" class="mlsc-sq mlsc-sq-orange" />
+                    <rect x="30" y="0" width="13" height="13" rx="1.5" fill="#7FBA00" class="mlsc-sq mlsc-sq-green" />
+                    <!-- Bottom row: col 1 (Blue), col 2 (Yellow) -->
+                    <rect x="0" y="15" width="13" height="13" rx="1.5" fill="#00A4EF" class="mlsc-sq mlsc-sq-blue" />
+                    <rect x="15" y="15" width="13" height="13" rx="1.5" fill="#FFB900" class="mlsc-sq mlsc-sq-yellow" />
+                  </svg>
+                  <span class="footer-brand-title">Microsoft Learn Student Chapter</span>
+                </a>
+                <p class="footer-tagline">Building a community of tech enthusiasts, creators, and innovators.</p>
               </div>
 
               <div class="footer-links-group">
                 <div class="footer-col">
                   <span class="footer-heading">Navigation</span>
                   <a href="#hero">Home</a>
-                  <a href="#about">About Now</a>
+                  <a href="#about">About</a>
                   <a href="#explore">Explore</a>
                 </div>
                 <div class="footer-col">
-                  <span class="footer-heading">Community</span>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                  <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+                  <span class="footer-heading">Connect With Us</span>
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+                    aria-label="Connect on LinkedIn">
+                    <svg class="footer-social-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.64a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z" />
+                    </svg>
+                    <span>LinkedIn</span>
+                  </a>
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-social-link"
+                    aria-label="Follow on Instagram">
+                    <svg class="footer-social-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"
+                      aria-hidden="true">
+                      <path
+                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a3.999 3.999 0 1 1 0-7.998 3.999 3.999 0 0 1 0 7.998zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
+                    </svg>
+                    <span>Instagram</span>
+                  </a>
                 </div>
               </div>
             </div>
 
             <div class="footer-bottom">
               <p class="footer-copy">&copy; 2026 Microsoft Learn Student Chapter. All rights reserved.</p>
-              <div class="footer-badges">
-                <span class="status-indicator">● Gradient Canvas 2500px</span>
-              </div>
             </div>
           </div>
         </footer>
@@ -226,4 +266,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
