@@ -8,7 +8,7 @@
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
-  
+
   --accent: #38bdf8;
   --accent-hover: #7dd3fc;
   --accent-glow: rgba(56, 189, 248, 0.2);
@@ -98,7 +98,7 @@ body {
   inset: 0;
   pointer-events: none;
   background-size: 40px 40px;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   opacity: 0;
@@ -218,19 +218,23 @@ body {
 
 /* MLSC Letter Brand Solid Colors (Matched to Microsoft Learn Chapter banner) */
 .letter-m {
-  color: #f25022; /* Microsoft Orange / Red */
+  color: #f25022;
+  /* Microsoft Orange / Red */
 }
 
 .letter-l {
-  color: #7fba00; /* Microsoft Green */
+  color: #7fba00;
+  /* Microsoft Green */
 }
 
 .letter-s {
-  color: #ffb900; /* Microsoft Yellow / Amber */
+  color: #ffb900;
+  /* Microsoft Yellow / Amber */
 }
 
 .letter-c {
-  color: #00a4ef; /* Microsoft Blue */
+  color: #00a4ef;
+  /* Microsoft Blue */
 }
 
 /* ========================================================= */
@@ -286,7 +290,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: clamp(16px, 2.5vw, 24px);
   box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -362,11 +366,6 @@ body {
   margin-top: 2px;
 }
 
-.compact-desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  max-width: 440px;
-}
 
 /* ========================================================= */
 /* REACT BITS: SCROLLSTACK NATIVE WINDOW COMPONENT CSS       */
@@ -386,7 +385,7 @@ body {
   will-change: transform;
   backface-visibility: hidden;
   box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85),
-              0 0 20px rgba(0, 0, 0, 0.3);
+    0 0 20px rgba(0, 0, 0, 0.3);
   height: 20rem;
   width: min(940px, 100%);
   margin: 0 auto;
@@ -455,12 +454,14 @@ body {
   .explore-section {
     padding: 60px 16px 40px;
   }
+
   .scroll-stack-card {
     height: auto;
     min-height: 16rem;
     padding: 2rem 1.5rem;
     border-radius: 22px;
   }
+
   .scroll-stack-end {
     height: 240px;
   }
@@ -471,7 +472,7 @@ body {
 /* ========================================================= */
 .site-footer {
   width: 100%;
-  min-height: 220px;
+  min-height: 330px;
   border-top: 1px solid var(--border-glass);
   border-bottom: 1px solid #ffffff;
   background: #0c0c0c;
@@ -654,6 +655,7 @@ body {
     grid-template-columns: 1fr;
     gap: 12px;
   }
+
   .compact-section {
     min-height: auto;
     padding: 48px 24px;
@@ -665,6 +667,7 @@ body {
     flex-direction: column;
     gap: 24px;
   }
+
   .footer-links-group {
     gap: 32px;
   }
@@ -904,4 +907,3 @@ body {
 .sidebar-social-links a:hover {
   color: #ffffff;
 }
-
