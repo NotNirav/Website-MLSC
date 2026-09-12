@@ -739,13 +739,26 @@ body {
   opacity: 0.85;
 }
 
-.nav-brand-dot {
-  width: 7px;
-  height: 7px;
-  background: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #22c55e;
+.nav-logo-icon {
+  display: block;
   flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.glass-nav-brand:hover .mlsc-sq-orange {
+  filter: drop-shadow(0 0 6px rgba(242, 80, 34, 0.7));
+}
+
+.glass-nav-brand:hover .mlsc-sq-green {
+  filter: drop-shadow(0 0 6px rgba(127, 186, 0, 0.7));
+}
+
+.glass-nav-brand:hover .mlsc-sq-blue {
+  filter: drop-shadow(0 0 6px rgba(0, 164, 239, 0.7));
+}
+
+.glass-nav-brand:hover .mlsc-sq-yellow {
+  filter: drop-shadow(0 0 6px rgba(255, 185, 0, 0.7));
 }
 
 .nav-brand-text {
