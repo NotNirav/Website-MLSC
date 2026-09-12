@@ -113,6 +113,10 @@
     navBrand.addEventListener('click', (e) => handleAnchorSmoothScroll(e, navBrand));
   }
 
+  document.querySelectorAll('.scroll-stack-arrow').forEach(arrow => {
+    arrow.addEventListener('click', (e) => handleAnchorSmoothScroll(e, arrow));
+  });
+
   // =========================================================
   // Global Lenis Smooth Scroll (Whole Website)
   // =========================================================
