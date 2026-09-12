@@ -57,105 +57,56 @@
   });
 
   // =========================================================
-  // Hamburger Visibility (2nd Viewport & Onwards) & Sidebar
+  // Glassmorphism Navbar Visibility (2nd Viewport & Onwards)
   // =========================================================
   const hero = document.getElementById('hero');
-  const hamburger = document.getElementById('nav-hamburger');
-  const sidebarDrawer = document.getElementById('sidebar-drawer');
-  const sidebarBackdrop = document.getElementById('sidebar-backdrop');
-  const sidebarClose = document.getElementById('sidebar-close');
-  const sidebarLinks = document.querySelectorAll('.sidebar-link');
+  const glassNavbar = document.getElementById('glass-navbar');
+  const navLinks = document.querySelectorAll('.glass-nav-link');
+  const navBrand = document.querySelector('.glass-nav-brand');
 
   let cachedHeroHeight = window.innerHeight;
   function measureHero() {
     if (hero) cachedHeroHeight = hero.offsetHeight || window.innerHeight;
   }
 
-  function updateHamburgerVisibility(scrollTop) {
-    if (!hero || !hamburger) return;
+  function updateNavbarVisibility(scrollTop) {
+    if (!hero || !glassNavbar) return;
     const currentY = typeof scrollTop === 'number' ? scrollTop : window.scrollY;
-    // Hamburger only shows from 2nd viewport and onwards (when hero is scrolled out of view)
+    // Navbar pops up at below-fold page (when hero is scrolled out of view)
     const inSecondViewportOrBeyond = currentY >= (cachedHeroHeight - 120);
     if (inSecondViewportOrBeyond) {
-      if (!hamburger.classList.contains('visible')) {
-        hamburger.classList.add('visible');
+      if (!glassNavbar.classList.contains('visible')) {
+        glassNavbar.classList.add('visible');
       }
     } else {
-      if (hamburger.classList.contains('visible')) {
-        hamburger.classList.remove('visible');
-        closeSidebar();
+      if (glassNavbar.classList.contains('visible')) {
+        glassNavbar.classList.remove('visible');
       }
     }
   }
 
-  function openSidebar() {
-    if (!sidebarDrawer) return;
-    sidebarDrawer.classList.add('open');
-    if (sidebarBackdrop) sidebarBackdrop.classList.add('open');
-    if (hamburger) {
-      hamburger.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
-    }
-    document.body.style.overflow = 'hidden';
-    if (globalLenis) globalLenis.stop();
-  }
-
-  function closeSidebar() {
-    if (!sidebarDrawer) return;
-    sidebarDrawer.classList.remove('open');
-    if (sidebarBackdrop) sidebarBackdrop.classList.remove('open');
-    if (hamburger) {
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
-    document.body.style.overflow = '';
-    if (globalLenis) globalLenis.start();
-  }
-
-  function toggleSidebar() {
-    if (!sidebarDrawer) return;
-    if (sidebarDrawer.classList.contains('open')) {
-      closeSidebar();
-    } else {
-      openSidebar();
-    }
-  }
-
-  if (hamburger) {
-    hamburger.addEventListener('click', toggleSidebar);
-  }
-
-  if (sidebarClose) {
-    sidebarClose.addEventListener('click', closeSidebar);
-  }
-
-  if (sidebarBackdrop) {
-    sidebarBackdrop.addEventListener('click', closeSidebar);
-  }
-
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      closeSidebar();
-      if (targetId && targetId.startsWith('#')) {
-        const targetEl = document.querySelector(targetId);
-        if (targetEl) {
-          e.preventDefault();
-          if (globalLenis) {
-            globalLenis.scrollTo(targetEl, { duration: 1.2 });
-          } else {
-            targetEl.scrollIntoView({ behavior: 'smooth' });
-          }
+  function handleAnchorSmoothScroll(e, link) {
+    const targetHref = link.getAttribute('href');
+    if (targetHref && targetHref.startsWith('#')) {
+      const targetElement = document.querySelector(targetHref);
+      if (targetElement) {
+        e.preventDefault();
+        if (globalLenis) {
+          globalLenis.scrollTo(targetElement, { offset: 0, duration: 1.2 });
+        } else {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
         }
       }
-    });
+    }
+  }
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => handleAnchorSmoothScroll(e, link));
   });
 
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sidebarDrawer && sidebarDrawer.classList.contains('open')) {
-      closeSidebar();
-    }
-  });
+  if (navBrand) {
+    navBrand.addEventListener('click', (e) => handleAnchorSmoothScroll(e, navBrand));
+  }
 
   // =========================================================
   // Global Lenis Smooth Scroll (Whole Website)
@@ -334,7 +285,7 @@
   function onScrollHandler(e) {
     const scrollY = (e && typeof e.scroll === 'number') ? e.scroll : window.scrollY;
     if (scrollStackInstance) scrollStackInstance.update(scrollY);
-    updateHamburgerVisibility(scrollY);
+    updateNavbarVisibility(scrollY);
   }
 
   function onResizeHandler() {
@@ -344,7 +295,7 @@
       scrollStackInstance.measure();
       scrollStackInstance.update(window.scrollY);
     }
-    updateHamburgerVisibility(window.scrollY);
+    updateNavbarVisibility(window.scrollY);
   }
 
   let isAppInitialized = false;

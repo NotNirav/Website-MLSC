@@ -15,58 +15,22 @@
 
 <body>
 
-  <!-- Floating Top-Left Hamburger (Active from 2nd Viewport onwards) -->
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false"
-    aria-controls="sidebar-drawer">
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-    <span class="hamburger-line"></span>
-  </button>
-
-  <!-- Left Sidebar Drawer & Backdrop -->
-  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
-  <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Navigation Menu">
-    <div class="sidebar-header">
-      <div class="sidebar-brand">
-        <span class="brand-dot"></span>
-        <span class="sidebar-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span
-            class="letter-s">S</span><span class="letter-c">C</span></span>
+  <!-- Floating Glassmorphism Navbar (Active from 2nd Viewport onwards) -->
+  <header class="glass-navbar" id="glass-navbar" aria-label="Main Navigation">
+    <nav class="glass-nav-container">
+      <a href="#hero" class="glass-nav-brand" aria-label="MLSC Home">
+        <span class="nav-brand-dot"></span>
+        <span class="nav-brand-text"><span class="letter-m">M</span><span class="letter-l">L</span><span class="letter-s">S</span><span class="letter-c">C</span></span>
+      </a>
+      <div class="glass-nav-links">
+        <a href="#hero" class="glass-nav-link active">Home</a>
+        <a href="events.html" class="glass-nav-link">Events</a>
+        <a href="teams.html" class="glass-nav-link">Teams</a>
+        <a href="achievements.html" class="glass-nav-link">Achievements</a>
+        <a href="games.html" class="glass-nav-link">Games</a>
       </div>
-      <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">&times;</button>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a href="#hero" class="sidebar-link active">
-        <span class="link-index">01</span>
-        <span class="link-label">Home</span>
-      </a>
-      <a href="teams.html" class="sidebar-link">
-        <span class="link-index">02</span>
-        <span class="link-label">Team</span>
-      </a>
-      <a href="events.html" class="sidebar-link">
-        <span class="link-index">03</span>
-        <span class="link-label">Events</span>
-      </a>
-      <a href="games.html" class="sidebar-link">
-        <span class="link-index">04</span>
-        <span class="link-label">Games</span>
-      </a>
-      <a href="contact.html" class="sidebar-link">
-        <span class="link-index">05</span>
-        <span class="link-label">Contact us</span>
-      </a>
     </nav>
-
-    <div class="sidebar-footer">
-      <p class="sidebar-note">Microsoft Learn Student Chapter</p>
-      <div class="sidebar-social-links">
-        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
-      </div>
-    </div>
-  </aside>
+  </header>
 
   <!-- Canvas Viewport -->
   <main class="canvas-viewport" id="canvas-viewport">
