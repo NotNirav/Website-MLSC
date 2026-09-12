@@ -1,0 +1,33 @@
+{
+  "name": "website-mlsc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "build:fluid-glass": "esbuild fluid-glass-mount.jsx --bundle --outfile=fluid-glass-bundle.js --format=iife --target=es2020 --platform=browser --define:global=globalThis --jsx=automatic --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NotNirav/Website-MLSC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NotNirav/Website-MLSC/issues"
+  },
+  "homepage": "https://github.com/NotNirav/Website-MLSC#readme",
+  "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "maath": "^0.10.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
