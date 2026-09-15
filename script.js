@@ -287,13 +287,118 @@
   }
 
   // =========================================================
+  // Achievements: Scroll-Driven Journey Timeline Logic
+  // =========================================================
+  function initJourneyTimeline() {
+    const journeySection = document.getElementById('our-journey');
+    if (!journeySection) return null;
+
+    const stickyContainer = document.getElementById('journey-sticky-container');
+    const lineFill = document.getElementById('journey-line-fill');
+    const milestoneItems = Array.from(journeySection.querySelectorAll('.journey-milestone-item'));
+
+    if (!lineFill || !milestoneItems.length) return null;
+
+    let isMobile = window.innerWidth <= 820;
+    let cachedSectionTop = 0;
+    let cachedScrollDistance = 0;
+
+    const getElementDocTop = (element) => {
+      let top = 0;
+      let curr = element;
+      while (curr) {
+        top += curr.offsetTop || 0;
+        curr = curr.offsetParent;
+      }
+      return top;
+    };
+
+    function measureLayout() {
+      isMobile = window.innerWidth <= 820;
+      cachedSectionTop = getElementDocTop(journeySection);
+      const sectionHeight = journeySection.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      cachedScrollDistance = Math.max(1, sectionHeight - viewportHeight);
+    }
+
+    measureLayout();
+
+    function updateTimeline(customScrollTop) {
+      const scrollTop = typeof customScrollTop === 'number' ? customScrollTop : window.scrollY;
+
+      if (!isMobile) {
+        // Desktop Pinned Horizontal Scroll-Driven Progress
+        const relY = scrollTop - cachedSectionTop;
+
+        // Pin the visual viewport container while user scrolls through Our Journey
+        let translateY = 0;
+        if (relY >= 0 && relY <= cachedScrollDistance) {
+          translateY = relY;
+        } else if (relY > cachedScrollDistance) {
+          translateY = cachedScrollDistance; // Release at the bottom of the section
+        } else {
+          translateY = 0;
+        }
+
+        if (stickyContainer) {
+          stickyContainer.style.transform = `translate3d(0, ${Math.round(translateY * 10) / 10}px, 0)`;
+        }
+
+        // Progress strictly mapped to the scroll distance inside Our Journey
+        const progress = Math.min(1, Math.max(0, relY / cachedScrollDistance));
+
+        // Smoothly fill bright blue line from left to right
+        lineFill.style.transform = `translateY(-50%) scaleX(${progress})`;
+
+        // Activate milestones as the line reaches each dot
+        const count = milestoneItems.length;
+        milestoneItems.forEach((item, index) => {
+          const target = index === 0 ? 0 : (index / (count - 1)) * 0.96;
+          if (progress >= target) {
+            if (!item.classList.contains('is-active')) item.classList.add('is-active');
+          } else {
+            if (item.classList.contains('is-active')) item.classList.remove('is-active');
+          }
+        });
+      } else {
+        // Mobile Vertical Timeline Progress
+        if (stickyContainer) stickyContainer.style.transform = 'none';
+
+        const rect = journeySection.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const totalTravel = journeySection.offsetHeight;
+        const currentProgress = Math.min(1, Math.max(0, (vh * 0.65 - rect.top) / (totalTravel * 0.85)));
+
+        lineFill.style.transform = `scaleY(${currentProgress})`;
+
+        // Reveal each milestone as it enters around 75% of viewport
+        milestoneItems.forEach(item => {
+          const itemRect = item.getBoundingClientRect();
+          if (itemRect.top <= vh * 0.75) {
+            if (!item.classList.contains('is-active')) item.classList.add('is-active');
+          } else {
+            if (item.classList.contains('is-active')) item.classList.remove('is-active');
+          }
+        });
+      }
+    }
+
+    return {
+      update: updateTimeline,
+      measure: measureLayout
+    };
+  }
+
+  // =========================================================
   // App Orchestration (Single Global Initialization)
   // =========================================================
   let scrollStackInstance = null;
+  let journeyTimelineInstance = null;
 
   function onScrollHandler(e) {
     const scrollY = (e && typeof e.scroll === 'number') ? e.scroll : window.scrollY;
     if (scrollStackInstance) scrollStackInstance.update(scrollY);
+    if (journeyTimelineInstance) journeyTimelineInstance.update(scrollY);
     updateNavbarVisibility(scrollY);
   }
 
@@ -303,6 +408,10 @@
     if (scrollStackInstance) {
       scrollStackInstance.measure();
       scrollStackInstance.update(window.scrollY);
+    }
+    if (journeyTimelineInstance) {
+      journeyTimelineInstance.measure();
+      journeyTimelineInstance.update(window.scrollY);
     }
     updateNavbarVisibility(window.scrollY);
   }
@@ -316,6 +425,7 @@
     renderCanvas();
     const lenis = initGlobalLenis();
     scrollStackInstance = initScrollStack();
+    journeyTimelineInstance = initJourneyTimeline();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
@@ -324,6 +434,7 @@
     }
 
     window.addEventListener('resize', onResizeHandler);
+    window.addEventListener('load', onResizeHandler);
     onScrollHandler({ scroll: window.scrollY });
   }
 
