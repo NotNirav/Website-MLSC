@@ -75,7 +75,7 @@
   }
 
   function updateNavbarVisibility(scrollTop) {
-    if (!hero || !glassNavbar) return;
+    if (!hero || !glassNavbar || glassNavbar.classList.contains('navbar-fixed')) return;
     const currentY = typeof scrollTop === 'number' ? scrollTop : window.scrollY;
     // Navbar appears right when the below-fold page just appears (at the white reference line)
     const inBelowFold = currentY >= cachedHeroHeight;

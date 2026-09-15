@@ -755,6 +755,13 @@ body {
   transform: translate(-50%, 0);
 }
 
+.glass-navbar.navbar-fixed {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+  transition: none;
+}
+
 .glass-nav-container {
   display: flex;
   align-items: center;
