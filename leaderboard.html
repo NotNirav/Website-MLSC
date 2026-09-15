@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Achievements — MLSC PCCOE</title>
+  <title>Leaderboard — MLSC PCCOE</title>
   <meta name="description"
-    content="Explore the achievements, hackathon winners, and community journey of Microsoft Learn Student Chapter PCCOE.">
+    content="LeetCode Leaderboard of Microsoft Learn Student Chapter PCCOE — Celebrating top problem solvers and competitive programmers.">
   <link rel="stylesheet" href="styles.css">
   <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
@@ -35,8 +35,8 @@
         <a href="index.html#hero" class="glass-nav-link">Home</a>
         <a href="events.html" class="glass-nav-link">Events</a>
         <a href="teams.html" class="glass-nav-link">Teams</a>
-        <a href="achievements.html" class="glass-nav-link active">Achievements</a>
-        <a href="leaderboard.html" class="glass-nav-link">Leaderboard</a>
+        <a href="achievements.html" class="glass-nav-link">Achievements</a>
+        <a href="leaderboard.html" class="glass-nav-link active">Leaderboard</a>
         <a href="games.html" class="glass-nav-link">Games</a>
       </div>
     </nav>
@@ -56,146 +56,89 @@
       <div class="site-content" id="site-content">
 
         <!-- ========================================================= -->
-        <!-- SECTION 1: HERO                                           -->
+        <!-- SECTION 1: HERO HEADER & CONTROLS                         -->
         <!-- ========================================================= -->
-        <section class="achievements-section hero-section" id="hero" aria-label="Hero Section">
-          <div class="achievements-container hero-container">
-            <span class="compact-tag">ACHIEVEMENTS</span>
-            <h1 class="achievements-hero-title">Where Curiosity Turns Into <span class="achievements-gradient-text">Achievement</span></h1>
-            <p class="achievements-hero-subtitle">Celebrating the milestones, victories, and coding spirit of the MLSC community.</p>
-          </div>
-        </section>
+        <section class="leaderboard-section leaderboard-hero-section" id="hero" aria-label="Leaderboard Hero Section">
+          <div class="leaderboard-container hero-container">
+            <span class="compact-tag">LEETCODE RANKERS</span>
+            <h1 class="leaderboard-hero-title">LEADERBOARD</h1>
+            <p class="leaderboard-hero-subtitle">Honoring our top algorithmic thinkers, problem solvers, and competitive coders.</p>
 
-        <!-- ========================================================= -->
-        <!-- SECTION 2: OUR JOURNEY                                    -->
-        <!-- ========================================================= -->
-        <section class="achievements-section journey-section" id="our-journey" aria-label="Our Journey Section">
-          <div class="journey-sticky-container" id="journey-sticky-container">
-            <div class="journey-content-wrap">
-              <!-- Section Header -->
-              <div class="journey-header">
-                <span class="compact-tag">OUR JOURNEY</span>
-                <h2 class="journey-title">Every milestone tells our story.</h2>
+            <!-- Search & Filter Bar -->
+            <div class="leaderboard-controls-wrap">
+              <div class="timeframe-toggle" role="tablist" aria-label="Timeframe selector">
+                <button class="timeframe-btn active" data-timeframe="all" role="tab" aria-selected="true">All Time</button>
+                <button class="timeframe-btn" data-timeframe="monthly" role="tab" aria-selected="false">Monthly</button>
+                <button class="timeframe-btn" data-timeframe="weekly" role="tab" aria-selected="false">Weekly</button>
               </div>
 
-              <!-- Scroll-Driven Timeline Track -->
-              <div class="journey-timeline-wrapper">
-                <div class="journey-timeline-track" id="journey-timeline-track">
-                  <!-- Base Blue Line -->
-                  <div class="journey-line-base" aria-hidden="true"></div>
-                  <!-- Bright Blue Active/Progress Line -->
-                  <div class="journey-line-progress" id="journey-line-fill" aria-hidden="true"></div>
-
-                  <!-- Milestones Row -->
-                  <div class="journey-milestones" id="journey-milestones">
-                    <!-- Milestone 1 -->
-                    <div class="journey-milestone-item is-active" data-index="0">
-                      <!-- Year Above Timeline -->
-                      <div class="milestone-year-wrap">
-                        <span class="milestone-year">2023</span>
-                        <div class="milestone-stem stem-top" aria-hidden="true"></div>
-                      </div>
-                      <!-- Dot Directly on Timeline -->
-                      <div class="milestone-dot-anchor">
-                        <div class="milestone-dot" aria-hidden="true"></div>
-                      </div>
-                      <!-- Description Below Timeline (No Box) -->
-                      <div class="milestone-desc-wrap">
-                        <div class="milestone-stem stem-bottom" aria-hidden="true"></div>
-                        <h3 class="milestone-title">Chapter Inception</h3>
-                        <p class="milestone-desc">Founded at PCCOE to empower student developers through peer learning and technical curiosity.</p>
-                      </div>
-                    </div>
-
-                    <!-- Milestone 2 -->
-                    <div class="journey-milestone-item" data-index="1">
-                      <!-- Year Above Timeline -->
-                      <div class="milestone-year-wrap">
-                        <span class="milestone-year">2024</span>
-                        <div class="milestone-stem stem-top" aria-hidden="true"></div>
-                      </div>
-                      <!-- Dot Directly on Timeline -->
-                      <div class="milestone-dot-anchor">
-                        <div class="milestone-dot" aria-hidden="true"></div>
-                      </div>
-                      <!-- Description Below Timeline (No Box) -->
-                      <div class="milestone-desc-wrap">
-                        <div class="milestone-stem stem-bottom" aria-hidden="true"></div>
-                        <h3 class="milestone-title">Community Expansion</h3>
-                        <p class="milestone-desc">Expanded to 500+ active members with hands-on bootcamps in Cloud, Web, and AI.</p>
-                      </div>
-                    </div>
-
-                    <!-- Milestone 3 -->
-                    <div class="journey-milestone-item" data-index="2">
-                      <!-- Year Above Timeline -->
-                      <div class="milestone-year-wrap">
-                        <span class="milestone-year">2025</span>
-                        <div class="milestone-stem stem-top" aria-hidden="true"></div>
-                      </div>
-                      <!-- Dot Directly on Timeline -->
-                      <div class="milestone-dot-anchor">
-                        <div class="milestone-dot" aria-hidden="true"></div>
-                      </div>
-                      <!-- Description Below Timeline (No Box) -->
-                      <div class="milestone-desc-wrap">
-                        <div class="milestone-stem stem-bottom" aria-hidden="true"></div>
-                        <h3 class="milestone-title">Flagship Hackathons</h3>
-                        <p class="milestone-desc">Launched BlueBit, TechRoom, and Praxis, convening student innovators nationwide.</p>
-                      </div>
-                    </div>
-
-                    <!-- Milestone 4 -->
-                    <div class="journey-milestone-item" data-index="3">
-                      <!-- Year Above Timeline -->
-                      <div class="milestone-year-wrap">
-                        <span class="milestone-year">2026</span>
-                        <div class="milestone-stem stem-top" aria-hidden="true"></div>
-                      </div>
-                      <!-- Dot Directly on Timeline -->
-                      <div class="milestone-dot-anchor">
-                        <div class="milestone-dot" aria-hidden="true"></div>
-                      </div>
-                      <!-- Description Below Timeline (No Box) -->
-                      <div class="milestone-desc-wrap">
-                        <div class="milestone-stem stem-bottom" aria-hidden="true"></div>
-                        <h3 class="milestone-title">Innovation Beyond</h3>
-                        <p class="milestone-desc">Driving real-world open-source contributions, high-impact mentorship, and collegiate victories.</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="leaderboard-search-box">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="leaderboard-search" placeholder="Search by name or handle..." aria-label="Search rankers">
               </div>
             </div>
           </div>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SECTION 3: HACKATHON WINNERS                              -->
+        <!-- SECTION 2: TOP 3 PODIUM                                   -->
         <!-- ========================================================= -->
-        <section class="achievements-section hackathon-section" id="hackathon-winners" aria-label="Hackathon Winners Section">
-          <div class="achievements-container hackathon-container">
-            <!-- Section 3 Hackathon Winners: Layout structure ready for content -->
+        <section class="leaderboard-section podium-section" id="podium" aria-label="Top 3 Podium">
+          <div class="leaderboard-container">
+            <div class="podium-wrapper" id="podium-container">
+              <!-- Dynamically rendered by JavaScript -->
+            </div>
           </div>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SECTION 4: LEADERBOARD                                    -->
+        <!-- SECTION 3: CURRENT LOGGED-IN USER HIGHLIGHT               -->
         <!-- ========================================================= -->
-        <section class="achievements-section leaderboard-section" id="leaderboard" aria-label="Leaderboard Section">
-          <div class="achievements-container leaderboard-container">
-            <!-- Section 4 Leaderboard: Layout structure ready for content -->
+        <section class="leaderboard-section user-highlight-section" id="user-highlight" aria-label="Current User Ranking">
+          <div class="leaderboard-container">
+            <div class="user-highlight-card glass-card" id="user-highlight-card">
+              <!-- Dynamically rendered by JavaScript -->
+            </div>
           </div>
         </section>
 
         <!-- ========================================================= -->
-        <!-- SITE FOOTER                                               -->
+        <!-- SECTION 4: REMAINING RANKINGS LIST / TABLE                 -->
+        <!-- ========================================================= -->
+        <section class="leaderboard-section rankings-section" id="rankings" aria-label="Rankings Table">
+          <div class="leaderboard-container">
+            <div class="rankings-header-row">
+              <h2 class="compact-title">Overall Rankings</h2>
+              <span class="rankings-count-badge" id="rankings-count">10 Coders</span>
+            </div>
+
+            <!-- Table Header -->
+            <div class="rankings-table-header">
+              <div class="col-rank">Rank</div>
+              <div class="col-user">Coder</div>
+              <div class="col-solved">Questions</div>
+              <div class="col-points">Points</div>
+              <div class="col-badge">Tier</div>
+            </div>
+
+            <!-- Table Rows List -->
+            <div class="rankings-table-body" id="rankings-list">
+              <!-- Dynamically rendered by JavaScript -->
+            </div>
+          </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- SECTION 5: SITE FOOTER                                    -->
         <!-- ========================================================= -->
         <footer class="site-footer" id="footer" aria-label="Site Footer">
           <div class="footer-container">
             <div class="footer-top">
               <div class="footer-brand">
-                <a href="#hero" class="footer-brand-header" aria-label="Microsoft Learn Student Chapter Home">
+                <a href="index.html#hero" class="footer-brand-header" aria-label="Microsoft Learn Student Chapter Home">
                   <svg class="mlsc-logo-icon" width="43" height="28" viewBox="0 0 43 28" fill="none"
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <!-- Top row: col 2 (Orange), col 3 (Green) -->
@@ -216,7 +159,8 @@
                   <a href="index.html#hero">Home</a>
                   <a href="events.html">Events</a>
                   <a href="teams.html">Teams</a>
-                  <a href="#hero">Achievements</a>
+                  <a href="achievements.html">Achievements</a>
+                  <a href="leaderboard.html">Leaderboard</a>
                   <a href="games.html">Games</a>
                 </div>
                 <div class="footer-col">
