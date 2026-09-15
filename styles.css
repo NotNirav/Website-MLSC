@@ -932,11 +932,50 @@ body {
 }
 
 .achievements-section.hero-section {
-  padding: 0 24px;
+  padding: clamp(90px, 14vh, 130px) 24px clamp(40px, 6vh, 60px);
+  text-align: center;
+}
+
+.achievements-section.hero-section .hero-container {
+  gap: clamp(14px, 2.2vh, 22px);
+  max-width: 900px;
+}
+
+.achievements-hero-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
+  color: #ffffff;
+  margin: 0;
+  max-width: 860px;
+}
+
+.achievements-gradient-text {
+  background: linear-gradient(135deg, #ffffff 20%, var(--accent) 68%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.achievements-hero-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 0;
+  opacity: 0.92;
 }
 
 @media (max-width: 768px) {
   .achievements-section {
     padding: clamp(24px, 4vh, 48px) 16px;
+  }
+
+  .achievements-section.hero-section {
+    padding: clamp(80px, 12vh, 100px) 18px clamp(36px, 5vh, 48px);
   }
 }
