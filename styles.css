@@ -941,6 +941,24 @@ body {
   max-width: 900px;
 }
 
+.achievements-section.hero-section .compact-tag {
+  color: #f25022; /* MLSC Orange */
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.achievements-section.hero-section .compact-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f25022;
+  box-shadow: 0 0 8px rgba(242, 80, 34, 0.7);
+}
+
 .achievements-hero-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(2.3rem, 5.4vw, 4.4rem);
@@ -953,10 +971,12 @@ body {
 }
 
 .achievements-gradient-text {
-  background: linear-gradient(135deg, #ffffff 20%, var(--accent) 68%, var(--accent-purple) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #f25022; /* MLSC Orange */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: #f25022;
   display: inline-block;
+  text-shadow: 0 0 28px rgba(242, 80, 34, 0.35);
 }
 
 .achievements-hero-subtitle {
@@ -1028,6 +1048,24 @@ body {
   gap: 8px;
   max-width: 700px;
   margin: 0 auto;
+}
+
+.journey-header .compact-tag {
+  color: #00a4ef; /* MLSC Blue */
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.journey-header .compact-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00a4ef;
+  box-shadow: 0 0 8px rgba(0, 164, 239, 0.7);
 }
 
 .journey-title {
@@ -1120,7 +1158,7 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
   font-weight: 800;
-  color: #ffb900; /* Existing MLSC Yellow */
+  color: #00a4ef; /* MLSC Blue */
   letter-spacing: -0.01em;
   opacity: 0.45;
   transform: translateY(0);
@@ -1134,7 +1172,7 @@ body {
 .journey-milestone-item.is-active .milestone-year {
   opacity: 1;
   transform: translateY(-10px); /* Smooth upward lift */
-  text-shadow: 0 0 18px rgba(255, 185, 0, 0.65), 0 0 35px rgba(255, 185, 0, 0.35);
+  text-shadow: 0 0 18px rgba(0, 164, 239, 0.65), 0 0 35px rgba(0, 164, 239, 0.35);
 }
 
 /* Subtle Stem connecting Year down to Dot */
@@ -1381,6 +1419,19 @@ body {
 .hackathon-tag {
   color: #7fba00; /* MLSC Green */
   letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hackathon-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #7fba00;
+  box-shadow: 0 0 8px rgba(127, 186, 0, 0.7);
 }
 
 .hackathon-title {
@@ -1558,5 +1609,32 @@ body {
     padding: 22px 20px;
     gap: 16px;
   }
+}
+
+/* ========================================================= */
+/* ACHIEVEMENTS: SECTION 4 - LEADERBOARD (MLSC YELLOW)       */
+/* ========================================================= */
+.leaderboard-section {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.leaderboard-tag {
+  color: #ffb900; /* MLSC Yellow */
+  letter-spacing: 0.12em;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.leaderboard-tag::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffb900;
+  box-shadow: 0 0 8px rgba(255, 185, 0, 0.7);
 }
 
