@@ -941,23 +941,6 @@ body {
   max-width: 900px;
 }
 
-.achievements-section.hero-section .compact-tag {
-  color: #f25022; /* MLSC Orange */
-  letter-spacing: 0.12em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.achievements-section.hero-section .compact-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #f25022;
-  box-shadow: 0 0 8px rgba(242, 80, 34, 0.7);
-}
 
 .achievements-hero-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -972,9 +955,6 @@ body {
 
 .achievements-gradient-text {
   color: #f25022; /* MLSC Orange */
-  background: none;
-  -webkit-background-clip: unset;
-  -webkit-text-fill-color: #f25022;
   display: inline-block;
   text-shadow: 0 0 28px rgba(242, 80, 34, 0.35);
 }
@@ -1050,23 +1030,6 @@ body {
   margin: 0 auto;
 }
 
-.journey-header .compact-tag {
-  color: #00a4ef; /* MLSC Blue */
-  letter-spacing: 0.12em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.journey-header .compact-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #00a4ef;
-  box-shadow: 0 0 8px rgba(0, 164, 239, 0.7);
-}
 
 .journey-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -1416,23 +1379,6 @@ body {
   margin: 0 auto;
 }
 
-.hackathon-tag {
-  color: #7fba00; /* MLSC Green */
-  letter-spacing: 0.12em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.hackathon-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #7fba00;
-  box-shadow: 0 0 8px rgba(127, 186, 0, 0.7);
-}
 
 .hackathon-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -1620,21 +1566,4 @@ body {
   box-sizing: border-box;
 }
 
-.leaderboard-tag {
-  color: #ffb900; /* MLSC Yellow */
-  letter-spacing: 0.12em;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.leaderboard-tag::before {
-  content: '';
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ffb900;
-  box-shadow: 0 0 8px rgba(255, 185, 0, 0.7);
-}
 
