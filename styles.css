@@ -1349,3 +1349,214 @@ body {
   }
 }
 
+/* ========================================================= */
+/* ACHIEVEMENTS: SECTION 3 - HACKATHON WINNERS               */
+/* ========================================================= */
+.hackathon-section {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(60px, 10vh, 100px) 24px;
+}
+
+.hackathon-container {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(36px, 5.5vh, 52px);
+}
+
+.hackathon-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.hackathon-tag {
+  color: #7fba00; /* MLSC Green */
+  letter-spacing: 0.12em;
+}
+
+.hackathon-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 2.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.hackathon-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.95rem, 1.35vw, 1.08rem);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 620px;
+}
+
+/* 3-Card Horizontal Grid (Desktop) */
+.hackathon-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  width: 100%;
+  align-items: stretch;
+}
+
+/* Individual Winner Information Card */
+.winner-card {
+  position: relative;
+  background: rgba(22, 22, 26, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: clamp(24px, 2.8vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  outline: none;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Subtle Top Accent Highlight */
+.winner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 2px;
+  background: #7fba00; /* MLSC Green */
+  opacity: 0.22;
+  border-radius: 2px;
+  transition: opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle Lifted / Active State using MLSC Green */
+.winner-card:hover,
+.winner-card:focus-visible,
+.winner-card.is-active {
+  transform: translateY(-6px);
+  border-color: rgba(127, 186, 0, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75),
+              0 0 22px -4px rgba(127, 186, 0, 0.16);
+}
+
+.winner-card:hover::before,
+.winner-card:focus-visible::before,
+.winner-card.is-active::before {
+  opacity: 0.85;
+  box-shadow: 0 0 10px rgba(127, 186, 0, 0.5);
+}
+
+/* Card Top: Position Pill */
+.winner-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 2px;
+}
+
+.winner-position {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #7fba00; /* MLSC Green */
+  background: rgba(127, 186, 0, 0.1);
+  border: 1px solid rgba(127, 186, 0, 0.25);
+  padding: 5px 13px;
+  border-radius: 9999px;
+  transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.winner-card:hover .winner-position,
+.winner-card:focus-visible .winner-position,
+.winner-card.is-active .winner-position {
+  background: rgba(127, 186, 0, 0.18);
+  border-color: rgba(127, 186, 0, 0.55);
+  box-shadow: 0 0 10px rgba(127, 186, 0, 0.25);
+}
+
+/* Card Data Fields */
+.winner-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.winner-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.winner-value {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Hackathon Name */
+.winner-hackathon {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Team Name - Highly Noticeable */
+.winner-team {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+/* Team Members - Clean Footer Field */
+.winner-members-field {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.winner-members {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Mobile & Tablet Responsive Stacking */
+@media (max-width: 860px) {
+  .hackathon-section {
+    padding: clamp(48px, 8vh, 72px) 16px;
+  }
+
+  .hackathon-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .winner-card {
+    padding: 22px 20px;
+    gap: 16px;
+  }
+}
+
