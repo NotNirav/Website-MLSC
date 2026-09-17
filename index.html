@@ -11,6 +11,9 @@
   <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+  <!-- GSAP & ScrollTrigger for high-performance animation syncing -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -117,6 +120,8 @@
           <div class="about-container">
             <h2 class="about-title">About Us</h2>
             <div class="about-glass-box" id="about-glass-box">
+              <!-- FluidGlass 3D React Component Mount Point -->
+              <div id="fluid-glass-root"></div>
               <p class="about-text">
                 Microsoft Learn Student Chapter PCCOE is a student driven tech community where curiosity meets
                 creativity and ideas turn into real-world experiences.
@@ -286,6 +291,7 @@
   <!-- Toast Notification -->
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+  <script src="fluid-glass-bundle.js"></script>
   <script src="script.js"></script>
 </body>
 
