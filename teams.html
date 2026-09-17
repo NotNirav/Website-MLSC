@@ -1,11 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teams</title>
+  <title>Teams — Microsoft Learn Student Chapter</title>
+  <meta name="description" content="Meet the creators, builders, and leads behind the Microsoft Learn Student Chapter.">
+  <!-- Resource Hints for Fast Rendering -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="teams.css?v=4.2">
+  <!-- Lenis Smooth Scroll (Parity with Home page) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
+
 <body>
-  <h1>Teams</h1>
+
+  <!-- Floating Top-Left Hamburger (Same as Home tab, visible on Teams page) -->
+  <button class="nav-hamburger visible" id="nav-hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false"
+    aria-controls="sidebar-drawer">
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+    <span class="hamburger-line"></span>
+  </button>
+
+  <!-- Left Sidebar Drawer & Backdrop (Identical to Home tab) -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Navigation Menu">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <span class="brand-dot"></span>
+        <span class="sidebar-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span
+            class="letter-s">S</span><span class="letter-c">C</span></span>
+      </div>
+      <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="index.html#hero" class="sidebar-link">
+        <span class="link-index">01</span>
+        <span class="link-label">Home</span>
+      </a>
+      <a href="teams.html" class="sidebar-link active">
+        <span class="link-index">02</span>
+        <span class="link-label">Team</span>
+      </a>
+      <a href="events.html" class="sidebar-link">
+        <span class="link-index">03</span>
+        <span class="link-label">Events</span>
+      </a>
+      <a href="games.html" class="sidebar-link">
+        <span class="link-index">04</span>
+        <span class="link-label">Games</span>
+      </a>
+      <a href="contact.html" class="sidebar-link">
+        <span class="link-index">05</span>
+        <span class="link-label">Contact us</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <p class="sidebar-note">Microsoft Learn Student Chapter</p>
+      <div class="sidebar-social-links">
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Website Content -->
+  <main class="site-content" style="padding: 0; min-height: 100vh;">
+
+    <!-- ========================================================= -->
+    <!-- SECTION: MLSC TEAMS & MEMBERS (3D Coverflow Carousel)     -->
+    <!-- ========================================================= -->
+    <section id="teams" class="teams-section" aria-label="MLSC Core Team Members">
+
+      <!-- Ambient Background Video Layer (Seamless Forward-and-Reverse Ping-Pong Loop) -->
+      <div class="teams-bg-decor" aria-hidden="true">
+        <video id="teams-bg-video" class="teams-bg-video active" autoplay muted loop playsinline preload="auto">
+          <source src="assets/videos/teams_pingpong.mp4" type="video/mp4">
+        </video>
+        <div class="teams-bg-overlay"></div>
+        <div class="teams-grid-texture"></div>
+      </div>
+
+      <!-- Section Header -->
+      <div class="teams-header">
+        <div class="teams-tag">
+          <span class="teams-tag-dot"></span>
+          <span>02 // CORE COMMUNITY</span>
+        </div>
+        <h1 class="teams-title">Meet the <span class="title-gradient">Minds Behind MLSC</span></h1>
+        <p class="teams-desc">
+          Different roles &nbsp;•&nbsp; Same vision &nbsp;•&nbsp; One club
+        </p>
+      </div>
+
+      <!-- Sticky / Quick Jump Domain Navigation Bar -->
+      <nav class="teams-jump-nav" id="teams-jump-nav" aria-label="Quick jump to domain">
+        <div class="teams-jump-container" id="teams-jump-container"></div>
+      </nav>
+
+      <!-- Stacked Teams Sections Wrapper (Dynamically Populated by teams.js) -->
+      <div class="teams-sections-wrapper" id="teams-sections-wrapper"></div>
+
+    </section>
+
+    <!-- SECTION 4: FOOTER (Matches Home Tab) -->
+    <footer class="site-footer" id="footer" aria-label="Site Footer">
+      <div class="footer-container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="brand-badge-footer">
+              <span class="brand-dot"></span>
+              <span class="footer-brand-title"><span class="letter-m">M</span><span class="letter-l">L</span><span
+                  class="letter-s">S</span><span class="letter-c">C</span></span>
+            </div>
+            <p class="footer-tagline">
+              Microsoft Learn Student Chapter &bull; Fueling student developer innovation and tech leadership.
+            </p>
+          </div>
+
+          <div class="footer-links-group">
+            <div class="footer-col">
+              <span class="footer-heading">Navigation</span>
+              <a href="index.html#hero">Home</a>
+              <a href="teams.html">Teams</a>
+              <a href="index.html#explore">Explore</a>
+            </div>
+            <div class="footer-col">
+              <span class="footer-heading">Community</span>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://discord.com" target="_blank" rel="noopener noreferrer">Discord</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p class="footer-copy">&copy; 2026 Microsoft Learn Student Chapter. All rights reserved.</p>
+          <div class="footer-badges">
+            <span class="status-indicator">● Teams Section</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Script for Teams Section -->
+  <script src="teams.js?v=5.1"></script>
 </body>
+
 </html>
