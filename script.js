@@ -474,6 +474,285 @@
   }
 
   // =========================================================
+  // LEADERBOARD PAGE FUNCTIONALITY & DATA
+  // =========================================================
+  const LEADERBOARD_DATA = [
+    { rank: 1, name: "Aarav Sharma", handle: "aarav45", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
+    { rank: 2, name: "Riya Kapoor", handle: "riya_code", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
+    { rank: 3, name: "Aditya Verma", handle: "aditya_v", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
+    { rank: 4, name: "Sneha Patel", handle: "sneha_dev", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
+    { rank: 5, name: "Rahul Kulkarni", handle: "rahul_k", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
+    { rank: 6, name: "Ananya Mehta", handle: "ananya_m", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 7, name: "Kunal Joshi", handle: "kunal_t", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 8, name: "Meera Singh", handle: "meera_s", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 9, name: "Yash Patil", handle: "yash_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 10, name: "Isha Roy", handle: "isha_r", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 11, name: "Devanshu Shah", handle: "devanshu_s", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 12, name: "Tanvi Bhat", handle: "tanvi_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
+  ];
+
+  function getAvatarSvg(name, rank) {
+    const palette = [
+      ['#ffb900', '#f59e0b'], // Gold
+      ['#cbd5e1', '#64748b'], // Silver
+      ['#f59e0b', '#b45309'], // Bronze
+      ['#38bdf8', '#0284c7'], // Sky blue
+      ['#c084fc', '#7e22ce'], // Purple
+      ['#34d399', '#059669'], // Emerald
+      ['#f43f5e', '#be123c'], // Rose
+      ['#fb923c', '#c2410c']  // Amber
+    ];
+    const colorPair = palette[(rank - 1) % palette.length];
+    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><linearGradient id="g${rank}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${encodeURIComponent(colorPair[0])}"/><stop offset="100%" stop-color="${encodeURIComponent(colorPair[1])}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(%23g${rank})"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="34">${initials}</text></svg>`;
+  }
+
+  function renderPodium(topThreeData) {
+    const podiumContainer = document.getElementById('podium-container');
+    if (!podiumContainer || topThreeData.length < 3) return;
+
+    // Podium layout order: Rank 2 (Left), Rank 1 (Center/Tallest), Rank 3 (Right)
+    const rank1 = topThreeData.find(u => u.rank === 1) || topThreeData[0];
+    const rank2 = topThreeData.find(u => u.rank === 2) || topThreeData[1];
+    const rank3 = topThreeData.find(u => u.rank === 3) || topThreeData[2];
+
+    podiumContainer.innerHTML = `
+      <!-- Rank 2 Card (Silver - Left) -->
+      <div class="podium-card rank-2 glass-card">
+        <div class="podium-avatar-outer">
+          <img src="${getAvatarSvg(rank2.name, 2)}" alt="${rank2.name}" class="podium-avatar">
+          <div class="podium-rank-badge">2</div>
+        </div>
+        <div class="podium-user-info">
+          <h3 class="podium-name">${rank2.name}</h3>
+          <span class="podium-handle">@${rank2.handle}</span>
+          <span class="podium-tier-tag">${rank2.tier}</span>
+        </div>
+        <div class="podium-pedestal-base">
+          <div class="podium-stat">
+            <span class="podium-stat-val">${rank2.solved}</span>
+            <span class="podium-stat-lbl">Solved</span>
+          </div>
+          <div class="podium-stat">
+            <span class="podium-stat-val pts">${rank2.points.toLocaleString()}</span>
+            <span class="podium-stat-lbl">Points</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rank 1 Card (Gold - Center/Tallest) -->
+      <div class="podium-card rank-1 glass-card">
+        <div class="podium-crown-wrap">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffb900" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5ZM19 19C19 19.5523 18.5523 20 18 20H6C5.44772 20 5 19.5523 5 19V18H19V19Z" />
+          </svg>
+        </div>
+        <div class="podium-avatar-outer">
+          <img src="${getAvatarSvg(rank1.name, 1)}" alt="${rank1.name}" class="podium-avatar">
+          <div class="podium-rank-badge">1</div>
+        </div>
+        <div class="podium-user-info">
+          <h3 class="podium-name">${rank1.name}</h3>
+          <span class="podium-handle">@${rank1.handle}</span>
+          <span class="podium-tier-tag">${rank1.tier}</span>
+        </div>
+        <div class="podium-pedestal-base">
+          <div class="podium-stat">
+            <span class="podium-stat-val">${rank1.solved}</span>
+            <span class="podium-stat-lbl">Solved</span>
+          </div>
+          <div class="podium-stat">
+            <span class="podium-stat-val pts">${rank1.points.toLocaleString()}</span>
+            <span class="podium-stat-lbl">Points</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rank 3 Card (Bronze - Right) -->
+      <div class="podium-card rank-3 glass-card">
+        <div class="podium-avatar-outer">
+          <img src="${getAvatarSvg(rank3.name, 3)}" alt="${rank3.name}" class="podium-avatar">
+          <div class="podium-rank-badge">3</div>
+        </div>
+        <div class="podium-user-info">
+          <h3 class="podium-name">${rank3.name}</h3>
+          <span class="podium-handle">@${rank3.handle}</span>
+          <span class="podium-tier-tag">${rank3.tier}</span>
+        </div>
+        <div class="podium-pedestal-base">
+          <div class="podium-stat">
+            <span class="podium-stat-val">${rank3.solved}</span>
+            <span class="podium-stat-lbl">Solved</span>
+          </div>
+          <div class="podium-stat">
+            <span class="podium-stat-val pts">${rank3.points.toLocaleString()}</span>
+            <span class="podium-stat-lbl">Points</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCurrentUserCard(user) {
+    const userCard = document.getElementById('user-highlight-card');
+    if (!userCard || !user) return;
+
+    const rankFormatted = String(user.rank).padStart(2, '0');
+
+    userCard.innerHTML = `
+      <div class="user-card-left">
+        <div class="user-card-avatar-wrap">
+          <img src="${getAvatarSvg(user.name, user.rank)}" alt="${user.name}" class="user-card-avatar">
+          <span class="user-you-tag">YOU</span>
+        </div>
+        <div class="user-card-details">
+          <div class="user-card-title-row">
+            <h3 class="user-card-name">${user.name}</h3>
+          </div>
+          <span class="user-card-handle">@${user.handle}</span>
+        </div>
+      </div>
+
+      <div class="user-card-stats-grid">
+        <div class="user-stat-box">
+          <span class="user-stat-lbl">Position</span>
+          <span class="user-stat-val accent">#${rankFormatted}</span>
+        </div>
+        <div class="user-stat-box">
+          <span class="user-stat-lbl">Questions</span>
+          <span class="user-stat-val">${user.solved}</span>
+        </div>
+        <div class="user-stat-box">
+          <span class="user-stat-lbl">Points</span>
+          <span class="user-stat-val accent">${user.points.toLocaleString()} pts</span>
+        </div>
+        <div class="user-stat-box">
+          <span class="user-stat-lbl">Tier</span>
+          <span class="user-stat-val">${user.tier} ${user.badge}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderRankingsList(listData) {
+    const listContainer = document.getElementById('rankings-list');
+    const countBadge = document.getElementById('rankings-count');
+    if (!listContainer) return;
+
+    if (countBadge) {
+      countBadge.textContent = `${listData.length} Coders`;
+    }
+
+    if (listData.length === 0) {
+      listContainer.innerHTML = `
+        <div style="text-align: center; padding: 40px; color: var(--text-muted); font-family: 'Plus Jakarta Sans', sans-serif;">
+          No rankers found matching your search query.
+        </div>
+      `;
+      return;
+    }
+
+    listContainer.innerHTML = listData.map(item => {
+      const formattedRank = String(item.rank).padStart(2, '0');
+      const tierClass = item.tier.toLowerCase().replace(/\s+/g, '-');
+      const currentUserClass = item.isCurrentUser ? 'is-current-user' : '';
+      const youBadge = item.isCurrentUser ? `<span class="row-you-badge">YOU</span>` : '';
+
+      return `
+        <div class="ranking-row ${currentUserClass} glass-card">
+          <div class="col-rank">${formattedRank}</div>
+          <div class="col-user">
+            <img src="${getAvatarSvg(item.name, item.rank)}" alt="${item.name}" class="row-avatar">
+            <div class="row-user-details">
+              <span class="row-name">${item.name} ${youBadge}</span>
+              <span class="row-handle">@${item.handle}</span>
+            </div>
+          </div>
+          <div class="col-solved">${item.solved} solved</div>
+          <div class="col-points">${item.points.toLocaleString()} pts</div>
+          <div class="col-badge">
+            <span class="tier-badge ${tierClass}">${item.tier} ${item.badge}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Re-attach glass spotlight mousemove events for newly rendered rows
+    const newGlassCards = listContainer.querySelectorAll('.glass-card');
+    newGlassCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+  }
+
+  function initLeaderboard() {
+    const podiumContainer = document.getElementById('podium-container');
+    if (!podiumContainer) return; // Not on page with leaderboard
+
+    let currentDataSet = [...LEADERBOARD_DATA];
+
+    // Initial render
+    renderPodium(currentDataSet.slice(0, 3));
+    const currentUser = currentDataSet.find(u => u.isCurrentUser) || currentDataSet[3];
+    renderCurrentUserCard(currentUser);
+    // Display remaining rankings (ranks 4+)
+    renderRankingsList(currentDataSet.slice(3));
+
+    // Search Filtering
+    const searchInput = document.getElementById('leaderboard-search');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+          renderRankingsList(currentDataSet.slice(3));
+          return;
+        }
+
+        const filtered = currentDataSet.filter(item =>
+          item.name.toLowerCase().includes(query) ||
+          item.handle.toLowerCase().includes(query) ||
+          item.tier.toLowerCase().includes(query)
+        );
+        renderRankingsList(filtered);
+      });
+    }
+
+    // Timeframe Tabs Filter
+    const timeframeBtns = document.querySelectorAll('.timeframe-btn');
+    timeframeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        timeframeBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const timeframe = btn.getAttribute('data-timeframe');
+        let multiplier = 1;
+        if (timeframe === 'monthly') multiplier = 0.35;
+        if (timeframe === 'weekly') multiplier = 0.12;
+
+        currentDataSet = LEADERBOARD_DATA.map(item => ({
+          ...item,
+          points: Math.round(item.points * multiplier),
+          solved: Math.round(item.solved * multiplier)
+        }));
+
+        renderPodium(currentDataSet.slice(0, 3));
+        const updatedCurrentUser = currentDataSet.find(u => u.isCurrentUser) || currentDataSet[3];
+        renderCurrentUserCard(updatedCurrentUser);
+        renderRankingsList(currentDataSet.slice(3));
+
+        if (searchInput && searchInput.value) {
+          searchInput.dispatchEvent(new Event('input'));
+        }
+      });
+    });
+  }
+
+  // =========================================================
   // App Orchestration (Single Global Initialization)
   // =========================================================
   let scrollStackInstance = null;
@@ -517,6 +796,7 @@
     scrollStackInstance = initScrollStack();
     initScrollAnimations();
     journeyTimelineInstance = initJourneyTimeline();
+    initLeaderboard();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
@@ -540,3 +820,4 @@
     initApp();
   }
 })();
+
