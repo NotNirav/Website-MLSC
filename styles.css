@@ -441,13 +441,13 @@ body {
 /* ========================================================= */
 .site-footer {
   width: 100%;
-  min-height: 220px;
+  min-height: auto;
   border-top: 1px solid var(--border-glass);
   border-bottom: 1px solid #ffffff;
   background: #0c0c0c;
   display: flex;
   align-items: center;
-  padding: 44px 24px 28px;
+  padding: 24px 24px 16px;
   position: relative;
   z-index: 10;
 }
@@ -457,7 +457,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 16px;
 }
 
 .footer-top {
@@ -537,7 +537,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding-top: 20px;
+  padding-top: 12px;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
   flex-wrap: wrap;
 }
