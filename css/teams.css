@@ -13,74 +13,20 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 85px 16px 80px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  background: linear-gradient(180deg, #0c0c0c 0%, #121316 50%, #171717 100%);
+  background: linear-gradient(180deg, #0c0c0c 0%, #171717 100%);
   color: #f3f4f6;
   overflow: hidden;
   box-sizing: border-box;
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid #ffffff;
 }
 
-/* Background Atmosphere Layer with Ambient Video */
-.teams-bg-decor {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.teams-bg-video-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: ambientBreathing 20s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes ambientBreathing {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.teams-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  opacity: 0.55;
-  filter: brightness(0.9) contrast(1.2) saturate(1.25);
-  transition: opacity 1.2s ease;
-  pointer-events: none;
-}
-
-.teams-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 38%, rgba(12, 16, 26, 0.35) 0%, rgba(10, 12, 18, 0.82) 70%, #0c0c0c 100%);
-  pointer-events: none;
-}
-
+/* 40px Grid Texture Overlay matching Home & Achievements pages */
 .teams-grid-texture {
   position: absolute;
   inset: 0;
@@ -89,7 +35,23 @@
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
-  opacity: 0.35;
+  z-index: 1;
+}
+
+/* ========================================================= */
+/* 2. TEAMS HERO / HEADER VIEWPORT                           */
+/* ========================================================= */
+.teams-hero-viewport {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding: clamp(90px, 14vh, 130px) 16px clamp(40px, 6vh, 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
 }
 
 /* ========================================================= */
@@ -276,10 +238,9 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1400px;
   display: flex;
   flex-direction: column;
-  gap: 90px;
+  gap: 0;
   margin: 0 auto;
   box-sizing: border-box;
 }
@@ -290,20 +251,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  scroll-margin-top: 100px;
-  padding: 10px 0 20px;
-}
-
-/* Subtle separator line between domain blocks */
-.team-domain-block:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  bottom: -45px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(80%, 800px);
-  height: 1px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 80%);
+  scroll-margin-top: 130px;
+  padding: clamp(60px, 9vh, 90px) 16px clamp(60px, 9vh, 90px);
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
 }
 
 /* Domain Block Header */

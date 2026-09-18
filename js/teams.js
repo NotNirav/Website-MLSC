@@ -1213,8 +1213,9 @@
           e.preventDefault();
           const target = document.getElementById(`domain-${domain.id}`);
           if (target) {
-            if (globalLenis) {
-              globalLenis.scrollTo(target, { offset: -80 });
+            const activeLenis = globalLenis || window.lenis;
+            if (activeLenis) {
+              activeLenis.scrollTo(target, { offset: -95 });
             } else {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }

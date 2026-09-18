@@ -2,22 +2,22 @@
 
 :root {
   --radius: 1rem;
-  --background: #171717;
-  --foreground: #fafafa;
-  --card: #232323;
-  --muted-foreground: #adadad;
-  --border: rgba(255, 255, 255, 0.12);
+  --background: #0c0c0c;
+  --foreground: #f3f4f6;
+  --card: rgba(22, 22, 22, 0.65);
+  --muted-foreground: #9ca3af;
+  --border: rgba(255, 255, 255, 0.08);
 
-  --ms-red: #e0673f;
-  --ms-green: #7ec158;
-  --ms-blue: #5a9bd8;
-  --ms-yellow: #e8c165;
+  --ms-red: #f25022;
+  --ms-green: #7fba00;
+  --ms-blue: #00a4ef;
+  --ms-yellow: #ffb900;
 
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-bg: rgba(22, 22, 22, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.12);
 
-  --font-display: "Unbounded", "Space Grotesk", sans-serif;
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", "Unbounded", "Space Grotesk", sans-serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
@@ -27,15 +27,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 body {
   margin: 0;
-  background-color: var(--background);
+  background-color: #080808;
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
 }
 
 img {
@@ -69,16 +70,20 @@ a {
 .glass {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(18px) saturate(140%);
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
+/* 40px Grid Texture Overlay (Theme Parity with Home & Achievements) */
 .grain {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-  background-size: 22px 22px;
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  z-index: 1;
 }
 
 .mono-label {
@@ -266,7 +271,8 @@ main {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background: var(--background);
+  background: linear-gradient(180deg, #0c0c0c 0%, #171717 100%);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
 }
 
 .wrap {
@@ -436,10 +442,47 @@ main {
   background: var(--ms-yellow);
 }
 
-/* ===== Roadmap page ===== */
+/* ===== Roadmap Viewport Sections (White Line Dividers) ===== */
+
+.events-hero-section {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding-top: 5.5rem;
+  padding-bottom: 0;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+
+.events-track-section {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding: 40px 0 80px;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+
+.events-closing-section {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding: 40px 0;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
+}
+
+.event-hero-section {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  padding-top: 5.5rem;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
+}
 
 .roadmap-hero {
-  padding-top: 5rem;
+  padding-top: 1.5rem;
   padding-bottom: 0;
   text-align: center;
 }
@@ -621,7 +664,7 @@ main {
   letter-spacing: 0.35em;
   color: var(--muted-foreground);
   transition: color 0.2s;
-  padding-top: 2.5rem;
+  padding-top: 6.5rem;
 }
 
 .back-link:hover {
@@ -697,9 +740,10 @@ main {
   position: relative;
   z-index: 10;
   margin: 0 auto;
-  margin-top: 3.5rem;
+  padding: 60px 1.25rem;
   max-width: 64rem;
-  padding: 0 1.25rem;
+  border-bottom: 1px solid #ffffff;
+  box-sizing: border-box;
 }
 
 .section-label {
