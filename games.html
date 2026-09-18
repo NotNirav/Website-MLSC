@@ -28,9 +28,14 @@
 
 <body>
   <div class="game-container">
-    <iframe src="games/flappy-dragon/" title="Flappy Dragon" allow="autoplay">
+    <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon" allow="autoplay">
     </iframe>
   </div>
+  <script>
+    if (window.location.protocol === 'file:') {
+      document.getElementById('game-frame').src = 'games/flappy-dragon/index.html';
+    }
+  </script>
 </body>
 
 </html>
