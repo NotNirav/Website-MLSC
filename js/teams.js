@@ -1290,7 +1290,7 @@
   async function loadMembersCSV() {
     try {
       const timestamp = Date.now();
-      const response = await fetch(`members.csv?_=${timestamp}`, {
+      const response = await fetch(`data/members.csv?_=${timestamp}`, {
         cache: 'no-store',
         headers: { 'Cache-Control': 'no-cache' }
       });

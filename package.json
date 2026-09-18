@@ -2,11 +2,11 @@
   "name": "website-mlsc",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "js/script.js",
   "scripts": {
     "start": "npx serve -l 3000",
     "dev": "npx serve -l 3000",
-    "build:fluid-glass": "esbuild fluid-glass-mount.jsx --bundle --outfile=fluid-glass-bundle.js --format=iife --target=es2020 --platform=browser --define:global=globalThis --jsx=automatic --minify",
+    "build:fluid-glass": "esbuild src/components/fluid-glass/fluid-glass-mount.jsx --bundle --outfile=js/fluid-glass-bundle.js --format=iife --target=es2020 --platform=browser --define:global=globalThis --jsx=automatic --minify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
