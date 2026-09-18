@@ -1,0 +1,459 @@
+/**
+ * MLSC Arcade & Games Section Stylesheet
+ * Integrates Flappy Dragon and arcade experiences with the MLSC dark gradient theme
+ */
+
+:root {
+  --games-bg-start: #0c0c0c;
+  --games-bg-mid: #141518;
+  --games-bg-end: #171717;
+  --games-accent-blue: #38bdf8;
+  --games-accent-glow: rgba(56, 189, 248, 0.2);
+  --games-border-white: #ffffff;
+  --games-border-glass: rgba(255, 255, 255, 0.12);
+}
+
+/* Base Page Setup */
+html, body {
+  background-color: var(--games-bg-start);
+  color: #ffffff;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Games Section Container */
+.games-page {
+  position: relative;
+  background: linear-gradient(180deg, var(--games-bg-start) 0%, var(--games-bg-mid) 45%, var(--games-bg-end) 100%);
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Subtle 40px Grid Texture (Parity with Home, Achievements & Teams) */
+.games-grid-texture {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+}
+
+/* Ambient Radial Glow */
+.games-ambient-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.06) 0%, rgba(242, 80, 34, 0.03) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+  filter: blur(60px);
+}
+
+/* ========================================================= */
+/* 1. HERO & ARCADE LOBBY VIEWPORT                           */
+/* ========================================================= */
+.games-hero-viewport {
+  position: relative;
+  z-index: 2;
+  min-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 130px 24px 70px;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--games-border-white);
+}
+
+.games-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--games-accent-blue);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  margin-bottom: 18px;
+}
+
+.games-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--games-accent-blue);
+  box-shadow: 0 0 8px var(--games-accent-blue);
+}
+
+.games-title {
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 0 16px;
+  max-width: 880px;
+}
+
+.games-title .title-gradient {
+  background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.games-desc {
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  color: #9ca3af;
+  line-height: 1.65;
+  max-width: 620px;
+  margin: 0 auto 32px;
+}
+
+/* Feature Spec Pills */
+.arcade-feature-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.arcade-feature-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: #d1d5db;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px);
+}
+
+.arcade-feature-pill svg {
+  color: var(--games-accent-blue);
+}
+
+/* Call to Action Button */
+.arcade-launch-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  color: #0c0c0c;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 14px 28px;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.2s ease;
+  box-shadow: 0 10px 25px -5px rgba(255, 255, 255, 0.25);
+}
+
+.arcade-launch-cta:hover {
+  transform: translateY(-2px);
+  background: #f3f4f6;
+  box-shadow: 0 16px 32px -6px rgba(255, 255, 255, 0.35);
+}
+
+.arcade-launch-cta svg {
+  transition: transform 0.2s ease;
+}
+
+.arcade-launch-cta:hover svg {
+  transform: translateY(3px);
+}
+
+/* Scroll indicator */
+.games-scroll-hint {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #6b7280;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'JetBrains Mono', monospace;
+  animation: floatHint 2.4s ease-in-out infinite;
+}
+
+@keyframes floatHint {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ========================================================= */
+/* 2. ARCADE CHAMBER VIEWPORT & CABINET                      */
+/* ========================================================= */
+.games-arcade-viewport {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 80px 20px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--games-border-white);
+}
+
+.arcade-cabinet {
+  width: 100%;
+  max-width: 1020px;
+  background: rgba(18, 18, 22, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--games-border-glass);
+  border-radius: 20px;
+  box-shadow: 0 28px 70px -15px rgba(0, 0, 0, 0.85),
+              0 0 0 1px rgba(255, 255, 255, 0.05),
+              inset 0 1px 0 rgba(255, 255, 255, 0.16),
+              0 0 45px -10px var(--games-accent-glow);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.arcade-cabinet:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 32px 80px -15px rgba(0, 0, 0, 0.9),
+              0 0 0 1px rgba(255, 255, 255, 0.08),
+              inset 0 1px 0 rgba(255, 255, 255, 0.22),
+              0 0 55px -8px var(--games-accent-glow);
+}
+
+/* Top Console Header */
+.cabinet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(24, 24, 30, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cabinet-status-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cabinet-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.cabinet-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cabinet-dot.red { background: #ef4444; }
+.cabinet-dot.yellow { background: #f59e0b; }
+.cabinet-dot.green { background: #10b981; }
+
+.cabinet-feed-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #9ca3af;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cabinet-feed-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+  animation: pulseLive 2s infinite;
+}
+
+@keyframes pulseLive {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.cabinet-title-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f3f4f6;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.08em;
+}
+
+.cabinet-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cabinet-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #d1d5db;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cabinet-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Screen Wrapper & Iframe */
+.cabinet-screen-wrapper {
+  position: relative;
+  width: 100%;
+  height: 680px;
+  background: #0c0c0c;
+  overflow: hidden;
+}
+
+.cabinet-screen-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #0c0c0c;
+}
+
+/* Bottom Console Deck */
+.cabinet-deck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background: rgba(20, 20, 26, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.74rem;
+  color: #9ca3af;
+}
+
+.cabinet-keybinds {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.keybind-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.key-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: #f3f4f6;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.4);
+}
+
+.cabinet-storage-hint {
+  color: #6b7280;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Fullscreen Mode on Cabinet */
+.arcade-cabinet.is-fullscreen {
+  position: fixed;
+  inset: 0;
+  max-width: 100vw;
+  width: 100vw;
+  height: 100vh;
+  border-radius: 0;
+  border: none;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+}
+
+.arcade-cabinet.is-fullscreen .cabinet-screen-wrapper {
+  flex: 1;
+  height: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 860px) {
+  .cabinet-screen-wrapper {
+    height: 560px;
+  }
+  .cabinet-deck {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 580px) {
+  .games-hero-viewport {
+    padding: 110px 16px 50px;
+  }
+  .cabinet-screen-wrapper {
+    height: 480px;
+  }
+  .cabinet-title-badge {
+    display: none;
+  }
+  .cabinet-keybinds {
+    justify-content: center;
+  }
+}
