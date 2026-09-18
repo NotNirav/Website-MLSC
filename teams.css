@@ -1,0 +1,793 @@
+/**
+ * MLSC — Teams / Members Section Styles
+ * Vertically Stacked Multi-Team Layout with Independent 3D Coverflow Stages
+ * Crisp Vector Typography, Zero Blurriness, Home Page Theme Alignment
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ========================================================= */
+/* 1. TEAMS SECTION CONTAINER & BACKGROUND                   */
+/* ========================================================= */
+.teams-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 85px 16px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background: linear-gradient(180deg, #0c0c0c 0%, #121316 50%, #171717 100%);
+  color: #f3f4f6;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Background Atmosphere Layer with Ambient Video */
+.teams-bg-decor {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.teams-bg-video-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: ambientBreathing 20s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes ambientBreathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.teams-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  opacity: 0.55;
+  filter: brightness(0.9) contrast(1.2) saturate(1.25);
+  transition: opacity 1.2s ease;
+  pointer-events: none;
+}
+
+.teams-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 38%, rgba(12, 16, 26, 0.35) 0%, rgba(10, 12, 18, 0.82) 70%, #0c0c0c 100%);
+  pointer-events: none;
+}
+
+.teams-grid-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+/* ========================================================= */
+/* 2. SECTION MAIN HEADER                                    */
+/* ========================================================= */
+.teams-header {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 860px;
+  margin: 0 auto 24px;
+  padding: 0 16px;
+}
+
+.teams-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  padding: 5px 14px;
+  border-radius: 9999px;
+  margin-bottom: 12px;
+}
+
+.teams-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+.teams-title {
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.teams-title .title-gradient {
+  background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.teams-desc {
+  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
+  color: #9ca3af;
+  line-height: 1.6;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* ========================================================= */
+/* 3. STICKY QUICK-JUMP PILL NAVIGATION BAR                  */
+/* ========================================================= */
+.teams-jump-nav {
+  position: sticky;
+  top: 16px;
+  z-index: 35;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto 35px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.teams-jump-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: rgba(15, 17, 24, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+}
+
+.teams-jump-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #9ca3af;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+  user-select: none;
+}
+
+.teams-jump-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+.teams-jump-btn.active {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
+}
+
+.teams-jump-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+}
+
+/* Domain specific active pills */
+.teams-jump-btn[data-domain="Core Team"].active {
+  background: rgba(255, 185, 0, 0.16);
+  color: #ffb900;
+  border-color: #ffb900;
+  box-shadow: 0 0 12px rgba(255, 185, 0, 0.28);
+}
+
+.teams-jump-btn[data-domain="AI / ML"].active {
+  background: rgba(52, 211, 153, 0.16);
+  color: #34d399;
+  border-color: #34d399;
+  box-shadow: 0 0 12px rgba(52, 211, 153, 0.28);
+}
+
+.teams-jump-btn[data-domain="Web Development"].active {
+  background: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
+}
+
+.teams-jump-btn[data-domain="UI / UX & Design"].active {
+  background: rgba(236, 72, 153, 0.16);
+  color: #ec4899;
+  border-color: #ec4899;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.28);
+}
+
+.teams-jump-btn[data-domain="Events & Operations"].active {
+  background: rgba(242, 80, 34, 0.16);
+  color: #fb923c;
+  border-color: #f25022;
+  box-shadow: 0 0 12px rgba(242, 80, 34, 0.28);
+}
+
+.teams-jump-btn[data-domain="CP"].active {
+  background: rgba(168, 85, 247, 0.16);
+  color: #c084fc;
+  border-color: #a855f7;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.28);
+}
+
+/* ========================================================= */
+/* 4. VERTICALLY STACKED TEAMS SECTIONS                      */
+/* ========================================================= */
+.teams-sections-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1400px;
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.team-domain-block {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scroll-margin-top: 100px;
+  padding: 10px 0 20px;
+}
+
+/* Subtle separator line between domain blocks */
+.team-domain-block:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(80%, 800px);
+  height: 1px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 80%);
+}
+
+/* Domain Block Header */
+.team-domain-header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 20px;
+  padding: 0 16px;
+}
+
+.team-domain-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 13px;
+  border-radius: 9999px;
+  margin-bottom: 8px;
+  border: 1px solid currentColor;
+}
+
+.team-domain-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.team-domain-title {
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.team-domain-desc {
+  font-size: 0.92rem;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin: 0 auto;
+}
+
+/* ========================================================= */
+/* 5. 3D COVERFLOW CAROUSEL STAGE PER TEAM                   */
+/* ========================================================= */
+.teams-carousel-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1300px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin: 0 auto;
+  user-select: none;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.teams-cards-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Showcase presentation for single member teams (e.g. CP) */
+.team-showcase-single {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 460px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px auto;
+  z-index: 10;
+}
+
+.team-showcase-single .team-card {
+  position: relative;
+  top: auto;
+  left: auto;
+  transform: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: 15;
+}
+
+/* ========================================================= */
+/* 6. MEMBER CARD                                            */
+/* ========================================================= */
+.team-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 290px;
+  height: 450px;
+  margin: 0;
+  border-radius: 20px;
+  background: linear-gradient(175deg, #111524 0%, #090c15 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 12px 10px 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: flat;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7);
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transform: translate3d(-50%, -50%, -160px) scale(0.62);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Active Center Card: Prominent Glow & 1.0 Scale */
+.team-card.is-active {
+  cursor: default;
+  border: 2px solid var(--active-accent, #60a5fa);
+  box-shadow: 0 0 18px rgba(96, 165, 250, 0.5), 0 14px 32px rgba(0, 0, 0, 0.85);
+  transform-style: flat;
+  z-index: 15;
+}
+
+/* Inset Photo Box */
+.team-card-photo-box {
+  position: relative;
+  width: 100%;
+  height: 215px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #131724;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.team-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 12%;
+  display: block;
+}
+
+/* Card Content: Simple, Clean, Crisp Typography */
+.team-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 10px 4px 0 4px;
+  text-align: left;
+}
+
+.team-card-info-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.team-card-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: 0 0 5px 0;
+  line-height: 1.2;
+}
+
+.team-card-role-row {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.team-card-role-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 11px;
+  border-radius: 9999px;
+  background: #0d1b30;
+  color: #38bdf8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+}
+
+.team-card-academic {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.academic-cap {
+  font-size: 0.92rem;
+}
+
+.academic-text {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
+}
+
+.team-card-about {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #f8fafc;
+  line-height: 1.46;
+  margin: 2px 0 6px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  text-align: left;
+  letter-spacing: -0.005em;
+}
+
+/* Card Footer: GitHub & LinkedIn Logo Links */
+.team-card-footer {
+  width: 100%;
+  margin-top: auto;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.team-social-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.team-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: #cbd5e1;
+  text-decoration: none;
+  box-sizing: border-box;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 50 !important;
+  pointer-events: auto !important;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, color 0.15s ease;
+}
+
+.team-social-btn svg {
+  width: 19px;
+  height: 19px;
+  fill: currentColor;
+  flex-shrink: 0;
+  pointer-events: none;
+  transition: transform 0.15s ease;
+}
+
+.team-social-btn:hover {
+  color: #ffffff;
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+}
+
+.team-social-btn:active {
+  transform: translateY(0);
+  background: rgba(56, 189, 248, 0.4);
+}
+
+/* ========================================================= */
+/* 7. NAVIGATION CONTROLS (PREV/NEXT ARROWS)                 */
+/* ========================================================= */
+.teams-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(14, 18, 28, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 30;
+  transition: all 0.15s ease;
+  outline: none;
+}
+
+.teams-nav-btn.prev {
+  left: 20px;
+}
+
+.teams-nav-btn.next {
+  right: 20px;
+}
+
+.teams-nav-btn:hover {
+  background: rgba(26, 32, 50, 0.9);
+  border-color: rgba(56, 189, 248, 0.6);
+  color: #38bdf8;
+}
+
+.teams-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+/* ========================================================= */
+/* 8. RESPONSIVE MEDIA QUERIES                               */
+/* ========================================================= */
+@media (max-width: 1024px) {
+  .teams-section {
+    padding: 75px 16px 60px;
+  }
+
+  .teams-sections-wrapper {
+    gap: 75px;
+  }
+
+  .teams-carousel-stage {
+    height: 490px;
+  }
+
+  .team-card {
+    width: 265px;
+    height: 420px;
+  }
+
+  .team-card-photo-box {
+    height: 195px;
+  }
+}
+
+@media (max-width: 768px) {
+  .teams-section {
+    padding: 65px 12px 50px;
+  }
+
+  .teams-sections-wrapper {
+    gap: 60px;
+  }
+
+  .teams-jump-nav {
+    top: 10px;
+    margin-bottom: 25px;
+  }
+
+  .teams-jump-container {
+    gap: 5px;
+    padding: 6px 10px;
+  }
+
+  .teams-jump-btn {
+    padding: 5px 11px;
+    font-size: 0.76rem;
+  }
+
+  .teams-header {
+    margin-bottom: 14px;
+  }
+
+  .teams-title {
+    font-size: 2rem;
+  }
+
+  .team-domain-title {
+    font-size: 1.5rem;
+  }
+
+  .teams-carousel-stage {
+    height: 470px;
+  }
+
+  .team-card {
+    width: 265px;
+    height: 420px;
+  }
+
+  .team-card-photo-box {
+    height: 190px;
+  }
+
+  .team-card-about {
+    font-size: 0.84rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .teams-nav-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .teams-nav-btn.prev {
+    left: 4px;
+  }
+
+  .teams-nav-btn.next {
+    right: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .teams-section {
+    padding: 55px 8px 40px;
+  }
+
+  .teams-sections-wrapper {
+    gap: 50px;
+  }
+
+  .teams-carousel-stage {
+    height: 470px;
+  }
+
+  .team-card {
+    width: 275px;
+    height: 430px;
+    padding: 12px;
+  }
+
+  .team-card-photo-box {
+    height: 195px;
+  }
+
+  .team-card-name {
+    font-size: 1.2rem;
+  }
+
+  .team-card-about {
+    font-size: 0.84rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .teams-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .teams-nav-btn.prev {
+    left: 2px;
+  }
+
+  .teams-nav-btn.next {
+    right: 2px;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
