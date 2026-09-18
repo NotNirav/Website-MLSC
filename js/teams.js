@@ -1,6 +1,6 @@
 /**
  * MLSC — Teams / Members Multi-Section Carousel Engine
- * Dynamically loads static team dataset from data/teams.csv
+ * Dynamically loads static team dataset from data/teams.csv or data/members.csv
  */
 
 (function () {
@@ -602,26 +602,28 @@
   // 8. CSV PARSER & FETCH ENGINE
   // =========================================================
   async function loadMembersCSV() {
-    try {
-      const csvPath = './data/teams.csv';
-      const timestamp = Date.now();
-      const response = await fetch(`${csvPath}?_=${timestamp}`, {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
+    const candidatePaths = ['./data/teams.csv', './data/members.csv', 'data/teams.csv', 'data/members.csv'];
+    const timestamp = Date.now();
 
-      if (!response.ok) {
-        console.error(`Failed to fetch CSV from ${csvPath}: HTTP status ${response.status}`);
-        return null;
-      }
+    for (const csvPath of candidatePaths) {
+      try {
+        const response = await fetch(`${csvPath}?_=${timestamp}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
 
-      const csvText = await response.text();
-      const parsed = parseCSV(csvText);
-      return parsed;
-    } catch (err) {
-      console.error('Error loading team CSV data:', err);
-      return null;
+        if (response.ok) {
+          const csvText = await response.text();
+          const parsed = parseCSV(csvText);
+          if (parsed && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (err) {}
     }
+
+    console.error('Error loading team CSV data from all paths');
+    return null;
   }
 
   function parseCSV(text) {
