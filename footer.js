@@ -1,20 +1,49 @@
 /**
  * Shared Site Footer Component
- * Single source of truth for the MLSC Website footer across all pages.
+ * Single source of truth for the MLSC Website footer across all pages and event-detail routes.
  */
 (function () {
   'use strict';
 
   function initFooter() {
-    // 1. Ensure footer stylesheet is present
+    if (window.__mlscFooterRendered && document.getElementById('footer')?.querySelector('.footer-container')) {
+      return;
+    }
+
+    // 1. Resolve relative prefix for nested routes (e.g. /events/$slug)
+    let basePrefix = '';
+    const scriptTag =
+      document.currentScript ||
+      Array.from(document.querySelectorAll('script')).find(
+        (s) => s.src && s.src.includes('footer.js')
+      );
+
+    if (scriptTag) {
+      const srcAttr = scriptTag.getAttribute('src') || '';
+      const match = srcAttr.match(/^(\.\.\/)+/);
+      if (match) {
+        basePrefix = match[0];
+      }
+    }
+
+    if (!basePrefix) {
+      const normalizedPath = window.location.pathname.replace(/\\/g, '/');
+      const segments = normalizedPath.split('/').filter(Boolean);
+      const eventsIdx = segments.indexOf('events');
+      if (eventsIdx !== -1 && eventsIdx < segments.length - 1) {
+        basePrefix = '../';
+      }
+    }
+
+    // 2. Ensure footer stylesheet is present
     if (!document.querySelector('link[href*="footer.css"]')) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = 'footer.css';
+      link.href = basePrefix + 'footer.css';
       document.head.appendChild(link);
     }
 
-    // 2. Resolve navigation paths based on current page
+    // 3. Resolve navigation paths based on current page
     const pathname = window.location.pathname.toLowerCase();
     const isHomePage =
       pathname === '' ||
@@ -22,12 +51,12 @@
       pathname.endsWith('/index.html') ||
       pathname.endsWith('\\index.html');
 
-    const brandHref = isHomePage ? '#hero' : 'index.html#hero';
-    const homeHref = isHomePage ? '#hero' : 'index.html#hero';
-    const aboutHref = isHomePage ? '#about' : 'index.html#about';
-    const exploreHref = isHomePage ? '#explore' : 'index.html#explore';
+    const brandHref = isHomePage ? '#hero' : basePrefix + 'index.html#hero';
+    const homeHref = isHomePage ? '#hero' : basePrefix + 'index.html#hero';
+    const aboutHref = isHomePage ? '#about' : basePrefix + 'index.html#about';
+    const exploreHref = isHomePage ? '#explore' : basePrefix + 'index.html#explore';
 
-    // 3. Shared Single-Source Footer Template (exact match with index.html)
+    // 4. Shared Single-Source Footer Template (exact match with index.html)
     const footerContent = `
       <div class="footer-container">
         <div class="footer-top">
@@ -84,10 +113,16 @@
       </div>
     `;
 
-    // 4. Locate or create mount element
-    let mountEl = document.getElementById('footer');
+    // 5. Locate or create mount element
+    let mountEl = document.getElementById('footer') || document.querySelector('.site-footer');
+
     if (!mountEl) {
-      mountEl = document.querySelector('.site-footer');
+      // Check if .footer-space placeholder exists (event detail layout)
+      const placeholder = document.querySelector('.footer-space');
+      if (placeholder) {
+        mountEl = document.createElement('footer');
+        placeholder.parentNode.replaceChild(mountEl, placeholder);
+      }
     }
 
     if (mountEl) {
@@ -109,7 +144,11 @@
         document.body.appendChild(newFooter);
       }
     }
+
+    window.__mlscFooterRendered = true;
   }
+
+  window.initSharedFooter = initFooter;
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initFooter);

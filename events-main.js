@@ -190,6 +190,22 @@ function initRiseDelays() {
   });
 }
 
+// ===== Mount shared footer on event pages =====
+
+function initEventFooter() {
+  if (typeof window.initSharedFooter === "function") {
+    window.initSharedFooter();
+    return;
+  }
+
+  if (!document.querySelector('script[src*="footer.js"]')) {
+    const isNested = window.location.pathname.replace(/\\/g, '/').includes('/events/');
+    const script = document.createElement("script");
+    script.src = isNested ? "../footer.js" : "footer.js";
+    document.body.appendChild(script);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initTypewriters();
   initLandingParallax();
@@ -197,4 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initBelts();
   initRiseDelays();
   initRoadmap();
+  initEventFooter();
 });
+
