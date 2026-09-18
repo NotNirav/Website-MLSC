@@ -14,14 +14,14 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="teams.css?v=4.2">
-  <!-- Lenis Smooth Scroll (Parity with Home page) -->
+  <!-- Lenis Smooth Scroll -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 
 <body>
 
-  <!-- Floating Top-Left Hamburger (Same as Home tab, visible on Teams page) -->
+  <!-- Floating Top-Left Hamburger Navigation Button -->
   <button class="nav-hamburger visible" id="nav-hamburger" aria-label="Toggle Navigation Menu" aria-expanded="false"
     aria-controls="sidebar-drawer">
     <span class="hamburger-line"></span>
@@ -29,7 +29,7 @@
     <span class="hamburger-line"></span>
   </button>
 
-  <!-- Left Sidebar Drawer & Backdrop (Identical to Home tab) -->
+  <!-- Left Sidebar Drawer & Backdrop -->
   <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
   <aside class="sidebar-drawer" id="sidebar-drawer" aria-label="Navigation Menu">
     <div class="sidebar-header">
@@ -78,11 +78,11 @@
   <main class="site-content" style="padding: 0; min-height: 100vh;">
 
     <!-- ========================================================= -->
-    <!-- SECTION: MLSC TEAMS & MEMBERS (3D Coverflow Carousel)     -->
+    <!-- SECTION: MLSC TEAMS & MEMBERS                            -->
     <!-- ========================================================= -->
     <section id="teams" class="teams-section" aria-label="MLSC Core Team Members">
 
-      <!-- Ambient Background Video Layer (Seamless Forward-and-Reverse Ping-Pong Loop) -->
+      <!-- Ambient Background Video Layer -->
       <div class="teams-bg-decor" aria-hidden="true">
         <video id="teams-bg-video" class="teams-bg-video active" autoplay muted loop playsinline preload="auto">
           <source src="assets/videos/teams_pingpong.mp4" type="video/mp4">
@@ -109,11 +109,16 @@
       </nav>
 
       <!-- Stacked Teams Sections Wrapper (Dynamically Populated by teams.js) -->
-      <div class="teams-sections-wrapper" id="teams-sections-wrapper"></div>
+      <div class="teams-sections-wrapper" id="teams-sections-wrapper">
+        <div class="teams-loading-state" id="teams-loading-state" style="text-align: center; padding: 60px 20px; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">
+          <div class="loading-spinner" style="display: inline-block; width: 32px; height: 32px; border: 3px solid rgba(56, 189, 248, 0.2); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 16px;"></div>
+          <p style="margin: 0; font-size: 0.95rem; letter-spacing: 0.05em;">Loading team members...</p>
+        </div>
+      </div>
 
     </section>
 
-    <!-- SECTION 4: FOOTER (Matches Home Tab) -->
+    <!-- FOOTER -->
     <footer class="site-footer" id="footer" aria-label="Site Footer">
       <div class="footer-container">
         <div class="footer-top">
