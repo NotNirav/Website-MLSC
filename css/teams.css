@@ -13,7 +13,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 85px 16px 80px;
+  padding: 110px 16px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,61 +26,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Background Atmosphere Layer with Ambient Video */
-.teams-bg-decor {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.teams-bg-video-wrapper {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  animation: ambientBreathing 20s ease-in-out infinite alternate;
-  will-change: transform;
-}
-
-@keyframes ambientBreathing {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.teams-bg-video {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  min-width: 100%;
-  min-height: 100%;
-  object-fit: cover;
-  transform: translate(-50%, -50%);
-  opacity: 0.55;
-  filter: brightness(0.9) contrast(1.2) saturate(1.25);
-  transition: opacity 1.2s ease;
-  pointer-events: none;
-}
-
-.teams-bg-overlay {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 38%, rgba(12, 16, 26, 0.35) 0%, rgba(10, 12, 18, 0.82) 70%, #0c0c0c 100%);
-  pointer-events: none;
-}
-
+/* Background Atmosphere Layer (Clean dark theme parity with Home page) */
 .teams-grid-texture {
   position: absolute;
   inset: 0;
@@ -157,7 +103,7 @@
 /* ========================================================= */
 .teams-jump-nav {
   position: sticky;
-  top: 16px;
+  top: 86px;
   z-index: 35;
   width: 100%;
   max-width: 980px;
@@ -743,7 +689,11 @@
 
 @media (max-width: 480px) {
   .teams-section {
-    padding: 55px 8px 40px;
+    padding: 85px 8px 40px;
+  }
+
+  .teams-jump-nav {
+    top: 68px;
   }
 
   .teams-sections-wrapper {

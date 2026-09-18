@@ -4,22 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MLSC Games</title>
+  <title>Games — MLSC PCCOE</title>
+  <meta name="description" content="Take a break and play mini-games by Microsoft Learn Student Chapter PCCOE.">
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
   <style>
     body {
       margin: 0;
-      background: #000;
+      background: #080808;
+      overflow: hidden;
     }
 
     .game-container {
       width: 100%;
-      min-height: 100vh;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     .game-container iframe {
       width: 100%;
       height: 100vh;
-      min-height: 600px;
       border: none;
       display: block;
     }
@@ -27,15 +34,43 @@
 </head>
 
 <body>
+  <!-- Pinned Glassmorphism Navbar -->
+  <header class="glass-navbar navbar-fixed" id="glass-navbar" aria-label="Main Navigation">
+    <nav class="glass-nav-container">
+      <a href="index.html#hero" class="glass-nav-brand" aria-label="MLSC Home">
+        <svg class="mlsc-logo-icon nav-logo-icon" width="28" height="18" viewBox="0 0 43 28" fill="none"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Top row: col 2 (Orange), col 3 (Green) -->
+          <rect x="15" y="0" width="13" height="13" rx="1.5" fill="#F25022" class="mlsc-sq mlsc-sq-orange" />
+          <rect x="30" y="0" width="13" height="13" rx="1.5" fill="#7FBA00" class="mlsc-sq mlsc-sq-green" />
+          <!-- Bottom row: col 1 (Blue), col 2 (Yellow) -->
+          <rect x="0" y="15" width="13" height="13" rx="1.5" fill="#00A4EF" class="mlsc-sq mlsc-sq-blue" />
+          <rect x="15" y="15" width="13" height="13" rx="1.5" fill="#FFB900" class="mlsc-sq mlsc-sq-yellow" />
+        </svg>
+        <span class="nav-brand-text"><span class="letter-m">M</span><span class="letter-l">L</span><span
+            class="letter-s">S</span><span class="letter-c">C</span></span>
+      </a>
+      <div class="glass-nav-links">
+        <a href="index.html#hero" class="glass-nav-link">Home</a>
+        <a href="events.html" class="glass-nav-link">Events</a>
+        <a href="teams.html" class="glass-nav-link">Teams</a>
+        <a href="achievements.html" class="glass-nav-link">Achievements</a>
+        <a href="games.html" class="glass-nav-link active">Games</a>
+      </div>
+    </nav>
+  </header>
+
   <div class="game-container">
     <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon" allow="autoplay">
     </iframe>
   </div>
+
   <script>
     if (window.location.protocol === 'file:') {
       document.getElementById('game-frame').src = 'games/flappy-dragon/index.html';
     }
   </script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>

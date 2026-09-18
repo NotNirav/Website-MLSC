@@ -1213,8 +1213,9 @@
           e.preventDefault();
           const target = document.getElementById(`domain-${domain.id}`);
           if (target) {
-            if (globalLenis) {
-              globalLenis.scrollTo(target, { offset: -80 });
+            const activeLenis = globalLenis || window.lenis;
+            if (activeLenis) {
+              activeLenis.scrollTo(target, { offset: -95 });
             } else {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -1472,26 +1473,33 @@
     });
   }
 
+  let globalLenis = null;
+
   function setupLenisScroll() {
-    if (typeof Lenis === 'undefined' || globalLenis) return;
+    if (typeof Lenis === 'undefined' || globalLenis || window.lenis) {
+      if (window.lenis && !globalLenis) globalLenis = window.lenis;
+      return;
+    }
     try {
       globalLenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
+        lerp: 0.06,
+        wheelMultiplier: 0.72,
+        touchMultiplier: 1.2,
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.4,
-        infinite: false
+        infinite: false,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical'
       });
+      window.lenis = globalLenis;
 
       function raf(time) {
         globalLenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Teams Lenis scroll error:', e);
+    }
   }
 
   function escapeHTML(str) {
