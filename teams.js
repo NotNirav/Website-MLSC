@@ -595,6 +595,22 @@
   // =========================================================
   // 6. RENDER ALL DOMAIN SECTIONS SEQUENTIALLY
   // =========================================================
+    // Helper: Rank members by role authority so that Domain Heads are at index 0 (front & center),
+  // with Leads following and Executives/Members flanking them on the sides.
+  function getRoleRank(role) {
+    const r = (role || '').toLowerCase();
+    if (r.includes('president') && !r.includes('vice')) return 1;
+    if (r.includes('vice president') || r.includes('vp')) return 2;
+    if (r.includes('secretary')) return 3;
+    if (/\bhead\b/.test(r)) return 4;
+    if (/co-head|deputy/.test(r)) return 5;
+    if (/\blead\b/.test(r)) return 6;
+    if (/architect|strategist|coordinator/.test(r)) return 7;
+    if (/specialist|researcher|engineer|developer|designer/.test(r)) return 8;
+    if (/executive/.test(r)) return 9;
+    return 10; // member, other
+  }
+
   function renderAllDomainSections() {
     if (!sectionsWrapper) return;
 
@@ -612,7 +628,6 @@
     const membersByDomain = {};
     const domainsToRender = [...DOMAIN_ORDER];
 
-    // Check for any custom domain names present in CSV
     activeMembers.forEach(m => {
       const normTeam = normalizeTeamName(m.team);
       if (!membersByDomain[normTeam]) {
@@ -620,12 +635,14 @@
       }
       membersByDomain[normTeam].push(m);
 
-      // If this domain isn't in DOMAIN_ORDER, add it dynamically
+      // If custom domain isn't in DOMAIN_ORDER, add it dynamically
       if (!domainsToRender.some(d => d.name.toLowerCase() === normTeam.toLowerCase())) {
         const slug = normTeam.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
         domainsToRender.push({
           id: slug,
           name: normTeam,
+          category: 'Non-Tech',
+          categoryLabel: 'Other Domains',
           tag: `// ${normTeam.toUpperCase()}`,
           title: normTeam,
           desc: `Members and contributors in ${normTeam}.`,
@@ -634,19 +651,33 @@
       }
     });
 
+    // Track when we transition into Tech or Non-Tech wings to render sleek Wing Dividers
+    let hasRenderedTechDivider = false;
+    let hasRenderedNonTechDivider = false;
+
     // Render Jump Pills & Team Blocks
     domainsToRender.forEach(domain => {
       const domainMembers = membersByDomain[domain.name] || [];
       if (domainMembers.length === 0) return;
 
-      // 1. Create Jump Nav Pill
+      // CRITICAL: Sort domain members so that Domain Head (or President) is FRONT FIRST (index 0),
+      // followed by Leads, and Executives on the sides!
+      domainMembers.sort((a, b) => getRoleRank(a.role) - getRoleRank(b.role));
+
+      const cat = domain.category || 'Non-Tech';
+      const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
+      const catShort = cat === 'Core' ? 'CORE' : (cat === 'Tech' ? 'TECH' : 'NON-TECH');
+
+      // 1. Create Jump Nav Pill with distinct Tech / Non-Tech visual indicator
       if (jumpNavContainer) {
         const pill = document.createElement('a');
-        pill.className = 'teams-jump-btn';
+        pill.className = `teams-jump-btn ${catClass}-pill`;
         pill.href = `#domain-${domain.id}`;
         pill.setAttribute('data-domain', domain.name);
+        pill.setAttribute('data-category', cat);
         pill.innerHTML = `
-          <span>${escapeHTML(domain.name)}</span>
+          <span class="teams-jump-cat-tag ${catClass}">${catShort}</span>
+          <span class="teams-jump-label">${escapeHTML(domain.name)}</span>
           <span class="teams-jump-count">${domainMembers.length}</span>
         `;
         pill.addEventListener('click', (e) => {
@@ -663,11 +694,42 @@
         jumpNavContainer.appendChild(pill);
       }
 
-      // 2. Create Domain Section Block
+      // 2. Render Category Wing Divider Header before first Tech domain
+      if (cat === 'Tech' && !hasRenderedTechDivider) {
+        hasRenderedTechDivider = true;
+        const divider = document.createElement('div');
+        divider.className = 'team-wing-divider tech-wing';
+        divider.innerHTML = `
+          <div class="team-wing-badge">
+            <span class="wing-dot" style="background: #38bdf8;"></span>
+            <span class="wing-text">TECHNICAL DOMAINS</span>
+          </div>
+          <div class="team-wing-line"></div>
+        `;
+        sectionsWrapper.appendChild(divider);
+      }
+
+      // 3. Render Category Wing Divider Header before first Non-Tech domain
+      if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
+        hasRenderedNonTechDivider = true;
+        const divider = document.createElement('div');
+        divider.className = 'team-wing-divider nontech-wing';
+        divider.innerHTML = `
+          <div class="team-wing-badge nontech">
+            <span class="wing-dot" style="background: #ec4899;"></span>
+            <span class="wing-text">NON-TECHNICAL & CREATIVE DOMAINS</span>
+          </div>
+          <div class="team-wing-line"></div>
+        `;
+        sectionsWrapper.appendChild(divider);
+      }
+
+      // 4. Create Domain Section Block
       const block = document.createElement('section');
-      block.className = 'team-domain-block';
+      block.className = `team-domain-block domain-${catClass}`;
       block.id = `domain-${domain.id}`;
       block.setAttribute('data-domain', domain.name);
+      block.setAttribute('data-category', cat);
 
       // Domain Header
       const header = document.createElement('div');
@@ -685,7 +747,7 @@
       // Carousel / Showcase Container
       sectionsWrapper.appendChild(block);
 
-      // Instantiate Carousel
+      // Instantiate Carousel (at index 0, Domain Head will be FRONT AND CENTER!)
       const instance = new TeamCarousel(domain, domainMembers, block);
       carouselInstances.push(instance);
     });
