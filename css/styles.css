@@ -1581,6 +1581,48 @@ body {
   background: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 255, 255, 0.08);
   margin: 4px 0 8px;
+  position: relative;
+}
+
+.winner-card-image-wrap.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  user-select: none;
+}
+
+.winner-photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--text-muted, #71717a);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.winner-photo-placeholder svg {
+  opacity: 0.45;
+  color: #00A4EF;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.winner-card:hover .winner-photo-placeholder,
+.winner-card:focus-visible .winner-photo-placeholder {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.winner-card:hover .winner-photo-placeholder svg,
+.winner-card:focus-visible .winner-photo-placeholder svg {
+  opacity: 0.8;
+  transform: scale(1.08);
 }
 
 .winner-card-img {
@@ -1602,6 +1644,12 @@ body {
   color: var(--text-dim, #94a3b8);
   line-height: 1.55;
   margin: 2px 0 0;
+}
+
+.winner-desc-pending {
+  font-style: italic;
+  opacity: 0.5;
+  font-size: 0.82rem;
 }
 
 /* Mobile & Tablet Responsive Stacking */
