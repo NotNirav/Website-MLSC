@@ -1197,7 +1197,7 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #080808;
+  background: #000000;
   border: 2.5px solid rgba(0, 164, 239, 0.45);
   /* Base blue border */
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);

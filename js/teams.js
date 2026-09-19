@@ -566,6 +566,7 @@
     setupBgVideo();
     setupHomeStyleNavbar();
     setupLenisScroll();
+    setupHeroAnimations();
 
     // Fetch static CSV data dynamically
     const members = await loadMembersCSV();
@@ -580,6 +581,12 @@
     // Resize listener to re-align carousel items
     window.addEventListener('resize', debounce(() => {
       carouselInstances.forEach(c => c.updatePositions());
+      if (globalLenis || window.lenis) {
+        (globalLenis || window.lenis).resize();
+      }
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
     }, 60));
 
     // Page visibility listener
@@ -684,8 +691,13 @@
           e.preventDefault();
           const target = document.getElementById(`domain-${domain.id}`);
           if (target) {
-            if (globalLenis) {
-              globalLenis.scrollTo(target, { offset: -80 });
+            const activeLenis = globalLenis || window.lenis;
+            if (activeLenis) {
+              activeLenis.scrollTo(target, {
+                offset: -20,
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+              });
             } else {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -753,6 +765,56 @@
     });
 
     setupScrollSpy();
+
+    // Immediate resize & refresh of Lenis and GSAP ScrollTrigger after dynamic DOM insertion
+    const activeLenis = globalLenis || window.lenis;
+    if (activeLenis) {
+      activeLenis.resize();
+    }
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+    }
+
+    // Measure again after member avatar images complete loading
+    const memberImages = sectionsWrapper.querySelectorAll('img');
+    let loadedImgs = 0;
+    const onImgComplete = () => {
+      loadedImgs++;
+      if (loadedImgs % 4 === 0 || loadedImgs === memberImages.length) {
+        if (activeLenis) activeLenis.resize();
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+      }
+    };
+    memberImages.forEach(img => {
+      if (img.complete) {
+        onImgComplete();
+      } else {
+        img.addEventListener('load', onImgComplete, { once: true });
+        img.addEventListener('error', onImgComplete, { once: true });
+      }
+    });
+
+    // Synchronize ScrollTrigger and apply smooth reveal animations
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+
+      gsap.utils.toArray('.team-domain-block').forEach((block) => {
+        gsap.fromTo(block,
+          { opacity: 0.25, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: block,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+    }
   }
 
   // =========================================================
@@ -1126,25 +1188,77 @@
   }
 
   function setupLenisScroll() {
-    if (typeof Lenis === 'undefined' || globalLenis) return;
-    try {
-      globalLenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
-        smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.4,
-        infinite: false
-      });
+    if (typeof Lenis === 'undefined') return;
 
+    if (window.lenis) {
+      globalLenis = window.lenis;
+    } else if (!globalLenis) {
+      try {
+        globalLenis = new Lenis({
+          lerp: 0.07,
+          wheelMultiplier: 0.8,
+          touchMultiplier: 1.4,
+          smoothWheel: true,
+          infinite: false,
+          orientation: 'vertical',
+          gestureOrientation: 'vertical'
+        });
+        window.lenis = globalLenis;
+      } catch (e) {
+        console.warn('Teams Lenis scroll init error:', e);
+        return;
+      }
+    }
+
+    // Synchronize Lenis with GSAP ScrollTrigger & Ticker for buttery smooth scrolling
+    if (typeof gsap !== 'undefined') {
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        globalLenis.on('scroll', ScrollTrigger.update);
+      }
+      if (!window.__lenisTickerBound) {
+        window.__lenisTickerBound = true;
+        gsap.ticker.add((time) => {
+          globalLenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+      }
+    } else {
       function raf(time) {
         globalLenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-    } catch (e) {}
+    }
+  }
+
+  function setupHeroAnimations() {
+    if (typeof gsap === 'undefined') return;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.fromTo('.teams-tag',
+      { opacity: 0, y: -16 },
+      { opacity: 1, y: 0, duration: 0.65, delay: 0.1 }
+    );
+
+    tl.fromTo('.teams-title',
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.8 },
+      '-=0.35'
+    );
+
+    tl.fromTo('.teams-desc',
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.45'
+    );
+
+    tl.fromTo('.teams-jump-nav',
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.75 },
+      '-=0.35'
+    );
   }
 
   function escapeHTML(str) {

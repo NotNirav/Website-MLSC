@@ -1,0 +1,91 @@
+/**
+ * MLSC — Achievements Section Stylesheet
+ * Pure darkest black aesthetic (#000000) with zero grid lines, zero gradient canvas,
+ * and buttery smooth Lenis + GSAP scroll synchronization.
+ */
+
+/* ========================================================= */
+/* 0. PURE BLACK THEME & LENIS INTEGRATION                   */
+/* ========================================================= */
+html {
+  scroll-behavior: auto;
+  background-color: #000000 !important;
+  background: #000000 !important;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #f3f4f6;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+/* ========================================================= */
+/* 1. PAGE CONTAINER & SECTIONS (PURE BLACK, NO DIVIDERS)    */
+/* ========================================================= */
+.achievements-page,
+.site-content {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Eliminate white divider lines across all achievement sections */
+.achievements-section,
+.journey-section,
+.hackathon-section,
+.leaderboard-section {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border-bottom: none !important;
+  border-top: none !important;
+}
+
+/* Completely remove any grid overlay or white line texture */
+.grid-overlay,
+#gradient-canvas {
+  display: none !important;
+}
+
+/* Journey section pure black & pinned container styling */
+.journey-section {
+  background: #000000 !important;
+  border-bottom: none !important;
+}
+
+.journey-sticky-container {
+  background: transparent !important;
+}
+
+.milestone-dot {
+  background: #000000 !important;
+}
+
+/* Ensure Site Footer is pure black and has no white border lines */
+.site-footer {
+  background: #000000 !important;
+  background-color: #000000 !important;
+  border-bottom: none !important;
+}
