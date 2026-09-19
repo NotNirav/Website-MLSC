@@ -123,7 +123,7 @@ function initRoadmap() {
       mascotInner.style.transform = `rotate(${bank.toFixed(1)}deg)`;
     }
 
-    // Activate stations as dragon arrives at them (illuminates border when mascot is on the left edge of the box)
+    // Activate stations as dragon arrives at them (illuminates border smoothly when mascot is on the left edge of the box)
     const stationCount = stations.length;
     stations.forEach((station, idx) => {
       if (idx === 0) {
@@ -132,9 +132,12 @@ function initRoadmap() {
       }
       const stationProgress = stationCount > 1 ? idx / (stationCount - 1) : 0;
       // Triggers precisely when the mascot arrives on the left edge of the box (~0.027 path progress before center)
-      if (clampedProgress >= stationProgress - 0.027) {
+      const activateThreshold = stationProgress - 0.027;
+      const deactivateThreshold = activateThreshold - 0.012; // Hysteresis buffer prevents jitter / bounce
+      
+      if (clampedProgress >= activateThreshold) {
         station.classList.add("is-active");
-      } else {
+      } else if (clampedProgress < deactivateThreshold) {
         station.classList.remove("is-active");
       }
     });

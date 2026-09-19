@@ -651,8 +651,8 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 0 0 transparent, 0 12px 28px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.45s ease, box-shadow 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .station-hub img {
@@ -677,7 +677,7 @@ main {
   padding: 2px 7px;
   line-height: 1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.45s ease, background-color 0.45s ease, color 0.45s ease;
 }
 
 .station-card {
@@ -758,6 +758,7 @@ main {
 .roadmap-station:hover .station-hub {
   border-color: var(--station-accent, #00a4ef);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--station-accent, #00a4ef);
+  transform: translateY(-8px);
 }
 
 .roadmap-station:hover .station-hub img {
@@ -773,10 +774,11 @@ main {
   gap: 7px;
 }
 
-/* Active / Passed State (illuminated when dragon arrives) */
+/* Active / Passed State (illuminated and slightly lifted when dragon arrives) */
 .roadmap-station.is-active .station-hub {
   border-color: var(--station-accent, #00a4ef);
-  box-shadow: 0 0 0 2px var(--station-accent, #00a4ef), 0 12px 28px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 2px var(--station-accent, #00a4ef), 0 16px 34px rgba(0, 0, 0, 0.8);
+  transform: translateY(-6px);
 }
 
 .roadmap-station.is-active .station-num {
