@@ -185,28 +185,31 @@ function AboutTextContent({
     ? Math.min(v.width / 38, 0.112)
     : Math.min(v.width / 40, 0.126);
 
-  // Background solid color circles
+  // Background solid color circles (reverted to 4 clean solid color circles)
   const bgCircles = (
     <group position={[0, 0, -1]}>
-      {/* Soft Microsoft Blue top-left */}
+      {/* 1. Soft Microsoft Blue top-left */}
       <mesh position={[-v.width * 0.36, v.height * 0.32, 0]}>
         <circleGeometry args={[v.width * 0.28, 32]} />
-        <meshBasicMaterial color="#00A4EF" opacity={0.07} transparent toneMapped={false} />
+        <meshBasicMaterial color="#00A4EF" opacity={0.075} transparent toneMapped={false} />
       </mesh>
-      {/* Soft Microsoft Gold bottom-right */}
+
+      {/* 2. Soft Microsoft Gold bottom-right */}
       <mesh position={[v.width * 0.36, -v.height * 0.30, 0]}>
         <circleGeometry args={[v.width * 0.28, 32]} />
-        <meshBasicMaterial color="#FFB900" opacity={0.06} transparent toneMapped={false} />
+        <meshBasicMaterial color="#FFB900" opacity={0.065} transparent toneMapped={false} />
       </mesh>
-      {/* Soft Microsoft Red bottom-left */}
+
+      {/* 3. Soft Microsoft Red bottom-left */}
       <mesh position={[-v.width * 0.40, -v.height * 0.35, 0]}>
         <circleGeometry args={[v.width * 0.20, 32]} />
-        <meshBasicMaterial color="#F25022" opacity={0.04} transparent toneMapped={false} />
+        <meshBasicMaterial color="#F25022" opacity={0.045} transparent toneMapped={false} />
       </mesh>
-      {/* Soft Microsoft Green top-right */}
+
+      {/* 4. Soft Microsoft Green top-right */}
       <mesh position={[v.width * 0.40, v.height * 0.35, 0]}>
         <circleGeometry args={[v.width * 0.20, 32]} />
-        <meshBasicMaterial color="#7FBA00" opacity={0.04} transparent toneMapped={false} />
+        <meshBasicMaterial color="#7FBA00" opacity={0.045} transparent toneMapped={false} />
       </mesh>
     </group>
   );
@@ -255,6 +258,55 @@ function AboutTextContent({
       </group>
     );
   }
+
+  const activitiesColorRanges = useMemo(() => {
+    if (!activitiesText) return null;
+    const base = '#e2e8f0';
+    const ranges = { 0: base };
+    const bIdx = activitiesText.indexOf('BlueBit');
+    if (bIdx !== -1) {
+      ranges[bIdx] = '#1EAEF7';
+      ranges[bIdx + 'BlueBit'.length] = base;
+    }
+    const tIdx = activitiesText.indexOf('TechRoom');
+    if (tIdx !== -1) {
+      ranges[tIdx] = '#FF643D';
+      ranges[tIdx + 'TechRoom'.length] = base;
+    }
+    const pIdx = activitiesText.indexOf('Praxis');
+    if (pIdx !== -1) {
+      ranges[pIdx] = '#4ADE80';
+      ranges[pIdx + 'Praxis'.length] = base;
+    }
+    return ranges;
+  }, [activitiesText]);
+
+  const punchlineColorRanges = useMemo(() => {
+    if (!punchlineText) return null;
+    const base = '#ffffff';
+    const ranges = { 0: base };
+    const lIdx = punchlineText.indexOf('learn');
+    if (lIdx !== -1) {
+      ranges[lIdx] = '#1EAEF7';
+      ranges[lIdx + 'learn'.length] = base;
+    }
+    const c1Idx = punchlineText.indexOf('create');
+    if (c1Idx !== -1) {
+      ranges[c1Idx] = '#FF643D';
+      ranges[c1Idx + 'create'.length] = base;
+    }
+    const c2Idx = punchlineText.indexOf('collaborate');
+    if (c2Idx !== -1) {
+      ranges[c2Idx] = '#FFB900';
+      ranges[c2Idx + 'collaborate'.length] = base;
+    }
+    const impIdx = punchlineText.indexOf('make an impact');
+    if (impIdx !== -1) {
+      ranges[impIdx] = '#4ADE80';
+      ranges[impIdx + 'make an impact'.length] = base;
+    }
+    return ranges;
+  }, [punchlineText]);
 
   // Responsive vertical coordinates based on visible viewport height
   const orgY = isMobile ? v.height * 0.36 : v.height * 0.33;
@@ -325,6 +377,7 @@ function AboutTextContent({
           maxWidth={maxWidth}
           textAlign="center"
           color="#e2e8f0"
+          colorRanges={activitiesColorRanges}
           anchorX="center"
           anchorY="middle"
           outlineWidth={0}
@@ -356,7 +409,7 @@ function AboutTextContent({
         </Text>
       )}
 
-      {/* Tier 5: The Mission Anchor (Microsoft Electric Cyan) */}
+      {/* Tier 5: The Mission Anchor (Microsoft 4-Color Harmony / Electric Cyan) */}
       {punchlineText && (
         <Text
           position={[0, punchY, 0]}
@@ -365,7 +418,8 @@ function AboutTextContent({
           letterSpacing={0.02}
           maxWidth={maxWidth}
           textAlign="center"
-          color="#38BDF8"
+          color="#ffffff"
+          colorRanges={punchlineColorRanges}
           anchorX="center"
           anchorY="middle"
           outlineWidth={0}
