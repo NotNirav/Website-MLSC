@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Page Not Found | MLSC PCCOE</title>
+  <meta name="description"
+    content="404 - Page not found. The route you are looking for has moved or does not exist on the MLSC PCCOE website.">
+  <link rel="icon" href="assets/images/branding/favicon.svg" type="image/svg+xml">
+
+  <!-- Resource Hints & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/404.css">
+  <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+
+  <!-- Pinned Glass Navbar (Consistent with Site Navigation) -->
+  <header class="glass-navbar navbar-fixed" id="glass-navbar" aria-label="Main Navigation">
+    <nav class="glass-nav-container">
+      <a href="index.html#hero" class="glass-nav-brand" aria-label="MLSC Home">
+        <svg class="mlsc-logo-icon nav-logo-icon" width="28" height="18" viewBox="0 0 43 28" fill="none"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Top row: col 2 (Orange), col 3 (Green) -->
+          <rect x="15" y="0" width="13" height="13" rx="1.5" fill="#F25022" class="mlsc-sq mlsc-sq-orange" />
+          <rect x="30" y="0" width="13" height="13" rx="1.5" fill="#7FBA00" class="mlsc-sq mlsc-sq-green" />
+          <!-- Bottom row: col 1 (Blue), col 2 (Yellow) -->
+          <rect x="0" y="15" width="13" height="13" rx="1.5" fill="#00A4EF" class="mlsc-sq mlsc-sq-blue" />
+          <rect x="15" y="15" width="13" height="13" rx="1.5" fill="#FFB900" class="mlsc-sq mlsc-sq-yellow" />
+        </svg>
+        <span class="nav-brand-text"><span class="letter-m">M</span><span class="letter-l">L</span><span
+            class="letter-s">S</span><span class="letter-c">C</span></span>
+      </a>
+      <div class="glass-nav-links">
+        <a href="index.html#hero" class="glass-nav-link">Home</a>
+        <a href="events.html" class="glass-nav-link">Events</a>
+        <a href="teams.html" class="glass-nav-link">Teams</a>
+        <a href="achievements.html" class="glass-nav-link">Achievements</a>
+        <a href="games.html" class="glass-nav-link">Games</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main 404 Viewport -->
+  <main class="error-viewport" id="main-content">
+    <div class="error-container">
+
+      <!-- Status Pill -->
+      <div class="status-badge" role="status">
+        <span class="status-dot"></span>
+        <span>STATUS: 404_PAGE_NOT_FOUND</span>
+      </div>
+
+      <!-- Giant Typographic 404 (Solid MLSC Colors) -->
+      <div class="hero-digits" aria-label="Error 404">
+        <span class="digit d-red" title="Microsoft Orange / Red">4</span>
+        <span class="digit d-green" title="Microsoft Green">0</span>
+        <span class="digit d-blue" title="Microsoft Blue">4</span>
+      </div>
+
+      <!-- Headline & Description -->
+      <div class="error-text-group">
+        <h1 class="error-title">Page not found<span class="dot-yellow">.</span></h1>
+        <p class="error-desc">
+          You've ventured into uncommitted territory. The route you are trying to reach has been relocated, refactored,
+          or never pushed to this branch.
+        </p>
+      </div>
+
+      <!-- Solid MLSC Brand Pillars -->
+      <div class="brand-pillars" aria-label="MLSC Core Pillars">
+        <span class="pillar pillar-red">● Learn</span>
+        <span class="pillar pillar-green">● Build</span>
+        <span class="pillar pillar-yellow">● Share</span>
+        <span class="pillar pillar-blue">● Grow</span>
+      </div>
+
+      <!-- Primary Action and Secondary Routes -->
+      <div class="action-group">
+        <a href="index.html" class="btn-primary" id="btn-home" aria-label="Return to homepage">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          Return to Safety
+        </a>
+
+        <nav class="route-pills" aria-label="Direct Page Navigation">
+          <a href="events.html" class="route-pill pill-red">Events</a>
+          <a href="teams.html" class="route-pill pill-green">Teams</a>
+          <a href="achievements.html" class="route-pill pill-yellow">Achievements</a>
+          <a href="games.html" class="route-pill pill-blue">Arcade Games</a>
+        </nav>
+
+        <!-- Developer Keyboard Navigation Helper -->
+        <div class="keyboard-shortcuts" aria-label="Keyboard Shortcuts">
+          <span class="key-item"><kbd>H</kbd> Home</span>
+          <span class="key-item"><kbd>E</kbd> Events</span>
+          <span class="key-item"><kbd>T</kbd> Teams</span>
+          <span class="key-item"><kbd>A</kbd> Achievements</span>
+          <span class="key-item"><kbd>G</kbd> Games</span>
+          <span class="key-item"><kbd>Esc</kbd> Go Back</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Site Footer (Unified across MLSC) -->
+  <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
+
+  <!-- Scripts -->
+  <script src="js/footer.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      // Developer Keyboard Navigation
+      window.addEventListener('keydown', function (e) {
+        // Ignore if user is inside an input/textarea
+        if (e.target.matches('input, textarea, select')) return;
+
+        const key = e.key.toLowerCase();
+
+        if (key === 'h') {
+          window.location.href = 'index.html';
+        } else if (key === 'e') {
+          window.location.href = 'events.html';
+        } else if (key === 't') {
+          window.location.href = 'teams.html';
+        } else if (key === 'a') {
+          window.location.href = 'achievements.html';
+        } else if (key === 'g') {
+          window.location.href = 'games.html';
+        } else if (e.key === 'Escape' || key === 'b') {
+          if (window.history.length > 1) {
+            window.history.back();
+          } else {
+            window.location.href = 'index.html';
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
