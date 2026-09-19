@@ -7,8 +7,8 @@
 (function () {
   'use strict';
 
-  const COLOR_START = '#0c0c0c';
-  const COLOR_END = '#171717';
+  const COLOR_START = '#000000';
+  const COLOR_END = '#000000';
   const MIN_CANVAS_HEIGHT = 2500;
 
   const canvas = document.getElementById('gradient-canvas');

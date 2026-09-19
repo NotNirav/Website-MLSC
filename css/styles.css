@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --color-start: #0c0c0c;
-  --color-end: #171717;
+  --color-start: #000000;
+  --color-end: #000000;
   --canvas-height: 2500px;
-  --bg-app: #080808;
+  --bg-app: #000000;
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
@@ -32,6 +32,8 @@
 
 html {
   scroll-behavior: auto;
+  background-color: #000000 !important;
+  background: #000000 !important;
 }
 
 /* Global Lenis Smooth Scroll Integration */
@@ -54,7 +56,8 @@ html.lenis body {
 
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-app);
+  background: #000000 !important;
+  background-color: #000000 !important;
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: clip;
@@ -78,8 +81,8 @@ body {
   min-height: var(--canvas-height);
   position: relative;
   overflow: hidden;
-  background: var(--color-start);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+  background: #000000 !important;
+  box-shadow: none !important;
 }
 
 /* Background HTML5 canvas */
@@ -96,40 +99,12 @@ body {
 
 /* Grid overlay */
 .grid-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-.grid-overlay.visible {
-  opacity: 1;
+  display: none !important;
 }
 
 /* Height ruler */
 .height-ruler {
-  position: absolute;
-  top: 0;
-  right: 16px;
-  height: 100%;
-  width: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.height-ruler.visible {
-  opacity: 0.7;
+  display: none !important;
 }
 
 .ruler-marker {
@@ -200,7 +175,7 @@ body {
   justify-content: center;
   padding: 0 24px;
   overflow: hidden;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -254,7 +229,7 @@ body {
   justify-content: center;
   padding: clamp(24px, 4vh, 48px) 24px;
   box-sizing: border-box;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   overflow: hidden;
 }
 
@@ -377,7 +352,7 @@ body {
   width: 100%;
   position: relative;
   padding: 80px 24px 60px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -579,8 +554,8 @@ body {
   width: 100%;
   min-height: auto;
   border-top: 1px solid var(--border-glass);
-  border-bottom: 1px solid #ffffff;
-  background: #0c0c0c;
+  border-bottom: none !important;
+  background: #000000 !important;
   display: flex;
   align-items: center;
   padding: 44px 24px 28px;
@@ -962,7 +937,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: clamp(32px, 5vh, 64px) 24px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -1038,7 +1013,7 @@ body {
   min-height: 280vh;
   position: relative;
   padding: 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
   display: block;
 }
@@ -1703,7 +1678,7 @@ body {
   width: 100%;
   position: relative;
   padding: 60px 24px 80px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
