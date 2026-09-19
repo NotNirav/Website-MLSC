@@ -90,54 +90,78 @@ function initSparkles() {
 function initRoadmap() {
   const track = document.querySelector("[data-track]");
   const guide = document.querySelector("[data-guide]");
+  const path = document.querySelector("#roadmapPath");
   if (!track || !guide) return;
 
-  const nodes = JSON.parse(track.getAttribute("data-nodes"));
-  const viewH = Number(track.getAttribute("data-view-h"));
+  const nodes = JSON.parse(track.getAttribute("data-nodes") || "[]");
+  const viewH = Number(track.getAttribute("data-view-h") || 600);
+  const totalLength = path && path.getTotalLength ? path.getTotalLength() : 0;
 
   function pointOnPath(progress) {
+    if (path && totalLength > 0) {
+      const len = Math.max(0, Math.min(totalLength, progress * totalLength));
+      const pt = path.getPointAtLength(len);
+      const aheadLen = Math.min(totalLength, len + 1.5);
+      const behindLen = Math.max(0, len - 1.5);
+      const ptAhead = path.getPointAtLength(aheadLen);
+      const ptBehind = path.getPointAtLength(behindLen);
+      const dx = ptAhead.x - ptBehind.x;
+      const bank = Math.max(-10, Math.min(10, dx * 1.5));
+      return { x: pt.x, y: pt.y, tilt: bank };
+    }
+
     const segment = progress * (nodes.length - 1);
     const index = Math.min(nodes.length - 2, Math.floor(segment));
     const t = Math.min(1, segment - index);
     const from = nodes[index] || nodes[0];
     const to = nodes[index + 1] || from;
-    const middleY = (from.y + to.y) / 2;
+    const dy = to.y - from.y;
+    const cp1y = from.y + 0.38 * dy;
+    const cp2y = to.y - 0.38 * dy;
     const inverse = 1 - t;
 
-    return {
-      x:
-        inverse ** 3 * from.x +
-        3 * inverse ** 2 * t * from.x +
-        3 * inverse * t ** 2 * to.x +
-        t ** 3 * to.x,
-      y:
-        inverse ** 3 * from.y +
-        3 * inverse ** 2 * t * middleY +
-        3 * inverse * t ** 2 * middleY +
-        t ** 3 * to.y,
-    };
+    const x =
+      inverse ** 3 * from.x +
+      3 * inverse ** 2 * t * from.x +
+      3 * inverse * t ** 2 * to.x +
+      t ** 3 * to.x;
+    const y =
+      inverse ** 3 * from.y +
+      3 * inverse ** 2 * t * cp1y +
+      3 * inverse * t ** 2 * cp2y +
+      t ** 3 * to.y;
+
+    const dx = to.x - from.x;
+    const tilt = Math.max(-10, Math.min(10, dx * 0.25));
+    return { x, y, tilt };
   }
 
-  let targetPoint = pointOnPath(0);
-  let currentPoint = { ...targetPoint };
+  let targetProgress = 0;
+  let currentProgress = 0;
+  let currentTilt = 0;
   let animationFrame = null;
 
+  function renderGuide(progress, tilt) {
+    const pt = pointOnPath(progress);
+    guide.style.left = `${pt.x}%`;
+    guide.style.top = `${(pt.y / viewH) * 100}%`;
+    guide.style.transform = `translate(-50%, -50%) rotate(${tilt.toFixed(2)}deg)`;
+  }
+
   function updateGuide() {
-    const ease = 0.12;
+    const ease = 0.08;
+    currentProgress += (targetProgress - currentProgress) * ease;
+    const targetPt = pointOnPath(currentProgress);
+    currentTilt += (targetPt.tilt - currentTilt) * 0.1;
 
-    currentPoint.x += (targetPoint.x - currentPoint.x) * ease;
-    currentPoint.y += (targetPoint.y - currentPoint.y) * ease;
+    renderGuide(currentProgress, currentTilt);
 
-    guide.style.left = `${currentPoint.x}%`;
-    guide.style.top = `${(currentPoint.y / viewH) * 100}%`;
-
-    const distance =
-      Math.abs(targetPoint.x - currentPoint.x) +
-      Math.abs(targetPoint.y - currentPoint.y);
-
-    if (distance > 0.01) {
+    const diff = Math.abs(targetProgress - currentProgress);
+    if (diff > 0.0003) {
       animationFrame = requestAnimationFrame(updateGuide);
     } else {
+      currentProgress = targetProgress;
+      renderGuide(currentProgress, targetPt.tilt);
       animationFrame = null;
     }
   }
@@ -145,20 +169,20 @@ function initRoadmap() {
   function onScroll() {
     const r = track.getBoundingClientRect();
     const vh = window.innerHeight;
-    const firstNode = (nodes[0]?.y ?? 0) / viewH;
-    const lastNode = (nodes[nodes.length - 1]?.y ?? viewH) / viewH;
+    const firstNode = (nodes[0]?.y ?? 70) / viewH;
+    const lastNode = (nodes[nodes.length - 1]?.y ?? 530) / viewH;
     const start = r.top + r.height * firstNode;
     const finish = r.top + r.height * lastNode;
+    const triggerY = vh * 0.52;
+
     const atPageEnd =
-      window.scrollY + vh >= document.documentElement.scrollHeight - 2;
+      window.scrollY + vh >= document.documentElement.scrollHeight - 10;
 
     const p = atPageEnd
       ? 1
-      : (vh * 0.58 - start) / Math.max(1, finish - start);
+      : (triggerY - start) / Math.max(1, finish - start);
 
-    const progress = Math.min(1, Math.max(0, p));
-
-    targetPoint = pointOnPath(progress);
+    targetProgress = Math.min(1, Math.max(0, p));
 
     if (!animationFrame) {
       animationFrame = requestAnimationFrame(updateGuide);
@@ -166,9 +190,22 @@ function initRoadmap() {
   }
 
   onScroll();
+  currentProgress = targetProgress;
+  const initialPt = pointOnPath(currentProgress);
+  renderGuide(currentProgress, initialPt.tilt);
 
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+
+  const pollLenis = () => {
+    const l = window.lenis || window.globalLenis;
+    if (l && typeof l.on === "function") {
+      l.on("scroll", onScroll);
+    } else {
+      setTimeout(pollLenis, 300);
+    }
+  };
+  pollLenis();
 }
 // ===== Duplicate belt items so the marquee loops seamlessly =====
 

@@ -2,18 +2,18 @@
 
 :root {
   --radius: 1rem;
-  --background: #0c0c0c;
+  --background: #000000;
   --foreground: #f3f4f6;
-  --card: rgba(22, 22, 22, 0.65);
+  --card: rgba(20, 20, 20, 0.7);
   --muted-foreground: #9ca3af;
-  --border: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.1);
 
   --ms-red: #f25022;
   --ms-green: #7fba00;
   --ms-blue: #00a4ef;
   --ms-yellow: #ffb900;
 
-  --glass-bg: rgba(22, 22, 22, 0.65);
+  --glass-bg: rgba(18, 18, 18, 0.75);
   --glass-border: rgba(255, 255, 255, 0.12);
 
   --font-display: "Plus Jakarta Sans", "Unbounded", "Space Grotesk", sans-serif;
@@ -28,6 +28,7 @@
 
 html {
   scroll-behavior: auto;
+  background-color: #000000 !important;
 }
 
 /* Global Lenis Smooth Scroll Integration */
@@ -47,12 +48,11 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
-}
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0c0c0c 0%, #121316 50%, #171717 100%);
-  background-attachment: fixed;
+  background: #000000 !important;
+  background-color: #000000 !important;
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -96,16 +96,9 @@ a {
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* 40px Grid Texture Overlay (Theme Parity with Home & Achievements) */
+/* Disable all background grid textures / lines */
 .grain {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  z-index: 1;
+  display: none !important;
 }
 
 .mono-label {
@@ -293,8 +286,9 @@ main {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background: linear-gradient(180deg, #0c0c0c 0%, #171717 100%);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+  background: #000000 !important;
+  background-color: #000000 !important;
+  box-shadow: none;
 }
 
 .wrap {
@@ -468,11 +462,20 @@ main {
 
 .events-hero-section {
   width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   position: relative;
   z-index: 10;
-  padding-top: 5.5rem;
+  padding-top: 5rem;
   padding-bottom: 0;
   border-bottom: 1px solid #ffffff;
+  background: #000000 !important;
   box-sizing: border-box;
 }
 
@@ -480,17 +483,9 @@ main {
   width: 100%;
   position: relative;
   z-index: 10;
-  padding: 40px 0 80px;
+  padding: 60px 0 100px;
   border-bottom: 1px solid #ffffff;
-  box-sizing: border-box;
-}
-
-.events-closing-section {
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  padding: 40px 0;
-  border-bottom: 1px solid #ffffff;
+  background: #000000 !important;
   box-sizing: border-box;
 }
 
@@ -504,9 +499,21 @@ main {
 }
 
 .roadmap-hero {
-  padding-top: 1.5rem;
-  padding-bottom: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 1.25rem;
   text-align: center;
+  width: 100%;
+  max-width: 64rem;
+}
+
+.events-hero-section .belt {
+  width: 100%;
+  margin-top: auto;
+  border-bottom: none;
 }
 
 .roadmap-title {
@@ -555,7 +562,7 @@ main {
   position: absolute;
   z-index: 20;
   transform: translate(-50%, -50%);
-  transition: left 0.15s ease-out, top 0.15s ease-out;
+  will-change: transform, left, top;
 }
 
 .guide-mascot img {
@@ -896,7 +903,7 @@ main {
   }
 
   .roadmap-hero {
-    padding-top: 7rem;
+    padding-top: 0;
   }
 
   .roadmap-title {
@@ -985,3 +992,8 @@ main {
     column-count: 3;
   }
 }
+
+.site-footer {
+  background: #000000 !important;
+  background-color: #000000 !important;
+}
