@@ -78,8 +78,8 @@ function mount() {
           mode: 'lens',
           mainText,
           highlightText,
-          textColor: '#f3f4f6',
-          highlightColor: '#7dd3fc',
+          textColor: '#ffffff',
+          highlightColor: '#38bdf8',
           backgroundColor: '#141414',
           lensProps: {
             scale: 0.17,
