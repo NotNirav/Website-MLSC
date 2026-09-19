@@ -466,202 +466,366 @@ main {
   height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   position: relative;
   z-index: 10;
-  padding-top: 5rem;
-  padding-bottom: 0;
+  padding: clamp(75px, 11vh, 95px) 24px 0;
   border-bottom: 1px solid #ffffff;
   background: #000000 !important;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-.events-track-section {
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  padding: 60px 0 100px;
-  border-bottom: 1px solid #ffffff;
-  background: #000000 !important;
-  box-sizing: border-box;
-}
-
-.event-hero-section {
-  width: 100%;
-  position: relative;
-  z-index: 10;
-  padding-top: 5.5rem;
-  border-bottom: 1px solid #ffffff;
-  box-sizing: border-box;
-}
-
-.roadmap-hero {
-  flex: 1;
+.roadmap-hero-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 1.5rem 1.25rem;
+  justify-content: center;
   text-align: center;
   width: 100%;
-  max-width: 64rem;
+  max-width: 58rem;
+  margin: auto 0;
+  padding: 1rem;
 }
 
-.events-hero-section .belt {
-  width: 100%;
-  margin-top: auto;
-  border-bottom: none;
+.roadmap-hero-content .mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.35em;
+  color: #38bdf8;
+  margin: 0 0 1rem;
 }
 
 .roadmap-title {
-  margin: 1.5rem auto 0;
-  max-width: 48rem;
+  margin: 0 auto;
+  max-width: 54rem;
   font-family: var(--font-display);
-  font-size: 26px;
-  line-height: 1.25;
+  font-size: clamp(2.3rem, 5.5vw, 4.25rem);
+  line-height: 1.15;
   font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+}
+
+.hero-br {
+  display: block;
 }
 
 .roadmap-copy {
-  margin: 1.5rem auto 0;
-  max-width: 28rem;
-  font-size: 0.875rem;
+  margin: 1.25rem auto 0;
+  max-width: 34rem;
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
   line-height: 1.6;
   color: var(--muted-foreground);
 }
 
-.track-wrap {
-  position: relative;
-  margin: 4rem auto 0;
+.events-hero-section .belt {
   width: 100%;
-  max-width: 56rem;
-  padding: 0 1rem;
-}
-
-.track {
   position: relative;
-  height: 1150px;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+  background: #000000;
+  padding: 0.85rem 0;
+  flex-shrink: 0;
 }
 
-.track svg {
-  position: absolute;
-  inset: 0;
-  height: 100%;
+/* ========================================================= */
+/* SECTION 2: INTERACTIVE ROADMAP VIEWPORT                   */
+/* ========================================================= */
+
+.events-roadmap-section {
   width: 100%;
-}
-
-.track .dash {
-  animation: dash-flow 6s linear infinite;
-}
-
-.guide-mascot {
-  pointer-events: none;
-  position: absolute;
-  z-index: 20;
-  transform: translate(-50%, -50%);
-  will-change: transform, left, top;
-}
-
-.guide-mascot img {
-  height: 4rem;
-  width: 4rem;
-  object-fit: contain;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.7));
-}
-
-.node {
-  position: absolute;
+  position: relative;
   z-index: 10;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  text-align: center;
-  transition: transform 0.3s;
+  padding: 80px 20px 120px;
+  border-bottom: 1px solid #ffffff;
+  background: #000000 !important;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.node:hover .node-icon,
-.node:focus-visible .node-icon {
-  animation: node-bounce 0.7s cubic-bezier(0.22, 1.4, 0.36, 1);
-}
-
-.node-icon {
+.roadmap-track-container {
   position: relative;
+  width: 100%;
+  max-width: 920px;
+  height: 1600px;
+  margin: 0 auto;
+}
+
+/* Vector Road SVG */
+.roadmap-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.road-bed {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 28;
+  stroke-linecap: round;
+}
+
+.road-rails {
+  stroke: rgba(255, 255, 255, 0.14);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.road-core {
+  stroke: #000000;
+  stroke-width: 8;
+  stroke-linecap: round;
+}
+
+.road-energy {
+  stroke-width: 3;
+  stroke-dasharray: 8 12;
+  stroke-linecap: round;
+  animation: dash-flow 18s linear infinite;
+}
+
+/* Flying Mascot (The Dragon / Guide) */
+.guide-mascot {
+  position: absolute;
+  top: 8.75%;
+  left: 25%;
+  width: 76px;
+  height: 76px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 25;
+  will-change: left, top, transform;
+}
+
+.mascot-flight-inner {
+  width: 100%;
+  height: 100%;
   display: flex;
-  height: 4rem;
-  width: 4rem;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
+  filter: drop-shadow(0 8px 18px rgba(0, 164, 239, 0.5));
+  animation: float-soft 3.6s ease-in-out infinite;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.node-icon::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 1rem;
-  border: 1px solid var(--node-accent, var(--ms-yellow));
-}
-
-.node-icon img {
-  height: 3rem;
-  width: 3rem;
+.mascot-flight-inner img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
+  pointer-events: none;
 }
 
-.node-index {
+/* Milestone Stations */
+.roadmap-station {
   position: absolute;
-  top: -0.5rem;
-  right: -0.5rem;
+  z-index: 15;
+  width: 70px;
+  height: 70px;
+  transform: translate(-50%, -50%);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.station-hub {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 1.25rem;
+  background: rgba(16, 16, 16, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
   display: flex;
-  height: 1.5rem;
-  width: 1.5rem;
   align-items: center;
   justify-content: center;
-  border-radius: 9999px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.station-hub img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.station-num {
+  position: absolute;
+  top: -8px;
+  right: -8px;
   font-family: var(--font-mono);
   font-size: 10px;
-  font-weight: 500;
-  color: var(--background);
-  background: var(--node-accent, var(--ms-yellow));
+  font-weight: 700;
+  color: #ffffff;
+  background: #000000;
+  border: 1.5px solid var(--station-accent, #00a4ef);
+  border-radius: 9999px;
+  padding: 2px 7px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.node-card {
-  width: 9rem;
-  border-radius: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.station-card {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 175px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(14, 14, 14, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.6);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: auto;
 }
 
-.node-card {
-  width: 9rem;
-  border-radius: 0.75rem;
-  padding: 0.5rem 0.75rem;
-  transition: transform 0.2s ease;
+/* Odd stations (Left side): Card on outer LEFT */
+.roadmap-station:nth-of-type(odd) .station-card {
+  right: calc(100% + 18px);
+  left: auto;
+  text-align: right;
 }
 
-.node:hover .node-card {
-  transform: translateY(-3px);
+.roadmap-station:nth-of-type(odd) .station-card-cta {
+  justify-content: flex-end;
 }
 
-.node-name {
+/* Even stations (Right side): Card on outer RIGHT */
+.roadmap-station:nth-of-type(even) .station-card {
+  left: calc(100% + 18px);
+  right: auto;
+  text-align: left;
+}
+
+.roadmap-station:nth-of-type(even) .station-card-cta {
+  justify-content: flex-start;
+}
+
+.station-card-title {
   font-family: var(--font-display);
-  font-size: 11px;
-  line-height: 1.2;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  transition: color 0.2s ease;
 }
 
-.node-tag {
-  margin-top: 0.25rem;
+.station-card-tag {
+  margin-top: 3px;
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.12em;
   color: var(--muted-foreground);
+}
+
+.station-card-cta {
+  margin-top: 7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--station-accent, #00a4ef);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: gap 0.2s ease;
+}
+
+/* Hover Micro-Interactions */
+.roadmap-station:hover {
+  transform: translate(-50%, -54%);
+}
+
+.roadmap-station:hover .station-hub {
+  border-color: var(--station-accent, #00a4ef);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--station-accent, #00a4ef);
+}
+
+.roadmap-station:hover .station-hub img {
+  transform: scale(1.12);
+}
+
+.roadmap-station:hover .station-card {
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 14px 28px -4px rgba(0, 0, 0, 0.8);
+}
+
+.roadmap-station:hover .station-card-cta {
+  gap: 7px;
+}
+
+/* Active / Passed State (illuminated when dragon arrives) */
+.roadmap-station.is-active .station-hub {
+  border-color: var(--station-accent, #00a4ef);
+  box-shadow: 0 0 0 2px var(--station-accent, #00a4ef), 0 12px 28px rgba(0, 0, 0, 0.7);
+}
+
+.roadmap-station.is-active .station-num {
+  background: var(--station-accent, #00a4ef);
+  color: #000000;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 680px) {
+  .hero-br {
+    display: none;
+  }
+  
+  .station-hub {
+    width: 54px;
+    height: 54px;
+    border-radius: 1rem;
+  }
+
+  .station-hub img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .station-card {
+    width: 120px;
+    padding: 6px 8px;
+  }
+
+  .station-card-title {
+    font-size: 11px;
+  }
+
+  .station-card-tag {
+    font-size: 8px;
+  }
+
+  .roadmap-station:nth-of-type(odd) .station-card {
+    right: calc(100% + 8px);
+  }
+
+  .roadmap-station:nth-of-type(even) .station-card {
+    left: calc(100% + 8px);
+  }
+
+  .guide-mascot {
+    width: 58px;
+    height: 58px;
+  }
 }
 
 /* ===== Footer space ===== */

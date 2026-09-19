@@ -85,127 +85,94 @@ function initSparkles() {
   });
 }
 
-// ===== Roadmap page: guide mascot follows the path on scroll =====
+// ===== Interactive Events Roadmap: GSAP ScrollTrigger + SVG Path Flight =====
 
 function initRoadmap() {
-  const track = document.querySelector("[data-track]");
-  const guide = document.querySelector("[data-guide]");
-  const path = document.querySelector("#roadmapPath");
-  if (!track || !guide) return;
+  const container = document.querySelector("#roadmap-track-container");
+  const path = document.querySelector("#roadmapActivePath");
+  const mascot = document.querySelector("#guide-mascot");
+  const mascotInner = mascot ? mascot.querySelector(".mascot-flight-inner") : null;
+  const stations = document.querySelectorAll(".roadmap-station");
 
-  const nodes = JSON.parse(track.getAttribute("data-nodes") || "[]");
-  const viewH = Number(track.getAttribute("data-view-h") || 600);
-  const totalLength = path && path.getTotalLength ? path.getTotalLength() : 0;
+  if (!container || !path || !mascot) return;
 
-  function pointOnPath(progress) {
-    if (path && totalLength > 0) {
-      const len = Math.max(0, Math.min(totalLength, progress * totalLength));
-      const pt = path.getPointAtLength(len);
-      const aheadLen = Math.min(totalLength, len + 1.5);
-      const behindLen = Math.max(0, len - 1.5);
-      const ptAhead = path.getPointAtLength(aheadLen);
-      const ptBehind = path.getPointAtLength(behindLen);
-      const dx = ptAhead.x - ptBehind.x;
-      const bank = Math.max(-10, Math.min(10, dx * 1.5));
-      return { x: pt.x, y: pt.y, tilt: bank };
+  const totalLength = typeof path.getTotalLength === "function" ? path.getTotalLength() : 0;
+  if (totalLength === 0) return;
+
+  function updateRoadmap(progress) {
+    const clampedProgress = Math.max(0, Math.min(1, progress));
+    const len = clampedProgress * totalLength;
+    const pt = path.getPointAtLength(len);
+
+    // Calculate tangent angle for natural banking tilt into curves
+    const aheadLen = Math.min(totalLength, len + 4);
+    const behindLen = Math.max(0, len - 4);
+    const ptAhead = path.getPointAtLength(aheadLen);
+    const ptBehind = path.getPointAtLength(behindLen);
+    const dx = ptAhead.x - ptBehind.x;
+    const bank = Math.max(-14, Math.min(14, dx * 0.3));
+
+    // Convert SVG viewBox (1000 x 1600) to percentage
+    const pctX = (pt.x / 1000) * 100;
+    const pctY = (pt.y / 1600) * 100;
+
+    mascot.style.left = `${pctX.toFixed(2)}%`;
+    mascot.style.top = `${pctY.toFixed(2)}%`;
+
+    if (mascotInner) {
+      mascotInner.style.transform = `rotate(${bank.toFixed(1)}deg)`;
     }
 
-    const segment = progress * (nodes.length - 1);
-    const index = Math.min(nodes.length - 2, Math.floor(segment));
-    const t = Math.min(1, segment - index);
-    const from = nodes[index] || nodes[0];
-    const to = nodes[index + 1] || from;
-    const dy = to.y - from.y;
-    const cp1y = from.y + 0.38 * dy;
-    const cp2y = to.y - 0.38 * dy;
-    const inverse = 1 - t;
-
-    const x =
-      inverse ** 3 * from.x +
-      3 * inverse ** 2 * t * from.x +
-      3 * inverse * t ** 2 * to.x +
-      t ** 3 * to.x;
-    const y =
-      inverse ** 3 * from.y +
-      3 * inverse ** 2 * t * cp1y +
-      3 * inverse * t ** 2 * cp2y +
-      t ** 3 * to.y;
-
-    const dx = to.x - from.x;
-    const tilt = Math.max(-10, Math.min(10, dx * 0.25));
-    return { x, y, tilt };
+    // Activate stations as dragon arrives near them
+    const stationCount = stations.length;
+    stations.forEach((station, idx) => {
+      const stationProgress = stationCount > 1 ? idx / (stationCount - 1) : 0;
+      if (clampedProgress >= stationProgress - 0.05) {
+        station.classList.add("is-active");
+      } else {
+        station.classList.remove("is-active");
+      }
+    });
   }
 
-  let targetProgress = 0;
-  let currentProgress = 0;
-  let currentTilt = 0;
-  let animationFrame = null;
+  // Initial position
+  updateRoadmap(0);
 
-  function renderGuide(progress, tilt) {
-    const pt = pointOnPath(progress);
-    guide.style.left = `${pt.x}%`;
-    guide.style.top = `${(pt.y / viewH) * 100}%`;
-    guide.style.transform = `translate(-50%, -50%) rotate(${tilt.toFixed(2)}deg)`;
+  // GSAP ScrollTrigger synchronization with Lenis
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tracker = { progress: 0 };
+    gsap.to(tracker, {
+      progress: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top 72%",
+        end: "bottom 68%",
+        scrub: 0.35,
+        onUpdate: (self) => {
+          updateRoadmap(self.progress);
+        },
+      },
+    });
+
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
+  } else {
+    // Graceful scroll fallback
+    const onScrollFallback = () => {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = rect.top - vh * 0.72;
+      const totalSpan = rect.height * 0.96;
+      const p = Math.max(0, Math.min(1, -start / totalSpan));
+      updateRoadmap(p);
+    };
+    window.addEventListener("scroll", onScrollFallback, { passive: true });
+    onScrollFallback();
   }
-
-  function updateGuide() {
-    const ease = 0.08;
-    currentProgress += (targetProgress - currentProgress) * ease;
-    const targetPt = pointOnPath(currentProgress);
-    currentTilt += (targetPt.tilt - currentTilt) * 0.1;
-
-    renderGuide(currentProgress, currentTilt);
-
-    const diff = Math.abs(targetProgress - currentProgress);
-    if (diff > 0.0003) {
-      animationFrame = requestAnimationFrame(updateGuide);
-    } else {
-      currentProgress = targetProgress;
-      renderGuide(currentProgress, targetPt.tilt);
-      animationFrame = null;
-    }
-  }
-
-  function onScroll() {
-    const r = track.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const firstNode = (nodes[0]?.y ?? 70) / viewH;
-    const lastNode = (nodes[nodes.length - 1]?.y ?? 530) / viewH;
-    const start = r.top + r.height * firstNode;
-    const finish = r.top + r.height * lastNode;
-    const triggerY = vh * 0.52;
-
-    const atPageEnd =
-      window.scrollY + vh >= document.documentElement.scrollHeight - 10;
-
-    const p = atPageEnd
-      ? 1
-      : (triggerY - start) / Math.max(1, finish - start);
-
-    targetProgress = Math.min(1, Math.max(0, p));
-
-    if (!animationFrame) {
-      animationFrame = requestAnimationFrame(updateGuide);
-    }
-  }
-
-  onScroll();
-  currentProgress = targetProgress;
-  const initialPt = pointOnPath(currentProgress);
-  renderGuide(currentProgress, initialPt.tilt);
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
-
-  const pollLenis = () => {
-    const l = window.lenis || window.globalLenis;
-    if (l && typeof l.on === "function") {
-      l.on("scroll", onScroll);
-    } else {
-      setTimeout(pollLenis, 300);
-    }
-  };
-  pollLenis();
 }
 // ===== Duplicate belt items so the marquee loops seamlessly =====
 
