@@ -85,90 +85,94 @@ function initSparkles() {
   });
 }
 
-// ===== Roadmap page: guide mascot follows the path on scroll =====
+// ===== Interactive Events Roadmap: GSAP ScrollTrigger + SVG Path Flight =====
 
 function initRoadmap() {
-  const track = document.querySelector("[data-track]");
-  const guide = document.querySelector("[data-guide]");
-  if (!track || !guide) return;
+  const container = document.querySelector("#roadmap-track-container");
+  const path = document.querySelector("#roadmapActivePath");
+  const mascot = document.querySelector("#guide-mascot");
+  const mascotInner = mascot ? mascot.querySelector(".mascot-flight-inner") : null;
+  const stations = document.querySelectorAll(".roadmap-station");
 
-  const nodes = JSON.parse(track.getAttribute("data-nodes"));
-  const viewH = Number(track.getAttribute("data-view-h"));
+  if (!container || !path || !mascot) return;
 
-  function pointOnPath(progress) {
-    const segment = progress * (nodes.length - 1);
-    const index = Math.min(nodes.length - 2, Math.floor(segment));
-    const t = Math.min(1, segment - index);
-    const from = nodes[index] || nodes[0];
-    const to = nodes[index + 1] || from;
-    const middleY = (from.y + to.y) / 2;
-    const inverse = 1 - t;
+  const totalLength = typeof path.getTotalLength === "function" ? path.getTotalLength() : 0;
+  if (totalLength === 0) return;
 
-    return {
-      x:
-        inverse ** 3 * from.x +
-        3 * inverse ** 2 * t * from.x +
-        3 * inverse * t ** 2 * to.x +
-        t ** 3 * to.x,
-      y:
-        inverse ** 3 * from.y +
-        3 * inverse ** 2 * t * middleY +
-        3 * inverse * t ** 2 * middleY +
-        t ** 3 * to.y,
+  function updateRoadmap(progress) {
+    const clampedProgress = Math.max(0, Math.min(1, progress));
+    const len = clampedProgress * totalLength;
+    const pt = path.getPointAtLength(len);
+
+    // Calculate tangent angle for natural banking tilt into curves
+    const aheadLen = Math.min(totalLength, len + 4);
+    const behindLen = Math.max(0, len - 4);
+    const ptAhead = path.getPointAtLength(aheadLen);
+    const ptBehind = path.getPointAtLength(behindLen);
+    const dx = ptAhead.x - ptBehind.x;
+    const bank = Math.max(-14, Math.min(14, dx * 0.3));
+
+    // Convert SVG viewBox (1000 x 1600) to percentage
+    const pctX = (pt.x / 1000) * 100;
+    const pctY = (pt.y / 1600) * 100;
+
+    mascot.style.left = `${pctX.toFixed(2)}%`;
+    mascot.style.top = `${pctY.toFixed(2)}%`;
+
+    if (mascotInner) {
+      mascotInner.style.transform = `rotate(${bank.toFixed(1)}deg)`;
+    }
+
+    // Activate stations as dragon arrives near them
+    const stationCount = stations.length;
+    stations.forEach((station, idx) => {
+      const stationProgress = stationCount > 1 ? idx / (stationCount - 1) : 0;
+      if (clampedProgress >= stationProgress - 0.05) {
+        station.classList.add("is-active");
+      } else {
+        station.classList.remove("is-active");
+      }
+    });
+  }
+
+  // Initial position
+  updateRoadmap(0);
+
+  // GSAP ScrollTrigger synchronization with Lenis
+  if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const tracker = { progress: 0 };
+    gsap.to(tracker, {
+      progress: 1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        start: "top 72%",
+        end: "bottom 68%",
+        scrub: 0.35,
+        onUpdate: (self) => {
+          updateRoadmap(self.progress);
+        },
+      },
+    });
+
+    window.addEventListener("load", () => {
+      ScrollTrigger.refresh();
+    });
+  } else {
+    // Graceful scroll fallback
+    const onScrollFallback = () => {
+      const rect = container.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = rect.top - vh * 0.72;
+      const totalSpan = rect.height * 0.96;
+      const p = Math.max(0, Math.min(1, -start / totalSpan));
+      updateRoadmap(p);
     };
+    window.addEventListener("scroll", onScrollFallback, { passive: true });
+    onScrollFallback();
   }
-
-  let targetPoint = pointOnPath(0);
-  let currentPoint = { ...targetPoint };
-  let animationFrame = null;
-
-  function updateGuide() {
-    const ease = 0.12;
-
-    currentPoint.x += (targetPoint.x - currentPoint.x) * ease;
-    currentPoint.y += (targetPoint.y - currentPoint.y) * ease;
-
-    guide.style.left = `${currentPoint.x}%`;
-    guide.style.top = `${(currentPoint.y / viewH) * 100}%`;
-
-    const distance =
-      Math.abs(targetPoint.x - currentPoint.x) +
-      Math.abs(targetPoint.y - currentPoint.y);
-
-    if (distance > 0.01) {
-      animationFrame = requestAnimationFrame(updateGuide);
-    } else {
-      animationFrame = null;
-    }
-  }
-
-  function onScroll() {
-    const r = track.getBoundingClientRect();
-    const vh = window.innerHeight;
-    const firstNode = (nodes[0]?.y ?? 0) / viewH;
-    const lastNode = (nodes[nodes.length - 1]?.y ?? viewH) / viewH;
-    const start = r.top + r.height * firstNode;
-    const finish = r.top + r.height * lastNode;
-    const atPageEnd =
-      window.scrollY + vh >= document.documentElement.scrollHeight - 2;
-
-    const p = atPageEnd
-      ? 1
-      : (vh * 0.58 - start) / Math.max(1, finish - start);
-
-    const progress = Math.min(1, Math.max(0, p));
-
-    targetPoint = pointOnPath(progress);
-
-    if (!animationFrame) {
-      animationFrame = requestAnimationFrame(updateGuide);
-    }
-  }
-
-  onScroll();
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll);
 }
 // ===== Duplicate belt items so the marquee loops seamlessly =====
 
