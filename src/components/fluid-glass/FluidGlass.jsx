@@ -253,7 +253,7 @@ const ModeWrapper = memo(function ModeWrapper({
     const isHovered = isHoveredRef.current;
     const maxWorld = v.width * 0.9;
     const desired = maxWorld / geoWidthRef.current;
-    const baseScale = modeProps.scale ?? Math.min(0.28, desired);
+    const baseScale = modeProps.scale ?? Math.min(0.18, desired);
     const targetScale = isHovered ? baseScale : 0;
 
     // Smoothly animate scale up on enter, and quickly collapse to 0 on exit
@@ -282,14 +282,18 @@ const ModeWrapper = memo(function ModeWrapper({
       }
     }
 
-    gl.setClearColor(0x000000, 0);
+    if (backgroundColor && backgroundColor !== 'transparent') {
+      gl.setClearColor(backgroundColor, 1);
+    } else {
+      gl.setClearColor(0x000000, 0);
+    }
     gl.setRenderTarget(buffer);
     gl.render(scene, camera);
     gl.setRenderTarget(null);
     gl.setClearColor(0x000000, 0);
   });
 
-  const { scale, ior, thickness, anisotropy, chromaticAberration, ...extraMat } = modeProps;
+  const { scale, ior, thickness, anisotropy, chromaticAberration, distortion, distortionScale, temporalDistortion, ...extraMat } = modeProps;
 
   return (
     <>
@@ -312,20 +316,32 @@ const ModeWrapper = memo(function ModeWrapper({
       <mesh ref={ref} scale={0} visible={false} rotation-x={Math.PI / 2} geometry={nodes[geometryKey]?.geometry} {...props}>
         <MeshTransmissionMaterial
           buffer={buffer.texture}
-          ior={ior ?? 1.15}
-          thickness={thickness ?? 3.0}
-          anisotropy={anisotropy ?? 0}
-          chromaticAberration={chromaticAberration ?? 0.02}
+          ior={ior ?? 1.38}
+          thickness={thickness ?? 0.85}
+          anisotropy={anisotropy ?? 0.01}
+          chromaticAberration={chromaticAberration ?? 0.007}
           roughness={0}
           transmission={1}
-          distortion={0}
-          distortionScale={0}
-          temporalDistortion={0}
+          distortion={distortion ?? 0.60}
+          distortionScale={distortionScale ?? 0.40}
+          temporalDistortion={temporalDistortion ?? 0.30}
           color="#ffffff"
           attenuationColor="#ffffff"
-          attenuationDistance={1.0}
           {...extraMat}
         />
+        {/* Crisp, clearly distinguishable glass border */}
+        <mesh position={[0, 0.21, 0]} rotation-x={Math.PI / 2}>
+          <ringGeometry args={[0.95, 1.02, 64]} />
+          <meshBasicMaterial color="#ffffff" opacity={0.85} transparent side={THREE.DoubleSide} depthWrite={false} />
+        </mesh>
+        <mesh position={[0, 0.21, 0]} rotation-x={Math.PI / 2}>
+          <ringGeometry args={[0.88, 0.95, 64]} />
+          <meshBasicMaterial color="#ffffff" opacity={0.25} transparent side={THREE.DoubleSide} depthWrite={false} />
+        </mesh>
+        <mesh position={[0, 0.208, 0]} rotation-x={Math.PI / 2}>
+          <ringGeometry args={[1.02, 1.06, 64]} />
+          <meshBasicMaterial color="#000000" opacity={0.4} transparent side={THREE.DoubleSide} depthWrite={false} />
+        </mesh>
       </mesh>
     </>
   );
