@@ -626,6 +626,28 @@
     });
 
     setupScrollSpy();
+
+    // Synchronize ScrollTrigger and apply smooth reveal animations
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.refresh();
+
+      gsap.utils.toArray('.team-domain-block').forEach((block) => {
+        gsap.fromTo(block,
+          { opacity: 0.3, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.85,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: block,
+              start: 'top 88%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      });
+    }
   }
 
   // =========================================================
@@ -856,29 +878,44 @@
   }
 
   function setupLenisScroll() {
-    if (typeof Lenis === 'undefined' || globalLenis || window.lenis) {
-      if (window.lenis && !globalLenis) globalLenis = window.lenis;
-      return;
-    }
-    try {
-      globalLenis = new Lenis({
-        lerp: 0.06,
-        wheelMultiplier: 0.72,
-        touchMultiplier: 1.2,
-        smoothWheel: true,
-        infinite: false,
-        orientation: 'vertical',
-        gestureOrientation: 'vertical'
-      });
-      window.lenis = globalLenis;
+    if (typeof Lenis === 'undefined') return;
 
+    if (window.lenis) {
+      globalLenis = window.lenis;
+    } else if (!globalLenis) {
+      try {
+        globalLenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          gestureOrientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 0.9,
+          touchMultiplier: 1.5
+        });
+        window.lenis = globalLenis;
+      } catch (e) {
+        console.warn('Teams Lenis scroll init error:', e);
+        return;
+      }
+    }
+
+    // Synchronize Lenis with GSAP ScrollTrigger & Ticker for buttery smooth scrolling
+    if (typeof gsap !== 'undefined') {
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        globalLenis.on('scroll', ScrollTrigger.update);
+      }
+      gsap.ticker.add((time) => {
+        globalLenis.raf(time * 1000);
+      });
+      gsap.ticker.lagSmoothing(0);
+    } else {
       function raf(time) {
         globalLenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-    } catch (e) {
-      console.warn('Teams Lenis scroll error:', e);
     }
   }
 
