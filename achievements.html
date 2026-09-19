@@ -186,13 +186,28 @@
                 competing across hackathons.</p>
             </div>
 
-            <!-- Winner Information Cards Grid -->
-            <div class="hackathon-cards-grid">
-              <!-- Card 1: Smart India Hackathon Winner -->
-              <article class="winner-card" tabindex="0">
-                <div class="winner-card-top">
-                  <span class="winner-position">🏆 1st Place / Winner</span>
-                </div>
+            <!-- Single-Row Coverflow Carousel Stage (Matches Teams Page Scroll Animation) -->
+            <div class="winner-carousel-stage" id="winner-carousel-stage">
+              <!-- Previous Button -->
+              <button class="winner-nav-btn prev" id="winner-prev-btn" aria-label="Previous achievement">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <!-- Next Button -->
+              <button class="winner-nav-btn next" id="winner-next-btn" aria-label="Next achievement">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Single Row Track -->
+              <div class="winner-cards-track" id="winner-cards-track" role="region" aria-label="Hackathon winners carousel">
+                <!-- Card 1: Smart India Hackathon Winner -->
+                <article class="winner-card" tabindex="0">
+                  <div class="winner-card-top">
+                    <span class="winner-position">🏆 1st Place / Winner</span>
+                  </div>
                 <div class="winner-card-image-wrap">
                   <img class="winner-card-img" src="assets/images/achievements/sih_winner.png" alt="Smart India Hackathon Winner" loading="lazy">
                 </div>
@@ -706,6 +721,13 @@
                   <p class="winner-value winner-members">Isha Thakur</p>
                 </div>
               </article>
+              </div><!-- /.winner-cards-track -->
+            </div><!-- /.winner-carousel-stage -->
+
+            <!-- Carousel Bottom Controls (Indicators & Counter) -->
+            <div class="winner-carousel-footer">
+              <div class="winner-carousel-indicators" id="winner-indicators"></div>
+              <div class="winner-counter-badge" id="winner-counter">1 / 18</div>
             </div>
           </div>
         </section>

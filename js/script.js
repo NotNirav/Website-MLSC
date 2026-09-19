@@ -753,6 +753,255 @@
   }
 
   // =========================================================
+  // Achievements: Hackathon Winners 3D Single-Row Carousel (Parity with Teams Page)
+  // =========================================================
+  let hackathonCarouselInstance = null;
+
+  function initHackathonWinnersCarousel() {
+    const stage = document.getElementById('winner-carousel-stage');
+    const track = document.getElementById('winner-cards-track');
+    if (!stage || !track) return null;
+
+    const cards = Array.from(track.querySelectorAll('.winner-card'));
+    if (!cards.length) return null;
+
+    const prevBtn = document.getElementById('winner-prev-btn');
+    const nextBtn = document.getElementById('winner-next-btn');
+    const indicatorsWrap = document.getElementById('winner-indicators');
+    const counterBadge = document.getElementById('winner-counter');
+
+    let currentIndex = 0;
+    const total = cards.length;
+    let autoPlayTimer = null;
+
+    const WINNER_LUT = {
+      desktop: {
+        0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+        '+1': { transform: 'translate3d(calc(-50% + 245px), -50%, -50px) scale(0.88) rotateY(-16deg)', opacity: '0.92', zIndex: '12', pe: 'auto', vis: 'visible' },
+        '-1': { transform: 'translate3d(calc(-50% - 245px), -50%, -50px) scale(0.88) rotateY(16deg)', opacity: '0.92', zIndex: '12', pe: 'auto', vis: 'visible' },
+        '+2': { transform: 'translate3d(calc(-50% + 440px), -50%, -100px) scale(0.76) rotateY(-28deg)', opacity: '0.8', zIndex: '7', pe: 'auto', vis: 'visible' },
+        '-2': { transform: 'translate3d(calc(-50% - 440px), -50%, -100px) scale(0.76) rotateY(28deg)', opacity: '0.8', zIndex: '7', pe: 'auto', vis: 'visible' },
+        '+3': { transform: 'translate3d(calc(-50% + 560px), -50%, -160px) scale(0.62) rotateY(-38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+        '-3': { transform: 'translate3d(calc(-50% - 560px), -50%, -160px) scale(0.62) rotateY(38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+        dormant: { transform: 'translate3d(-50%, -50%, -180px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
+      },
+      tablet: {
+        0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+        '+1': { transform: 'translate3d(calc(-50% + 180px), -50%, -45px) scale(0.88) rotateY(-14deg)', opacity: '0.88', zIndex: '12', pe: 'auto', vis: 'visible' },
+        '-1': { transform: 'translate3d(calc(-50% - 180px), -50%, -45px) scale(0.88) rotateY(14deg)', opacity: '0.88', zIndex: '12', pe: 'auto', vis: 'visible' },
+        '+2': { transform: 'translate3d(calc(-50% + 310px), -50%, -95px) scale(0.74) rotateY(-24deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+        '-2': { transform: 'translate3d(calc(-50% - 310px), -50%, -95px) scale(0.74) rotateY(24deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+        dormant: { transform: 'translate3d(-50%, -50%, -150px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
+      },
+      mobile: {
+        0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+        '+1': { transform: 'translate3d(calc(-50% + 95px), -50%, -35px) scale(0.84) rotateY(-12deg)', opacity: '0.55', zIndex: '8', pe: 'auto', vis: 'visible' },
+        '-1': { transform: 'translate3d(calc(-50% - 95px), -50%, -35px) scale(0.84) rotateY(12deg)', opacity: '0.55', zIndex: '8', pe: 'auto', vis: 'visible' },
+        dormant: { transform: 'translate3d(-50%, -50%, -110px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
+      }
+    };
+
+    function getDevice() {
+      const w = window.innerWidth;
+      if (w <= 640) return 'mobile';
+      if (w <= 1024) return 'tablet';
+      return 'desktop';
+    }
+
+    function computeDelta(cardIdx, currentIdx) {
+      if (total <= 1) return 0;
+      let diff = cardIdx - currentIdx;
+      if (diff > total / 2) diff -= total;
+      if (diff < -total / 2) diff += total;
+      if (diff === -total / 2 && total % 2 === 0) diff = total / 2;
+      return diff;
+    }
+
+    function getPreset(device, delta) {
+      const lut = WINNER_LUT[device];
+      if (delta === 0) return lut[0];
+      if (delta === 'dormant') return lut.dormant;
+      if (device === 'mobile') {
+        if (delta === 1) return lut['+1'];
+        if (delta === -1) return lut['-1'];
+        return lut.dormant;
+      }
+      const key = (delta > 0 ? '+' : '') + delta;
+      if (lut[key]) return lut[key];
+      return delta > 0 ? (lut['+3'] || lut.dormant) : (lut['-3'] || lut.dormant);
+    }
+
+    // Build indicators
+    if (indicatorsWrap) {
+      indicatorsWrap.innerHTML = '';
+      for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'winner-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to achievement ${i + 1}`);
+        dot.addEventListener('click', () => {
+          goTo(i);
+          resetAutoPlay();
+        });
+        indicatorsWrap.appendChild(dot);
+      }
+    }
+
+    function updatePositions() {
+      const device = getDevice();
+      const dots = indicatorsWrap ? indicatorsWrap.querySelectorAll('.winner-dot') : [];
+
+      cards.forEach((card, idx) => {
+        const delta = computeDelta(idx, currentIndex);
+        const preset = getPreset(device, delta);
+
+        card.style.transform = preset.transform;
+        card.style.opacity = preset.opacity;
+        card.style.zIndex = preset.zIndex;
+        card.style.pointerEvents = preset.pe;
+        card.style.visibility = preset.vis;
+
+        if (delta === 0) {
+          card.classList.add('is-active');
+        } else {
+          card.classList.remove('is-active');
+        }
+      });
+
+      if (dots.length) {
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('active');
+            dot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      if (counterBadge) {
+        counterBadge.textContent = `${currentIndex + 1} / ${total}`;
+      }
+    }
+
+    function goTo(targetIdx) {
+      if (total <= 1) return;
+      currentIndex = ((targetIdx % total) + total) % total;
+      updatePositions();
+    }
+
+    function next() {
+      goTo(currentIndex + 1);
+    }
+
+    function prev() {
+      goTo(currentIndex - 1);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = setInterval(next, 4800);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+      }
+    }
+
+    function resetAutoPlay() {
+      stopAutoPlay();
+      startAutoPlay();
+    }
+
+    cards.forEach((card, idx) => {
+      card.addEventListener('click', () => {
+        if (currentIndex !== idx) {
+          goTo(idx);
+          resetAutoPlay();
+        }
+      });
+    });
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prev();
+        resetAutoPlay();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        next();
+        resetAutoPlay();
+      });
+    }
+
+    stage.setAttribute('tabindex', '0');
+    stage.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') {
+        prev();
+        resetAutoPlay();
+      } else if (e.key === 'ArrowRight') {
+        next();
+        resetAutoPlay();
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchDeltaX = 0;
+    let isHorizontalSwipe = null;
+
+    stage.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 1) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchDeltaX = 0;
+      isHorizontalSwipe = null;
+      stopAutoPlay();
+    }, { passive: true });
+
+    stage.addEventListener('touchmove', (e) => {
+      if (e.touches.length > 1) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      touchDeltaX = currentX - touchStartX;
+      const deltaY = Math.abs(currentY - touchStartY);
+
+      if (isHorizontalSwipe === null) {
+        if (Math.abs(touchDeltaX) > 8 || deltaY > 8) {
+          isHorizontalSwipe = Math.abs(touchDeltaX) > deltaY;
+        }
+      }
+    }, { passive: true });
+
+    stage.addEventListener('touchend', () => {
+      if (isHorizontalSwipe) {
+        if (touchDeltaX < -45) {
+          next();
+        } else if (touchDeltaX > 45) {
+          prev();
+        }
+      }
+      startAutoPlay();
+    }, { passive: true });
+
+    stage.addEventListener('mouseenter', stopAutoPlay);
+    stage.addEventListener('mouseleave', startAutoPlay);
+
+    updatePositions();
+    startAutoPlay();
+
+    return {
+      updatePositions,
+      next,
+      prev,
+      goTo
+    };
+  }
+
+  // =========================================================
   // App Orchestration (Single Global Initialization)
   // =========================================================
   let scrollStackInstance = null;
@@ -782,6 +1031,9 @@
       journeyTimelineInstance.measure();
       journeyTimelineInstance.update(window.scrollY);
     }
+    if (hackathonCarouselInstance) {
+      hackathonCarouselInstance.updatePositions();
+    }
     updateNavbarVisibility(window.scrollY);
   }
 
@@ -797,6 +1049,7 @@
     initScrollAnimations();
     journeyTimelineInstance = initJourneyTimeline();
     initLeaderboard();
+    hackathonCarouselInstance = initHackathonWinnersCarousel();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
