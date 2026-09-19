@@ -18,7 +18,7 @@
       name: 'Core Team',
       category: 'Core',
       categoryLabel: 'Core Leadership',
-      tag: '01 // EXECUTIVE BOARD',
+      tag: 'Core Leadership',
       title: 'Core Leadership',
       desc: 'Steering the chapter vision, institutional partnerships, and campus initiatives.',
       accentColor: '#ffb900'
@@ -32,7 +32,7 @@
       name: 'Web Development',
       category: 'Tech',
       categoryLabel: 'Technical Wing',
-      tag: 'TECH // WEB & PLATFORMS',
+      tag: 'Web Development',
       title: 'Web & Platform Engineering',
       desc: 'Architecting high-performance portals, serverless APIs, cloud infrastructure, and Web3 tools.',
       accentColor: '#38bdf8'
@@ -42,7 +42,7 @@
       name: 'AI / ML',
       category: 'Tech',
       categoryLabel: 'Technical Wing',
-      tag: 'TECH // ARTIFICIAL INTELLIGENCE',
+      tag: 'Artificial Intelligence',
       title: 'AI / ML & Data Intelligence',
       desc: 'Building neural systems, computer vision models, LLMs, and predictive data pipelines.',
       accentColor: '#34d399'
@@ -52,7 +52,7 @@
       name: 'CP',
       category: 'Tech',
       categoryLabel: 'Technical Wing',
-      tag: 'TECH // ALGORITHMIC ENGINEERING',
+      tag: 'Competitive Programming',
       title: 'Competitive Programming',
       desc: 'Optimizing algorithmic data structures, problem solving, and competitive coding mastery.',
       accentColor: '#a855f7'
@@ -66,7 +66,7 @@
       name: 'Event Management',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'NON-TECH // OPERATIONS & EVENTS',
+      tag: 'Event Management',
       title: 'Event Management & Operations',
       desc: 'Managing flagship BlueBit hackathons, speaker series, workshop logistics, and seamless event execution.',
       accentColor: '#f97316'
@@ -76,7 +76,7 @@
       name: 'Sponsorship & Marketing',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'NON-TECH // CORPORATE & OUTREACH',
+      tag: 'Sponsorship & Marketing',
       title: 'Sponsorship & Marketing',
       desc: 'Forging corporate sponsorships, industry partnerships, campus marketing, and public relations.',
       accentColor: '#06b6d4'
@@ -86,7 +86,7 @@
       name: 'Accounts & Finance',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'NON-TECH // BUDGETING & AUDITING',
+      tag: 'Accounts & Finance',
       title: 'Accounts & Finance',
       desc: 'Managing fiscal budget allocations, financial audits, operational funding, and sponsor disbursement.',
       accentColor: '#10b981'
@@ -96,7 +96,7 @@
       name: 'UI / UX & Design',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'NON-TECH // CREATIVE & DESIGN',
+      tag: 'UI / UX & Design',
       title: 'UI / UX & Creative Design',
       desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and motion graphics.',
       accentColor: '#ec4899'
@@ -106,7 +106,7 @@
       name: 'Videography & Media',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'NON-TECH // MEDIA & CINEMATICS',
+      tag: 'Videography & Media',
       title: 'Videography & Media Production',
       desc: 'Capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.',
       accentColor: '#8b5cf6'
@@ -620,7 +620,7 @@
           name: normTeam,
           category: 'Non-Tech',
           categoryLabel: 'Other Domains',
-          tag: `// ${normTeam.toUpperCase()}`,
+          tag: normTeam,
           title: normTeam,
           desc: `Members and contributors in ${normTeam}.`,
           accentColor: m.accentColor || '#38bdf8'
@@ -643,7 +643,7 @@
 
       const cat = domain.category || 'Non-Tech';
       const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
-      const catShort = cat === 'Core' ? 'CORE' : (cat === 'Tech' ? 'TECH' : 'NON-TECH');
+      const catShort = cat === 'Core' ? 'Core' : (cat === 'Tech' ? 'Tech' : 'Non-Tech');
 
       // 1. Create Jump Nav Pill with distinct Tech / Non-Tech visual indicator
       if (jumpNavContainer) {
@@ -683,8 +683,7 @@
         divider.className = 'team-wing-divider tech-wing';
         divider.innerHTML = `
           <div class="team-wing-badge">
-            <span class="wing-dot" style="background: #38bdf8;"></span>
-            <span class="wing-text">TECHNICAL DOMAINS</span>
+            <span class="wing-text">Technical Domains</span>
           </div>
           <div class="team-wing-line"></div>
         `;
@@ -698,8 +697,7 @@
         divider.className = 'team-wing-divider nontech-wing';
         divider.innerHTML = `
           <div class="team-wing-badge nontech">
-            <span class="wing-dot" style="background: #ec4899;"></span>
-            <span class="wing-text">NON-TECHNICAL & CREATIVE DOMAINS</span>
+            <span class="wing-text">Non-Technical & Creative Domains</span>
           </div>
           <div class="team-wing-line"></div>
         `;
@@ -717,8 +715,7 @@
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <div class="team-domain-badge" style="color: ${domain.accentColor}; background: ${domain.accentColor}18; border-color: ${domain.accentColor}55;">
-          <span class="team-domain-badge-dot" style="background: ${domain.accentColor}; box-shadow: 0 0 8px ${domain.accentColor};"></span>
+        <div class="team-domain-badge" style="color: ${domain.accentColor}; background: ${domain.accentColor}12; border-color: ${domain.accentColor}33;">
           <span>${escapeHTML(domain.tag)}</span>
         </div>
         <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
