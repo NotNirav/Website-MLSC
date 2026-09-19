@@ -19,8 +19,8 @@
       category: 'Core',
       categoryLabel: 'Core Leadership',
       tag: 'Core Leadership',
-      title: 'Core Leadership',
-      desc: 'Steering the chapter vision, institutional partnerships, and campus initiatives.',
+      title: 'Executive Board & Core Leadership',
+      desc: 'Steering chapter vision, campus initiatives, and institutional collaborations.',
       accentColor: '#ffb900'
     },
 
@@ -34,7 +34,7 @@
       categoryLabel: 'Technical Wing',
       tag: 'Web Development',
       title: 'Web & Platform Engineering',
-      desc: 'Architecting high-performance portals, serverless APIs, cloud infrastructure, and Web3 tools.',
+      desc: 'Developing responsive web portals, interactive applications, and chapter digital tools.',
       accentColor: '#38bdf8'
     },
     {
@@ -43,8 +43,8 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'Artificial Intelligence',
-      title: 'AI / ML & Data Intelligence',
-      desc: 'Building neural systems, computer vision models, LLMs, and predictive data pipelines.',
+      title: 'Artificial Intelligence & Machine Learning',
+      desc: 'Exploring machine learning models, computer vision, natural language processing, and data projects.',
       accentColor: '#34d399'
     },
     {
@@ -53,8 +53,8 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'Competitive Programming',
-      title: 'Competitive Programming',
-      desc: 'Optimizing algorithmic data structures, problem solving, and competitive coding mastery.',
+      title: 'Competitive Programming & DSA',
+      desc: 'Fostering algorithmic problem solving, data structures, and competitive coding contests.',
       accentColor: '#a855f7'
     },
 
@@ -68,7 +68,7 @@
       categoryLabel: 'Non-Technical Wing',
       tag: 'Event Management',
       title: 'Event Management & Operations',
-      desc: 'Managing flagship BlueBit hackathons, speaker series, workshop logistics, and seamless event execution.',
+      desc: 'Organizing hackathons, technical workshops, speaker sessions, and community gatherings.',
       accentColor: '#f97316'
     },
     {
@@ -77,8 +77,8 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Sponsorship & Marketing',
-      title: 'Sponsorship & Marketing',
-      desc: 'Forging corporate sponsorships, industry partnerships, campus marketing, and public relations.',
+      title: 'Sponsorship, Marketing & Outreach',
+      desc: 'Securing corporate sponsorships, managing partnerships, and driving community outreach.',
       accentColor: '#06b6d4'
     },
     {
@@ -87,8 +87,8 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Accounts & Finance',
-      title: 'Accounts & Finance',
-      desc: 'Managing fiscal budget allocations, financial audits, operational funding, and sponsor disbursement.',
+      title: 'Accounts & Financial Management',
+      desc: 'Managing financial planning, budget allocations, event logistics funding, and accounts.',
       accentColor: '#10b981'
     },
     {
@@ -96,9 +96,9 @@
       name: 'UI / UX & Design',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'UI / UX & Design',
+      tag: 'UI / UX Design',
       title: 'UI / UX & Creative Design',
-      desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and motion graphics.',
+      desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and graphics.',
       accentColor: '#ec4899'
     },
     {
@@ -108,7 +108,7 @@
       categoryLabel: 'Non-Technical Wing',
       tag: 'Videography & Media',
       title: 'Videography & Media Production',
-      desc: 'Capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.',
+      desc: 'Capturing event photography, producing aftermovies, recap videos, and chapter visual media.',
       accentColor: '#8b5cf6'
     }
   ];

@@ -4,7 +4,7 @@
  * Crisp Vector Typography, Zero Blurriness, Pure Black Aesthetics
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
 /* ========================================================= */
 /* 0. PURE BLACK THEME & LENIS SMOOTH SCROLL INTEGRATION     */
@@ -811,23 +811,52 @@ body {
     padding: 65px 12px 50px;
   }
 
+  .teams-hero-viewport {
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: none;
+    overflow: visible;
+    padding: 100px 16px 36px;
+    justify-content: flex-start;
+  }
+
   .teams-sections-wrapper {
     gap: 60px;
   }
 
   .teams-jump-nav {
-    top: 10px;
+    position: relative;
+    top: auto;
+    margin-top: 10px;
     margin-bottom: 25px;
+    padding: 0 4px;
+    max-width: 100%;
   }
 
   .teams-jump-container {
-    gap: 5px;
-    padding: 6px 10px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    max-width: 100%;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 9999px;
+    box-sizing: border-box;
+  }
+
+  .teams-jump-container::-webkit-scrollbar {
+    display: none;
   }
 
   .teams-jump-btn {
-    padding: 5px 11px;
-    font-size: 0.76rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 6px 13px;
+    font-size: 0.78rem;
   }
 
   .teams-header {
@@ -880,7 +909,13 @@ body {
   }
 
   .teams-hero-viewport {
-    padding: 75px 16px 24px;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+    max-height: none;
+    overflow: visible;
+    padding: 85px 12px 28px;
+    justify-content: flex-start;
   }
 
   .teams-sections-wrapper {
