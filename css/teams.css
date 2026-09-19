@@ -115,6 +115,87 @@
 }
 
 /* ========================================================= */
+/* 2.5. TENURE / YEAR SELECTOR SWITCH                        */
+/* ========================================================= */
+.teams-tenure-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.teams-tenure-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 6px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+}
+
+.teams-tenure-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94a3b8;
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.teams-tenure-btn .tenure-btn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64748b;
+  transition: all 0.25s ease;
+}
+
+.teams-tenure-btn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.teams-tenure-btn.active {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.25);
+}
+
+.teams-tenure-btn.active .tenure-btn-dot {
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+}
+
+@media (max-width: 640px) {
+  .teams-tenure-switch {
+    width: 100%;
+    max-width: 360px;
+    flex-wrap: wrap;
+  }
+  .teams-tenure-btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
+}
+
+/* ========================================================= */
 /* 3. STICKY QUICK-JUMP PILL NAVIGATION BAR                  */
 /* ========================================================= */
 .teams-jump-nav {

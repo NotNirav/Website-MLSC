@@ -422,6 +422,57 @@
   let jumpNavContainer = null;
   let sectionsWrapper = null;
   let globalLenis = null;
+  let currentTenure = '2025-2026';
+
+  function detectInitialTenure() {
+    const hash = window.location.hash.toLowerCase();
+    if (hash.includes('2024')) return '2024-2025';
+    if (hash.includes('current') || hash.includes('council')) return 'Current Council';
+    if (hash.includes('2025')) return '2025-2026';
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const tenureParam = urlParams.get('tenure') || urlParams.get('year');
+    if (tenureParam) {
+      if (tenureParam.includes('2024')) return '2024-2025';
+      if (tenureParam.includes('current')) return 'Current Council';
+      if (tenureParam.includes('2025')) return '2025-2026';
+    }
+    return '2025-2026';
+  }
+
+  function setupTenureSwitcher() {
+    const switchContainer = document.getElementById('teams-tenure-switch');
+    if (!switchContainer) return;
+
+    const buttons = switchContainer.querySelectorAll('.teams-tenure-btn');
+    buttons.forEach(btn => {
+      const bTenure = btn.getAttribute('data-tenure');
+      const isActive = bTenure === currentTenure;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const selectedTenure = btn.getAttribute('data-tenure');
+        if (selectedTenure === currentTenure) return;
+
+        currentTenure = selectedTenure;
+        buttons.forEach(b => {
+          const active = b.getAttribute('data-tenure') === currentTenure;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+
+        // Update URL hash smoothly without scroll jump
+        if (window.history && window.history.replaceState) {
+          const hashSlug = currentTenure === 'Current Council' ? 'current' : (currentTenure.includes('2024') ? '2024' : '2025');
+          window.history.replaceState(null, '', `#tenure=${hashSlug}`);
+        }
+
+        renderAllDomainSections();
+      });
+    });
+  }
 
   function normalizeTeamName(teamStr) {
     if (!teamStr) return 'Core Team';
@@ -441,6 +492,8 @@
 
     if (!sectionsWrapper) return;
 
+    currentTenure = detectInitialTenure();
+    setupTenureSwitcher();
     setupBgVideo();
     setupHomeStyleNavbar();
     setupLenisScroll();
@@ -483,12 +536,18 @@
     sectionsWrapper.innerHTML = '';
     if (jumpNavContainer) jumpNavContainer.innerHTML = '';
 
-    // Group members by normalized domain
+    // Filter members matching the active tenure
+    const activeMembers = allMembers.filter(m => {
+      if (!currentTenure) return true;
+      return (m.tenure || '').toLowerCase() === currentTenure.toLowerCase();
+    });
+
+    // Group active members by normalized domain
     const membersByDomain = {};
     const domainsToRender = [...DOMAIN_ORDER];
 
     // Check for any custom domain names present in CSV
-    allMembers.forEach(m => {
+    activeMembers.forEach(m => {
       const normTeam = normalizeTeamName(m.team);
       if (!membersByDomain[normTeam]) {
         membersByDomain[normTeam] = [];
@@ -662,6 +721,7 @@
         result.push({
           id: entry.id || String(i),
           name: entry.name,
+          tenure: entry.tenure || '2025-2026',
           team: team,
           role: role,
           subtext: entry.subtext || '',
