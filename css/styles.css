@@ -962,7 +962,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: clamp(32px, 5vh, 64px) 24px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -1038,7 +1038,7 @@ body {
   min-height: 280vh;
   position: relative;
   padding: 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
   display: block;
 }
@@ -1222,7 +1222,7 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #080808;
+  background: #000000;
   border: 2.5px solid rgba(0, 164, 239, 0.45);
   /* Base blue border */
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1623,7 +1623,7 @@ body {
   width: 100%;
   position: relative;
   padding: 60px 24px 80px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 

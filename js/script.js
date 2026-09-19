@@ -124,17 +124,23 @@
   let globalLenis = null;
 
   function initGlobalLenis() {
-    if (globalLenis || typeof Lenis === 'undefined') return globalLenis;
+    if (globalLenis) return globalLenis;
+    if (typeof window !== 'undefined' && window.lenis) {
+      globalLenis = window.lenis;
+      return globalLenis;
+    }
+    if (typeof Lenis === 'undefined') return null;
     try {
       globalLenis = new Lenis({
-        lerp: 0.06, // Liquid inertia damping — gives that silky, weighty Awwwards-style glide
-        wheelMultiplier: 0.72, // Calibrated pace so scrolling doesn't fly through content
+        lerp: 0.07, // Liquid inertia damping — gives that silky, weighty Awwwards-style glide
+        wheelMultiplier: 0.8, // Calibrated pace for buttery smooth scrolling
         touchMultiplier: 1.2,
         smoothWheel: true,
         infinite: false,
         orientation: 'vertical',
         gestureOrientation: 'vertical'
       });
+      window.lenis = globalLenis;
 
       // Synchronize Lenis with GSAP Ticker if available for zero-jitter rendering
       if (typeof gsap !== 'undefined') {
@@ -142,10 +148,13 @@
           gsap.registerPlugin(ScrollTrigger);
           globalLenis.on('scroll', ScrollTrigger.update);
         }
-        gsap.ticker.add((time) => {
-          globalLenis.raf(time * 1000);
-        });
-        gsap.ticker.lagSmoothing(0);
+        if (!window.__lenisTickerBound) {
+          window.__lenisTickerBound = true;
+          gsap.ticker.add((time) => {
+            globalLenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(0);
+        }
       } else {
         function raf(time) {
           globalLenis.raf(time);
@@ -407,43 +416,44 @@
 
     measureLayout();
 
+    function applyProgress(progress) {
+      lineFill.style.transform = `translateY(-50%) scaleX(${progress})`;
+
+      const count = milestoneItems.length;
+      milestoneItems.forEach((item, index) => {
+        const target = index === 0 ? 0 : (index / (count - 1)) * 0.96;
+        if (progress >= target) {
+          if (!item.classList.contains('is-active')) item.classList.add('is-active');
+        } else {
+          if (item.classList.contains('is-active')) item.classList.remove('is-active');
+        }
+      });
+    }
+
+    // GSAP ScrollTrigger Integration for Buttery Smooth Scrubbing
+    let scrollTriggerInstance = null;
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !isMobile) {
+      gsap.registerPlugin(ScrollTrigger);
+      scrollTriggerInstance = ScrollTrigger.create({
+        trigger: journeySection,
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (self) => {
+          applyProgress(self.progress);
+        }
+      });
+    }
+
     function updateTimeline(customScrollTop) {
       const scrollTop = typeof customScrollTop === 'number' ? customScrollTop : window.scrollY;
 
       if (!isMobile) {
-        // Desktop Pinned Horizontal Scroll-Driven Progress
-        const relY = scrollTop - cachedSectionTop;
-
-        // Pin the visual viewport container while user scrolls through Our Journey
-        let translateY = 0;
-        if (relY >= 0 && relY <= cachedScrollDistance) {
-          translateY = relY;
-        } else if (relY > cachedScrollDistance) {
-          translateY = cachedScrollDistance; // Release at the bottom of the section
-        } else {
-          translateY = 0;
+        // Desktop: If ScrollTrigger is active, it handles progress; otherwise update directly
+        if (!scrollTriggerInstance) {
+          const relY = scrollTop - cachedSectionTop;
+          const progress = Math.min(1, Math.max(0, relY / cachedScrollDistance));
+          applyProgress(progress);
         }
-
-        if (stickyContainer) {
-          stickyContainer.style.transform = `translate3d(0, ${Math.round(translateY * 10) / 10}px, 0)`;
-        }
-
-        // Progress strictly mapped to the scroll distance inside Our Journey
-        const progress = Math.min(1, Math.max(0, relY / cachedScrollDistance));
-
-        // Smoothly fill bright blue line from left to right
-        lineFill.style.transform = `translateY(-50%) scaleX(${progress})`;
-
-        // Activate milestones as the line reaches each dot
-        const count = milestoneItems.length;
-        milestoneItems.forEach((item, index) => {
-          const target = index === 0 ? 0 : (index / (count - 1)) * 0.96;
-          if (progress >= target) {
-            if (!item.classList.contains('is-active')) item.classList.add('is-active');
-          } else {
-            if (item.classList.contains('is-active')) item.classList.remove('is-active');
-          }
-        });
       } else {
         // Mobile Vertical Timeline Progress
         if (stickyContainer) stickyContainer.style.transform = 'none';

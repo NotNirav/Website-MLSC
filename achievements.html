@@ -7,8 +7,21 @@
   <title>Achievements — MLSC PCCOE</title>
   <meta name="description"
     content="Explore the achievements, hackathon winners, and community journey of Microsoft Learn Student Chapter PCCOE.">
+  <!-- Resource Hints for High Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/achievements.css?v=1.0">
+
+  <!-- GSAP & ScrollTrigger for high-performance buttery scroll & animation syncing -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll (Parity with Teams, Events, and Home) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
@@ -41,18 +54,8 @@
     </nav>
   </header>
 
-  <!-- Canvas Viewport -->
-  <main class="canvas-viewport" id="canvas-viewport">
-    <div class="canvas-container" id="canvas-container">
-
-      <!-- HTML5 Canvas Rendering Surface (Dynamic & Scaled) -->
-      <canvas id="gradient-canvas"></canvas>
-
-      <!-- Grid Overlay -->
-      <div class="grid-overlay" id="grid-overlay"></div>
-
-      <!-- MAIN WEBSITE CONTENT OVERLAY -->
-      <div class="site-content" id="site-content">
+  <!-- MAIN WEBSITE CONTENT -->
+  <main class="site-content achievements-page" id="site-content">
 
         <!-- ========================================================= -->
         <!-- SECTION 1: HERO                                           -->
@@ -321,9 +324,6 @@
         <!-- ========================================================= -->
         <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
 
-      </div><!-- /.site-content -->
-
-    </div>
   </main>
 
   <script src="js/footer.js"></script>
