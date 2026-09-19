@@ -601,8 +601,8 @@ main {
   position: absolute;
   top: 8.75%;
   left: 25%;
-  width: 76px;
-  height: 76px;
+  width: 104px;
+  height: 104px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 25;
@@ -631,8 +631,8 @@ main {
 .roadmap-station {
   position: absolute;
   z-index: 15;
-  width: 70px;
-  height: 70px;
+  width: 106px;
+  height: 106px;
   transform: translate(-50%, -50%);
   text-decoration: none;
   cursor: pointer;
@@ -641,9 +641,9 @@ main {
 
 .station-hub {
   position: relative;
-  width: 70px;
-  height: 70px;
-  border-radius: 1.25rem;
+  width: 106px;
+  height: 106px;
+  border-radius: 1.5rem;
   background: rgba(16, 16, 16, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -651,13 +651,13 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 0 0 0 transparent, 0 12px 28px rgba(0, 0, 0, 0.7);
+  transition: border-color 0.45s ease, box-shadow 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .station-hub img {
-  width: 44px;
-  height: 44px;
+  width: 86px;
+  height: 86px;
   object-fit: contain;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -677,16 +677,16 @@ main {
   padding: 2px 7px;
   line-height: 1;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.45s ease, background-color 0.45s ease, color 0.45s ease;
 }
 
 .station-card {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 175px;
-  padding: 10px 14px;
-  border-radius: 14px;
+  width: 215px;
+  padding: 13px 18px;
+  border-radius: 16px;
   background: rgba(14, 14, 14, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -698,7 +698,7 @@ main {
 
 /* Odd stations (Left side): Card on outer LEFT */
 .roadmap-station:nth-of-type(odd) .station-card {
-  right: calc(100% + 18px);
+  right: calc(100% + 22px);
   left: auto;
   text-align: right;
 }
@@ -709,7 +709,7 @@ main {
 
 /* Even stations (Right side): Card on outer RIGHT */
 .roadmap-station:nth-of-type(even) .station-card {
-  left: calc(100% + 18px);
+  left: calc(100% + 22px);
   right: auto;
   text-align: left;
 }
@@ -720,7 +720,7 @@ main {
 
 .station-card-title {
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: #ffffff;
   line-height: 1.25;
@@ -730,7 +730,7 @@ main {
 .station-card-tag {
   margin-top: 3px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 9.5px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted-foreground);
@@ -739,7 +739,7 @@ main {
 .station-card-cta {
   margin-top: 7px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 9.5px;
   font-weight: 600;
   color: var(--station-accent, #00a4ef);
   text-transform: uppercase;
@@ -758,6 +758,7 @@ main {
 .roadmap-station:hover .station-hub {
   border-color: var(--station-accent, #00a4ef);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--station-accent, #00a4ef);
+  transform: translateY(-8px);
 }
 
 .roadmap-station:hover .station-hub img {
@@ -773,10 +774,11 @@ main {
   gap: 7px;
 }
 
-/* Active / Passed State (illuminated when dragon arrives) */
+/* Active / Passed State (illuminated and slightly lifted when dragon arrives) */
 .roadmap-station.is-active .station-hub {
   border-color: var(--station-accent, #00a4ef);
-  box-shadow: 0 0 0 2px var(--station-accent, #00a4ef), 0 12px 28px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 0 2px var(--station-accent, #00a4ef), 0 16px 34px rgba(0, 0, 0, 0.8);
+  transform: translateY(-6px);
 }
 
 .roadmap-station.is-active .station-num {
@@ -790,41 +792,47 @@ main {
     display: none;
   }
   
+  .roadmap-station {
+    width: 76px;
+    height: 76px;
+  }
+
   .station-hub {
-    width: 54px;
-    height: 54px;
-    border-radius: 1rem;
+    width: 76px;
+    height: 76px;
+    border-radius: 1.25rem;
   }
 
   .station-hub img {
-    width: 32px;
-    height: 32px;
+    width: 58px;
+    height: 58px;
   }
 
   .station-card {
-    width: 120px;
-    padding: 6px 8px;
+    width: 145px;
+    padding: 8px 10px;
+    border-radius: 12px;
   }
 
   .station-card-title {
-    font-size: 11px;
+    font-size: 12px;
   }
 
   .station-card-tag {
-    font-size: 8px;
+    font-size: 8.5px;
   }
 
   .roadmap-station:nth-of-type(odd) .station-card {
-    right: calc(100% + 8px);
+    right: calc(100% + 10px);
   }
 
   .roadmap-station:nth-of-type(even) .station-card {
-    left: calc(100% + 8px);
+    left: calc(100% + 10px);
   }
 
   .guide-mascot {
-    width: 58px;
-    height: 58px;
+    width: 78px;
+    height: 78px;
   }
 }
 
