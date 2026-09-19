@@ -855,8 +855,6 @@
     });
   }
 
-  let globalLenis = null;
-
   function setupLenisScroll() {
     if (typeof Lenis === 'undefined' || globalLenis || window.lenis) {
       if (window.lenis && !globalLenis) globalLenis = window.lenis;
