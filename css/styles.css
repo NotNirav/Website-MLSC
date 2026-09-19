@@ -473,7 +473,7 @@ body {
   flex-shrink: 0;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .scroll-stack-arrow svg {
@@ -487,8 +487,8 @@ body {
   color: #ffffff;
   transform: scale(1.08);
   box-shadow: 0 12px 30px -4px rgba(56, 189, 248, 0.35),
-              0 0 20px rgba(56, 189, 248, 0.2),
-              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 0 20px rgba(56, 189, 248, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .scroll-stack-card:hover .scroll-stack-arrow svg,
@@ -546,7 +546,7 @@ body {
 /* Bottom buffer so full 5-card stack stays pinned before scrolling out to footer */
 .scroll-stack-end {
   width: 100%;
-  height: 380px;
+  height: 290px;
 }
 
 @media (max-width: 768px) {
@@ -568,7 +568,7 @@ body {
   }
 
   .scroll-stack-end {
-    height: 240px;
+    height: 180px;
   }
 }
 
@@ -577,7 +577,7 @@ body {
 /* ========================================================= */
 .site-footer {
   width: 100%;
-  min-height: 330px;
+  min-height: auto;
   border-top: 1px solid var(--border-glass);
   border-bottom: 1px solid #ffffff;
   background: #0c0c0c;
@@ -790,7 +790,7 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   width: auto;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
@@ -820,9 +820,9 @@ body {
   border-radius: 9999px;
   padding: 6px 10px 6px 18px;
   box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.75),
-              0 0 0 1px rgba(255, 255, 255, 0.04),
-              inset 0 1px 0 rgba(255, 255, 255, 0.18),
-              0 0 24px rgba(56, 189, 248, 0.08);
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 0 24px rgba(56, 189, 248, 0.08);
   box-sizing: border-box;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -830,9 +830,9 @@ body {
 .glass-nav-container:hover {
   border-color: rgba(255, 255, 255, 0.22);
   box-shadow: 0 24px 44px -10px rgba(0, 0, 0, 0.82),
-              0 0 0 1px rgba(255, 255, 255, 0.06),
-              inset 0 1px 0 rgba(255, 255, 255, 0.25),
-              0 0 28px rgba(56, 189, 248, 0.12);
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25),
+    0 0 28px rgba(56, 189, 248, 0.12);
 }
 
 .glass-nav-brand {
@@ -1001,7 +1001,8 @@ body {
 }
 
 .achievements-gradient-text {
-  color: #f25022; /* MLSC Orange */
+  color: #f25022;
+  /* MLSC Orange */
   display: inline-block;
   text-shadow: 0 0 28px rgba(242, 80, 34, 0.35);
 }
@@ -1032,7 +1033,8 @@ body {
 /* ========================================================= */
 .journey-section {
   width: 100%;
-  height: 280vh; /* Pinned vertical scroll envelope */
+  height: 280vh;
+  /* Pinned vertical scroll envelope */
   min-height: 280vh;
   position: relative;
   padding: 0;
@@ -1113,11 +1115,13 @@ body {
 /* Single Blue Timeline Line (Desktop) */
 .journey-line-base {
   position: absolute;
-  top: 100px; /* Centered with milestone-dot-anchor */
+  top: 100px;
+  /* Centered with milestone-dot-anchor */
   left: 12.5%;
   width: 75%;
   height: 3px;
-  background: rgba(0, 164, 239, 0.25); /* Muted MLSC Blue base */
+  background: rgba(0, 164, 239, 0.25);
+  /* Muted MLSC Blue base */
   border-radius: 9999px;
   transform: translateY(-50%);
   z-index: 1;
@@ -1125,11 +1129,13 @@ body {
 
 .journey-line-progress {
   position: absolute;
-  top: 100px; /* Same vertical center */
+  top: 100px;
+  /* Same vertical center */
   left: 12.5%;
   width: 75%;
   height: 3px;
-  background: #00a4ef; /* Pure MLSC Blue light */
+  background: #00a4ef;
+  /* Pure MLSC Blue light */
   border-radius: 9999px;
   transform-origin: left center;
   transform: translateY(-50%) scaleX(0);
@@ -1168,20 +1174,22 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: clamp(1.6rem, 2.4vw, 2.2rem);
   font-weight: 800;
-  color: #00a4ef; /* MLSC Blue */
+  color: #00a4ef;
+  /* MLSC Blue */
   letter-spacing: -0.01em;
   opacity: 0.45;
   transform: translateY(0);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.35s ease,
-              text-shadow 0.35s ease;
+    opacity 0.35s ease,
+    text-shadow 0.35s ease;
   user-select: none;
 }
 
 /* Active Year Lifts Up */
 .journey-milestone-item.is-active .milestone-year {
   opacity: 1;
-  transform: translateY(-10px); /* Smooth upward lift */
+  transform: translateY(-10px);
+  /* Smooth upward lift */
   text-shadow: 0 0 18px rgba(0, 164, 239, 0.65), 0 0 35px rgba(0, 164, 239, 0.35);
 }
 
@@ -1215,7 +1223,8 @@ body {
   height: 18px;
   border-radius: 50%;
   background: #080808;
-  border: 2.5px solid rgba(0, 164, 239, 0.45); /* Base blue border */
+  border: 2.5px solid rgba(0, 164, 239, 0.45);
+  /* Base blue border */
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
@@ -1223,7 +1232,8 @@ body {
 /* Active Dot Illuminates in Bright Blue */
 .journey-milestone-item.is-active .milestone-dot {
   background: #ffffff;
-  border: 3px solid #00a4ef; /* Bright MLSC Blue */
+  border: 3px solid #00a4ef;
+  /* Bright MLSC Blue */
   box-shadow: 0 0 16px #00a4ef, 0 0 30px rgba(0, 164, 239, 0.85);
   transform: scale(1.2);
 }
@@ -1470,8 +1480,8 @@ body {
   outline: none;
   box-sizing: border-box;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 /* Subtle Top Accent Highlight */
@@ -1482,7 +1492,8 @@ body {
   left: 28px;
   right: 28px;
   height: 2px;
-  background: #7fba00; /* MLSC Green */
+  background: #7fba00;
+  /* MLSC Green */
   opacity: 0.22;
   border-radius: 2px;
   transition: opacity 0.3s ease, box-shadow 0.3s ease;
@@ -1495,7 +1506,7 @@ body {
   transform: translateY(-6px);
   border-color: rgba(127, 186, 0, 0.45);
   box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75),
-              0 0 22px -4px rgba(127, 186, 0, 0.16);
+    0 0 22px -4px rgba(127, 186, 0, 0.16);
 }
 
 .winner-card:hover::before,
@@ -1520,7 +1531,8 @@ body {
   font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  color: #7fba00; /* MLSC Green */
+  color: #7fba00;
+  /* MLSC Green */
   background: rgba(127, 186, 0, 0.1);
   border: 1px solid rgba(127, 186, 0, 0.25);
   padding: 5px 13px;
@@ -1779,8 +1791,8 @@ body {
   min-height: 380px;
   border-color: rgba(255, 185, 0, 0.4);
   box-shadow: 0 25px 60px -10px rgba(255, 185, 0, 0.22),
-              0 0 30px rgba(255, 185, 0, 0.12),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    0 0 30px rgba(255, 185, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   background: linear-gradient(180deg, rgba(40, 32, 12, 0.75) 0%, rgba(22, 22, 22, 0.85) 100%);
   z-index: 3;
 }
@@ -1788,7 +1800,7 @@ body {
 .podium-card.rank-1:hover {
   border-color: rgba(255, 185, 0, 0.7);
   box-shadow: 0 30px 70px -10px rgba(255, 185, 0, 0.35),
-              0 0 40px rgba(255, 185, 0, 0.25);
+    0 0 40px rgba(255, 185, 0, 0.25);
 }
 
 /* Rank 2 (Silver - Left) */
@@ -1991,13 +2003,13 @@ body {
   justify-content: space-between;
   gap: 24px;
   box-shadow: 0 15px 40px -10px rgba(242, 80, 34, 0.22),
-              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   transition: var(--transition-smooth);
 }
 
 .user-highlight-card:hover {
   box-shadow: 0 20px 50px -10px rgba(242, 80, 34, 0.32),
-              0 0 25px rgba(242, 80, 34, 0.22);
+    0 0 25px rgba(242, 80, 34, 0.22);
   border-color: rgba(242, 80, 34, 0.6);
 }
 
@@ -2150,7 +2162,7 @@ body {
   border-color: var(--border-glass-hover);
   transform: translateX(4px);
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.6),
-              0 0 15px var(--accent-orange-glow);
+    0 0 15px var(--accent-orange-glow);
 }
 
 .ranking-row.is-current-user {
@@ -2355,5 +2367,3 @@ body {
     text-align: left;
   }
 }
-
-

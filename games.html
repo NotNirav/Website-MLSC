@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MLSC Games</title>
+  <link rel="stylesheet" href="css/footer.css">
   <style>
     body {
       margin: 0;
@@ -31,11 +32,15 @@
     <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon" allow="autoplay">
     </iframe>
   </div>
+
+  <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
+
   <script>
     if (window.location.protocol === 'file:') {
       document.getElementById('game-frame').src = 'games/flappy-dragon/index.html';
     }
   </script>
+  <script src="js/footer.js"></script>
 </body>
 
 </html>

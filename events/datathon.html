@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,10 +11,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+
   <link rel="icon" href="../assets/images/branding/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="../css/events.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
 </head>
+
 <body>
   <main style="--event-accent: var(--ms-red);">
     <div class="grain" aria-hidden="true"></div>
@@ -26,16 +31,11 @@
         <div>
           <p class="event-kicker">Milestone 04 · Data in motion</p>
           <h1 class="event-title">Datathon</h1>
-          <p class="event-intro" data-typewriter data-text="Raw data, sharp minds, one clock running." data-speed="38"></p>
+          <p class="event-intro" data-typewriter data-text="Raw data, sharp minds, one clock running." data-speed="38">
+          </p>
         </div>
-        <img
-          src="../assets/images/mascots/mascot-laptop.png"
-          alt="Datathon mascot"
-          width="1024"
-          height="1024"
-          class="event-mascot animate-float-soft"
-          style="animation-duration: 5.6s; animation-delay: -3.2s;"
-        />
+        <img src="../assets/images/mascots/mascot-laptop.png" alt="Datathon mascot" width="1024" height="1024"
+          class="event-mascot animate-float-soft" style="animation-duration: 5.6s; animation-delay: -3.2s;" />
       </header>
 
       <figure class="event-quote glass">
@@ -55,7 +55,8 @@
     <section class="section">
       <h2 class="section-label">About the event</h2>
       <p class="section-body">
-        Datathon handed every team the same messy dataset and a deadline that did not move. The lab stayed loud for hours — half the room debugging, half the room defending a chart nobody else believed yet.
+        Datathon handed every team the same messy dataset and a deadline that did not move. The lab stayed loud for
+        hours — half the room debugging, half the room defending a chart nobody else believed yet.
       </p>
 
       <div class="highlights">
@@ -99,14 +100,15 @@
       </a>
     </section>
 
-    <div class="footer-space">
-      <div class="footer-space-inner glass">
-        <p class="mono-label">Footer space</p>
-      </div>
-    </div>
+    <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
   </main>
 
-  <script src="../js/events.js"></script>
+  <<<<<<< HEAD <script src="../js/events.js">
+    </script>
+    =======
+    <script src="../footer.js"></script>
+    <script src="../events-main.js"></script>
+    >>>>>>> footer
 </body>
-</html>
 
+</html>
