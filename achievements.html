@@ -7,8 +7,21 @@
   <title>Achievements — MLSC PCCOE</title>
   <meta name="description"
     content="Explore the achievements, hackathon winners, and community journey of Microsoft Learn Student Chapter PCCOE.">
+  <!-- Resource Hints for High Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
-  <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/achievements.css?v=1.0">
+
+  <!-- GSAP & ScrollTrigger for high-performance buttery scroll & animation syncing -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Lenis Smooth Scroll (Parity with Teams, Events, and Home) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
@@ -41,18 +54,8 @@
     </nav>
   </header>
 
-  <!-- Canvas Viewport -->
-  <main class="canvas-viewport" id="canvas-viewport">
-    <div class="canvas-container" id="canvas-container">
-
-      <!-- HTML5 Canvas Rendering Surface (Dynamic & Scaled) -->
-      <canvas id="gradient-canvas"></canvas>
-
-      <!-- Grid Overlay -->
-      <div class="grid-overlay" id="grid-overlay"></div>
-
-      <!-- MAIN WEBSITE CONTENT OVERLAY -->
-      <div class="site-content" id="site-content">
+  <!-- MAIN WEBSITE CONTENT -->
+  <main class="site-content achievements-page" id="site-content">
 
         <!-- ========================================================= -->
         <!-- SECTION 1: HERO                                           -->
@@ -186,64 +189,548 @@
                 competing across hackathons.</p>
             </div>
 
-            <!-- Winner Information Cards Grid -->
-            <div class="hackathon-cards-grid">
-              <!-- Card 1: 1st Place -->
-              <article class="winner-card" tabindex="0">
-                <div class="winner-card-top">
-                  <span class="winner-position">1st Place</span>
+            <!-- Single-Row Coverflow Carousel Stage (Matches Teams Page Scroll Animation) -->
+            <div class="winner-carousel-stage" id="winner-carousel-stage">
+              <!-- Previous Button -->
+              <button class="winner-nav-btn prev" id="winner-prev-btn" aria-label="Previous achievement">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <!-- Next Button -->
+              <button class="winner-nav-btn next" id="winner-next-btn" aria-label="Next achievement">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Single Row Track -->
+              <div class="winner-cards-track" id="winner-cards-track" role="region" aria-label="Hackathon winners carousel">
+                <!-- Card 1: Smart India Hackathon Winner -->
+                <article class="winner-card" tabindex="0">
+                  <div class="winner-card-top">
+                    <span class="winner-position">🏆 1st Place / Winner</span>
+                  </div>
+                <div class="winner-card-image-wrap">
+                  <img class="winner-card-img" src="assets/images/achievements/sih_winner.png" alt="Smart India Hackathon Winner" loading="lazy">
                 </div>
                 <div class="winner-field">
                   <span class="winner-label">Hackathon Name</span>
-                  <p class="winner-value winner-hackathon">[Hackathon Name]</p>
+                  <p class="winner-value winner-hackathon">Smart India Hackathon (SIH)</p>
                 </div>
                 <div class="winner-field">
-                  <span class="winner-label">Team Name</span>
-                  <h3 class="winner-value winner-team">[Team Name]</h3>
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Smart India Hackathon Winner</h3>
+                  <p class="winner-desc">Payal Pawar, Siddhesh Patil, and Pawan Patil from the MLSC PCCoE Team won the prestigious national edition of Smart India Hackathon.</p>
                 </div>
                 <div class="winner-field winner-members-field">
                   <span class="winner-label">Team Members</span>
-                  <p class="winner-value winner-members">[Team Members]</p>
+                  <p class="winner-value winner-members">Payal Pawar, Siddhesh Patil, Pawan Patil</p>
                 </div>
               </article>
 
-              <!-- Card 2: 2nd Place -->
+              <!-- Card 2: BMC Hackathon Winner -->
               <article class="winner-card" tabindex="0">
                 <div class="winner-card-top">
-                  <span class="winner-position">2nd Place</span>
+                  <span class="winner-position">🥈 2nd Place / Winner</span>
+                </div>
+                <div class="winner-card-image-wrap">
+                  <img class="winner-card-img" src="assets/images/achievements/bmc_winner.png" alt="BMC Hackathon Winner" loading="lazy">
                 </div>
                 <div class="winner-field">
                   <span class="winner-label">Hackathon Name</span>
-                  <p class="winner-value winner-hackathon">[Hackathon Name]</p>
+                  <p class="winner-value winner-hackathon">BMC Software India Hackathon</p>
                 </div>
                 <div class="winner-field">
-                  <span class="winner-label">Team Name</span>
-                  <h3 class="winner-value winner-team">[Team Name]</h3>
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">BMC Hackathon Winner</h3>
+                  <p class="winner-desc">Adinath Yadav from the MLSC PCCoE Team secured 2nd place in the prestigious BMC Software India Hackathon.</p>
                 </div>
                 <div class="winner-field winner-members-field">
                   <span class="winner-label">Team Members</span>
-                  <p class="winner-value winner-members">[Team Members]</p>
+                  <p class="winner-value winner-members">Adinath Yadav</p>
                 </div>
               </article>
 
-              <!-- Card 3: 3rd Place -->
+              <!-- Card 3: ICPC Regionals -->
               <article class="winner-card" tabindex="0">
                 <div class="winner-card-top">
-                  <span class="winner-position">3rd Place</span>
+                  <span class="winner-position">🎖️ Regional Finalist</span>
+                </div>
+                <div class="winner-card-image-wrap">
+                  <img class="winner-card-img" src="assets/images/achievements/icpc_regionals.png" alt="ICPC Regionals Finalist" loading="lazy">
                 </div>
                 <div class="winner-field">
-                  <span class="winner-label">Hackathon Name</span>
-                  <p class="winner-value winner-hackathon">[Hackathon Name]</p>
+                  <span class="winner-label">Competition</span>
+                  <p class="winner-value winner-hackathon">ICPC Kanpur Regional Contest</p>
                 </div>
                 <div class="winner-field">
-                  <span class="winner-label">Team Name</span>
-                  <h3 class="winner-value winner-team">[Team Name]</h3>
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">ICPC Regionalist</h3>
+                  <p class="winner-desc">Siddhesh Patil from the MLSC PCCoE Team qualified and competed in the prestigious ICPC Kanpur regional finals.</p>
                 </div>
                 <div class="winner-field winner-members-field">
                   <span class="winner-label">Team Members</span>
-                  <p class="winner-value winner-members">[Team Members]</p>
+                  <p class="winner-value winner-members">Siddhesh Patil</p>
                 </div>
               </article>
+
+              <!-- Card 4: Alphabyte 3.0 (24-Hour Hackathon) -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🏆 1st Prize</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Hackathon Name</span>
+                  <p class="winner-value winner-hackathon">Alphabyte 3.0 (24-Hour Hackathon)</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">1st Prize Winner</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 5: IEEE R10 ACEI INV.ENT Pitch Competition 2026 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🥉 3rd Prize</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">IEEE R10 ACEI INV.ENT Pitch Competition 2026</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">3rd Prize Winner</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 6: IEEE Competition – 2025 & 2026 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🏆 Winner</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">IEEE Competition – 2025 & 2026</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Competition Winner</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 7: AUD $750 Innovation Grant – La Trobe University, Australia -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">💡 Grant Recipient</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Organization / University</span>
+                  <p class="winner-value winner-hackathon">La Trobe University, Australia</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">AUD $750 Innovation Grant</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Recipient</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 8: AI for Bharat National Level Hackathon (by AWS) -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">⭐ Top Innovator</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Hackathon Name</span>
+                  <p class="winner-value winner-hackathon">AI for Bharat National Level Hackathon (by AWS)</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Top Innovator</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 9: IT Department Topper Medalist -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎖️ Topper Medalist</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Academic Category</span>
+                  <p class="winner-value winner-hackathon">IT Department</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Topper Medalist</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Recipient</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 10: Hackswagon 36-Hour Hackathon -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎖️ Finalist</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Hackathon Name</span>
+                  <p class="winner-value winner-hackathon">Hackswagon 36-Hour Hackathon</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Hackathon Finalist</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 11: Hacktopia 24-Hour Hackathon -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎖️ Finalist</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Hackathon Name</span>
+                  <p class="winner-value winner-hackathon">Hacktopia 24-Hour Hackathon</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Hackathon Finalist</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 12: NMIET Ideathon -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎖️ Finalist</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">NMIET Ideathon</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Ideathon Finalist</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Madhav Khobare</p>
+                </div>
+              </article>
+
+              <!-- Card 13: Innovik 2025 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🥉 Third Place</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">Innovik 2025</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Third Place</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Aditya Rajput</p>
+                </div>
+              </article>
+
+              <!-- Card 14: Navonmesh 2025 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎗️ Consolation Prize</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">Navonmesh 2025</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Consolation Prize</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Aditya Rajput</p>
+                </div>
+              </article>
+
+              <!-- Card 15: Samartha 2025 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🏅 Domain Winner</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">Samartha 2025</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Domain Winners</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Aditya Rajput</p>
+                </div>
+              </article>
+
+              <!-- Card 16: CodeVerse 2025 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🥈 Second Place</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">CodeVerse 2025</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Second Place</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Aditya Rajput</p>
+                </div>
+              </article>
+
+              <!-- Card 17: Innoquest 2025 -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🏅 Domain Winner</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Competition Name</span>
+                  <p class="winner-value winner-hackathon">Innoquest 2025</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">Domain Winners</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Aditya Rajput</p>
+                </div>
+              </article>
+
+              <!-- Card 18: India Innovates – National-Level Hackathon -->
+              <article class="winner-card" tabindex="0">
+                <div class="winner-card-top">
+                  <span class="winner-position">🎖️ Finalist</span>
+                </div>
+                <div class="winner-card-image-wrap is-empty">
+                  <div class="winner-photo-placeholder">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    <span>Photo Pending</span>
+                  </div>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Hackathon Name</span>
+                  <p class="winner-value winner-hackathon">India Innovates – National-Level Hackathon, Bharat Mandapam, New Delhi</p>
+                </div>
+                <div class="winner-field">
+                  <span class="winner-label">Achievement</span>
+                  <h3 class="winner-value winner-team">National Hackathon Finalist</h3>
+                  <p class="winner-desc winner-desc-pending">Information pending...</p>
+                </div>
+                <div class="winner-field winner-members-field">
+                  <span class="winner-label">Team Members</span>
+                  <p class="winner-value winner-members">Isha Thakur</p>
+                </div>
+              </article>
+              </div><!-- /.winner-cards-track -->
+            </div><!-- /.winner-carousel-stage -->
+
+            <!-- Carousel Bottom Controls (Indicators & Counter) -->
+            <div class="winner-carousel-footer">
+              <div class="winner-carousel-indicators" id="winner-indicators"></div>
+              <div class="winner-counter-badge" id="winner-counter">1 / 18</div>
             </div>
           </div>
         </section>
@@ -321,9 +808,6 @@
         <!-- ========================================================= -->
         <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
 
-      </div><!-- /.site-content -->
-
-    </div>
   </main>
 
   <script src="js/footer.js"></script>

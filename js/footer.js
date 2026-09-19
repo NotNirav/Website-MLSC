@@ -39,7 +39,7 @@
     if (!document.querySelector('link[href*="footer.css"]')) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = basePrefix + 'footer.css';
+      link.href = basePrefix + 'css/footer.css';
       document.head.appendChild(link);
     }
 

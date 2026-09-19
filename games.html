@@ -60,10 +60,6 @@
   <!-- ========================================================= -->
   <main class="games-page" id="games-page">
 
-    <!-- Subtle 40px Grid Texture & Ambient Glow Overlay -->
-    <div class="games-grid-texture" aria-hidden="true"></div>
-    <div class="games-ambient-glow" aria-hidden="true"></div>
-
     <!-- VIEWPORT 1: HERO & LOBBY (Ends with White Line Divider) -->
     <section class="games-hero-viewport" id="hero-lobby" aria-label="Arcade Introduction">
       <div class="games-tag">
@@ -129,20 +125,8 @@
 
         <!-- Top Monitor Bezel / Status Bar -->
         <div class="cabinet-header">
-          <div class="cabinet-status-group">
-            <div class="cabinet-dots" aria-hidden="true">
-              <span class="cabinet-dot red"></span>
-              <span class="cabinet-dot yellow"></span>
-              <span class="cabinet-dot green"></span>
-            </div>
-            <div class="cabinet-feed-label">
-              <span class="cabinet-feed-indicator"></span>
-              <span>LIVE // STATION 01</span>
-            </div>
-          </div>
-
           <div class="cabinet-title-badge">
-            FLAPPY DRAGON v1.0
+            FLAPPY DRAGON
           </div>
 
           <div class="cabinet-actions">
@@ -156,19 +140,25 @@
             </button>
             <button class="cabinet-btn" id="btn-toggle-fullscreen" title="Toggle Fullscreen"
               aria-label="Toggle Fullscreen">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              <svg class="icon-expand" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                 stroke-linecap="round" stroke-linejoin="round">
                 <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
                 </path>
               </svg>
-              <span>FULLSCREEN</span>
+              <svg class="icon-compress" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                <path d="M4 14h6v6m10-10h-6V4m0 6l7-7M3 21l7-7">
+                </path>
+              </svg>
+              <span class="fs-text">FULLSCREEN</span>
             </button>
           </div>
         </div>
 
         <!-- Embedded Game Screen -->
         <div class="cabinet-screen-wrapper">
-          <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon Game" allow="autoplay; fullscreen">
+          <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon Game" allow="autoplay; fullscreen"
+            allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true">
           </iframe>
         </div>
 
@@ -260,33 +250,105 @@
       });
     }
 
-    // Toggle Fullscreen on Arcade Cabinet
+    // Toggle Fullscreen on Arcade Cabinet (Native API + CSS Fullscreen Fallback)
     const fullscreenBtn = document.getElementById('btn-toggle-fullscreen');
     const cabinet = document.getElementById('arcade-cabinet');
+    const gameFrameEl = document.getElementById('game-frame');
+
+    function getFullscreenElement() {
+      return document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement ||
+        null;
+    }
+
+    function isCabinetFullscreen() {
+      return !!(getFullscreenElement() || (cabinet && cabinet.classList.contains('is-fullscreen')));
+    }
+
+    function updateFullscreenUI() {
+      if (!fullscreenBtn) return;
+      const isFs = isCabinetFullscreen();
+      const textSpan = fullscreenBtn.querySelector('.fs-text') || fullscreenBtn.querySelector('span');
+      const expandIcon = fullscreenBtn.querySelector('.icon-expand');
+      const compressIcon = fullscreenBtn.querySelector('.icon-compress');
+
+      if (isFs) {
+        if (textSpan) textSpan.textContent = 'EXIT FULLSCREEN';
+        if (expandIcon) expandIcon.style.display = 'none';
+        if (compressIcon) compressIcon.style.display = 'inline-block';
+        fullscreenBtn.classList.add('active');
+        if (cabinet) cabinet.classList.add('is-fullscreen');
+        document.body.classList.add('cabinet-fullscreen');
+      } else {
+        if (textSpan) textSpan.textContent = 'FULLSCREEN';
+        if (expandIcon) expandIcon.style.display = 'inline-block';
+        if (compressIcon) compressIcon.style.display = 'none';
+        fullscreenBtn.classList.remove('active');
+        if (cabinet) cabinet.classList.remove('is-fullscreen');
+        document.body.classList.remove('cabinet-fullscreen');
+      }
+
+      // Trigger resize on iframe window so canvas updates immediately
+      if (gameFrameEl && gameFrameEl.contentWindow) {
+        try {
+          gameFrameEl.contentWindow.dispatchEvent(new Event('resize'));
+        } catch (e) {}
+      }
+    }
+
     if (fullscreenBtn && cabinet) {
       fullscreenBtn.addEventListener('click', function () {
-        if (!document.fullscreenElement) {
-          if (cabinet.requestFullscreen) {
-            cabinet.requestFullscreen().catch(err => {
-              // Fallback CSS fullscreen
-              cabinet.classList.toggle('is-fullscreen');
+        if (!isCabinetFullscreen()) {
+          const req = cabinet.requestFullscreen ||
+            cabinet.webkitRequestFullscreen ||
+            cabinet.mozRequestFullScreen ||
+            cabinet.msRequestFullscreen;
+
+          if (req) {
+            req.call(cabinet).then(() => {
+              cabinet.classList.add('is-fullscreen');
+              updateFullscreenUI();
+            }).catch(err => {
+              console.warn('Native fullscreen rejected, applying CSS fallback:', err);
+              cabinet.classList.add('is-fullscreen');
+              updateFullscreenUI();
             });
           } else {
-            cabinet.classList.toggle('is-fullscreen');
+            cabinet.classList.add('is-fullscreen');
+            updateFullscreenUI();
           }
         } else {
-          if (document.exitFullscreen) {
-            document.exitFullscreen();
+          cabinet.classList.remove('is-fullscreen');
+          const exit = document.exitFullscreen ||
+            document.webkitExitFullscreen ||
+            document.mozCancelFullScreen ||
+            document.msExitFullscreen;
+
+          if (getFullscreenElement() && exit) {
+            exit.call(document).then(() => {
+              updateFullscreenUI();
+            }).catch(() => {
+              updateFullscreenUI();
+            });
+          } else {
+            updateFullscreenUI();
           }
         }
       });
 
-      document.addEventListener('fullscreenchange', function () {
-        if (document.fullscreenElement) {
-          fullscreenBtn.querySelector('span').textContent = 'EXIT FULL';
-        } else {
-          fullscreenBtn.querySelector('span').textContent = 'FULLSCREEN';
+      ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(evt => {
+        document.addEventListener(evt, updateFullscreenUI);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isCabinetFullscreen()) {
+          if (getFullscreenElement() && document.exitFullscreen) {
+            document.exitFullscreen().catch(() => {});
+          }
           cabinet.classList.remove('is-fullscreen');
+          updateFullscreenUI();
         }
       });
     }

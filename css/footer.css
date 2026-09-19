@@ -13,8 +13,8 @@
   width: 100%;
   min-height: auto;
   border-top: 1px solid var(--border-glass, rgba(255, 255, 255, 0.08));
-  border-bottom: 1px solid #ffffff;
-  background: #0c0c0c;
+  border-bottom: none !important;
+  background: #000000 !important;
   display: flex;
   align-items: center;
   padding: 44px 24px 28px;

@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --color-start: #0c0c0c;
-  --color-end: #171717;
+  --color-start: #000000;
+  --color-end: #000000;
   --canvas-height: 2500px;
-  --bg-app: #080808;
+  --bg-app: #000000;
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --text-dim: #6b7280;
@@ -32,6 +32,8 @@
 
 html {
   scroll-behavior: auto;
+  background-color: #000000 !important;
+  background: #000000 !important;
 }
 
 /* Global Lenis Smooth Scroll Integration */
@@ -54,7 +56,8 @@ html.lenis body {
 
 body {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-app);
+  background: #000000 !important;
+  background-color: #000000 !important;
   color: var(--text-main);
   min-height: 100vh;
   overflow-x: clip;
@@ -78,8 +81,8 @@ body {
   min-height: var(--canvas-height);
   position: relative;
   overflow: hidden;
-  background: var(--color-start);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+  background: #000000 !important;
+  box-shadow: none !important;
 }
 
 /* Background HTML5 canvas */
@@ -96,40 +99,12 @@ body {
 
 /* Grid overlay */
 .grid-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 2;
-}
-
-.grid-overlay.visible {
-  opacity: 1;
+  display: none !important;
 }
 
 /* Height ruler */
 .height-ruler {
-  position: absolute;
-  top: 0;
-  right: 16px;
-  height: 100%;
-  width: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.height-ruler.visible {
-  opacity: 0.7;
+  display: none !important;
 }
 
 .ruler-marker {
@@ -200,7 +175,7 @@ body {
   justify-content: center;
   padding: 0 24px;
   overflow: hidden;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -254,7 +229,7 @@ body {
   justify-content: center;
   padding: clamp(24px, 4vh, 48px) 24px;
   box-sizing: border-box;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   overflow: hidden;
 }
 
@@ -377,7 +352,7 @@ body {
   width: 100%;
   position: relative;
   padding: 80px 24px 60px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -579,8 +554,8 @@ body {
   width: 100%;
   min-height: auto;
   border-top: 1px solid var(--border-glass);
-  border-bottom: 1px solid #ffffff;
-  background: #0c0c0c;
+  border-bottom: none !important;
+  background: #000000 !important;
   display: flex;
   align-items: center;
   padding: 44px 24px 28px;
@@ -1014,7 +989,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: clamp(32px, 5vh, 64px) 24px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
@@ -1090,7 +1065,7 @@ body {
   min-height: 280vh;
   position: relative;
   padding: 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
   display: block;
 }
@@ -1274,7 +1249,7 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #080808;
+  background: #000000;
   border: 2.5px solid rgba(0, 164, 239, 0.45);
   /* Base blue border */
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1508,64 +1483,118 @@ body {
   max-width: 620px;
 }
 
-/* 3-Card Horizontal Grid (Desktop) */
-.hackathon-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+/* ========================================================= */
+/* ACHIEVEMENTS: HACKATHON WINNERS SINGLE-ROW CAROUSEL STAGE */
+/* Parity with Teams Page Coverflow & Scroll Animation        */
+/* ========================================================= */
+.winner-carousel-stage {
+  position: relative;
   width: 100%;
-  align-items: stretch;
+  max-width: 1240px;
+  height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  margin: 16px auto 0;
+  user-select: none;
+  perspective: 1200px;
+  perspective-origin: 50% 50%;
+  overflow: visible;
+  box-sizing: border-box;
+  outline: none;
 }
 
-/* Individual Winner Information Card */
-.winner-card {
+.winner-cards-track {
   position: relative;
-  background: rgba(22, 22, 26, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Navigation Buttons (Prev / Next) */
+.winner-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 35;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.winner-nav-btn:hover {
+  background: rgba(0, 164, 239, 0.25);
+  border-color: #00A4EF;
+  color: #00A4EF;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 0 18px rgba(0, 164, 239, 0.4);
+}
+
+.winner-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.winner-nav-btn.prev {
+  left: 8px;
+}
+
+.winner-nav-btn.next {
+  right: 8px;
+}
+
+/* Individual Winner Information Card (Single Row 3D Arc) */
+.winner-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 310px;
+  max-width: 86vw;
+  height: 470px;
+  margin: 0;
   border-radius: 20px;
-  padding: clamp(24px, 2.8vw, 32px);
+  background: linear-gradient(175deg, #111524 0%, #090c15 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  outline: none;
+  padding: 16px 16px 14px;
   box-sizing: border-box;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
+  cursor: pointer;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform-style: flat;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  transform: translate3d(-50%, -50%, -160px) scale(0.62);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Subtle Top Accent Highlight */
-.winner-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 28px;
-  right: 28px;
-  height: 2px;
-  background: #7fba00;
-  /* MLSC Green */
-  opacity: 0.22;
-  border-radius: 2px;
-  transition: opacity 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Subtle Lifted / Active State using MLSC Green */
-.winner-card:hover,
-.winner-card:focus-visible,
+/* Active Center Card: Prominent Glow & Scale */
 .winner-card.is-active {
-  transform: translateY(-6px);
-  border-color: rgba(127, 186, 0, 0.45);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.75),
-    0 0 22px -4px rgba(127, 186, 0, 0.16);
-}
-
-.winner-card:hover::before,
-.winner-card:focus-visible::before,
-.winner-card.is-active::before {
-  opacity: 0.85;
-  box-shadow: 0 0 10px rgba(127, 186, 0, 0.5);
+  cursor: default;
+  border-color: #00A4EF;
+  box-shadow: 0 0 22px rgba(0, 164, 239, 0.45), 0 16px 36px rgba(0, 0, 0, 0.85);
+  z-index: 20;
 }
 
 /* Card Top: Position Pill */
@@ -1580,20 +1609,17 @@ body {
   display: inline-flex;
   align-items: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.84rem;
+  font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   color: #7fba00;
-  /* MLSC Green */
   background: rgba(127, 186, 0, 0.1);
   border: 1px solid rgba(127, 186, 0, 0.25);
-  padding: 5px 13px;
+  padding: 4px 11px;
   border-radius: 9999px;
   transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.winner-card:hover .winner-position,
-.winner-card:focus-visible .winner-position,
 .winner-card.is-active .winner-position {
   background: rgba(127, 186, 0, 0.18);
   border-color: rgba(127, 186, 0, 0.55);
@@ -1604,12 +1630,13 @@ body {
 .winner-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 3px;
+  margin-top: 4px;
 }
 
 .winner-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -1618,53 +1645,202 @@ body {
 
 .winner-value {
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
-/* Hackathon Name */
+/* Hackathon / Competition Name */
 .winner-hackathon {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
+  font-weight: 500;
 }
 
-/* Team Name - Highly Noticeable */
+/* Team / Achievement Name */
 .winner-team {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  font-size: clamp(1.1rem, 1.5vw, 1.25rem);
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
 /* Team Members - Clean Footer Field */
 .winner-members-field {
   margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .winner-members {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.5;
+  font-size: 0.86rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-/* Mobile & Tablet Responsive Stacking */
-@media (max-width: 860px) {
-  .hackathon-section {
-    padding: clamp(48px, 8vh, 72px) 16px;
-  }
+/* Winner Card Image Box */
+.winner-card-image-wrap {
+  width: 100%;
+  height: 165px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 4px 0 6px;
+  position: relative;
+  flex-shrink: 0;
+}
 
-  .hackathon-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 18px;
-    max-width: 480px;
-    margin: 0 auto;
+.winner-card-image-wrap.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  user-select: none;
+}
+
+.winner-photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--text-muted, #71717a);
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.winner-photo-placeholder svg {
+  opacity: 0.45;
+  color: #00A4EF;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.winner-card:hover .winner-photo-placeholder,
+.winner-card:focus-visible .winner-photo-placeholder {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+.winner-card:hover .winner-photo-placeholder svg,
+.winner-card:focus-visible .winner-photo-placeholder svg {
+  opacity: 0.8;
+  transform: scale(1.08);
+}
+
+.winner-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.winner-card:hover .winner-card-img,
+.winner-card:focus-visible .winner-card-img {
+  transform: scale(1.05);
+}
+
+.winner-desc {
+  font-size: 0.82rem;
+  color: var(--text-dim, #94a3b8);
+  line-height: 1.45;
+  margin: 2px 0 0;
+}
+
+.winner-desc-pending {
+  font-style: italic;
+  opacity: 0.5;
+  font-size: 0.78rem;
+}
+
+/* Carousel Bottom Controls (Indicators & Counter) */
+.winner-carousel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+  position: relative;
+  z-index: 25;
+}
+
+.winner-carousel-indicators {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 68vw;
+  overflow-x: auto;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  scrollbar-width: none;
+}
+
+.winner-carousel-indicators::-webkit-scrollbar {
+  display: none;
+}
+
+.winner-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.winner-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.winner-dot.active {
+  width: 22px;
+  border-radius: 9999px;
+  background: #00A4EF;
+  box-shadow: 0 0 10px rgba(0, 164, 239, 0.6);
+}
+
+.winner-counter-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* Responsive Viewports */
+@media (max-width: 768px) {
+  .winner-carousel-stage {
+    height: 480px;
   }
 
   .winner-card {
-    padding: 22px 20px;
-    gap: 16px;
+    width: 275px;
+    height: 440px;
+    padding: 14px 14px 12px;
+  }
+
+  .winner-card-image-wrap {
+    height: 145px;
+  }
+
+  .winner-nav-btn {
+    width: 38px;
+    height: 38px;
   }
 }
 
@@ -1675,7 +1851,7 @@ body {
   width: 100%;
   position: relative;
   padding: 60px 24px 80px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
