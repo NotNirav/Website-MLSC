@@ -198,7 +198,6 @@
       this.containerEl = containerEl;
       this.currentIndex = 0;
       this.cardElements = [];
-      this.autoPlayTimer = null;
       this.trackEl = null;
 
       this.init();
@@ -227,6 +226,8 @@
     renderCarousel() {
       const stage = document.createElement('div');
       stage.className = 'teams-carousel-stage';
+      stage.setAttribute('tabindex', '0');
+      stage.setAttribute('aria-label', `${this.domainInfo.name} carousel, use left and right arrow keys to navigate`);
 
       // Prev Button
       const prevBtn = document.createElement('button');
@@ -259,7 +260,6 @@
           if (e.target.closest('.team-social-btn')) return;
           if (this.currentIndex !== idx) {
             this.goToIndex(idx);
-            this.resetAutoPlay();
           }
         });
         this.trackEl.appendChild(card);
@@ -271,18 +271,23 @@
       stage.appendChild(this.trackEl);
       this.containerEl.appendChild(stage);
 
-      // Event Listeners
-      prevBtn.addEventListener('click', () => { this.prev(); this.resetAutoPlay(); });
-      nextBtn.addEventListener('click', () => { this.next(); this.resetAutoPlay(); });
+      // Interactive Navigation Listeners
+      prevBtn.addEventListener('click', () => this.prev());
+      nextBtn.addEventListener('click', () => this.next());
+
+      // Keyboard arrow key navigation when focused
+      stage.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          this.prev();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          this.next();
+        }
+      });
 
       this.setupGestures(stage);
-
-      // Autoplay with hover-pause
-      stage.addEventListener('mouseenter', () => this.stopAutoPlay());
-      stage.addEventListener('mouseleave', () => this.startAutoPlay());
-
       this.updatePositions();
-      this.startAutoPlay();
     }
 
     setupGestures(stage) {
@@ -297,7 +302,6 @@
         touchStartY = e.touches[0].clientY;
         touchDeltaX = 0;
         isHorizontalSwipe = null;
-        this.stopAutoPlay();
       }, { passive: true });
 
       stage.addEventListener('touchmove', (e) => {
@@ -322,7 +326,6 @@
             this.prev();
           }
         }
-        this.startAutoPlay();
       }, { passive: true });
     }
 
@@ -374,26 +377,6 @@
         }
       }
     }
-
-    startAutoPlay() {
-      if (this.members.length <= 1) return;
-      this.stopAutoPlay();
-      this.autoPlayTimer = setInterval(() => {
-        this.next();
-      }, 4200 + Math.random() * 400);
-    }
-
-    stopAutoPlay() {
-      if (this.autoPlayTimer) {
-        clearInterval(this.autoPlayTimer);
-        this.autoPlayTimer = null;
-      }
-    }
-
-    resetAutoPlay() {
-      this.stopAutoPlay();
-      this.startAutoPlay();
-    }
   }
 
   // =========================================================
@@ -417,7 +400,7 @@
 
     card.innerHTML = `
       <div class="team-card-photo-box">
-        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}">
+        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}" width="280" height="215" loading="lazy" decoding="async">
       </div>
       <div class="team-card-content">
         <div class="team-card-info-top">
@@ -563,12 +546,10 @@
 
     currentTenure = detectInitialTenure();
     setupTenureSwitcher();
-    setupBgVideo();
-    setupHomeStyleNavbar();
     setupLenisScroll();
     setupHeroAnimations();
 
-    // Fetch static CSV data dynamically
+    // Fetch static CSV data dynamically (cached in memory)
     const members = await loadMembersCSV();
 
     if (members && members.length > 0) {
@@ -587,16 +568,7 @@
       if (typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.refresh();
       }
-    }, 60));
-
-    // Page visibility listener
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        carouselInstances.forEach(c => c.stopAutoPlay());
-      } else {
-        carouselInstances.forEach(c => c.startAutoPlay());
-      }
-    });
+    }, 100));
   }
 
   // =========================================================
@@ -621,8 +593,6 @@
   function renderAllDomainSections() {
     if (!sectionsWrapper) return;
 
-    // Clean up existing carousels
-    carouselInstances.forEach(c => c.stopAutoPlay());
     carouselInstances = [];
 
     sectionsWrapper.innerHTML = '';
@@ -775,40 +745,28 @@
       ScrollTrigger.refresh();
     }
 
-    // Measure again after member avatar images complete loading
-    const memberImages = sectionsWrapper.querySelectorAll('img');
-    let loadedImgs = 0;
-    const onImgComplete = () => {
-      loadedImgs++;
-      if (loadedImgs % 4 === 0 || loadedImgs === memberImages.length) {
-        if (activeLenis) activeLenis.resize();
-        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
-      }
-    };
-    memberImages.forEach(img => {
-      if (img.complete) {
-        onImgComplete();
-      } else {
-        img.addEventListener('load', onImgComplete, { once: true });
-        img.addEventListener('error', onImgComplete, { once: true });
-      }
-    });
+    // Single debounced refresh once all initial layout calculations are settled
+    setTimeout(() => {
+      if (activeLenis) activeLenis.resize();
+      if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    }, 200);
 
-    // Synchronize ScrollTrigger and apply smooth reveal animations
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // Synchronize ScrollTrigger and apply smooth reveal animations (respects reduced motion)
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReducedMotion && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       ScrollTrigger.refresh();
 
       gsap.utils.toArray('.team-domain-block').forEach((block) => {
         gsap.fromTo(block,
-          { opacity: 0.25, y: 28 },
+          { opacity: 0.25, y: 20 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 0.6,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: block,
-              start: 'top 85%',
+              start: 'top 88%',
               toggleActions: 'play none none none'
             }
           }
@@ -963,7 +921,12 @@
 108,Prem Thakur,Current Year (2025–26),Web Development,Tech,Backend Developer,SY IT,"Structuring relational schemas, handling event-driven queues, and securing API endpoints.",assets/images/members/prem thakur.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/premthakur,https://linkedin.com/in/premthakur
 109,Yash Bhagodia,Current Year (2025–26),Web Development,Tech,Web3 & Full-Stack Developer,TY IT,Bridging decentralized smart contracts with progressive client-side web applications.,assets/images/members/Yash Bhagodia_.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/yashbhagodia,https://linkedin.com/in/yashbhagodia`;
 
+  let cachedParsedMembers = null;
+
   async function loadMembersCSV() {
+    if (cachedParsedMembers && cachedParsedMembers.length > 0) {
+      return cachedParsedMembers;
+    }
     const candidatePaths = ['./data/teams.csv', './data/members.csv', 'data/teams.csv', 'data/members.csv'];
     const timestamp = Date.now();
 
@@ -976,6 +939,7 @@
           if (csvText && csvText.trim().length > 0) {
             const parsed = parseCSV(csvText);
             if (parsed && parsed.length > 0) {
+              cachedParsedMembers = parsed;
               return parsed;
             }
           }
@@ -992,6 +956,7 @@
           if (csvText && csvText.trim().length > 0) {
             const parsed = parseCSV(csvText);
             if (parsed && parsed.length > 0) {
+              cachedParsedMembers = parsed;
               return parsed;
             }
           }
@@ -1004,6 +969,7 @@
       if (typeof FALLBACK_TEAMS_CSV === 'string' && FALLBACK_TEAMS_CSV.trim().length > 0) {
         const parsed = parseCSV(FALLBACK_TEAMS_CSV);
         if (parsed && parsed.length > 0) {
+          cachedParsedMembers = parsed;
           return parsed;
         }
       }
@@ -1108,96 +1074,18 @@
   // =========================================================
   // 9. BACKGROUND VIDEO & NAVIGATION CONTROLLER
   // =========================================================
-  function setupBgVideo() {
-    const bgVideo = document.getElementById('teams-bg-video');
-    if (!bgVideo) return;
-
-    bgVideo.loop = true;
-
-    const startPlayback = () => {
-      if (bgVideo.paused) {
-        const promise = bgVideo.play();
-        if (promise !== undefined) {
-          promise.catch(() => {
-            const resumeOnInteract = () => {
-              bgVideo.play().catch(() => {});
-              window.removeEventListener('click', resumeOnInteract);
-              window.removeEventListener('touchstart', resumeOnInteract);
-            };
-            window.addEventListener('click', resumeOnInteract, { once: true });
-            window.addEventListener('touchstart', resumeOnInteract, { once: true });
-          });
-        }
-      }
-    };
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        bgVideo.pause();
-      } else {
-        startPlayback();
-      }
-    });
-
-    requestAnimationFrame(() => startPlayback());
-  }
-
-  function setupHomeStyleNavbar() {
-    const hamburgerBtn = document.getElementById('nav-hamburger');
-    const sidebarDrawer = document.getElementById('sidebar-drawer');
-    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
-    const sidebarClose = document.getElementById('sidebar-close');
-
-    if (!hamburgerBtn || !sidebarDrawer) return;
-
-    const openSidebar = () => {
-      sidebarDrawer.classList.add('open');
-      if (sidebarBackdrop) sidebarBackdrop.classList.add('open');
-      hamburgerBtn.classList.add('hidden');
-      document.body.classList.add('sidebar-open');
-    };
-
-    const closeSidebar = () => {
-      sidebarDrawer.classList.remove('open');
-      if (sidebarBackdrop) sidebarBackdrop.classList.remove('open');
-      hamburgerBtn.classList.remove('hidden');
-      document.body.classList.remove('sidebar-open');
-    };
-
-    hamburgerBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openSidebar();
-    });
-
-    if (sidebarClose) {
-      sidebarClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeSidebar();
-      });
-    }
-
-    if (sidebarBackdrop) {
-      sidebarBackdrop.addEventListener('click', () => closeSidebar());
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && sidebarDrawer.classList.contains('open')) {
-        closeSidebar();
-      }
-    });
-  }
-
   function setupLenisScroll() {
-    if (typeof Lenis === 'undefined') return;
+    if (typeof Lenis === 'undefined' || window.__teamsLenisInitialized) return;
+    window.__teamsLenisInitialized = true;
 
     if (window.lenis) {
       globalLenis = window.lenis;
     } else if (!globalLenis) {
       try {
         globalLenis = new Lenis({
-          lerp: 0.07,
-          wheelMultiplier: 0.8,
-          touchMultiplier: 1.4,
+          lerp: 0.08,
+          wheelMultiplier: 0.85,
+          touchMultiplier: 1.2,
           smoothWheel: true,
           infinite: false,
           orientation: 'vertical',
@@ -1233,31 +1121,32 @@
   }
 
   function setupHeroAnimations() {
-    if (typeof gsap === 'undefined') return;
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || typeof gsap === 'undefined') return;
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
     tl.fromTo('.teams-tag',
-      { opacity: 0, y: -16 },
-      { opacity: 1, y: 0, duration: 0.65, delay: 0.1 }
+      { opacity: 0, y: -12 },
+      { opacity: 1, y: 0, duration: 0.5, delay: 0.05 }
     );
 
     tl.fromTo('.teams-title',
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      '-=0.35'
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      '-=0.3'
     );
 
     tl.fromTo('.teams-desc',
-      { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 0.7 },
-      '-=0.45'
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5 },
+      '-=0.35'
     );
 
     tl.fromTo('.teams-jump-nav',
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.75 },
-      '-=0.35'
+      { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.6 },
+      '-=0.3'
     );
   }
 
