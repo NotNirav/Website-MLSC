@@ -4,40 +4,291 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MLSC Games</title>
+  <title>Arcade Chamber — Microsoft Learn Student Chapter</title>
+  <meta name="description"
+    content="Test your reflexes in the MLSC Arcade Chamber featuring Flappy Dragon. High precision, zero latency, and local flight log.">
+
+  <!-- Resource Hints for High Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+
+  <!-- Site Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/games.css?v=2.0">
   <link rel="stylesheet" href="css/footer.css">
-  <style>
-    body {
-      margin: 0;
-      background: #000;
-    }
 
-    .game-container {
-      width: 100%;
-      min-height: 100vh;
-    }
-
-    .game-container iframe {
-      width: 100%;
-      height: 100vh;
-      min-height: 600px;
-      border: none;
-      display: block;
-    }
-  </style>
+  <!-- Lenis Smooth Scroll -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 </head>
 
 <body>
-  <div class="game-container">
-    <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon" allow="autoplay">
-    </iframe>
-  </div>
 
-  <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
+  <!-- ========================================================= -->
+  <!-- PINNED GLASSMORPHISM NAVBAR (Matches Home & All Pages)    -->
+  <!-- ========================================================= -->
+  <header class="glass-navbar navbar-fixed" id="glass-navbar" aria-label="Main Navigation">
+    <nav class="glass-nav-container">
+      <a href="index.html#hero" class="glass-nav-brand" aria-label="MLSC Home">
+        <svg class="mlsc-logo-icon nav-logo-icon" width="28" height="18" viewBox="0 0 43 28" fill="none"
+          xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Top row: col 2 (Orange), col 3 (Green) -->
+          <rect x="15" y="0" width="13" height="13" rx="1.5" fill="#F25022" class="mlsc-sq mlsc-sq-orange" />
+          <rect x="30" y="0" width="13" height="13" rx="1.5" fill="#7FBA00" class="mlsc-sq mlsc-sq-green" />
+          <!-- Bottom row: col 1 (Blue), col 2 (Yellow) -->
+          <rect x="0" y="15" width="13" height="13" rx="1.5" fill="#00A4EF" class="mlsc-sq mlsc-sq-blue" />
+          <rect x="15" y="15" width="13" height="13" rx="1.5" fill="#FFB900" class="mlsc-sq mlsc-sq-yellow" />
+        </svg>
+        <span class="nav-brand-text"><span class="letter-m">M</span><span class="letter-l">L</span><span
+            class="letter-s">S</span><span class="letter-c">C</span></span>
+      </a>
+      <div class="glass-nav-links">
+        <a href="index.html#hero" class="glass-nav-link">Home</a>
+        <a href="events.html" class="glass-nav-link">Events</a>
+        <a href="teams.html" class="glass-nav-link">Teams</a>
+        <a href="achievements.html" class="glass-nav-link">Achievements</a>
+        <a href="games.html" class="glass-nav-link active">Games</a>
+      </div>
+    </nav>
+  </header>
 
+  <!-- ========================================================= -->
+  <!-- MAIN SITE CONTENT: ARCADE CHAMBER                         -->
+  <!-- ========================================================= -->
+  <main class="games-page" id="games-page">
+
+    <!-- Subtle 40px Grid Texture & Ambient Glow Overlay -->
+    <div class="games-grid-texture" aria-hidden="true"></div>
+    <div class="games-ambient-glow" aria-hidden="true"></div>
+
+    <!-- VIEWPORT 1: HERO & LOBBY (Ends with White Line Divider) -->
+    <section class="games-hero-viewport" id="hero-lobby" aria-label="Arcade Introduction">
+      <div class="games-tag">
+        <span class="games-tag-dot"></span>
+        <span>05 // ARCADE & MINI-GAMES</span>
+      </div>
+
+      <h1 class="games-title">MLSC <span class="title-gradient">Arcade Chamber</span></h1>
+
+      <p class="games-desc">
+        Take flight in Flappy Dragon. High-precision mechanics, browser-native score logging, and retro-inspired visuals
+        designed for instant replay.
+      </p>
+
+      <div class="arcade-feature-row">
+        <div class="arcade-feature-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>60 FPS ENGINE</span>
+        </div>
+        <div class="arcade-feature-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>LOCAL FLIGHT LOG</span>
+        </div>
+        <div class="arcade-feature-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+          <span>CANVAS 2D DYNAMICS</span>
+        </div>
+        <div class="arcade-feature-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122">
+            </path>
+          </svg>
+          <span>KEYBOARD & TOUCH</span>
+        </div>
+      </div>
+
+      <a href="#arcade-chamber" class="arcade-launch-cta" id="launch-cta">
+        <span>ENTER ARCADE BAY</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <polyline points="19 12 12 19 5 12"></polyline>
+        </svg>
+      </a>
+
+      <div class="games-scroll-hint">
+        <span>SCROLL DOWN TO PLAY</span>
+      </div>
+    </section>
+
+    <!-- VIEWPORT 2: ARCADE STAGE & MONITOR (Ends with White Line Divider) -->
+    <section class="games-arcade-viewport" id="arcade-chamber" aria-label="Arcade Simulator Station">
+      <div class="arcade-cabinet" id="arcade-cabinet">
+
+        <!-- Top Monitor Bezel / Status Bar -->
+        <div class="cabinet-header">
+          <div class="cabinet-status-group">
+            <div class="cabinet-dots" aria-hidden="true">
+              <span class="cabinet-dot red"></span>
+              <span class="cabinet-dot yellow"></span>
+              <span class="cabinet-dot green"></span>
+            </div>
+            <div class="cabinet-feed-label">
+              <span class="cabinet-feed-indicator"></span>
+              <span>LIVE // STATION 01</span>
+            </div>
+          </div>
+
+          <div class="cabinet-title-badge">
+            FLAPPY DRAGON v1.0
+          </div>
+
+          <div class="cabinet-actions">
+            <button class="cabinet-btn" id="btn-reload-frame" title="Reset Flight" aria-label="Reset Flight">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              <span>RESET</span>
+            </button>
+            <button class="cabinet-btn" id="btn-toggle-fullscreen" title="Toggle Fullscreen"
+              aria-label="Toggle Fullscreen">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3">
+                </path>
+              </svg>
+              <span>FULLSCREEN</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Embedded Game Screen -->
+        <div class="cabinet-screen-wrapper">
+          <iframe id="game-frame" src="games/flappy-dragon/" title="Flappy Dragon Game" allow="autoplay; fullscreen">
+          </iframe>
+        </div>
+
+        <!-- Bottom Controller Bar -->
+        <div class="cabinet-deck">
+          <div class="cabinet-keybinds">
+            <span class="keybind-item"><span class="key-badge">SPACE</span> / <span class="key-badge">↑</span> Flap
+              Wing</span>
+            <span class="keybind-item"><span class="key-badge">CLICK</span> / <span class="key-badge">TAP</span> Touch
+              Flap</span>
+            <span class="keybind-item"><span class="key-badge">ESC</span> Exit Fullscreen</span>
+          </div>
+          <div class="cabinet-storage-hint">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            <span>High scores logged automatically in browser</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- Shared Footer -->
+    <footer class="site-footer" id="footer" aria-label="Site Footer"></footer>
+
+  </main>
+
+  <!-- Interactive Controls & Smooth Scroll Script -->
   <script>
+    // Protocol fallback for local file opening
     if (window.location.protocol === 'file:') {
-      document.getElementById('game-frame').src = 'games/flappy-dragon/index.html';
+      const frame = document.getElementById('game-frame');
+      if (frame) frame.src = 'games/flappy-dragon/index.html';
+    }
+
+    // Initialize Lenis Smooth Scroll
+    let lenisInstance = null;
+    if (typeof Lenis !== 'undefined') {
+      try {
+        lenisInstance = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          orientation: 'vertical',
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2
+        });
+
+        function raf(time) {
+          lenisInstance.raf(time);
+          requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+      } catch (err) {
+        console.warn('Lenis init error:', err);
+      }
+    }
+
+    // Smooth Scroll CTA
+    const launchCta = document.getElementById('launch-cta');
+    if (launchCta) {
+      launchCta.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.getElementById('arcade-chamber');
+        if (target) {
+          if (lenisInstance) {
+            lenisInstance.scrollTo(target, { offset: -20, duration: 1.2 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    }
+
+    // Reset / Reload Game Frame
+    const reloadBtn = document.getElementById('btn-reload-frame');
+    const gameFrame = document.getElementById('game-frame');
+    if (reloadBtn && gameFrame) {
+      reloadBtn.addEventListener('click', function () {
+        const currentSrc = gameFrame.src;
+        gameFrame.src = '';
+        setTimeout(() => {
+          gameFrame.src = currentSrc;
+        }, 100);
+      });
+    }
+
+    // Toggle Fullscreen on Arcade Cabinet
+    const fullscreenBtn = document.getElementById('btn-toggle-fullscreen');
+    const cabinet = document.getElementById('arcade-cabinet');
+    if (fullscreenBtn && cabinet) {
+      fullscreenBtn.addEventListener('click', function () {
+        if (!document.fullscreenElement) {
+          if (cabinet.requestFullscreen) {
+            cabinet.requestFullscreen().catch(err => {
+              // Fallback CSS fullscreen
+              cabinet.classList.toggle('is-fullscreen');
+            });
+          } else {
+            cabinet.classList.toggle('is-fullscreen');
+          }
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      });
+
+      document.addEventListener('fullscreenchange', function () {
+        if (document.fullscreenElement) {
+          fullscreenBtn.querySelector('span').textContent = 'EXIT FULL';
+        } else {
+          fullscreenBtn.querySelector('span').textContent = 'FULLSCREEN';
+          cabinet.classList.remove('is-fullscreen');
+        }
+      });
     }
   </script>
   <script src="js/footer.js"></script>

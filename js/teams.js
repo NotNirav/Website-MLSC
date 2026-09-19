@@ -1,12 +1,6 @@
 /**
  * MLSC — Teams / Members Multi-Section Carousel Engine
- * Vertically Stacked Multi-Team Layout with Independent 3D Coverflow Stages
- * Features:
- *   - Automatic Vertical Stacking of Teams (Core Team -> AI/ML -> Web Dev -> UI/UX -> Events & Ops -> CP)
- *   - Independent 3D Coverflow Arc Carousels per Team with $O(1)$ LUT Matrix
- *   - Sticky Domain Jump Bar with Active Scroll-Spy Tracking
- *   - Predictive Virtual Image Preloader (90%+ Payload Reduction)
- *   - Independent Touch Swipe, Autoplay, and Hardware-Accelerated Transforms
+ * Dynamically loads static team dataset from data/teams.csv or data/members.csv
  */
 
 (function () {
@@ -66,564 +60,6 @@
     }
   ];
 
-  // =========================================================
-  // 2. DEFAULT MEMBERS DATA (Instant Fallback)
-  // =========================================================
-  const DEFAULT_MEMBERS = [
-    {
-      id: 1,
-      name: "Ved Jadhav",
-      team: "Core Team",
-      role: "President",
-      subtext: "TY CSE",
-      bio: "Driving strategic club vision, partnerships, and high-impact campus tech initiatives.",
-      image: "assets/images/members/Ved_Jadhav.png",
-      accentColor: "#ffb900",
-      github: "https://github.com/vedjadhav",
-      linkedin: "https://linkedin.com/in/vedjadhav"
-    },
-    {
-      id: 2,
-      name: "Sharvil Patil",
-      team: "Core Team",
-      role: "Vice President",
-      subtext: "SY ENTC",
-      bio: "Directing flagship BlueBit hackathons, speaker series, and technical bootcamps.",
-      image: "assets/images/members/Sharvil_Patil.jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/sharvilpatil",
-      linkedin: "https://linkedin.com/in/sharvilpatil"
-    },
-    {
-      id: 3,
-      name: "Isha",
-      team: "Core Team",
-      role: "General Secretary",
-      subtext: "SY ENTC",
-      bio: "Designing sleek wireframes, micro-interactions, and visual assets for club web portals.",
-      image: "assets/images/members/isha_.jpg",
-      accentColor: "#ec4899",
-      github: "https://github.com/isha",
-      linkedin: "https://linkedin.com/in/isha"
-    },
-    {
-      id: 4,
-      name: "Aryan Verma",
-      team: "AI / ML",
-      role: "Member",
-      subtext: "TY IT",
-      bio: "Empowering student innovators, driving technical culture, and leading MLSC to new heights.",
-      image: "assets/images/members/aryan.jpg",
-      accentColor: "#ffb900",
-      github: "https://github.com/aryanverma",
-      linkedin: "https://linkedin.com/in/aryanverma"
-    },
-    {
-      id: 5,
-      name: "Saksham Jagtap",
-      team: "AI / ML",
-      role: "Executive Lead",
-      subtext: "TY CSE",
-      bio: "Spearheading flagship hackathons and community developer engagement programs.",
-      image: "assets/images/members/Saksham Jagtap.png",
-      accentColor: "#ffb900",
-      github: "https://github.com/sakshamjagtap",
-      linkedin: "https://linkedin.com/in/sakshamjagtap"
-    },
-    {
-      id: 6,
-      name: "Kashvi Patki",
-      team: "AI / ML",
-      role: "Member",
-      subtext: "SY CSE AIML",
-      bio: "Orchestrating community initiatives, club operations, and inter-chapter collaborations.",
-      image: "assets/images/members/Kashvi_Patki .jpg",
-      accentColor: "#ffb900",
-      github: "https://github.com/kashvipatki",
-      linkedin: "https://linkedin.com/in/kashvipatki"
-    },
-    {
-      id: 7,
-      name: "Apurv Sagare",
-      team: "AI / ML",
-      role: "Computer Vision Specialist",
-      subtext: "TY CSE",
-      bio: "Developing real-time neural object detection models and visual edge computing pipelines.",
-      image: "assets/images/members/APURV SAGARE.jpeg",
-      accentColor: "#34d399",
-      github: "https://github.com/apurvsagare",
-      linkedin: "https://linkedin.com/in/apurvsagare"
-    },
-    {
-      id: 8,
-      name: "Arnav Kumar",
-      team: "AI / ML",
-      role: "NLP & LLM Researcher",
-      subtext: "SY CSE AIML",
-      bio: "Exploring open-weights language model fine-tuning and retrieval-augmented generation.",
-      image: "assets/images/members/Arnav Kumar.png",
-      accentColor: "#34d399",
-      github: "https://github.com/arnavkumar",
-      linkedin: "https://linkedin.com/in/arnavkumar"
-    },
-    {
-      id: 9,
-      name: "Aryan Patel",
-      team: "AI / ML",
-      role: "Deep Learning Engineer",
-      subtext: "SY CSE",
-      bio: "Building deep neural networks and automated evaluation frameworks for ML systems.",
-      image: "assets/images/members/Aryan Patel.png",
-      accentColor: "#34d399",
-      github: "https://github.com/aryanpatel",
-      linkedin: "https://linkedin.com/in/aryanpatel"
-    },
-    {
-      id: 10,
-      name: "Atindra Kumeriya",
-      team: "AI / ML",
-      role: "ML Systems Engineer",
-      subtext: "SY IT",
-      bio: "Optimizing tensor computation pipelines and building end-to-end predictive models.",
-      image: "assets/images/members/Atindra Kumeriya.jpg",
-      accentColor: "#34d399",
-      github: "https://github.com/atindrakumeriya",
-      linkedin: "https://linkedin.com/in/atindrakumeriya"
-    },
-    {
-      id: 11,
-      name: "Avadhoot Chavan",
-      team: "AI / ML",
-      role: "Data Science Specialist",
-      subtext: "TY CSE DS",
-      bio: "Extracting actionable insights from high-dimensional datasets and statistical modelling.",
-      image: "assets/images/members/Avadhoot Chavan.jpg",
-      accentColor: "#34d399",
-      github: "https://github.com/avadhootchavan",
-      linkedin: "https://linkedin.com/in/avadhootchavan"
-    },
-    {
-      id: 12,
-      name: "Chaitanya Jadhav",
-      team: "AI / ML",
-      role: "Intelligent Agents Developer",
-      subtext: "SY CSE AIML",
-      bio: "Prototyping multi-agent coordination frameworks and automated developer tooling.",
-      image: "assets/images/members/Chaitanya Jadhav.png",
-      accentColor: "#34d399",
-      github: "https://github.com/chaitanyajadhav",
-      linkedin: "https://linkedin.com/in/chaitanyajadhav"
-    },
-    {
-      id: 13,
-      name: "Chinmay Ahire",
-      team: "AI / ML",
-      role: "Neural Systems Researcher",
-      subtext: "TY CSE",
-      bio: "Designing scalable model architectures and training pipelines for competitive hackathons.",
-      image: "assets/images/members/Chinmay_Ahire.png",
-      accentColor: "#34d399",
-      github: "https://github.com/chinmayahire",
-      linkedin: "https://linkedin.com/in/chinmayahire"
-    },
-    {
-      id: 14,
-      name: "Devendra Adsure",
-      team: "AI / ML",
-      role: "MLOps Engineer",
-      subtext: "SY IT",
-      bio: "Containerizing ML workloads and deploying automated inference pipelines on cloud infrastructure.",
-      image: "assets/images/members/Devendra Adsure.png",
-      accentColor: "#34d399",
-      github: "https://github.com/devendraadsure",
-      linkedin: "https://linkedin.com/in/devendraadsure"
-    },
-    {
-      id: 15,
-      name: "Madhav",
-      team: "AI / ML",
-      role: "Edge AI Developer",
-      subtext: "SY CSE",
-      bio: "Building lightweight inference runtimes on microcontrollers and embedded Linux boards.",
-      image: "assets/images/members/Madhav.jpg",
-      accentColor: "#34d399",
-      github: "https://github.com/madhav",
-      linkedin: "https://linkedin.com/in/madhav"
-    },
-    {
-      id: 16,
-      name: "Rishabh Prabhu",
-      team: "AI / ML",
-      role: "Generative AI Specialist",
-      subtext: "TY CSE AIML",
-      bio: "Crafting multimodal pipelines and exploring generative media synthesis applications.",
-      image: "assets/images/members/Rishabh Prabhu.png",
-      accentColor: "#34d399",
-      github: "https://github.com/rishabhprabhu",
-      linkedin: "https://linkedin.com/in/rishabhprabhu"
-    },
-    {
-      id: 17,
-      name: "Sanish Dalvi",
-      team: "CP",
-      role: "Competitive Programming Lead",
-      subtext: "TY IT",
-      bio: "Architecting robust algorithms, competitive problem sets, and engineering scalable ecosystems.",
-      image: "assets/images/members/Sanish Dalvi.png",
-      accentColor: "#ffb900",
-      github: "https://github.com/SanishDalvi",
-      linkedin: "https://linkedin.com/in/sanishdalvi"
-    },
-    {
-      id: 18,
-      name: "Adii",
-      team: "Web Development",
-      role: "Logistics Coordinator",
-      subtext: "SY CSE",
-      bio: "Managing venue logistics, equipment routing, and high-energy hackathon hospitality.",
-      image: "assets/images/members/Adii.jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/adii",
-      linkedin: "https://linkedin.com/in/adii"
-    },
-    {
-      id: 19,
-      name: "Shivanshi",
-      team: "Web Development",
-      role: "Public Relations Lead",
-      subtext: "SY IT",
-      bio: "Fostering inter-collegiate outreach, speaker invitations, and technical media PR.",
-      image: "assets/images/members/shivanshi.png",
-      accentColor: "#f25022",
-      github: "https://github.com/shivanshi",
-      linkedin: "https://linkedin.com/in/shivanshi"
-    },
-    {
-      id: 20,
-      name: "Srushti Gaikwad",
-      team: "Events & Operations",
-      role: "Sponsorship & Outreach Lead",
-      subtext: "TY CSE",
-      bio: "Spearheading partnerships with industry sponsors and community developer grants.",
-      image: "assets/images/members/Srushti Gaikwad.png",
-      accentColor: "#f25022",
-      github: "https://github.com/srushtigaikwad",
-      linkedin: "https://linkedin.com/in/srushtigaikwad"
-    },
-    {
-      id: 21,
-      name: "Tanvi Jadhav",
-      team: "Events & Operations",
-      role: "Hackathon Coordinator",
-      subtext: "SY ENTC",
-      bio: "Directing developer registration flows, mentor scheduling, and project evaluation tracks.",
-      image: "assets/images/members/Tanvi Jadhav.jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/tanvijadhav",
-      linkedin: "https://linkedin.com/in/tanvijadhav"
-    },
-    {
-      id: 22,
-      name: "Tejal Jadhav",
-      team: "Events & Operations",
-      role: "Event Strategist",
-      subtext: "SY CSE",
-      bio: "Curating workshop curriculums, tech talk lineups, and interactive participant engagement.",
-      image: "assets/images/members/Tejal Jadhav.jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/tejaljadhav",
-      linkedin: "https://linkedin.com/in/tejaljadhav"
-    },
-    {
-      id: 23,
-      name: "Vaidehi Behare",
-      team: "Events & Operations",
-      role: "Campus Outreach Lead",
-      subtext: "SY IT",
-      bio: "Connecting student innovators across departments and managing community ambassador tracks.",
-      image: "assets/images/members/Vaidehi Behare.jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/vaidehibehare",
-      linkedin: "https://linkedin.com/in/vaidehibehare"
-    },
-    {
-      id: 24,
-      name: "Vaishnavi Marne",
-      team: "Events & Operations",
-      role: "Delegate Relations Coordinator",
-      subtext: "SY ENTC",
-      bio: "Managing attendee communications, welcome kits, and post-event survey telemetry.",
-      image: "assets/images/members/Vaishnavi Marne .jpg",
-      accentColor: "#f25022",
-      github: "https://github.com/vaishnavimarne",
-      linkedin: "https://linkedin.com/in/vaishnavimarne"
-    },
-    {
-      id: 25,
-      name: "Sharvari Deshmukh",
-      team: "UI / UX & Design",
-      role: "Design Head",
-      subtext: "SY IT",
-      bio: "Crafting intuitive visual design systems, interactive prototypes, and community branding.",
-      image: "assets/images/members/Sharvari_Deshmukh.png",
-      accentColor: "#ec4899",
-      github: "https://github.com/sharvarideshmukh",
-      linkedin: "https://linkedin.com/in/sharvarideshmukh"
-    },
-    {
-      id: 26,
-      name: "Amrita",
-      team: "UI / UX & Design",
-      role: "Product Designer",
-      subtext: "SY CSE",
-      bio: "Mapping user journeys and turning complex software architectures into clean interfaces.",
-      image: "assets/images/members/Amrita.jpg",
-      accentColor: "#ec4899",
-      github: "https://github.com/amrita",
-      linkedin: "https://linkedin.com/in/amrita"
-    },
-    {
-      id: 27,
-      name: "Amruta Thakare",
-      team: "UI / UX & Design",
-      role: "Visual & Brand Designer",
-      subtext: "SY ENTC",
-      bio: "Defining visual design language, event identity kits, and typography guidelines.",
-      image: "assets/images/members/Amruta Thakare.png",
-      accentColor: "#ec4899",
-      github: "https://github.com/amrutathakare",
-      linkedin: "https://linkedin.com/in/amrutathakare"
-    },
-    {
-      id: 28,
-      name: "Anannya",
-      team: "UI / UX & Design",
-      role: "UI/UX Researcher",
-      subtext: "SY IT",
-      bio: "Conducting usability testing, heuristic analysis, and prototyping sleek student workflows.",
-      image: "assets/images/members/Anannya.jpg",
-      accentColor: "#ec4899",
-      github: "https://github.com/anannya",
-      linkedin: "https://linkedin.com/in/anannya"
-    },
-    {
-      id: 29,
-      name: "Anjali Borse",
-      team: "UI / UX & Design",
-      role: "Motion & Graphic Designer",
-      subtext: "TY CSE",
-      bio: "Creating dynamic motion graphics, keynote presentations, and marketing collaterals.",
-      image: "assets/images/members/Anjali Borse.png",
-      accentColor: "#ec4899",
-      github: "https://github.com/anjaliborse",
-      linkedin: "https://linkedin.com/in/anjaliborse"
-    },
-    {
-      id: 30,
-      name: "Deesha",
-      team: "UI / UX & Design",
-      role: "Design Systems Specialist",
-      subtext: "SY CSE AIML",
-      bio: "Building scalable Figma component libraries, auto-layout tokens, and theme palettes.",
-      image: "assets/images/members/Deesha.jpg",
-      accentColor: "#ec4899",
-      github: "https://github.com/deesha",
-      linkedin: "https://linkedin.com/in/deesha"
-    },
-    {
-      id: 31,
-      name: "Khushi Kolhe",
-      team: "UI / UX & Design",
-      role: "Experience Designer",
-      subtext: "TY IT",
-      bio: "Transforming hackathon participant workflows into intuitive, joyful user journeys.",
-      image: "assets/images/members/Khushi Kolhe.jpg",
-      accentColor: "#ec4899",
-      github: "https://github.com/khushikolhe",
-      linkedin: "https://linkedin.com/in/khushikolhe"
-    },
-    {
-      id: 32,
-      name: "Sanika Shinde",
-      team: "UI / UX & Design",
-      role: "Creative Lead",
-      subtext: "SY IT",
-      bio: "Curating aesthetic club social media branding, posters, and digital promotional media.",
-      image: "assets/images/members/Sanika Shinde.png",
-      accentColor: "#ec4899",
-      github: "https://github.com/sanikashinde",
-      linkedin: "https://linkedin.com/in/sanikashinde"
-    },
-    {
-      id: 33,
-      name: "Samarth Wani",
-      team: "Web Development",
-      role: "Strategy Lead",
-      subtext: "SY IT",
-      bio: "Aligning technical programs with student developer needs and industry tech trends.",
-      image: "assets/images/members/Samarth_W.png",
-      accentColor: "#ffb900",
-      github: "https://github.com/samarthwani",
-      linkedin: "https://linkedin.com/in/samarthwani"
-    },
-    {
-      id: 34,
-      name: "Saumyaa Gupta",
-      team: "Web Development",
-      role: "Community Lead",
-      subtext: "SY CSE",
-      bio: "Fostering an inclusive developer ecosystem and empowering first-time hackathon builders.",
-      image: "assets/images/members/Saumyaa Gupta.jpg",
-      accentColor: "#ffb900",
-      github: "https://github.com/saumyaagupta",
-      linkedin: "https://linkedin.com/in/saumyaagupta"
-    },
-    {
-      id: 35,
-      name: "Badal Dadwani",
-      team: "Web Development",
-      role: "Finance & Operations Lead",
-      subtext: "SY IT",
-      bio: "Managing club resources, sponsor allocations, and operational logistical pipelines.",
-      image: "assets/images/members/Badal Dadwani.png",
-      accentColor: "#ffb900",
-      github: "https://github.com/badaldadwani",
-      linkedin: "https://linkedin.com/in/badaldadwani"
-    },
-    {
-      id: 36,
-      name: "Pranav Narkhede",
-      team: "Web Development",
-      role: "Web Development Head",
-      subtext: "TY IT",
-      bio: "Architecting high-performance web platforms and mentoring club web developers.",
-      image: "assets/images/members/Pranav_Narkhede.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/pranavnarkhede",
-      linkedin: "https://linkedin.com/in/pranavnarkhede"
-    },
-    {
-      id: 37,
-      name: "Aditya Deore",
-      team: "Web Development",
-      role: "Full-Stack Developer",
-      subtext: "TY CSE",
-      bio: "Building reactive web applications with Next.js, Node.js microservices, and serverless stacks.",
-      image: "assets/images/members/Aditya Deore.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/adityadeore",
-      linkedin: "https://linkedin.com/in/adityadeore"
-    },
-    {
-      id: 38,
-      name: "Aditya Gurav",
-      team: "Web Development",
-      role: "Backend Systems Developer",
-      subtext: "SY IT",
-      bio: "Designing resilient REST and GraphQL APIs backed by distributed caching layers.",
-      image: "assets/images/members/AdityaGurav.jpeg",
-      accentColor: "#38bdf8",
-      github: "https://github.com/adityagurav",
-      linkedin: "https://linkedin.com/in/adityagurav"
-    },
-    {
-      id: 39,
-      name: "Aditya Rajput",
-      team: "Web Development",
-      role: "Frontend Architect",
-      subtext: "SY CSE",
-      bio: "Crafting modern responsive interfaces with sleek micro-interactions and high-FPS animations.",
-      image: "assets/images/members/Aditya_Rajput.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/adityarajput",
-      linkedin: "https://linkedin.com/in/adityarajput"
-    },
-    {
-      id: 40,
-      name: "Mahesh Shirame",
-      team: "Web Development",
-      role: "Cloud & DevOps Engineer",
-      subtext: "TY CSE",
-      bio: "Automating CI/CD pipelines, Dockerized deployments, and club cloud infrastructure.",
-      image: "assets/images/members/Mahesh_Shirame.jpg",
-      accentColor: "#38bdf8",
-      github: "https://github.com/maheshshirame",
-      linkedin: "https://linkedin.com/in/maheshshirame"
-    },
-    {
-      id: 41,
-      name: "Mayank Pawar",
-      team: "Web Development",
-      role: "Full-Stack Developer",
-      subtext: "SY IT",
-      bio: "Building seamless frontend user flows integrated with real-time WebSocket backend services.",
-      image: "assets/images/members/Mayank Pawar.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/mayankpawar",
-      linkedin: "https://linkedin.com/in/mayankpawar"
-    },
-    {
-      id: 42,
-      name: "Nirav Neve",
-      team: "Web Development",
-      role: "Systems & API Engineer",
-      subtext: "SY CSE",
-      bio: "Engineering low-latency database queries and scalable authentication mechanisms.",
-      image: "assets/images/members/Nirav_Neve.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/niravneve",
-      linkedin: "https://linkedin.com/in/niravneve"
-    },
-    {
-      id: 43,
-      name: "Palash",
-      team: "Web Development",
-      role: "Frontend Specialist",
-      subtext: "SY ENTC",
-      bio: "Crafting accessible, pixel-perfect user experiences using modern CSS and TypeScript.",
-      image: "assets/images/members/Palash.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/palash",
-      linkedin: "https://linkedin.com/in/palash"
-    },
-    {
-      id: 44,
-      name: "Parth Popli",
-      team: "Web Development",
-      role: "Next.js Developer",
-      subtext: "SY CSE",
-      bio: "Developing server-side rendered portals and optimized static web assets for club projects.",
-      image: "assets/images/members/Parth_Popli.png",
-      accentColor: "#38bdf8",
-      github: "https://github.com/parthpopli",
-      linkedin: "https://linkedin.com/in/parthpopli"
-    },
-    {
-      id: 45,
-      name: "Prem Thakur",
-      team: "Web Development",
-      role: "Backend Developer",
-      subtext: "SY IT",
-      bio: "Structuring relational schemas, handling event-driven queues, and securing API endpoints.",
-      image: "assets/images/members/prem thakur.jpg",
-      accentColor: "#38bdf8",
-      github: "https://github.com/premthakur",
-      linkedin: "https://linkedin.com/in/premthakur"
-    },
-    {
-      id: 46,
-      name: "Yash Bhagodia",
-      team: "Web Development",
-      role: "Web3 & Full-Stack Developer",
-      subtext: "TY IT",
-      bio: "Bridging decentralized smart contracts with progressive client-side web applications.",
-      image: "assets/images/members/Yash Bhagodia_.jpg",
-      accentColor: "#38bdf8",
-      github: "https://github.com/yashbhagodia",
-      linkedin: "https://linkedin.com/in/yashbhagodia"
-    }
-  ];
-
   // SVG Icons
   const GITHUB_SVG = `
     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" style="pointer-events: none;">
@@ -636,157 +72,36 @@
     </svg>`;
 
   const PLACEHOLDER_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 290 215'%3E%3Crect width='100%25' height='100%25' fill='%23131724'/%3E%3C/svg%3E";
-  const CSV_CACHE_KEY = 'mlsc_members_csv_cache_v3';
 
   // =========================================================
-  // 3. PRECOMPUTED 3D CAROUSEL TRANSFORMS LOOK-UP TABLE (LUT)
+  // 2. PRECOMPUTED 3D CAROUSEL TRANSFORMS LOOK-UP TABLE (LUT)
   // =========================================================
   const TRANSFORM_LUT = {
     mobile: {
-      0: {
-        transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)',
-        opacity: '1',
-        zIndex: '20',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+1': {
-        transform: 'translate3d(calc(-50% + 75px), -50%, -40px) scale(0.82) rotateY(-10deg)',
-        opacity: '0.25',
-        zIndex: '4',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '-1': {
-        transform: 'translate3d(calc(-50% - 75px), -50%, -40px) scale(0.82) rotateY(10deg)',
-        opacity: '0.25',
-        zIndex: '4',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      dormant: {
-        transform: 'translate3d(-50%, -50%, -120px) scale(0.6)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      }
+      0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+      '+1': { transform: 'translate3d(calc(-50% + 75px), -50%, -40px) scale(0.82) rotateY(-10deg)', opacity: '0.25', zIndex: '4', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 75px), -50%, -40px) scale(0.82) rotateY(10deg)', opacity: '0.25', zIndex: '4', pe: 'auto', vis: 'visible' },
+      dormant: { transform: 'translate3d(-50%, -50%, -120px) scale(0.6)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     },
     tablet: {
-      0: {
-        transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)',
-        opacity: '1',
-        zIndex: '20',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+1': {
-        transform: 'translate3d(calc(-50% + 185px), -50%, -40px) scale(0.86) rotateY(-14deg)',
-        opacity: '0.92',
-        zIndex: '10',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '-1': {
-        transform: 'translate3d(calc(-50% - 185px), -50%, -40px) scale(0.86) rotateY(14deg)',
-        opacity: '0.92',
-        zIndex: '10',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+2': {
-        transform: 'translate3d(calc(-50% + 330px), -50%, -85px) scale(0.74) rotateY(-24deg)',
-        opacity: '0.78',
-        zIndex: '6',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '-2': {
-        transform: 'translate3d(calc(-50% - 330px), -50%, -85px) scale(0.74) rotateY(24deg)',
-        opacity: '0.78',
-        zIndex: '6',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+3': {
-        transform: 'translate3d(calc(-50% + 440px), -50%, -140px) scale(0.6) rotateY(-34deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      },
-      '-3': {
-        transform: 'translate3d(calc(-50% - 440px), -50%, -140px) scale(0.6) rotateY(34deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      },
-      dormant: {
-        transform: 'translate3d(-50%, -50%, -140px) scale(0.6) rotateY(0deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      }
+      0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+      '+1': { transform: 'translate3d(calc(-50% + 185px), -50%, -40px) scale(0.86) rotateY(-14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 185px), -50%, -40px) scale(0.86) rotateY(14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 330px), -50%, -85px) scale(0.74) rotateY(-24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
+      '-2': { transform: 'translate3d(calc(-50% - 330px), -50%, -85px) scale(0.74) rotateY(24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
+      '+3': { transform: 'translate3d(calc(-50% + 440px), -50%, -140px) scale(0.6) rotateY(-34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 440px), -50%, -140px) scale(0.6) rotateY(34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      dormant: { transform: 'translate3d(-50%, -50%, -140px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     },
     desktop: {
-      0: {
-        transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)',
-        opacity: '1',
-        zIndex: '20',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+1': {
-        transform: 'translate3d(calc(-50% + 225px), -50%, -45px) scale(0.88) rotateY(-16deg)',
-        opacity: '0.94',
-        zIndex: '12',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '-1': {
-        transform: 'translate3d(calc(-50% - 225px), -50%, -45px) scale(0.88) rotateY(16deg)',
-        opacity: '0.94',
-        zIndex: '12',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+2': {
-        transform: 'translate3d(calc(-50% + 415px), -50%, -90px) scale(0.77) rotateY(-28deg)',
-        opacity: '0.84',
-        zIndex: '7',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '-2': {
-        transform: 'translate3d(calc(-50% - 415px), -50%, -90px) scale(0.77) rotateY(28deg)',
-        opacity: '0.84',
-        zIndex: '7',
-        pe: 'auto',
-        vis: 'visible'
-      },
-      '+3': {
-        transform: 'translate3d(calc(-50% + 520px), -50%, -160px) scale(0.62) rotateY(-38deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      },
-      '-3': {
-        transform: 'translate3d(calc(-50% - 520px), -50%, -160px) scale(0.62) rotateY(38deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      },
-      dormant: {
-        transform: 'translate3d(-50%, -50%, -160px) scale(0.62) rotateY(0deg)',
-        opacity: '0',
-        zIndex: '1',
-        pe: 'none',
-        vis: 'hidden'
-      }
+      0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
+      '+1': { transform: 'translate3d(calc(-50% + 225px), -50%, -45px) scale(0.88) rotateY(-16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 225px), -50%, -45px) scale(0.88) rotateY(16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 415px), -50%, -90px) scale(0.77) rotateY(-28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
+      '-2': { transform: 'translate3d(calc(-50% - 415px), -50%, -90px) scale(0.77) rotateY(28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
+      '+3': { transform: 'translate3d(calc(-50% + 520px), -50%, -160px) scale(0.62) rotateY(-38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 520px), -50%, -160px) scale(0.62) rotateY(38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      dormant: { transform: 'translate3d(-50%, -50%, -160px) scale(0.62) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     }
   };
 
@@ -821,7 +136,7 @@
   }
 
   // =========================================================
-  // 4. TEAM CAROUSEL INSTANCE CLASS
+  // 3. TEAM CAROUSEL INSTANCE CLASS
   // =========================================================
   class TeamCarousel {
     constructor(domainInfo, members, containerEl) {
@@ -831,9 +146,6 @@
       this.currentIndex = 0;
       this.cardElements = [];
       this.autoPlayTimer = null;
-      this.isSwiping = false;
-      this.startX = 0;
-      this.currentX = 0;
       this.trackEl = null;
 
       this.init();
@@ -1015,7 +327,7 @@
       this.stopAutoPlay();
       this.autoPlayTimer = setInterval(() => {
         this.next();
-      }, 4200 + Math.random() * 400); // Slight staggering between domain carousels
+      }, 4200 + Math.random() * 400);
     }
 
     stopAutoPlay() {
@@ -1032,7 +344,7 @@
   }
 
   // =========================================================
-  // 5. HELPER: CREATE MEMBER CARD ELEMENT
+  // 4. HELPER: CREATE MEMBER CARD ELEMENT
   // =========================================================
   function createCardElement(member, idx, currentIdx, total, fallbackAccent) {
     const card = document.createElement('div');
@@ -1052,7 +364,7 @@
 
     card.innerHTML = `
       <div class="team-card-photo-box">
-        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'280\\' height=\\'210\\'><rect fill=\\'%23191c28\\' width=\\'280\\' height=\\'210\\'/><text fill=\\'%237dd3fc\\' x=\\'50%\\' y=\\'50%\\' font-family=\\'sans-serif\\' font-size=\\'18\\' font-weight=\\'bold\\' text-anchor=\\'middle\\'>${encodeURIComponent(member.name)}</text></svg>'">
+        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}">
       </div>
       <div class="team-card-content">
         <div class="team-card-info-top">
@@ -1062,10 +374,11 @@
               ${escapeHTML(member.role)}
             </span>
           </div>
+          ${member.subtext ? `
           <div class="team-card-academic">
             <span class="academic-cap">🎓</span>
             <span class="academic-text">${escapeHTML(member.subtext)}</span>
-          </div>
+          </div>` : ''}
           <p class="team-card-about">${escapeHTML(member.bio)}</p>
         </div>
         <div class="team-card-footer">
@@ -1081,7 +394,16 @@
       </div>
     `;
 
-    // Prevent clicks on social links from bubbling up
+    // Safe error handler for images without inline string escaping issues
+    const imgEl = card.querySelector('.team-card-image');
+    if (imgEl) {
+      imgEl.addEventListener('error', function () {
+        const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="280" height="210"><rect fill="%23191c28" width="280" height="210"/><text fill="%237dd3fc" x="50%" y="50%" font-family="sans-serif" font-size="18" font-weight="bold" text-anchor="middle">${encodeURIComponent(member.name)}</text></svg>`;
+        this.src = 'data:image/svg+xml;utf8,' + svgStr;
+      }, { once: true });
+    }
+
+    // Prevent clicks on social links from bubbling up to carousel card rotation
     card.querySelectorAll('.team-social-btn').forEach(btn => {
       btn.addEventListener('pointerdown', (e) => e.stopPropagation());
       btn.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
@@ -1093,9 +415,9 @@
   }
 
   // =========================================================
-  // 6. MAIN ENGINE & STATE
+  // 5. MAIN ENGINE & STATE
   // =========================================================
-  let allMembers = [...DEFAULT_MEMBERS];
+  let allMembers = [];
   let carouselInstances = [];
   let jumpNavContainer = null;
   let sectionsWrapper = null;
@@ -1123,22 +445,15 @@
     setupHomeStyleNavbar();
     setupLenisScroll();
 
-    // Check cached data for fast initial paint
-    try {
-      const cached = sessionStorage.getItem(CSV_CACHE_KEY);
-      if (cached) {
-        const parsed = parseCSV(cached);
-        if (parsed && parsed.length > 0) {
-          allMembers = parsed;
-        }
-      }
-    } catch (e) {}
+    // Fetch static CSV data dynamically
+    const members = await loadMembersCSV();
 
-    // Fetch freshest members.csv immediately
-    const loaded = await loadMembersCSV();
-    
-    // Render with the freshest data (or fallback if fetch fails)
-    renderAllDomainSections();
+    if (members && members.length > 0) {
+      allMembers = members;
+      renderAllDomainSections();
+    } else {
+      showErrorState('Unable to load team data. Please check your network or try again later.');
+    }
 
     // Resize listener to re-align carousel items
     window.addEventListener('resize', debounce(() => {
@@ -1156,7 +471,7 @@
   }
 
   // =========================================================
-  // 7. RENDER ALL DOMAIN SECTIONS SEQUENTIALLY
+  // 6. RENDER ALL DOMAIN SECTIONS SEQUENTIALLY
   // =========================================================
   function renderAllDomainSections() {
     if (!sectionsWrapper) return;
@@ -1213,8 +528,9 @@
           e.preventDefault();
           const target = document.getElementById(`domain-${domain.id}`);
           if (target) {
-            if (globalLenis) {
-              globalLenis.scrollTo(target, { offset: -80 });
+            const activeLenis = globalLenis || window.lenis;
+            if (activeLenis) {
+              activeLenis.scrollTo(target, { offset: -95 });
             } else {
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -1254,7 +570,7 @@
   }
 
   // =========================================================
-  // 8. SCROLL-SPY FOR STICKY JUMP NAV PILLS
+  // 7. SCROLL-SPY FOR STICKY JUMP NAV PILLS
   // =========================================================
   function setupScrollSpy() {
     if (!jumpNavContainer) return;
@@ -1280,38 +596,35 @@
 
     blocks.forEach(block => observer.observe(block));
 
-    // Activate first pill by default
     if (pills[0]) pills[0].classList.add('active');
   }
 
   // =========================================================
-  // 9. CSV PARSER WITH CACHE-BUSTED FETCH & SESSION CACHING
+  // 8. CSV PARSER & FETCH ENGINE
   // =========================================================
   async function loadMembersCSV() {
-    try {
-      const timestamp = Date.now();
-      const response = await fetch(`data/members.csv?_=${timestamp}`, {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache' }
-      });
-      if (!response.ok) return false;
-      const csvText = await response.text();
+    const candidatePaths = ['./data/teams.csv', './data/members.csv', 'data/teams.csv', 'data/members.csv'];
+    const timestamp = Date.now();
 
-      const parsed = parseCSV(csvText);
-      if (parsed && parsed.length > 0) {
-        allMembers = parsed;
-        try {
-          sessionStorage.setItem(CSV_CACHE_KEY, csvText);
-        } catch (e) {}
-        return true;
-      }
-    } catch (err) {
-      console.warn('Live fetch for members.csv was not available (using cached or fallback members):', err);
-      if (!allMembers || allMembers.length === 0) {
-        allMembers = [...DEFAULT_MEMBERS];
-      }
+    for (const csvPath of candidatePaths) {
+      try {
+        const response = await fetch(`${csvPath}?_=${timestamp}`, {
+          cache: 'no-store',
+          headers: { 'Cache-Control': 'no-cache' }
+        });
+
+        if (response.ok) {
+          const csvText = await response.text();
+          const parsed = parseCSV(csvText);
+          if (parsed && parsed.length > 0) {
+            return parsed;
+          }
+        }
+      } catch (err) {}
     }
-    return false;
+
+    console.error('Error loading team CSV data from all paths');
+    return null;
   }
 
   function parseCSV(text) {
@@ -1389,8 +702,19 @@
     return values;
   }
 
+  function showErrorState(msg) {
+    if (!sectionsWrapper) return;
+    sectionsWrapper.innerHTML = `
+      <div class="teams-error-state" style="text-align: center; padding: 60px 20px; color: #f87171; font-family: 'Plus Jakarta Sans', sans-serif;">
+        <div style="font-size: 2.2rem; margin-bottom: 12px;">⚠️</div>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: #fca5a5;">${escapeHTML(msg)}</h3>
+        <p style="font-size: 0.9rem; color: #9ca3af; margin: 0;">Please ensure you are viewing over a web server (e.g. http://localhost) or refresh the page.</p>
+      </div>
+    `;
+  }
+
   // =========================================================
-  // 10. BACKGROUND VIDEO CONTROLLER (PING-PONG LOOP)
+  // 9. BACKGROUND VIDEO & NAVIGATION CONTROLLER
   // =========================================================
   function setupBgVideo() {
     const bgVideo = document.getElementById('teams-bg-video');
@@ -1415,7 +739,6 @@
       }
     };
 
-    // Tab visibility handling: pause during inactive tabs to save CPU/GPU cycles
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         bgVideo.pause();
@@ -1472,26 +795,33 @@
     });
   }
 
+  let globalLenis = null;
+
   function setupLenisScroll() {
-    if (typeof Lenis === 'undefined' || globalLenis) return;
+    if (typeof Lenis === 'undefined' || globalLenis || window.lenis) {
+      if (window.lenis && !globalLenis) globalLenis = window.lenis;
+      return;
+    }
     try {
       globalLenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        orientation: 'vertical',
-        gestureOrientation: 'vertical',
+        lerp: 0.06,
+        wheelMultiplier: 0.72,
+        touchMultiplier: 1.2,
         smoothWheel: true,
-        wheelMultiplier: 1,
-        touchMultiplier: 1.4,
-        infinite: false
+        infinite: false,
+        orientation: 'vertical',
+        gestureOrientation: 'vertical'
       });
+      window.lenis = globalLenis;
 
       function raf(time) {
         globalLenis.raf(time);
         requestAnimationFrame(raf);
       }
       requestAnimationFrame(raf);
-    } catch (e) {}
+    } catch (e) {
+      console.warn('Teams Lenis scroll error:', e);
+    }
   }
 
   function escapeHTML(str) {
@@ -1512,7 +842,6 @@
     };
   }
 
-  // Auto-boot on DOM readiness
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initTeamsPage);
   } else {
