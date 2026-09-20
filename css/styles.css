@@ -164,6 +164,7 @@ body {
 /* SECTION 1: HERO (Raw B/W "MLSC" - No Description, No Tab) */
 /* ========================================================= */
 .hero-section {
+  position: relative;
   height: 100vh;
   height: 100dvh;
   min-height: 100vh;
@@ -177,6 +178,23 @@ body {
   overflow: hidden;
   border-bottom: none;
   box-sizing: border-box;
+}
+
+/* Animated WebP Mascot in Hero Section */
+.hero-mascot-webp {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  width: 318px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 5;
+}
+
+.hero-mascot-webp.hero-mascot-delayed {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .hero-raw-title {

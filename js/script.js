@@ -1154,6 +1154,24 @@
     });
   }
 
+  // =========================================================
+  // 1-Second Entrance Delay for Hero Section WebP Mascot
+  // =========================================================
+  function initHeroMascotDelay() {
+    const heroMascot = document.querySelector('.hero-mascot-delayed');
+    if (!heroMascot) return;
+
+    const targetSrc = heroMascot.getAttribute('src');
+    heroMascot.setAttribute('src', '');
+
+    setTimeout(() => {
+      heroMascot.setAttribute('src', targetSrc);
+      heroMascot.classList.remove('hero-mascot-delayed');
+      heroMascot.style.visibility = 'visible';
+      heroMascot.style.opacity = '1';
+    }, 1000);
+  }
+
   let isAppInitialized = false;
   function initApp() {
     if (isAppInitialized) return;
@@ -1167,6 +1185,7 @@
     journeyTimelineInstance = initJourneyTimeline();
     initLeaderboard();
     initBrieNavbar();
+    initHeroMascotDelay();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
