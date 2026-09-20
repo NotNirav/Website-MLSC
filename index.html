@@ -9,6 +9,7 @@
     content="Microsoft Learn Student Chapter PCCOE — empowering student developers through community, technology, hackathons, and real-world projects.">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/loading-animation.css">
   <!-- Lenis Smooth Scroll (Global smooth scroll stylesheet & library) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.css">
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
@@ -18,6 +19,84 @@
 </head>
 
 <body>
+
+  <!-- ========================================================= -->
+  <!-- CINEMATIC LOADING SCREEN ANIMATION (Main Page Only)       -->
+  <!-- ========================================================= -->
+  <div id="mlsc-loading-screen" role="dialog" aria-modal="true" aria-label="Loading MLSC">
+    <div class="theater-scene" aria-hidden="true">
+      <div class="room-space">
+        <img
+          src="assets/images/loading/cinema-room.webp"
+          alt=""
+          class="room-image"
+          draggable="false"
+        >
+        <div class="screen-halo"></div>
+        <div class="cinema-screen">
+          <div class="screen-light"></div>
+          <div class="screen-texture"></div>
+          <div class="projection">
+            <div class="mlsc-logo mlsc-logo-animated" role="img" aria-label="Microsoft Learn Student Chapter, PCCoE">
+              <img
+                src="assets/images/loading/mlsc-letters-light.png"
+                alt=""
+                class="mlsc-lettering"
+                draggable="false"
+              >
+              <span class="mlsc-tiles" aria-hidden="true">
+                <span class="mlsc-tile mlsc-tile-red"></span>
+                <span class="mlsc-tile mlsc-tile-green"></span>
+                <span class="mlsc-tile mlsc-tile-blue"></span>
+                <span class="mlsc-tile mlsc-tile-yellow"></span>
+              </span>
+            </div>
+            <p class="screen-caption">Learn. Build. Belong.</p>
+          </div>
+          <div class="screen-glint"></div>
+        </div>
+        <div class="room-light-spill"></div>
+      </div>
+      <div class="cinema-vignette"></div>
+      <div class="cinema-grain"></div>
+    </div>
+
+    <header class="experience-header">
+      <div class="chapter-brand">
+        <span class="header-logo">
+          <img src="assets/images/loading/mlsc-light.png" alt="MLSC" class="mlsc-lettering">
+        </span>
+        <span class="brand-divider"></span>
+        <span class="brand-caption">Microsoft Learn<br>Student Chapter</span>
+      </div>
+      <div class="header-right">
+        <span class="chapter-location"><span class="location-dot"></span> PCCOE, PUNE</span>
+        <button id="loading-skip-btn" class="skip-intro-btn" type="button" aria-label="Skip loading intro">
+          Skip intro
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="scene-eyebrow" aria-hidden="true">
+      <span class="eyebrow-line"></span>
+      A NEW CHAPTER IS COMING TO LIGHT
+      <span class="eyebrow-line"></span>
+    </div>
+
+    <div class="intro-copy" aria-hidden="true">
+      <p class="intro-kicker">Curiosity brings us together.</p>
+      <h1>This is where it begins.</h1>
+    </div>
+
+    <div class="experience-progress" aria-hidden="true">
+      <span></span>
+    </div>
+  </div>
+
 
   <!-- Floating Glassmorphism Navbar (Active from 2nd Viewport onwards) -->
   <header class="glass-navbar" id="glass-navbar" aria-label="Main Navigation">
@@ -195,6 +274,7 @@
   <script src="js/footer.js"></script>
   <script src="js/fluid-glass-bundle.js"></script>
   <script src="js/script.js"></script>
+  <script src="js/loading-animation.js"></script>
 
 </body>
 
