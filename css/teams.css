@@ -320,11 +320,39 @@ body {
   box-shadow: 0 0 12px rgba(168, 85, 247, 0.28);
 }
 
+.teams-jump-btn[data-domain="Operations"].active {
+  background: rgba(249, 115, 22, 0.16);
+  color: #fb923c;
+  border-color: #f97316;
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.28);
+}
+
+.teams-jump-btn[data-domain="Management"].active {
+  background: rgba(251, 146, 60, 0.16);
+  color: #fdba74;
+  border-color: #fb923c;
+  box-shadow: 0 0 12px rgba(251, 146, 60, 0.28);
+}
+
 .teams-jump-btn[data-domain="Event Management"].active {
   background: rgba(249, 115, 22, 0.16);
   color: #fb923c;
   border-color: #f97316;
   box-shadow: 0 0 12px rgba(249, 115, 22, 0.28);
+}
+
+.teams-jump-btn[data-domain="Marketing"].active {
+  background: rgba(6, 182, 212, 0.16);
+  color: #22d3ee;
+  border-color: #06b6d4;
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.28);
+}
+
+.teams-jump-btn[data-domain="Sponsorship"].active {
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+  border-color: #f59e0b;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.28);
 }
 
 .teams-jump-btn[data-domain="Sponsorship & Marketing"].active {
@@ -334,11 +362,32 @@ body {
   box-shadow: 0 0 12px rgba(6, 182, 212, 0.28);
 }
 
+.teams-jump-btn[data-domain="Finance"].active {
+  background: rgba(16, 185, 129, 0.16);
+  color: #34d399;
+  border-color: #10b981;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.28);
+}
+
 .teams-jump-btn[data-domain="Accounts & Finance"].active {
   background: rgba(16, 185, 129, 0.16);
   color: #34d399;
   border-color: #10b981;
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.28);
+}
+
+.teams-jump-btn[data-domain="Design"].active {
+  background: rgba(236, 72, 153, 0.16);
+  color: #ec4899;
+  border-color: #ec4899;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.28);
+}
+
+.teams-jump-btn[data-domain="Social Media"].active {
+  background: rgba(139, 92, 246, 0.16);
+  color: #a78bfa;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.28);
 }
 
 .teams-jump-btn[data-domain="UI / UX & Design"].active {
