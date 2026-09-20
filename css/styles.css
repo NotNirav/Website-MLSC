@@ -641,56 +641,6 @@ body {
   z-index: 1;
 }
 
-/* Elegant micro-tag pill without modifying any HTML text */
-.scroll-stack-content::before {
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-  padding: 5px 14px;
-  border-radius: 999px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 2px;
-}
-
-.card-1 .scroll-stack-content::before {
-  content: "01 • EVENTS";
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.card-2 .scroll-stack-content::before {
-  content: "02 • TEAMS";
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
-.card-3 .scroll-stack-content::before {
-  content: "03 • ACHIEVEMENTS";
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-}
-
-.card-4 .scroll-stack-content::before {
-  content: "04 • GAMES";
-  background: rgba(17, 24, 39, 0.12);
-  color: #111827;
-  border: 1px solid rgba(17, 24, 39, 0.24);
-}
-
-.card-5 .scroll-stack-content::before {
-  content: "05 • HOME";
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-}
-
 /* ========================================================= */
 /* MLSC SOLID BRAND COLOR CARDS                              */
 /* ========================================================= */
@@ -1342,12 +1292,31 @@ body {
   width: 100%;
 }
 
+.event-glow {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .achievements-section.hero-section {
+  position: relative;
+  overflow: hidden;
   padding: clamp(90px, 14vh, 130px) 24px clamp(40px, 6vh, 60px);
   text-align: center;
 }
 
 .achievements-section.hero-section .hero-container {
+  position: relative;
+  z-index: 2;
   gap: clamp(14px, 2.2vh, 22px);
   max-width: 900px;
 }
