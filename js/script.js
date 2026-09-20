@@ -1208,6 +1208,7 @@
     scrollStackInstance = initScrollStack();
     initScrollAnimations();
     journeyTimelineInstance = initJourneyTimeline();
+    hackathonCarouselInstance = initHackathonWinnersCarousel();
     initLeaderboard();
     initBrieNavbar();
     initHeroMascotController();

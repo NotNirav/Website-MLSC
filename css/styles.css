@@ -1901,6 +1901,10 @@ body {
   border-color: #00A4EF;
   box-shadow: 0 0 22px rgba(0, 164, 239, 0.45), 0 16px 36px rgba(0, 0, 0, 0.85);
   z-index: 20;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg);
 }
 
 /* Card Top: Position Pill */
