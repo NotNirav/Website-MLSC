@@ -7,6 +7,23 @@
   <title>MLSC — Microsoft Learn Student Chapter PCCOE</title>
   <meta name="description"
     content="Microsoft Learn Student Chapter PCCOE — empowering student developers through community, technology, hackathons, and real-world projects.">
+  <script>
+    (function() {
+      try {
+        if (sessionStorage.getItem('mlsc_has_seen_loading_screen')) {
+          document.documentElement.classList.add('mlsc-skip-loading');
+        }
+      } catch(e) {}
+    })();
+  </script>
+  <style>
+    html.mlsc-skip-loading #mlsc-loading-screen {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+  </style>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/loading-animation.css">

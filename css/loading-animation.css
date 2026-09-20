@@ -3,6 +3,13 @@
 /* Recreated faithfully from loading-animation package       */
 /* ========================================================= */
 
+html.mlsc-skip-loading #mlsc-loading-screen {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 #mlsc-loading-screen {
   --cinema-amber: #d9ad72;
   --cinema-paper: #f4f0e8;
