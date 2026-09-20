@@ -1,0 +1,591 @@
+/* ========================================================= */
+/* MLSC CINEMATIC LOADING SCREEN ANIMATION STYLES           */
+/* Recreated faithfully from loading-animation package       */
+/* ========================================================= */
+
+#mlsc-loading-screen {
+  --cinema-amber: #d9ad72;
+  --cinema-paper: #f4f0e8;
+  --brand-red: #f25022;
+  --brand-green: #7fba00;
+  --brand-blue: #00a4ef;
+  --brand-yellow: #ffb900;
+  --room-scale: 1;
+  --screen-light: 0;
+  --logo-opacity: 1;
+  --intro-opacity: 1;
+  --room-opacity: 1;
+  --progress: 0;
+
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999999;
+  background: #000000;
+  color: #f2eee6;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.4s ease;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Exit Transition: Smooth, Pure-Black Cinematic Zoom-Through Dissolve (Zero Ghosting) */
+#mlsc-loading-screen.loading-exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1) 0.3s, visibility 1.6s ease;
+}
+
+#mlsc-loading-screen.loading-exit .room-space {
+  transform: translate(-50%, -50%) scale(2.2);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mlsc-loading-screen.loading-exit .projection {
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s ease-out;
+}
+
+#mlsc-loading-screen.loading-exit .theater-scene {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+}
+
+#mlsc-loading-screen.loading-exit .experience-header,
+#mlsc-loading-screen.loading-exit .experience-progress {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#mlsc-loading-screen.loading-hidden {
+  display: none !important;
+}
+
+/* ========================================================= */
+/* THEATER SCENE                                             */
+/* ========================================================= */
+.theater-scene {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: var(--room-opacity);
+  background: radial-gradient(ellipse at 50% 40%, #16120e, #000000 75%);
+}
+
+.room-space {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100vw, 160svh);
+  aspect-ratio: 1.6;
+  transform: translate(-50%, -50%) scale(var(--room-scale));
+  transform-origin: 50% 47.9%;
+  will-change: transform;
+}
+
+.room-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  filter: brightness(0.82) saturate(0.76);
+}
+
+.cinema-screen,
+.screen-halo {
+  position: absolute;
+  left: 29.98%;
+  top: 29.85%;
+  width: 40.1%;
+  height: 35.65%;
+}
+
+.cinema-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #070706;
+  box-shadow: inset 0 0 2px 1px #000;
+  overflow: hidden;
+}
+
+.screen-halo {
+  box-shadow: 0 0 35px 12px #e7aa4c2b, 0 0 100px 45px #dd934415;
+  animation: ambient-breathe 7s ease-in-out infinite alternate;
+}
+
+.screen-light {
+  display: none;
+}
+
+.screen-texture {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, #b48a5318, transparent 65%);
+  pointer-events: none;
+}
+
+.projection {
+  position: relative;
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(12px, 1.35vw, 26px);
+  padding-top: 7%;
+  opacity: var(--logo-opacity);
+}
+
+/* ========================================================= */
+/* MLSC LOGO & TILE ASSEMBLY ANIMATION                       */
+/* ========================================================= */
+.mlsc-logo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 485 / 184;
+  flex-shrink: 0;
+}
+
+.mlsc-vector-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.logo-letters {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  user-select: none;
+}
+
+.logo-sub {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  user-select: none;
+}
+
+.mlsc-logo-animated .logo-letters {
+  animation: lettering-reveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mlsc-logo-animated .logo-sub {
+  animation: caption-reveal 2.8s ease both;
+}
+
+.mlsc-lettering {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mlsc-tiles {
+  position: absolute;
+  inset: 0;
+}
+
+.mlsc-tile {
+  position: absolute;
+  width: 9.9%;
+  height: 26.1%;
+  border-radius: 4px;
+}
+
+.mlsc-tile-red {
+  left: 56.29%;
+  top: 4.9%;
+  background: var(--brand-red);
+  --tile-x: 0px;
+  --tile-y: -130px;
+}
+
+.mlsc-tile-green {
+  left: 68.25%;
+  top: 4.9%;
+  background: var(--brand-green);
+  --tile-x: 150px;
+  --tile-y: 0px;
+}
+
+.mlsc-tile-blue {
+  left: 44.33%;
+  top: 36.41%;
+  background: var(--brand-blue);
+  --tile-x: -150px;
+  --tile-y: 0px;
+}
+
+.mlsc-tile-yellow {
+  left: 56.29%;
+  top: 36.41%;
+  background: var(--brand-yellow);
+  --tile-x: 0px;
+  --tile-y: 130px;
+}
+
+.mlsc-logo-animated .mlsc-lettering {
+  animation: lettering-reveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mlsc-logo-animated .mlsc-tile {
+  animation: tile-assemble 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mlsc-logo-animated .mlsc-tile-green {
+  animation-delay: 0.15s;
+}
+
+.mlsc-logo-animated .mlsc-tile-yellow {
+  animation-delay: 0.3s;
+}
+
+.mlsc-logo-animated .mlsc-tile-blue {
+  animation-delay: 0.08s;
+}
+
+.screen-caption {
+  color: #d0bfa6;
+  font-size: clamp(6px, 0.6vw, 11px);
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: caption-reveal 2.8s ease both;
+  margin: 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.screen-glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 35%, #d9b57909 48%, transparent 62%);
+  animation: screen-sweep 9s ease-in-out infinite;
+  opacity: calc(1 - var(--screen-light));
+  pointer-events: none;
+}
+
+.room-light-spill {
+  display: none;
+}
+
+.cinema-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #000000b0, transparent 25%, transparent 52%, #000000b0 77%, #000000 100%),
+              radial-gradient(ellipse at 50% 43%, transparent 25%, #00000085 95%);
+  pointer-events: none;
+}
+
+.cinema-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23ffffff' filter='url(%23n)' opacity='.5' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+
+/* ========================================================= */
+/* EXPERIENCE HEADER & BRANDING                             */
+/* ========================================================= */
+.experience-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 40px;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.chapter-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.header-logo {
+  position: relative;
+  display: block;
+  width: 84px;
+  height: 32px;
+}
+
+.header-logo .mlsc-logo {
+  position: absolute;
+  inset: 0;
+}
+
+.brand-divider {
+  height: 24px;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.2;
+}
+
+.brand-caption {
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: 0.07em;
+  opacity: 0.65;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.chapter-location {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 9px 'JetBrains Mono', monospace;
+  letter-spacing: 0.14em;
+  opacity: 0.6;
+}
+
+.location-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--cinema-amber);
+}
+
+
+
+/* ========================================================= */
+/* SCENE EYEBROW & INTRO COPY                                */
+/* ========================================================= */
+.scene-eyebrow {
+  position: absolute;
+  top: 18.5%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  color: #d1b997;
+  font: 9px 'JetBrains Mono', monospace;
+  letter-spacing: 0.22em;
+  opacity: calc(var(--intro-opacity) * 0.75);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.eyebrow-line {
+  height: 1px;
+  width: 26px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.intro-copy {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: var(--intro-opacity);
+  transform: translateY(calc((1 - var(--intro-opacity)) * 18px));
+  z-index: 10;
+  pointer-events: none;
+}
+
+.intro-kicker {
+  margin: 0 0 6px 0;
+  color: #c0b2a1;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.intro-copy h1 {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(24px, 2.5vw, 36px);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #f2eee6;
+}
+
+/* ========================================================= */
+/* EXPERIENCE PROGRESS BAR                                  */
+/* ========================================================= */
+.experience-progress {
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(217, 173, 114, 0.12);
+  z-index: 10;
+}
+
+.experience-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--cinema-amber);
+  transform: scaleX(var(--progress));
+  transform-origin: left;
+  transition: transform 0.15s ease-out;
+}
+
+/* ========================================================= */
+/* KEYFRAME ANIMATIONS                                       */
+/* ========================================================= */
+@keyframes tile-assemble {
+  0%, 10% {
+    opacity: 0;
+    transform: translate(var(--tile-x), var(--tile-y)) scale(0.4);
+    filter: blur(4px);
+  }
+  25% {
+    opacity: 1;
+  }
+  65%, 100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes lettering-reveal {
+  0%, 18% {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    filter: blur(5px);
+    transform: translateY(8px);
+  }
+  65%, 100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes caption-reveal {
+  0%, 60% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0.85;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ambient-breathe {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes screen-sweep {
+  0%, 15% {
+    transform: translateX(-100%);
+  }
+  70%, 100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ========================================================= */
+/* RESPONSIVE DESIGN                                         */
+/* ========================================================= */
+@media (max-width: 640px) {
+  .experience-header {
+    padding: 20px 20px;
+    gap: 12px;
+  }
+  .chapter-brand {
+    gap: 10px;
+  }
+  .header-logo {
+    width: 68px;
+    height: 26px;
+  }
+  .brand-caption {
+    font-size: 7px;
+  }
+  .brand-divider {
+    height: 20px;
+  }
+  .chapter-location {
+    display: none;
+  }
+
+  .scene-eyebrow {
+    top: 20%;
+    font-size: 7px;
+    letter-spacing: 0.16em;
+    gap: 10px;
+  }
+  .eyebrow-line {
+    width: 15px;
+  }
+  .room-space {
+    width: max(155vw, 96svh);
+    top: 43%;
+  }
+  .projection {
+    width: 68%;
+    gap: 12px;
+  }
+  .screen-caption {
+    font-size: 6px;
+    letter-spacing: 0.25em;
+  }
+  .intro-copy {
+    bottom: 60px;
+  }
+  .intro-kicker {
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .intro-copy h1 {
+    font-size: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .room-space {
+    will-change: auto;
+  }
+}

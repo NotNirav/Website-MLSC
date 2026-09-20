@@ -458,7 +458,7 @@ main {
   background: var(--ms-yellow);
 }
 
-/* ===== Roadmap Viewport Sections (White Line Dividers) ===== */
+/* ===== Roadmap Viewport Sections ===== */
 
 .events-hero-section {
   width: 100%;
@@ -475,7 +475,7 @@ main {
   position: relative;
   z-index: 10;
   padding: clamp(75px, 11vh, 95px) 24px 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
   box-sizing: border-box;
   overflow: hidden;
@@ -546,7 +546,7 @@ main {
   position: relative;
   z-index: 10;
   padding: 80px 20px 120px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
   box-sizing: border-box;
   overflow: hidden;
@@ -943,7 +943,7 @@ main {
   margin: 0 auto;
   padding: 60px 1.25rem;
   max-width: 64rem;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
