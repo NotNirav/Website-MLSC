@@ -1156,7 +1156,7 @@
 
   // =========================================================
   // Praxis Mascot One-Time Announcement Playback Controller
-  // Runs ONCE per Home page mount/entry. Completely ignores scroll events.
+  // Triggers AFTER the landing loading animation completes & Hero opens.
   // =========================================================
   function initHeroMascotController() {
     const heroMascot = document.querySelector('.hero-mascot-webp');
@@ -1169,32 +1169,47 @@
     }
 
     const WEBP_SINGLE_PLAY_DURATION = 10000; // Exact 10.0s WebP sequence
+    let isTriggered = false;
 
-    // 1. Initially hidden on Home page entry
+    // 1. Initially hidden while landing loading animation plays
     heroMascot.classList.add('hero-mascot-delayed');
     heroMascot.style.visibility = 'hidden';
     heroMascot.style.opacity = '0';
     heroMascot.setAttribute('src', '');
 
-    // 2. Wait exactly 1 second (1000ms) after Home page entry
-    setTimeout(() => {
-      // 3. Attach cache-busting timestamp URL to play WebP animation from frame 1
-      const freshSrc = baseSrc + '?t=' + Date.now();
-      heroMascot.setAttribute('src', freshSrc);
+    function startSequence() {
+      if (isTriggered) return;
+      isTriggered = true;
 
-      // 4. Make mascot visible
-      heroMascot.classList.remove('hero-mascot-delayed');
-      heroMascot.style.visibility = 'visible';
-      heroMascot.style.opacity = '1';
-
-      // 5. After exactly 10 seconds (single WebP loop duration), hide mascot immediately
+      // 2. Wait 1 second (1000ms) after Hero page opens
       setTimeout(() => {
-        heroMascot.classList.add('hero-mascot-delayed');
-        heroMascot.style.visibility = 'hidden';
-        heroMascot.style.opacity = '0';
-        heroMascot.setAttribute('src', '');
-      }, WEBP_SINGLE_PLAY_DURATION);
-    }, 1000);
+        // 3. Attach fresh timestamp URL to play WebP animation from frame 1
+        const freshSrc = baseSrc + '?t=' + Date.now();
+        heroMascot.setAttribute('src', freshSrc);
+
+        // 4. Mascot comes out
+        heroMascot.classList.remove('hero-mascot-delayed');
+        heroMascot.style.visibility = 'visible';
+        heroMascot.style.opacity = '1';
+
+        // 5. After WebP animation finishes (10 seconds), hide immediately
+        setTimeout(() => {
+          heroMascot.classList.add('hero-mascot-delayed');
+          heroMascot.style.visibility = 'hidden';
+          heroMascot.style.opacity = '0';
+          heroMascot.setAttribute('src', '');
+        }, WEBP_SINGLE_PLAY_DURATION);
+      }, 1000);
+    }
+
+    const loadingScreen = document.getElementById('mlsc-loading-screen');
+    if (loadingScreen && !window.__mlscLandingComplete && !loadingScreen.classList.contains('loading-hidden')) {
+      // Wait for landing loading animation to complete and hero page to open
+      window.addEventListener('mlsc-landing-complete', startSequence, { once: true });
+    } else {
+      // If no loading screen or already completed, start sequence
+      startSequence();
+    }
   }
 
   let isAppInitialized = false;

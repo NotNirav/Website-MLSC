@@ -8,15 +8,63 @@
   const loadingScreen = document.getElementById('mlsc-loading-screen');
   if (!loadingScreen) return;
 
+  const HAS_SEEN_LOADING_KEY = 'mlsc_has_seen_loading_screen';
+
+  // If user has already seen the intro loading screen during this session, skip it immediately
+  try {
+    if (sessionStorage.getItem(HAS_SEEN_LOADING_KEY)) {
+      loadingScreen.style.display = 'none';
+      loadingScreen.classList.add('loading-hidden');
+      loadingScreen.setAttribute('aria-hidden', 'true');
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+      window.__mlscLandingComplete = true;
+      setTimeout(() => {
+        window.dispatchEvent(new Event('mlsc-landing-complete'));
+      }, 50);
+      return;
+    }
+  } catch (e) {}
+
   let isDismissed = false;
   // Natural pacing: allow the complete 4-tile assembly (2.7s), lettering reveal (2.8s),
   // and settled breathing room (~1.0s) so the user can clearly appreciate the logo.
   const MIN_DISPLAY_TIME_MS = 3800;
   const startTime = Date.now();
 
-  // 1. Lock scrolling during loading
+  // Disable automatic scroll restoration on page reload
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // 1. Lock scrolling during loading & force scroll position to top (0, 0)
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
+  window.scrollTo(0, 0);
+
+  function preventScroll(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+
+  window.addEventListener('wheel', preventScroll, { passive: false });
+  window.addEventListener('touchmove', preventScroll, { passive: false });
+
+  // Continuously ensure scroll position stays strictly locked at top (0, 0)
+  const lockScrollInterval = setInterval(() => {
+    if (!isDismissed) {
+      window.scrollTo(0, 0);
+      if (window.lenis) {
+        try {
+          window.lenis.stop();
+          window.lenis.scrollTo(0, { immediate: true });
+        } catch (e) {}
+      }
+    } else {
+      clearInterval(lockScrollInterval);
+    }
+  }, 50);
 
   // 2. Smooth simulated progress tracking calibrated to the ~3.8s duration
   let progress = 0;
@@ -42,15 +90,30 @@
     isDismissed = true;
 
     clearInterval(progressInterval);
+    clearInterval(lockScrollInterval);
     updateProgress(1);
+
+    // Force scroll position to top of Hero page
+    window.scrollTo(0, 0);
+    if (window.lenis) {
+      try {
+        window.lenis.scrollTo(0, { immediate: true });
+      } catch (e) {}
+    }
+
+    // Remove event listeners blocking scroll
+    window.removeEventListener('wheel', preventScroll);
+    window.removeEventListener('touchmove', preventScroll);
 
     // Trigger smooth, pure-black cinematic fade exit
     loadingScreen.classList.add('loading-exit');
 
     // Awaken global smooth scroll & refresh GSAP triggers after the screen begins fading
     setTimeout(() => {
+      window.scrollTo(0, 0);
       if (window.lenis) {
         try {
+          window.lenis.scrollTo(0, { immediate: true });
           window.lenis.start();
           window.lenis.resize();
         } catch (e) {}
@@ -73,6 +136,11 @@
     setTimeout(() => {
       loadingScreen.classList.add('loading-hidden');
       loadingScreen.setAttribute('aria-hidden', 'true');
+      window.__mlscLandingComplete = true;
+      try {
+        sessionStorage.setItem(HAS_SEEN_LOADING_KEY, 'true');
+      } catch (e) {}
+      window.dispatchEvent(new Event('mlsc-landing-complete'));
     }, 1600);
   }
 
