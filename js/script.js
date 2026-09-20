@@ -174,26 +174,7 @@
   function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    // 1. Hero Title: Cinematic Parallax & Scale-down on scroll
-    const heroTitle = document.querySelector('.hero-raw-title');
-    const heroSection = document.getElementById('hero');
-    if (heroTitle && heroSection) {
-      gsap.to(heroTitle, {
-        scrollTrigger: {
-          trigger: heroSection,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2,
-          invalidateOnRefresh: true
-        },
-        y: 110,
-        scale: 0.86,
-        opacity: 0.08,
-        ease: 'power1.out'
-      });
-    }
-
-    // 2. About Us Section: Silky Elevation & Reveal
+    // 3. About Us Section: Silky Elevation & Reveal
     const aboutContainer = document.querySelector('.about-container');
     const aboutSection = document.getElementById('about');
     if (aboutContainer && aboutSection) {
@@ -216,7 +197,7 @@
       );
     }
 
-    // 3. Explore Header: Gentle Slide & Focus
+    // 4. Explore Header: Gentle Slide & Focus
     const exploreHeader = document.querySelector('.explore-header-row');
     const exploreSection = document.getElementById('explore');
     if (exploreHeader && exploreSection) {
@@ -237,6 +218,127 @@
         }
       );
     }
+  }
+
+  // =========================================================
+  // Dual Direction Mascot Scroll Controller (Down & Up)
+  // Maps scroll progress directly to mascot transform & opacity
+  // =========================================================
+  function initDualMascotScrollController() {
+    const heroSection = document.getElementById('hero');
+    const exploreSection = document.getElementById('explore');
+    const downWrapper = document.getElementById('brie-scroll-down-wrapper');
+    const upWrapper = document.getElementById('brie-scroll-up-wrapper');
+    const heroTitle = document.querySelector('.hero-raw-title');
+
+    if (!heroSection || !exploreSection || !downWrapper || !upWrapper) return;
+
+    let lastY = window.scrollY;
+    let scrollDirection = 'down';
+
+    function getElementDocTop(el) {
+      let top = 0;
+      let curr = el;
+      while (curr) {
+        top += curr.offsetTop || 0;
+        curr = curr.offsetParent;
+      }
+      return top;
+    }
+
+    function updateMascots(currentScrollY) {
+      const y = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+
+      const diff = y - lastY;
+      if (Math.abs(diff) > 1.5) {
+        scrollDirection = diff > 0 ? 'down' : 'up';
+        lastY = y;
+      }
+
+      const heroTop = getElementDocTop(heroSection);
+      const heroHeight = heroSection.offsetHeight || window.innerHeight;
+      const exploreTop = getElementDocTop(exploreSection);
+
+      const startY = heroTop + heroHeight * 0.45;
+      const endY = exploreTop + 80;
+
+      if (y <= heroTop + 10) {
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
+        return;
+      }
+
+      if (y < startY) {
+        const heroFadeProgress = (y - heroTop) / (startY - heroTop);
+        if (heroTitle) {
+          const titleOpacity = Math.max(0, 1 - heroFadeProgress * 1.5);
+          gsap.set(heroTitle, { opacity: titleOpacity, scale: 1 - heroFadeProgress * 0.1, y: heroFadeProgress * 80 });
+        }
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        return;
+      }
+
+      if (y >= endY) {
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+        return;
+      }
+
+      const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
+
+      if (heroTitle) {
+        gsap.set(heroTitle, { opacity: 0 });
+      }
+
+      const mascotY = p * 62 + 'vh';
+
+      if (scrollDirection === 'down') {
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+
+        let downOpacity = 0;
+        if (p < 0.18) {
+          downOpacity = p / 0.18;
+        } else if (p <= 0.82) {
+          downOpacity = 1.0;
+        } else {
+          downOpacity = (1 - p) / 0.18;
+        }
+
+        gsap.set(downWrapper, {
+          visibility: 'visible',
+          opacity: Math.max(0, Math.min(1, downOpacity)),
+          y: mascotY
+        });
+      } else {
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+
+        let upOpacity = 0;
+        if (p > 0.82) {
+          upOpacity = (1 - p) / 0.18;
+        } else if (p >= 0.18) {
+          upOpacity = 1.0;
+        } else {
+          upOpacity = p / 0.18;
+        }
+
+        gsap.set(upWrapper, {
+          visibility: 'visible',
+          opacity: Math.max(0, Math.min(1, upOpacity)),
+          y: mascotY
+        });
+      }
+    }
+
+    if (window.lenis) {
+      window.lenis.on('scroll', (e) => updateMascots(e.scroll));
+    } else {
+      window.addEventListener('scroll', () => updateMascots(window.scrollY), { passive: true });
+    }
+
+    updateMascots(window.scrollY);
   }
 
   // =========================================================
@@ -1212,6 +1314,106 @@
     }
   }
 
+  // =========================================================
+  // Stack Cards Rive Mascot State Controller (brie_animation.riv)
+  // Active only during the Stack Cards section & bounded above footer.
+  // =========================================================
+  let riveInstance = null;
+  let isRiveInitialized = false;
+
+  function initStackCardsRiveMascot() {
+    const riveCanvas = document.getElementById('brie-rive-canvas');
+    const riveWrapper = document.getElementById('brie-rive-wrapper');
+    const exploreSection = document.getElementById('explore');
+    const footerElement = document.getElementById('footer');
+
+    if (!riveCanvas || !riveWrapper || !exploreSection) return;
+
+    // Load Rive Animation Asset with explicit Artboard & State Machine
+    if (typeof rive !== 'undefined' && !isRiveInitialized) {
+      isRiveInitialized = true;
+      try {
+        riveInstance = new rive.Rive({
+          src: 'assets/animation/brie_animation.riv',
+          canvas: riveCanvas,
+          artboard: 'Artboard 1',
+          stateMachines: 'State Machine 1',
+          autoplay: true,
+          layout: new rive.Layout({
+            fit: rive.Fit.Contain,
+            alignment: rive.Alignment.Center
+          }),
+          onLoad: () => {
+            if (riveInstance) {
+              riveInstance.resizeDrawingSurfaceToCanvas();
+            }
+          },
+          onLoadError: (err) => {
+            console.error('Rive animation load error:', err);
+            try {
+              riveInstance = new rive.Rive({
+                src: 'assets/animation/brie_animation.riv',
+                canvas: riveCanvas,
+                artboard: 'Artboard 1',
+                animations: 'Timeline 1',
+                autoplay: true,
+                onLoad: () => {
+                  if (riveInstance) riveInstance.resizeDrawingSurfaceToCanvas();
+                }
+              });
+            } catch (fallbackErr) {
+              console.error('Rive fallback load error:', fallbackErr);
+            }
+          }
+        });
+      } catch (err) {
+        console.error('Rive initialization exception:', err);
+      }
+    }
+
+    // ScrollTrigger Controller for Stack Cards Rive Mascot
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.create({
+        trigger: exploreSection,
+        start: 'top 25%',
+        endTrigger: footerElement || exploreSection,
+        end: 'top 90%',
+        onEnter: () => {
+          gsap.to(riveWrapper, {
+            opacity: 1,
+            duration: 0.4,
+            overwrite: 'auto',
+            onStart: () => gsap.set(riveWrapper, { visibility: 'visible' })
+          });
+        },
+        onLeave: () => {
+          gsap.to(riveWrapper, {
+            opacity: 0,
+            duration: 0.3,
+            overwrite: 'auto',
+            onComplete: () => gsap.set(riveWrapper, { visibility: 'hidden' })
+          });
+        },
+        onEnterBack: () => {
+          gsap.to(riveWrapper, {
+            opacity: 1,
+            duration: 0.4,
+            overwrite: 'auto',
+            onStart: () => gsap.set(riveWrapper, { visibility: 'visible' })
+          });
+        },
+        onLeaveBack: () => {
+          gsap.to(riveWrapper, {
+            opacity: 0,
+            duration: 0.3,
+            overwrite: 'auto',
+            onComplete: () => gsap.set(riveWrapper, { visibility: 'hidden' })
+          });
+        }
+      });
+    }
+  }
+
   let isAppInitialized = false;
   function initApp() {
     if (isAppInitialized) return;
@@ -1222,10 +1424,12 @@
     const lenis = initGlobalLenis();
     scrollStackInstance = initScrollStack();
     initScrollAnimations();
+    initDualMascotScrollController();
     journeyTimelineInstance = initJourneyTimeline();
     initLeaderboard();
     initBrieNavbar();
     initHeroMascotController();
+    initStackCardsRiveMascot();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);

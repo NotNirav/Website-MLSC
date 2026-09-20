@@ -33,6 +33,8 @@
   <!-- GSAP & ScrollTrigger for high-performance animation syncing -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Rive Canvas Web Runtime -->
+  <script src="https://unpkg.com/@rive-app/canvas@2.26.4/rive.js"></script>
 </head>
 
 <body>
@@ -131,6 +133,21 @@
 
   <!-- MAIN WEBSITE CONTENT -->
   <main class="site-content" id="site-content">
+
+    <!-- Mascot Scroll Transition Element: Down Movement (Hero -> Stack Cards) -->
+    <div id="brie-scroll-down-wrapper" class="brie-scroll-down-wrapper" aria-hidden="true">
+      <img src="assets/images/mascots/down-movement.svg" alt="Brie Scrolling Down" class="brie-scroll-down-img" />
+    </div>
+
+    <!-- Mascot Scroll Transition Element: Up Movement (Stack Cards -> Hero) -->
+    <div id="brie-scroll-up-wrapper" class="brie-scroll-up-wrapper" aria-hidden="true">
+      <img src="assets/images/mascots/up-movement.svg" alt="Brie Scrolling Up" class="brie-scroll-up-img" />
+    </div>
+
+    <!-- Stack Cards Rive Mascot Element -->
+    <div id="brie-rive-wrapper" class="brie-rive-wrapper" aria-hidden="true">
+      <canvas id="brie-rive-canvas" class="brie-rive-canvas" width="400" height="400"></canvas>
+    </div>
 
         <!-- ========================================================= -->
         <!-- SECTION 1: HERO (100vh / Full Viewport)                   -->
