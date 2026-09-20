@@ -69,7 +69,24 @@ body {
   overflow: hidden;
 }
 
+.event-glow {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .games-title {
+  position: relative;
+  z-index: 2;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(2.3rem, 5.4vw, 4.4rem);
   font-weight: 800;

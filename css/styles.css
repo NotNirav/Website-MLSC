@@ -1292,12 +1292,31 @@ body {
   width: 100%;
 }
 
+.event-glow {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .achievements-section.hero-section {
+  position: relative;
+  overflow: hidden;
   padding: clamp(90px, 14vh, 130px) 24px clamp(40px, 6vh, 60px);
   text-align: center;
 }
 
 .achievements-section.hero-section .hero-container {
+  position: relative;
+  z-index: 2;
   gap: clamp(14px, 2.2vh, 22px);
   max-width: 900px;
 }
