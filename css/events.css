@@ -901,12 +901,15 @@ main {
   position: absolute;
   top: -10rem;
   left: 50%;
-  height: 24rem;
-  width: 24rem;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
   transform: translateX(-50%);
   border-radius: 9999px;
-  filter: blur(64px);
-  opacity: 0.16;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .event-kicker {
