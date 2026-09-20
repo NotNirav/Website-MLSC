@@ -1563,6 +1563,7 @@
     initScrollAnimations();
     initDualMascotScrollController();
     journeyTimelineInstance = initJourneyTimeline();
+    hackathonCarouselInstance = initHackathonWinnersCarousel();
     initLeaderboard();
     initBrieNavbar();
     initHeroMascotController();

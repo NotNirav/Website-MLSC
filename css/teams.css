@@ -94,50 +94,23 @@ body {
   z-index: 10;
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 24px;
+  margin: 0 auto 28px;
   padding: 0 16px;
 }
 
-.teams-tag {
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  padding: 5px 16px;
-  border-radius: 9999px;
-  margin-bottom: 12px;
-}
-
-.teams-tag-dot {
-  display: none;
-}
-
 .teams-title {
-  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   line-height: 1.15;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 
 .teams-title .title-gradient {
-  background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
+  background: linear-gradient(135deg, #ffffff 40%, #00a4ef 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.teams-desc {
-  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-  color: #9ca3af;
-  line-height: 1.6;
-  max-width: 640px;
-  margin: 0 auto;
 }
 
 /* ========================================================= */
@@ -157,11 +130,11 @@ body {
   gap: 6px;
   padding: 6px 8px;
   border-radius: 9999px;
-  background: rgba(15, 17, 24, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background: rgba(12, 12, 16, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .teams-tenure-btn {
@@ -182,14 +155,16 @@ body {
 
 .teams-tenure-btn:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .teams-tenure-btn.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(59, 130, 246, 0.18));
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.55);
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  background: rgba(26, 28, 36, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
 }
 
 @media (max-width: 640px) {
@@ -216,26 +191,25 @@ body {
   box-sizing: border-box;
 }
 
-
 .teams-jump-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 9999px;
-  background: rgba(15, 17, 24, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 12, 16, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .teams-jump-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   padding: 6px 14px;
   border-radius: 9999px;
   background: transparent;
@@ -251,16 +225,47 @@ body {
 }
 
 .teams-jump-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
+/* Black glassmorphism active pill - Pure dark glass aesthetics */
 .teams-jump-btn.active {
-  background: rgba(56, 189, 248, 0.16);
-  color: #38bdf8;
-  border-color: #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
+  background: rgba(26, 28, 36, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Category indicator tag on Jump Pills (Black glassmorphic) */
+.teams-jump-cat-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  line-height: 1.2;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teams-jump-cat-tag.core,
+.teams-jump-cat-tag.tech,
+.teams-jump-cat-tag.nontech {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teams-jump-btn.active .teams-jump-cat-tag {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .teams-jump-count {
@@ -273,164 +278,13 @@ body {
   border-radius: 9999px;
   font-size: 0.68rem;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.1);
-  color: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3af;
 }
 
-/* Domain specific active pills */
-.teams-jump-btn[data-domain="Core Team"].active {
-  background: rgba(255, 185, 0, 0.16);
-  color: #ffb900;
-  border-color: #ffb900;
-  box-shadow: 0 0 12px rgba(255, 185, 0, 0.28);
-}
-
-.teams-jump-btn[data-domain="AI / ML"].active {
-  background: rgba(52, 211, 153, 0.16);
-  color: #34d399;
-  border-color: #34d399;
-  box-shadow: 0 0 12px rgba(52, 211, 153, 0.28);
-}
-
-.teams-jump-btn[data-domain="Web Development"].active {
-  background: rgba(56, 189, 248, 0.16);
-  color: #38bdf8;
-  border-color: #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
-}
-
-.teams-jump-btn[data-domain="DevOps"].active {
-  background: rgba(14, 165, 233, 0.16);
-  color: #38bdf8;
-  border-color: #0ea5e9;
-  box-shadow: 0 0 12px rgba(14, 165, 233, 0.28);
-}
-
-.teams-jump-btn[data-domain="Cyber Security"].active {
-  background: rgba(239, 68, 68, 0.16);
-  color: #f87171;
-  border-color: #ef4444;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.28);
-}
-
-.teams-jump-btn[data-domain="CP"].active {
-  background: rgba(168, 85, 247, 0.16);
-  color: #c084fc;
-  border-color: #a855f7;
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.28);
-}
-
-.teams-jump-btn[data-domain="Operations"].active {
-  background: rgba(249, 115, 22, 0.16);
-  color: #fb923c;
-  border-color: #f97316;
-  box-shadow: 0 0 12px rgba(249, 115, 22, 0.28);
-}
-
-.teams-jump-btn[data-domain="Management"].active {
-  background: rgba(251, 146, 60, 0.16);
-  color: #fdba74;
-  border-color: #fb923c;
-  box-shadow: 0 0 12px rgba(251, 146, 60, 0.28);
-}
-
-.teams-jump-btn[data-domain="Event Management"].active {
-  background: rgba(249, 115, 22, 0.16);
-  color: #fb923c;
-  border-color: #f97316;
-  box-shadow: 0 0 12px rgba(249, 115, 22, 0.28);
-}
-
-.teams-jump-btn[data-domain="Marketing"].active {
-  background: rgba(6, 182, 212, 0.16);
-  color: #22d3ee;
-  border-color: #06b6d4;
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.28);
-}
-
-.teams-jump-btn[data-domain="Sponsorship"].active {
-  background: rgba(245, 158, 11, 0.16);
-  color: #fbbf24;
-  border-color: #f59e0b;
-  box-shadow: 0 0 12px rgba(245, 158, 11, 0.28);
-}
-
-.teams-jump-btn[data-domain="Sponsorship & Marketing"].active {
-  background: rgba(6, 182, 212, 0.16);
-  color: #22d3ee;
-  border-color: #06b6d4;
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.28);
-}
-
-.teams-jump-btn[data-domain="Finance"].active {
-  background: rgba(16, 185, 129, 0.16);
-  color: #34d399;
-  border-color: #10b981;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.28);
-}
-
-.teams-jump-btn[data-domain="Accounts & Finance"].active {
-  background: rgba(16, 185, 129, 0.16);
-  color: #34d399;
-  border-color: #10b981;
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.28);
-}
-
-.teams-jump-btn[data-domain="Design"].active {
-  background: rgba(236, 72, 153, 0.16);
-  color: #ec4899;
-  border-color: #ec4899;
-  box-shadow: 0 0 12px rgba(236, 72, 153, 0.28);
-}
-
-.teams-jump-btn[data-domain="Social Media"].active {
-  background: rgba(139, 92, 246, 0.16);
-  color: #a78bfa;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.28);
-}
-
-.teams-jump-btn[data-domain="UI / UX & Design"].active {
-  background: rgba(236, 72, 153, 0.16);
-  color: #ec4899;
-  border-color: #ec4899;
-  box-shadow: 0 0 12px rgba(236, 72, 153, 0.28);
-}
-
-.teams-jump-btn[data-domain="Videography & Media"].active {
-  background: rgba(139, 92, 246, 0.16);
-  color: #a78bfa;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 12px rgba(139, 92, 246, 0.28);
-}
-
-/* Category indicator tag on Jump Pills */
-.teams-jump-cat-tag {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: normal;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  line-height: 1.2;
-}
-
-.teams-jump-cat-tag.core {
-  background: rgba(255, 185, 0, 0.16);
-  color: #fde047;
-  border: 1px solid rgba(255, 185, 0, 0.35);
-}
-
-.teams-jump-cat-tag.tech {
-  background: rgba(56, 189, 248, 0.16);
-  color: #7dd3fc;
-  border: 1px solid rgba(56, 189, 248, 0.35);
-}
-
-.teams-jump-cat-tag.nontech {
-  background: rgba(236, 72, 153, 0.16);
-  color: #f472b6;
-  border: 1px solid rgba(236, 72, 153, 0.35);
+.teams-jump-btn.active .teams-jump-count {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
 }
 
 /* Category Wing Dividers */
@@ -445,25 +299,20 @@ body {
   box-sizing: border-box;
 }
 
-.team-wing-badge {
+.team-wing-badge,
+.team-wing-badge.nontech {
   display: inline-flex;
   align-items: center;
   padding: 6px 16px;
   border-radius: 9999px;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
+  background: rgba(0, 164, 239, 0.08) !important;
+  border: 1px solid rgba(0, 164, 239, 0.25) !important;
+  color: #00a4ef !important;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
-}
-
-.team-wing-badge.nontech {
-  background: rgba(236, 72, 153, 0.08);
-  border-color: rgba(236, 72, 153, 0.25);
-  color: #ec4899;
 }
 
 .team-wing-badge .wing-dot {
@@ -509,41 +358,20 @@ body {
 /* Domain Block Header */
 .team-domain-header {
   text-align: center;
-  max-width: 780px;
-  margin: 0 auto 20px;
+  max-width: 860px;
+  margin: 0 auto 28px;
   padding: 0 16px;
 }
 
-.team-domain-badge {
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  padding: 4px 14px;
-  border-radius: 9999px;
-  margin-bottom: 10px;
-  border: 1px solid currentColor;
-}
-
-.team-domain-badge-dot {
-  display: none;
-}
-
 .team-domain-title {
-  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   color: #ffffff;
-  margin-bottom: 6px;
-}
-
-.team-domain-desc {
-  font-size: 0.92rem;
-  color: #9ca3af;
-  line-height: 1.5;
-  margin: 0 auto;
+  line-height: 1.15;
+  margin: 0;
+  text-align: center;
 }
 
 /* ========================================================= */
@@ -608,23 +436,25 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 290px;
-  height: 450px;
+  width: 304px;
+  height: 472px;
   margin: 0;
-  border-radius: 20px;
-  background: linear-gradient(175deg, #111524 0%, #090c15 100%);
-  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  background: rgba(14, 15, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
-  padding: 12px 12px 10px 12px;
+  padding: 14px 14px 12px 14px;
   box-sizing: border-box;
   cursor: pointer;
   transform-origin: 50% 50%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform-style: flat;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -639,8 +469,8 @@ body {
 /* Active Center Card: Prominent Glow & 1.0 Scale */
 .team-card.is-active {
   cursor: default;
-  border: 2px solid var(--active-accent, #60a5fa);
-  box-shadow: 0 0 16px rgba(96, 165, 250, 0.35), 0 12px 28px rgba(0, 0, 0, 0.8);
+  border: 2px solid #00a4ef;
+  box-shadow: 0 0 24px rgba(0, 164, 239, 0.45), 0 16px 40px rgba(0, 0, 0, 0.85);
   transform-style: flat;
   z-index: 15;
 }
@@ -649,14 +479,14 @@ body {
 .team-card-photo-box {
   position: relative;
   width: 100%;
-  height: 215px;
-  aspect-ratio: 280 / 215;
+  height: 222px;
   contain: layout paint;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  background: #131724;
+  background: #111524;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 14px rgba(0, 0, 0, 0.35);
 }
 
 .team-card-image {
@@ -665,6 +495,12 @@ body {
   object-fit: cover;
   object-position: center 12%;
   display: block;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.team-card:hover .team-card-image,
+.team-card:focus-visible .team-card-image {
+  transform: scale(1.04);
 }
 
 /* Card Content: Simple, Clean, Crisp Typography */
@@ -673,7 +509,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
-  padding: 10px 4px 0 4px;
+  padding: 12px 2px 0 2px;
   text-align: left;
 }
 
@@ -689,12 +525,12 @@ body {
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.02em;
-  margin: 0 0 5px 0;
+  margin: 0 0 6px 0;
   line-height: 1.2;
 }
 
 .team-card-role-row {
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   display: flex;
   align-items: center;
 }
@@ -702,27 +538,29 @@ body {
 .team-card-role-badge {
   display: inline-flex;
   align-items: center;
-  padding: 3px 11px;
+  padding: 3px 12px;
   border-radius: 9999px;
-  background: #0d1b30;
-  color: #38bdf8;
-  font-size: 0.78rem;
-  font-weight: 600;
-  border: 1px solid rgba(56, 189, 248, 0.45);
+  background: rgba(14, 18, 26, 0.85);
+  color: #00a4ef;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(0, 164, 239, 0.35);
 }
 
 .team-card-academic {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.82rem;
-  color: #cbd5e1;
+  font-size: 0.8rem;
+  color: #94a3b8;
   font-weight: 600;
   margin-bottom: 6px;
 }
 
 .academic-cap {
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 }
 
 .academic-text {
@@ -731,10 +569,10 @@ body {
 }
 
 .team-card-about {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   font-weight: 500;
-  color: #f8fafc;
-  line-height: 1.46;
+  color: #cbd5e1;
+  line-height: 1.48;
   margin: 2px 0 6px 0;
   display: -webkit-box;
   -webkit-line-clamp: 3;
@@ -750,7 +588,7 @@ body {
 .team-card-footer {
   width: 100%;
   margin-top: auto;
-  padding-top: 6px;
+  padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -758,11 +596,9 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 100%;
 }
 
 .team-social-btn {
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
@@ -791,15 +627,15 @@ body {
 
 .team-social-btn:hover {
   color: #ffffff;
-  background: rgba(56, 189, 248, 0.25);
-  border-color: #38bdf8;
+  background: rgba(0, 164, 239, 0.22);
+  border-color: #00a4ef;
   transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 164, 239, 0.35);
 }
 
 .team-social-btn:active {
   transform: translateY(0);
-  background: rgba(56, 189, 248, 0.4);
+  background: rgba(0, 164, 239, 0.35);
 }
 
 /* ========================================================= */
@@ -834,9 +670,10 @@ body {
 }
 
 .teams-nav-btn:hover {
-  background: rgba(26, 32, 50, 0.9);
-  border-color: rgba(56, 189, 248, 0.6);
-  color: #38bdf8;
+  background: rgba(0, 164, 239, 0.22);
+  border-color: #00a4ef;
+  color: #00a4ef;
+  box-shadow: 0 0 16px rgba(0, 164, 239, 0.4);
 }
 
 .teams-nav-btn:active {
