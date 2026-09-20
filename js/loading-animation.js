@@ -1,7 +1,6 @@
 /**
  * MLSC Cinematic Loading Screen Controller
- * Controls loading progress, tile animation timing, skip action,
- * and seamless cinematic transition into the main page.
+ * Controls loading progress, pacing, and seamless cinematic transition into the main page.
  */
 (function () {
   'use strict';
@@ -9,16 +8,17 @@
   const loadingScreen = document.getElementById('mlsc-loading-screen');
   if (!loadingScreen) return;
 
-  const skipBtn = document.getElementById('loading-skip-btn');
   let isDismissed = false;
-  const MIN_DISPLAY_TIME_MS = 2800; // Complete tile-assemble (2.4s) and lettering-reveal (2.8s)
+  // Natural pacing: allow the complete 4-tile assembly (2.7s), lettering reveal (2.8s),
+  // and settled breathing room (~1.0s) so the user can clearly appreciate the logo.
+  const MIN_DISPLAY_TIME_MS = 3800;
   const startTime = Date.now();
 
   // 1. Lock scrolling during loading
   document.documentElement.style.overflow = 'hidden';
   document.body.style.overflow = 'hidden';
 
-  // 2. Smooth simulated progress tracking
+  // 2. Smooth simulated progress tracking calibrated to the ~3.8s duration
   let progress = 0;
   let pageLoaded = false;
   let progressInterval = null;
@@ -28,14 +28,14 @@
     loadingScreen.style.setProperty('--progress', progress.toString());
   }
 
-  // Smoothly advance progress bar
+  // Smoothly increment progress bar over the display duration
   progressInterval = setInterval(() => {
-    if (progress < 0.85) {
-      updateProgress(progress + 0.035);
+    if (progress < 0.88) {
+      updateProgress(progress + 0.018);
     } else if (pageLoaded && progress < 1) {
-      updateProgress(progress + 0.05);
+      updateProgress(progress + 0.035);
     }
-  }, 50);
+  }, 60);
 
   function dismissLoadingScreen() {
     if (isDismissed) return;
@@ -44,14 +44,10 @@
     clearInterval(progressInterval);
     updateProgress(1);
 
-    // Trigger cinematic zoom & fade exit
+    // Trigger smooth, pure-black cinematic fade exit
     loadingScreen.classList.add('loading-exit');
 
-    // Unlock scrolling
-    document.documentElement.style.overflow = '';
-    document.body.style.overflow = '';
-
-    // Awaken global smooth scroll & refresh GSAP triggers
+    // Awaken global smooth scroll & refresh GSAP triggers after the screen begins fading
     setTimeout(() => {
       if (window.lenis) {
         try {
@@ -67,11 +63,17 @@
       window.dispatchEvent(new Event('resize'));
     }, 400);
 
-    // Completely hide after animation completes
+    // Unlock scrolling once the zoom transition is comfortably underway
+    setTimeout(() => {
+      document.documentElement.style.overflow = '';
+      document.body.style.overflow = '';
+    }, 1100);
+
+    // Completely hide after the 1.6s transition finishes
     setTimeout(() => {
       loadingScreen.classList.add('loading-hidden');
       loadingScreen.setAttribute('aria-hidden', 'true');
-    }, 1200);
+    }, 1600);
   }
 
   // Check when both natural display duration and page load are satisfied
@@ -98,21 +100,6 @@
         pageLoaded = true;
         tryDismiss();
       }
-    }, 4500);
+    }, 5500);
   }
-
-  // Skip button click
-  if (skipBtn) {
-    skipBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dismissLoadingScreen();
-    });
-  }
-
-  // Keyboard shortcut: Escape or Space to skip intro
-  window.addEventListener('keydown', (e) => {
-    if (!isDismissed && (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter')) {
-      dismissLoadingScreen();
-    }
-  });
 })();

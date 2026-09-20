@@ -23,7 +23,7 @@
   height: 100vh;
   height: 100dvh;
   z-index: 999999;
-  background: #0c0a08;
+  background: #000000;
   color: #f2eee6;
   isolation: isolate;
   overflow: hidden;
@@ -33,31 +33,37 @@
   pointer-events: auto;
   opacity: 1;
   visibility: visible;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.85s ease;
+  transition: opacity 1.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 1.4s ease;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   user-select: none;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Exit Transition State */
+/* Exit Transition: Smooth, Pure-Black Cinematic Zoom-Through Dissolve (Zero Ghosting) */
 #mlsc-loading-screen.loading-exit {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  transition: opacity 1.0s cubic-bezier(0.25, 1, 0.5, 1) 0.3s, visibility 1.6s ease;
 }
 
 #mlsc-loading-screen.loading-exit .room-space {
-  transform: translate(-50%, -50%) scale(3.8);
-  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate(-50%, -50%) scale(2.2);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#mlsc-loading-screen.loading-exit .projection {
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s ease-out;
 }
 
 #mlsc-loading-screen.loading-exit .theater-scene {
   opacity: 0;
-  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.9s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
 }
 
 #mlsc-loading-screen.loading-exit .experience-header,
-#mlsc-loading-screen.loading-exit .scene-eyebrow,
-#mlsc-loading-screen.loading-exit .intro-copy,
 #mlsc-loading-screen.loading-exit .experience-progress {
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -76,7 +82,7 @@
   pointer-events: none;
   overflow: hidden;
   opacity: var(--room-opacity);
-  background: radial-gradient(ellipse at 50% 40%, #342719, #0c0a08 78%);
+  background: radial-gradient(ellipse at 50% 40%, #16120e, #000000 75%);
 }
 
 .room-space {
@@ -123,18 +129,13 @@
 }
 
 .screen-light {
-  position: absolute;
-  inset: 0;
-  background: var(--cinema-paper);
-  opacity: var(--screen-light);
-  pointer-events: none;
+  display: none;
 }
 
 .screen-texture {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 50%, #b48a5320, transparent 65%);
-  opacity: calc(1 - var(--screen-light));
+  background: radial-gradient(ellipse at 50% 50%, #b48a5318, transparent 65%);
   pointer-events: none;
 }
 
@@ -159,6 +160,33 @@
   flex-shrink: 0;
 }
 
+.mlsc-vector-logo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.logo-letters {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  user-select: none;
+}
+
+.logo-sub {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  user-select: none;
+}
+
+.mlsc-logo-animated .logo-letters {
+  animation: lettering-reveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.mlsc-logo-animated .logo-sub {
+  animation: caption-reveal 2.8s ease both;
+}
+
 .mlsc-lettering {
   display: block;
   width: 100%;
@@ -174,6 +202,7 @@
   position: absolute;
   width: 9.9%;
   height: 26.1%;
+  border-radius: 4px;
 }
 
 .mlsc-tile-red {
@@ -250,20 +279,14 @@
 }
 
 .room-light-spill {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 48%, #ead6b860, #d8b68625 43%, transparent 78%);
-  mix-blend-mode: screen;
-  opacity: calc(var(--screen-light) * 0.8);
-  pointer-events: none;
+  display: none;
 }
 
 .cinema-vignette {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #080706a3, transparent 25%, transparent 52%, #08070696 77%, #080706f5 100%),
-              radial-gradient(ellipse at 50% 43%, transparent 25%, #08070678 95%);
-  opacity: calc(1 - var(--screen-light) * 0.8);
+  background: linear-gradient(180deg, #000000b0, transparent 25%, transparent 52%, #000000b0 77%, #000000 100%),
+              radial-gradient(ellipse at 50% 43%, transparent 25%, #00000085 95%);
   pointer-events: none;
 }
 
@@ -348,35 +371,7 @@
   background: var(--cinema-amber);
 }
 
-.skip-intro-btn {
-  font-size: 11px;
-  font-weight: 500;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #f2eee6;
-  padding: 7px 16px;
-  border-radius: 9999px;
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  font-family: inherit;
-  letter-spacing: 0.02em;
-}
 
-.skip-intro-btn:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.skip-intro-btn svg {
-  width: 13px;
-  height: 13px;
-  opacity: 0.8;
-}
 
 /* ========================================================= */
 /* SCENE EYEBROW & INTRO COPY                                */
@@ -423,16 +418,19 @@
 .intro-kicker {
   margin: 0 0 6px 0;
   color: #c0b2a1;
-  font-size: 12px;
-  letter-spacing: 0.025em;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .intro-copy h1 {
   margin: 0;
-  font-size: clamp(22px, 2.2vw, 34px);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(24px, 2.5vw, 36px);
   line-height: 1.2;
-  font-weight: 400;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.035em;
   color: #f2eee6;
 }
 
@@ -546,10 +544,7 @@
   .chapter-location {
     display: none;
   }
-  .skip-intro-btn {
-    font-size: 10px;
-    padding: 5px 12px;
-  }
+
   .scene-eyebrow {
     top: 20%;
     font-size: 7px;
