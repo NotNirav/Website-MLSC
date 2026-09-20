@@ -1,0 +1,12 @@
+{
+  "public": ".",
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/index", "destination": "/index.html" },
+    { "source": "/events", "destination": "/events.html" },
+    { "source": "/teams", "destination": "/teams.html" },
+    { "source": "/achievements", "destination": "/achievements.html" },
+    { "source": "/games", "destination": "/games.html" },
+    { "source": "/contact", "destination": "/contact.html" }
+  ]
+}

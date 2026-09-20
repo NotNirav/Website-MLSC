@@ -342,6 +342,7 @@
 
         const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
         const scale = 1 - scaleProgress * (1 - targetScale);
+        const depthDim = 1 - (scaleProgress * 0.12);
 
         let translateY = 0;
         if (scrollTop >= pinStart && scrollTop <= pinEnd) {
@@ -354,11 +355,13 @@
           gsap.set(card, {
             y: translateY,
             scale: scale,
+            filter: `brightness(${depthDim})`,
             force3D: true,
             overwrite: 'auto'
           });
         } else {
           card.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+          card.style.filter = `brightness(${depthDim})`;
         }
 
         if (i === cachedCards.length - 1) {

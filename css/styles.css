@@ -215,37 +215,103 @@ body {
 }
 
 /* ========================================================= */
-/* SECTION 2: ABOUT US SECTION (100vh)                       */
+/* SECTION 2: ABOUT US SECTION                               */
 /* ========================================================= */
 .about-section {
-  height: 100vh;
-  height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
-  max-height: 100vh;
-  max-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: clamp(24px, 4vh, 48px) 24px;
+  padding: clamp(24px, 3.5vh, 44px) 24px;
   box-sizing: border-box;
   border-bottom: none;
   overflow: hidden;
+  position: relative;
+  background:
+    radial-gradient(circle at 10% 20%, rgba(0, 164, 239, 0.08) 0%, transparent 42%),
+    radial-gradient(circle at 90% 20%, rgba(127, 186, 0, 0.07) 0%, transparent 42%),
+    radial-gradient(circle at 12% 85%, rgba(242, 80, 34, 0.07) 0%, transparent 42%),
+    radial-gradient(circle at 88% 85%, rgba(255, 185, 0, 0.08) 0%, transparent 42%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.015) 0%, transparent 60%);
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1180px, 88vw);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 164, 239, 0.4) 25%,
+    rgba(127, 186, 0, 0.4) 50%,
+    rgba(255, 185, 0, 0.4) 75%,
+    rgba(242, 80, 34, 0.4) 90%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
 .about-container {
-  width: min(960px, 88vw);
+  width: min(1180px, 92vw);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 2.5vh, 26px);
+  gap: clamp(12px, 1.8vh, 20px);
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+}
+
+.about-header-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-brand-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.about-brand-indicator .brand-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+.about-brand-indicator .dot-red {
+  background-color: #f25022;
+  color: #f25022;
+}
+
+.about-brand-indicator .dot-green {
+  background-color: #7fba00;
+  color: #7fba00;
+}
+
+.about-brand-indicator .dot-blue {
+  background-color: #00a4ef;
+  color: #00a4ef;
+}
+
+.about-brand-indicator .dot-yellow {
+  background-color: #ffb900;
+  color: #ffb900;
 }
 
 .about-title {
-  font-size: clamp(1.8rem, min(4vw, 4vh), 3rem);
+  font-size: clamp(2rem, min(4.5vw, 4.5vh), 3.2rem);
   font-weight: 700;
   color: #ffffff;
   letter-spacing: -0.03em;
@@ -254,26 +320,36 @@ body {
   text-align: center;
   width: 100%;
   flex-shrink: 0;
+  background: linear-gradient(180deg, #ffffff 30%, #d1d5db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* Greyish rectangular box with glassmorphism (shrunk for comfortable breathing room) */
+/* Greyish rectangular box with glassmorphism (generous and balanced) */
 .about-glass-box {
   width: 100%;
-  min-height: clamp(280px, 48vh, 460px);
-  max-height: clamp(320px, 60vh, 520px);
-  background: rgba(140, 140, 140, 0.14);
+  min-height: clamp(520px, 72vh, 640px);
+  max-height: clamp(560px, 78vh, 700px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(18, 19, 23, 0.72) 100%
+  );
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: clamp(16px, 2.5vw, 24px);
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: clamp(20px, 2.5vw, 30px);
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: clamp(24px, 4vw, 48px);
-  gap: clamp(16px, 2vh, 24px);
+  padding: clamp(28px, 4vw, 48px);
+  gap: clamp(12px, 1.8vh, 20px);
   text-align: center;
   overflow: hidden;
   box-sizing: border-box;
@@ -301,11 +377,22 @@ body {
   background: transparent !important;
 }
 
+.about-content-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
 .about-text {
   font-size: clamp(0.95rem, 1.35vw, 1.15rem);
   line-height: 1.7;
-  color: var(--text-main);
-  max-width: 820px;
+  color: #ffffff;
+  max-width: 960px;
   margin: 0;
   font-weight: 400;
   opacity: 0.95;
@@ -314,13 +401,53 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.about-highlight {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  line-height: 1.5;
-  color: var(--accent-hover);
-  font-weight: 600;
-  max-width: 820px;
+.about-p1 {
+  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+  line-height: 1.65;
+  color: #ffffff;
   margin: 0;
+  font-weight: 400;
+}
+
+.about-p2 {
+  font-size: clamp(0.92rem, 1.2vw, 1.08rem);
+  line-height: 1.6;
+  color: #e5e7eb;
+  margin: 0;
+  font-weight: 400;
+}
+
+.event-accent.blue {
+  color: #00a4ef;
+  font-weight: 600;
+}
+
+.event-accent.orange {
+  color: #f25022;
+  font-weight: 600;
+}
+
+.event-accent.green {
+  color: #7fba00;
+  font-weight: 600;
+}
+
+.about-quote {
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.5;
+  color: #ffb900;
+  font-style: italic;
+  font-weight: 600;
+  margin: 6px 0 0;
+}
+
+.about-highlight {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  line-height: 1.4;
+  color: #38bdf8;
+  font-weight: 600;
+  max-width: 960px;
+  margin: 8px 0 0;
   letter-spacing: -0.01em;
   position: relative;
   z-index: 1;
@@ -329,6 +456,7 @@ body {
 
 /* When 3D FluidGlass mounts successfully, visually hide static HTML text to prevent duplication,
    while preserving full accessibility and SEO */
+.about-glass-box.has-fluid-glass .about-content-fallback,
 .about-glass-box.has-fluid-glass .about-text,
 .about-glass-box.has-fluid-glass .about-highlight {
   position: absolute;
@@ -404,10 +532,8 @@ body {
 
 .scroll-stack-card {
   transform-origin: top center;
-  will-change: transform;
+  will-change: transform, filter;
   backface-visibility: hidden;
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.85),
-    0 0 20px rgba(0, 0, 0, 0.3);
   height: 20rem;
   width: min(940px, 100%);
   margin: 0 auto;
@@ -417,105 +543,298 @@ body {
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   position: relative;
+  overflow: hidden;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+  cursor: pointer;
+  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle corner ambient light overlay for premium solid depth */
+.scroll-stack-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22) 0%, transparent 60%),
+              radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.18) 0%, transparent 65%);
+  z-index: 0;
+}
+
+/* Background watermark typography to make the cards look rich and full */
+.scroll-stack-card::before {
+  position: absolute;
+  right: 6%;
+  bottom: -15%;
+  font-size: clamp(10rem, 18vw, 15rem);
+  font-weight: 900;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.06em;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  z-index: 0;
+}
+
+.scroll-stack-card:hover::before {
+  transform: translateX(-12px) scale(1.05);
+}
+
+.scroll-stack-card.card-1::before {
+  content: "01";
+  color: rgba(255, 255, 255, 0.14);
+}
+
+.scroll-stack-card.card-2::before {
+  content: "02";
+  color: rgba(255, 255, 255, 0.14);
+}
+
+.scroll-stack-card.card-3::before {
+  content: "03";
+  color: rgba(255, 255, 255, 0.16);
+}
+
+.scroll-stack-card.card-4::before {
+  content: "04";
+  color: rgba(17, 24, 39, 0.08);
+}
+
+.scroll-stack-card.card-5::before {
+  content: "05";
+  color: rgba(255, 255, 255, 0.14);
 }
 
 .scroll-stack-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
   flex: 1;
+  position: relative;
+  z-index: 1;
 }
 
+/* Elegant micro-tag pill without modifying any HTML text */
+.scroll-stack-content::before {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.card-1 .scroll-stack-content::before {
+  content: "01 • EVENTS";
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.card-2 .scroll-stack-content::before {
+  content: "02 • TEAMS";
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.card-3 .scroll-stack-content::before {
+  content: "03 • ACHIEVEMENTS";
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.card-4 .scroll-stack-content::before {
+  content: "04 • GAMES";
+  background: rgba(17, 24, 39, 0.12);
+  color: #111827;
+  border: 1px solid rgba(17, 24, 39, 0.24);
+}
+
+.card-5 .scroll-stack-content::before {
+  content: "05 • HOME";
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* ========================================================= */
+/* MLSC SOLID BRAND COLOR CARDS                              */
+/* ========================================================= */
+/* Card 1: Microsoft Orange-Red */
+.scroll-stack-card.card-1 {
+  background-color: #f25022;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 50px -10px rgba(242, 80, 34, 0.48),
+              0 8px 24px rgba(0, 0, 0, 0.6),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-stack-card.card-1:hover {
+  box-shadow: 0 32px 64px -10px rgba(242, 80, 34, 0.58),
+              0 12px 30px rgba(0, 0, 0, 0.7),
+              inset 0 2px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Card 2: Microsoft Blue */
+.scroll-stack-card.card-2 {
+  background-color: #00a4ef;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 50px -10px rgba(0, 164, 239, 0.48),
+              0 8px 24px rgba(0, 0, 0, 0.6),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-stack-card.card-2:hover {
+  box-shadow: 0 32px 64px -10px rgba(0, 164, 239, 0.58),
+              0 12px 30px rgba(0, 0, 0, 0.7),
+              inset 0 2px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Card 3: Microsoft Green */
+.scroll-stack-card.card-3 {
+  background-color: #7fba00;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 50px -10px rgba(127, 186, 0, 0.48),
+              0 8px 24px rgba(0, 0, 0, 0.6),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-stack-card.card-3:hover {
+  box-shadow: 0 32px 64px -10px rgba(127, 186, 0, 0.58),
+              0 12px 30px rgba(0, 0, 0, 0.7),
+              inset 0 2px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* Card 4: Microsoft Yellow */
+.scroll-stack-card.card-4 {
+  background-color: #ffb900;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow: 0 24px 50px -10px rgba(255, 185, 0, 0.48),
+              0 8px 24px rgba(0, 0, 0, 0.6),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.55);
+}
+
+.scroll-stack-card.card-4:hover {
+  box-shadow: 0 32px 64px -10px rgba(255, 185, 0, 0.6),
+              0 12px 30px rgba(0, 0, 0, 0.7),
+              inset 0 2px 0 rgba(255, 255, 255, 0.65);
+}
+
+/* Card 5: Microsoft Purple */
+.scroll-stack-card.card-5 {
+  background-color: #5c2d91;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 24px 50px -10px rgba(92, 45, 145, 0.5),
+              0 8px 24px rgba(0, 0, 0, 0.6),
+              inset 0 1.5px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-stack-card.card-5:hover {
+  box-shadow: 0 32px 64px -10px rgba(92, 45, 145, 0.6),
+              0 12px 30px rgba(0, 0, 0, 0.7),
+              inset 0 2px 0 rgba(255, 255, 255, 0.55);
+}
+
+.scroll-stack-card h2 {
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-stack-card p {
+  font-size: clamp(1.05rem, 1.45vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.94);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 620px;
+  font-weight: 500;
+}
+
+/* High-contrast dark typography for Yellow card */
+.scroll-stack-card.card-4 h2 {
+  color: #111827;
+  text-shadow: none;
+}
+
+.scroll-stack-card.card-4 p {
+  color: rgba(17, 24, 39, 0.88);
+}
+
+/* Interactive Arrow Button */
 .scroll-stack-arrow {
-  width: clamp(48px, 5.5vw, 58px);
-  height: clamp(48px, 5.5vw, 58px);
+  width: clamp(52px, 5.8vw, 62px);
+  height: clamp(52px, 5.8vw, 62px);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
   color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
   flex-shrink: 0;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 1;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.scroll-stack-card.card-4 .scroll-stack-arrow {
+  background: #111827;
+  border-color: rgba(17, 24, 39, 0.3);
+  color: #ffffff;
 }
 
 .scroll-stack-arrow svg {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .scroll-stack-card:hover .scroll-stack-arrow,
 .scroll-stack-arrow:hover {
-  background: rgba(56, 189, 248, 0.22);
-  border-color: rgba(56, 189, 248, 0.5);
-  color: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 0 12px 30px -4px rgba(56, 189, 248, 0.35),
-    0 0 20px rgba(56, 189, 248, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: #ffffff;
+  transform: scale(1.12);
+  box-shadow: 0 14px 32px -4px rgba(0, 0, 0, 0.45);
 }
+
+.scroll-stack-card.card-1:hover .scroll-stack-arrow { color: #f25022; }
+.scroll-stack-card.card-2:hover .scroll-stack-arrow { color: #00a4ef; }
+.scroll-stack-card.card-3:hover .scroll-stack-arrow { color: #7fba00; }
+.scroll-stack-card.card-4:hover .scroll-stack-arrow { 
+  background: #000000;
+  color: #ffb900; 
+}
+.scroll-stack-card.card-5:hover .scroll-stack-arrow { color: #5c2d91; }
 
 .scroll-stack-card:hover .scroll-stack-arrow svg,
 .scroll-stack-arrow:hover svg {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
 .scroll-stack-arrow:active {
   transform: scale(0.95);
-}
-
-/* 5 Clean Neutral/Dark Gradient Cards */
-.scroll-stack-card.card-1 {
-  background: #18191e;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.scroll-stack-card.card-2 {
-  background: #1e2027;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.scroll-stack-card.card-3 {
-  background: #242630;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-}
-
-.scroll-stack-card.card-4 {
-  background: #2a2d39;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-}
-
-.scroll-stack-card.card-5 {
-  background: #313543;
-  border: 1px solid rgba(255, 255, 255, 0.20);
-}
-
-.scroll-stack-card h2 {
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 800;
-  color: #ffffff;
-  letter-spacing: -0.025em;
-  margin: 0;
-  line-height: 1.1;
-}
-
-.scroll-stack-card p {
-  font-size: clamp(1rem, 1.4vw, 1.25rem);
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin: 0;
-  max-width: 600px;
 }
 
 /* Bottom buffer so full 5-card stack stays pinned before scrolling out to footer */
