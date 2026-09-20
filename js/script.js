@@ -1155,20 +1155,45 @@
   }
 
   // =========================================================
-  // 1-Second Entrance Delay for Hero Section WebP Mascot
+  // Praxis Mascot One-Time Announcement Playback Controller
+  // Runs ONCE per Home page mount/entry. Completely ignores scroll events.
   // =========================================================
-  function initHeroMascotDelay() {
-    const heroMascot = document.querySelector('.hero-mascot-delayed');
+  function initHeroMascotController() {
+    const heroMascot = document.querySelector('.hero-mascot-webp');
     if (!heroMascot) return;
 
-    const targetSrc = heroMascot.getAttribute('src');
+    let baseSrc = heroMascot.getAttribute('data-src');
+    if (!baseSrc) {
+      baseSrc = heroMascot.getAttribute('src').split('?')[0];
+      heroMascot.setAttribute('data-src', baseSrc);
+    }
+
+    const WEBP_SINGLE_PLAY_DURATION = 10000; // Exact 10.0s WebP sequence
+
+    // 1. Initially hidden on Home page entry
+    heroMascot.classList.add('hero-mascot-delayed');
+    heroMascot.style.visibility = 'hidden';
+    heroMascot.style.opacity = '0';
     heroMascot.setAttribute('src', '');
 
+    // 2. Wait exactly 1 second (1000ms) after Home page entry
     setTimeout(() => {
-      heroMascot.setAttribute('src', targetSrc);
+      // 3. Attach cache-busting timestamp URL to play WebP animation from frame 1
+      const freshSrc = baseSrc + '?t=' + Date.now();
+      heroMascot.setAttribute('src', freshSrc);
+
+      // 4. Make mascot visible
       heroMascot.classList.remove('hero-mascot-delayed');
       heroMascot.style.visibility = 'visible';
       heroMascot.style.opacity = '1';
+
+      // 5. After exactly 10 seconds (single WebP loop duration), hide mascot immediately
+      setTimeout(() => {
+        heroMascot.classList.add('hero-mascot-delayed');
+        heroMascot.style.visibility = 'hidden';
+        heroMascot.style.opacity = '0';
+        heroMascot.setAttribute('src', '');
+      }, WEBP_SINGLE_PLAY_DURATION);
     }, 1000);
   }
 
@@ -1185,7 +1210,7 @@
     journeyTimelineInstance = initJourneyTimeline();
     initLeaderboard();
     initBrieNavbar();
-    initHeroMascotDelay();
+    initHeroMascotController();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
