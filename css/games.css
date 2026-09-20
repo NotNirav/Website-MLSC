@@ -60,7 +60,7 @@ body {
   text-align: center;
   padding: clamp(75px, 11vh, 100px) 24px clamp(20px, 4vh, 40px);
   box-sizing: border-box;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
   overflow: hidden;
 }
@@ -219,7 +219,7 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
 }
 
