@@ -926,7 +926,7 @@ main {
 }
 
 .event-title {
-  margin-top: 1rem;
+  margin-top: 0;
   font-family: var(--font-display);
   font-size: 30px;
   line-height: 1.1;
@@ -1092,7 +1092,7 @@ main {
 }
 
 .next-name {
-  margin-top: 0.4rem;
+  margin-top: 0;
   display: block;
   font-family: var(--font-display);
   font-size: 1.35rem;
