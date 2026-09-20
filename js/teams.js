@@ -9,7 +9,8 @@
   // =========================================================
   // 1. DOMAIN CONFIGURATION & ORDER
   // =========================================================
-        const DOMAIN_ORDER = [
+    const DOMAIN_ACCENT = '#00A4EF';
+    const DOMAIN_ORDER = [
     // =========================================================
     // 1. CORE LEADERSHIP
     // =========================================================
@@ -21,7 +22,7 @@
       tag: 'Core Leadership',
       title: 'Executive Board & Core Leadership',
       desc: 'Steering chapter vision, campus initiatives, and institutional collaborations.',
-      accentColor: '#ffb900'
+      accentColor: DOMAIN_ACCENT
     },
 
     // =========================================================
@@ -35,27 +36,27 @@
       tag: 'Web Development',
       title: 'Web & Platform Engineering',
       desc: 'Developing responsive web portals, interactive applications, and chapter digital tools.',
-      accentColor: '#38bdf8'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'devops',
       name: 'DevOps',
       category: 'Tech',
       categoryLabel: 'Technical Wing',
-      tag: 'DevOps & Cloud',
+      tag: 'DevOps',
       title: 'DevOps & Cloud Infrastructure',
       desc: 'Containerizing workloads, orchestrating CI/CD pipelines, and maintaining resilient cloud infrastructure.',
-      accentColor: '#0ea5e9'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'ai-ml',
       name: 'AI / ML',
       category: 'Tech',
       categoryLabel: 'Technical Wing',
-      tag: 'Artificial Intelligence',
+      tag: 'AI / ML',
       title: 'Artificial Intelligence & Machine Learning',
       desc: 'Exploring machine learning models, computer vision, natural language processing, and data projects.',
-      accentColor: '#34d399'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'cyber-security',
@@ -65,7 +66,7 @@
       tag: 'Cyber Security',
       title: 'Cyber Security & Systems',
       desc: 'Securing cloud services, vulnerability testing, authentication security, and defense protocols.',
-      accentColor: '#ef4444'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'cp',
@@ -75,7 +76,7 @@
       tag: 'Competitive Programming',
       title: 'Competitive Programming & DSA',
       desc: 'Fostering algorithmic problem solving, data structures, and competitive coding contests.',
-      accentColor: '#a855f7'
+      accentColor: DOMAIN_ACCENT
     },
 
     // =========================================================
@@ -89,7 +90,7 @@
       tag: 'Operations',
       title: 'Operations & Logistics',
       desc: 'Orchestrating hardware resources, venue infrastructure, and smooth operations.',
-      accentColor: '#f97316'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'management',
@@ -99,7 +100,7 @@
       tag: 'Management',
       title: 'Event Management & Strategy',
       desc: 'Directing flagship hackathons, technical speaker series, and participant experience.',
-      accentColor: '#fb923c'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'event-management',
@@ -109,7 +110,7 @@
       tag: 'Event Management',
       title: 'Event Management & Operations',
       desc: 'Organizing hackathons, technical workshops, operations, logistics, and speaker sessions.',
-      accentColor: '#f97316'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'marketing',
@@ -119,7 +120,7 @@
       tag: 'Marketing',
       title: 'Marketing & Public Relations',
       desc: 'Driving campus marketing campaigns, student engagement, and brand promotions.',
-      accentColor: '#06b6d4'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'sponsorship',
@@ -129,7 +130,7 @@
       tag: 'Sponsorship',
       title: 'Corporate Sponsorship & Grants',
       desc: 'Forging industry partnerships, securing corporate sponsorships, and developer grants.',
-      accentColor: '#f59e0b'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'sponsorship-marketing',
@@ -139,7 +140,7 @@
       tag: 'Sponsorship & Marketing',
       title: 'Sponsorship, Marketing & Outreach',
       desc: 'Securing corporate sponsorships, managing partnerships, and driving community outreach.',
-      accentColor: '#06b6d4'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'finance',
@@ -149,7 +150,7 @@
       tag: 'Finance',
       title: 'Financial Planning & Accounts',
       desc: 'Managing budget allocations, event logistics funding, financial audits, and sponsor fund disbursement.',
-      accentColor: '#10b981'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'accounts-finance',
@@ -159,7 +160,7 @@
       tag: 'Accounts & Finance',
       title: 'Accounts & Financial Management',
       desc: 'Managing financial planning, budget allocations, event logistics funding, and accounts.',
-      accentColor: '#10b981'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'design',
@@ -169,17 +170,17 @@
       tag: 'Design',
       title: 'UI / UX & Creative Design',
       desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and graphics.',
-      accentColor: '#ec4899'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'ui-ux-design',
       name: 'UI / UX & Design',
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
-      tag: 'UI / UX Design',
+      tag: 'UI / UX & Design',
       title: 'UI / UX & Creative Design',
       desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and graphics.',
-      accentColor: '#ec4899'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'social-media',
@@ -189,7 +190,7 @@
       tag: 'Social Media',
       title: 'Social Media & Content',
       desc: 'Curating social branding, video reels, interactive posts, and digital promotional media.',
-      accentColor: '#8b5cf6'
+      accentColor: DOMAIN_ACCENT
     },
     {
       id: 'videography-media',
@@ -199,7 +200,7 @@
       tag: 'Videography & Media',
       title: 'Videography & Media Production',
       desc: 'Capturing event photography, producing aftermovies, recap videos, and managing chapter visual media.',
-      accentColor: '#8b5cf6'
+      accentColor: DOMAIN_ACCENT
     }
   ];
 
@@ -452,7 +453,7 @@
 
         if (delta === 0) {
           card.classList.add('is-active');
-          card.style.setProperty('--active-accent', this.domainInfo.accentColor);
+          card.style.setProperty('--active-accent', '#00A4EF');
         } else {
           card.classList.remove('is-active');
         }
@@ -481,7 +482,7 @@
 
     const githubUrl = member.github || 'https://github.com';
     const linkedinUrl = member.linkedin || 'https://linkedin.com';
-    const accent = member.accentColor || fallbackAccent || '#38bdf8';
+    const accent = '#00A4EF';
 
     const delta = computeCardDelta(idx, currentIdx, total);
     const isInitiallyVisible = total === 1 || (delta !== 'dormant' && Math.abs(delta) <= 2);
@@ -490,13 +491,13 @@
 
     card.innerHTML = `
       <div class="team-card-photo-box">
-        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}" width="280" height="215" loading="lazy" decoding="async">
+        <img class="team-card-image" src="${initialSrc}" ${dataSrcAttr} alt="${escapeHTML(member.name)}" width="280" height="224" loading="lazy" decoding="async">
       </div>
       <div class="team-card-content">
         <div class="team-card-info-top">
           <h3 class="team-card-name">${escapeHTML(member.name)}</h3>
           <div class="team-card-role-row">
-            <span class="team-card-role-badge" style="color: ${accent}; border-color: ${accent}55; background: ${accent}18;">
+            <span class="team-card-role-badge">
               ${escapeHTML(member.role)}
             </span>
           </div>
@@ -507,8 +508,8 @@
           </div>` : ''}
           <p class="team-card-about">${escapeHTML(member.bio)}</p>
           ${member.achievements && member.achievements.trim() && !/^\s*(-|working|searching|n\/a|none|i dont have any|\.\.\.|on the way\.\.\.\.|in progress\.\.)\s*$/i.test(member.achievements) ? `
-          <div class="team-card-achievements" style="margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(250, 204, 21, 0.08); border: 1px solid rgba(250, 204, 21, 0.22); font-size: 0.74rem; line-height: 1.35; color: #fef08a; text-align: left;">
-            <span style="font-weight: 800; color: #facc15;">🏆 Achievements: </span>
+          <div class="team-card-achievements" style="margin-top: 8px; padding: 6px 10px; border-radius: 8px; background: rgba(0, 164, 239, 0.08); border: 1px solid rgba(0, 164, 239, 0.25); font-size: 0.74rem; line-height: 1.35; color: #e0f2fe; text-align: left;">
+            <span style="font-weight: 800; color: #00A4EF;">🏆 Achievements: </span>
             <span style="color: #f1f5f9;">${escapeHTML(member.achievements)}</span>
           </div>` : ''}
         </div>
@@ -820,11 +821,7 @@
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <div class="team-domain-badge" style="color: ${domain.accentColor}; background: ${domain.accentColor}12; border-color: ${domain.accentColor}33;">
-          <span>${escapeHTML(domain.tag)}</span>
-        </div>
-        <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
-        <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
+        <h2 class="team-domain-title">${escapeHTML(domain.tag || domain.name)}</h2>
       `;
       block.appendChild(header);
 
