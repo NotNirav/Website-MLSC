@@ -325,9 +325,15 @@
 
 .header-logo {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+.header-logo .mlsc-logo-icon {
   display: block;
-  width: 84px;
-  height: 32px;
 }
 
 .header-logo .mlsc-logo {
@@ -532,8 +538,8 @@
     gap: 10px;
   }
   .header-logo {
-    width: 68px;
-    height: 26px;
+    width: auto;
+    height: auto;
   }
   .brand-caption {
     font-size: 7px;
