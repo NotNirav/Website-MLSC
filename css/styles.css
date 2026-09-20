@@ -164,6 +164,7 @@ body {
 /* SECTION 1: HERO (Raw B/W "MLSC" - No Description, No Tab) */
 /* ========================================================= */
 .hero-section {
+  position: relative;
   height: 100vh;
   height: 100dvh;
   min-height: 100vh;
@@ -177,6 +178,23 @@ body {
   overflow: hidden;
   border-bottom: none;
   box-sizing: border-box;
+}
+
+/* Animated WebP Mascot in Hero Section */
+.hero-mascot-webp {
+  position: absolute;
+  top: 34px;
+  right: 0;
+  width: 318px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 5;
+}
+
+.hero-mascot-webp.hero-mascot-delayed {
+  visibility: hidden;
+  opacity: 0;
 }
 
 .hero-raw-title {
@@ -1104,6 +1122,7 @@ body {
 }
 
 .glass-nav-container {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1205,9 +1224,60 @@ body {
 
 .glass-nav-link.active {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.12);
+  background: transparent;
   font-weight: 600;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  position: relative;
+  z-index: 2;
+  box-shadow: none;
+}
+
+.glass-nav-link.active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  padding: 1.5px;
+  background: linear-gradient(90deg, #FF5A36 0%, #FFD43B 33%, #A8E63D 66%, #00B7FF 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.glass-nav-link.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #FF5A36 0%, #FFD43B 33%, #A8E63D 66%, #00B7FF 100%);
+  filter: blur(6px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Brie Mascot Styling */
+.brie-nav-mascot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 52px;
+  width: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1005;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
+  will-change: transform, opacity;
+}
+
+.brie-nav-mascot img {
+  height: 100%;
+  width: auto;
+  display: block;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
 }
 
 /* Responsive adjustment for tablet and mobile */

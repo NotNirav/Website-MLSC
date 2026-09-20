@@ -1050,6 +1050,153 @@
     updateNavbarVisibility(window.scrollY);
   }
 
+  // =========================================================
+  // Interactive Brie Mascot Navbar Interaction
+  // =========================================================
+  function initBrieNavbar() {
+    const navContainer = document.querySelector('.glass-nav-container');
+    const navLinksContainer = document.querySelector('.glass-nav-links');
+    if (!navContainer || !navLinksContainer) return;
+
+    let mascot = navContainer.querySelector('.brie-nav-mascot');
+    let isNewMascot = false;
+
+    if (!mascot) {
+      isNewMascot = true;
+      mascot = document.createElement('div');
+      mascot.className = 'brie-nav-mascot';
+      mascot.setAttribute('aria-hidden', 'true');
+      mascot.style.opacity = '0';
+      mascot.style.transition = 'none';
+
+      const isSubFolder = window.location.pathname.includes('/events/');
+      const mascotPath = isSubFolder ? '../assets/images/mascots/brie-navbar.svg' : 'assets/images/mascots/brie-navbar.svg';
+
+      const img = document.createElement('img');
+      img.src = mascotPath;
+      img.alt = 'Brie Mascot';
+      mascot.appendChild(img);
+      navContainer.appendChild(mascot);
+    }
+
+    const navLinks = navLinksContainer.querySelectorAll('.glass-nav-link');
+    let activeLink = navLinksContainer.querySelector('.glass-nav-link.active') || navLinks[0];
+    let currentTargetLink = activeLink;
+
+    function positionMascot(targetLink, animate = true) {
+      if (!targetLink || !mascot) return;
+      currentTargetLink = targetLink;
+
+      const containerRect = navContainer.getBoundingClientRect();
+      const linkRect = targetLink.getBoundingClientRect();
+
+      if (linkRect.width === 0 && linkRect.height === 0) return;
+
+      const mascotWidth = mascot.offsetWidth || 56;
+      const mascotHeight = mascot.offsetHeight || 52;
+
+      // Center horizontally over target item's bounding box
+      const targetX = (linkRect.left - containerRect.left) + (linkRect.width / 2) - (mascotWidth / 2);
+
+      // Position vertically relative to target item's top edge so paws overlap naturally (~10px overlap)
+      const PAW_OVERLAP = 10;
+      const targetY = (linkRect.top - containerRect.top) - mascotHeight + PAW_OVERLAP;
+
+      if (!animate) {
+        mascot.style.transition = 'none';
+      }
+
+      mascot.style.transform = `translate3d(${Math.round(targetX * 10) / 10}px, ${Math.round(targetY * 10) / 10}px, 0)`;
+
+      if (!animate) {
+        // Force reflow so transform is applied instantly before transition is enabled
+        void mascot.offsetHeight;
+        requestAnimationFrame(() => {
+          mascot.style.opacity = '1';
+          setTimeout(() => {
+            mascot.style.transition = '';
+          }, 50);
+        });
+      } else {
+        mascot.style.opacity = '1';
+      }
+    }
+
+    // Immediate non-animated initial positioning above the active link
+    positionMascot(activeLink, false);
+
+    const imgElement = mascot.querySelector('img');
+    if (imgElement) {
+      if (imgElement.complete) {
+        positionMascot(activeLink, false);
+      } else {
+        imgElement.addEventListener('load', () => {
+          positionMascot(currentTargetLink || activeLink, false);
+        });
+      }
+    }
+
+    // Hover bindings
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => {
+        positionMascot(link, true);
+      });
+    });
+
+    navContainer.addEventListener('mouseleave', () => {
+      activeLink = navLinksContainer.querySelector('.glass-nav-link.active') || navLinks[0];
+      positionMascot(activeLink, true);
+    });
+
+    window.addEventListener('resize', () => {
+      activeLink = navLinksContainer.querySelector('.glass-nav-link.active') || navLinks[0];
+      positionMascot(currentTargetLink || activeLink, false);
+    });
+  }
+
+  // =========================================================
+  // Praxis Mascot One-Time Announcement Playback Controller
+  // Runs ONCE per Home page mount/entry. Completely ignores scroll events.
+  // =========================================================
+  function initHeroMascotController() {
+    const heroMascot = document.querySelector('.hero-mascot-webp');
+    if (!heroMascot) return;
+
+    let baseSrc = heroMascot.getAttribute('data-src');
+    if (!baseSrc) {
+      baseSrc = heroMascot.getAttribute('src').split('?')[0];
+      heroMascot.setAttribute('data-src', baseSrc);
+    }
+
+    const WEBP_SINGLE_PLAY_DURATION = 10000; // Exact 10.0s WebP sequence
+
+    // 1. Initially hidden on Home page entry
+    heroMascot.classList.add('hero-mascot-delayed');
+    heroMascot.style.visibility = 'hidden';
+    heroMascot.style.opacity = '0';
+    heroMascot.setAttribute('src', '');
+
+    // 2. Wait exactly 1 second (1000ms) after Home page entry
+    setTimeout(() => {
+      // 3. Attach cache-busting timestamp URL to play WebP animation from frame 1
+      const freshSrc = baseSrc + '?t=' + Date.now();
+      heroMascot.setAttribute('src', freshSrc);
+
+      // 4. Make mascot visible
+      heroMascot.classList.remove('hero-mascot-delayed');
+      heroMascot.style.visibility = 'visible';
+      heroMascot.style.opacity = '1';
+
+      // 5. After exactly 10 seconds (single WebP loop duration), hide mascot immediately
+      setTimeout(() => {
+        heroMascot.classList.add('hero-mascot-delayed');
+        heroMascot.style.visibility = 'hidden';
+        heroMascot.style.opacity = '0';
+        heroMascot.setAttribute('src', '');
+      }, WEBP_SINGLE_PLAY_DURATION);
+    }, 1000);
+  }
+
   let isAppInitialized = false;
   function initApp() {
     if (isAppInitialized) return;
@@ -1062,7 +1209,8 @@
     initScrollAnimations();
     journeyTimelineInstance = initJourneyTimeline();
     initLeaderboard();
-    hackathonCarouselInstance = initHackathonWinnersCarousel();
+    initBrieNavbar();
+    initHeroMascotController();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
