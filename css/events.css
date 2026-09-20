@@ -1052,6 +1052,8 @@ main {
 }
 
 .next-card {
+  --next-accent: var(--ms-green, #7fba00);
+  --next-accent-glow: rgba(127, 186, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1068,8 +1070,8 @@ main {
 
 .next-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(127, 186, 0, 0.45);
-  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(127, 186, 0, 0.12);
+  border-color: var(--next-accent);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 25px var(--next-accent-glow);
 }
 
 .next-card-content {
@@ -1086,7 +1088,7 @@ main {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.25em;
-  color: var(--ms-green, #7fba00);
+  color: var(--next-accent);
 }
 
 .next-name {
@@ -1128,10 +1130,10 @@ main {
 }
 
 .next-card:hover .next-arrow-wrapper {
-  background: var(--ms-green, #7fba00);
+  background: var(--next-accent);
   color: #000000;
-  border-color: var(--ms-green, #7fba00);
-  box-shadow: 0 0 16px rgba(127, 186, 0, 0.4);
+  border-color: var(--next-accent);
+  box-shadow: 0 0 16px var(--next-accent-glow);
 }
 
 .next-card:hover .next-arrow {
@@ -1227,7 +1229,7 @@ main {
   }
 
   .highlights {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .gallery {
