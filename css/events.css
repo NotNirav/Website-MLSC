@@ -884,17 +884,18 @@ main {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
+  font-family: 'Plus Jakarta Sans', var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   color: var(--muted-foreground);
-  transition: color 0.2s;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   padding-top: 6.5rem;
 }
 
 .back-link:hover {
-  color: var(--foreground);
+  color: #ffffff;
+  transform: translateX(-3px);
 }
 
 .event-header {
@@ -968,23 +969,28 @@ main {
   margin: 0 auto;
   padding: 60px 1.25rem;
   max-width: 64rem;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   box-sizing: border-box;
 }
 
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.5em;
-  color: var(--muted-foreground);
+  font-family: 'Plus Jakarta Sans', var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  line-height: 1.25;
+  text-transform: none;
+  margin: 0;
 }
 
 .section-body {
-  margin-top: 1.25rem;
-  max-width: 42rem;
-  font-size: 0.875rem;
-  line-height: 1.9;
+  margin-top: 1rem;
+  max-width: 48rem;
+  font-family: 'Plus Jakarta Sans', var(--font-sans);
+  font-size: 0.975rem;
+  font-weight: 400;
+  line-height: 1.75;
   color: var(--muted-foreground);
 }
 
@@ -1050,33 +1056,86 @@ main {
   align-items: center;
   justify-content: space-between;
   border-radius: 1.5rem;
-  padding: 1.5rem;
-  transition: transform 0.3s;
+  padding: 1.75rem 2rem;
+  background: rgba(18, 18, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  gap: 1.5rem;
 }
 
 .next-card:hover {
   transform: translateY(-4px);
+  border-color: rgba(127, 186, 0, 0.45);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(127, 186, 0, 0.12);
+}
+
+.next-card-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .next-label {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.4em;
-  color: var(--muted-foreground);
+  letter-spacing: 0.25em;
+  color: var(--ms-green, #7fba00);
 }
 
 .next-name {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
   display: block;
   font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+}
+
+.next-desc {
+  margin-top: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  line-height: 1.5;
+}
+
+.next-arrow-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
 }
 
 .next-arrow {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.next-card:hover .next-arrow-wrapper {
+  background: var(--ms-green, #7fba00);
+  color: #000000;
+  border-color: var(--ms-green, #7fba00);
+  box-shadow: 0 0 16px rgba(127, 186, 0, 0.4);
+}
+
+.next-card:hover .next-arrow {
+  transform: translateX(3px);
 }
 
 /* ===== Responsive ===== */
