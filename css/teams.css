@@ -130,11 +130,11 @@ body {
   gap: 6px;
   padding: 6px 8px;
   border-radius: 9999px;
-  background: rgba(15, 17, 24, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  background: rgba(12, 12, 16, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .teams-tenure-btn {
@@ -155,14 +155,16 @@ body {
 
 .teams-tenure-btn:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .teams-tenure-btn.active {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(59, 130, 246, 0.18));
-  color: #38bdf8;
-  border-color: rgba(56, 189, 248, 0.55);
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.3);
+  background: rgba(26, 28, 36, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
 }
 
 @media (max-width: 640px) {
@@ -189,26 +191,25 @@ body {
   box-sizing: border-box;
 }
 
-
 .teams-jump-container {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 8px 12px;
+  padding: 8px 14px;
   border-radius: 9999px;
-  background: rgba(15, 17, 24, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(12, 12, 16, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .teams-jump-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   padding: 6px 14px;
   border-radius: 9999px;
   background: transparent;
@@ -224,16 +225,47 @@ body {
 }
 
 .teams-jump-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
+/* Black glassmorphism active pill - Pure dark glass aesthetics */
 .teams-jump-btn.active {
-  background: rgba(56, 189, 248, 0.16);
-  color: #38bdf8;
-  border-color: #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.28);
+  background: rgba(26, 28, 36, 0.9) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+/* Category indicator tag on Jump Pills (Black glassmorphic) */
+.teams-jump-cat-tag {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: normal;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  line-height: 1.2;
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teams-jump-cat-tag.core,
+.teams-jump-cat-tag.tech,
+.teams-jump-cat-tag.nontech {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.teams-jump-btn.active .teams-jump-cat-tag {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .teams-jump-count {
@@ -246,45 +278,13 @@ body {
   border-radius: 9999px;
   font-size: 0.68rem;
   font-weight: 700;
-  background: rgba(255, 255, 255, 0.1);
-  color: inherit;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94a3af;
 }
 
-/* Unified MS Blue active and hover states (Home page theme) */
-.teams-jump-btn:hover {
-  background: rgba(0, 164, 239, 0.08);
-  border-color: rgba(0, 164, 239, 0.45);
+.teams-jump-btn.active .teams-jump-count {
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.teams-jump-btn.active {
-  background: rgba(0, 164, 239, 0.18) !important;
-  color: #ffffff !important;
-  border-color: #00a4ef !important;
-  box-shadow: 0 0 16px rgba(0, 164, 239, 0.35) !important;
-}
-
-/* Category indicator tag on Jump Pills */
-.teams-jump-cat-tag {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: normal;
-  padding: 2px 8px;
-  border-radius: 9999px;
-  line-height: 1.2;
-  background: rgba(0, 164, 239, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(0, 164, 239, 0.28);
-}
-
-.teams-jump-cat-tag.core,
-.teams-jump-cat-tag.tech,
-.teams-jump-cat-tag.nontech {
-  background: rgba(0, 164, 239, 0.12);
-  color: #38bdf8;
-  border: 1px solid rgba(0, 164, 239, 0.28);
 }
 
 /* Category Wing Dividers */
@@ -440,7 +440,9 @@ body {
   height: 472px;
   margin: 0;
   border-radius: 22px;
-  background: linear-gradient(175deg, #101524 0%, #080b14 100%);
+  background: rgba(14, 15, 20, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1.5px solid rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
@@ -451,7 +453,7 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform-style: flat;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
   transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
@@ -538,14 +540,13 @@ body {
   align-items: center;
   padding: 3px 12px;
   border-radius: 9999px;
-  background: rgba(0, 164, 239, 0.12);
+  background: rgba(14, 18, 26, 0.85);
   color: #00a4ef;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.02em;
   border: 1px solid rgba(0, 164, 239, 0.35);
-  box-shadow: 0 0 8px rgba(0, 164, 239, 0.15);
 }
 
 .team-card-academic {
