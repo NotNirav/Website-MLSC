@@ -9,7 +9,7 @@
   // =========================================================
   // 1. DOMAIN CONFIGURATION & ORDER
   // =========================================================
-    const DOMAIN_ORDER = [
+      const DOMAIN_ORDER = [
     // =========================================================
     // 1. CORE LEADERSHIP
     // =========================================================
@@ -38,6 +38,16 @@
       accentColor: '#38bdf8'
     },
     {
+      id: 'devops',
+      name: 'DevOps',
+      category: 'Tech',
+      categoryLabel: 'Technical Wing',
+      tag: 'DevOps & Cloud',
+      title: 'DevOps & Cloud Infrastructure',
+      desc: 'Containerizing workloads, orchestrating CI/CD pipelines, and maintaining resilient cloud infrastructure.',
+      accentColor: '#0ea5e9'
+    },
+    {
       id: 'ai-ml',
       name: 'AI / ML',
       category: 'Tech',
@@ -46,6 +56,16 @@
       title: 'Artificial Intelligence & Machine Learning',
       desc: 'Exploring machine learning models, computer vision, natural language processing, and data projects.',
       accentColor: '#34d399'
+    },
+    {
+      id: 'cyber-security',
+      name: 'Cyber Security',
+      category: 'Tech',
+      categoryLabel: 'Technical Wing',
+      tag: 'Cyber Security',
+      title: 'Cyber Security & Systems',
+      desc: 'Securing cloud services, vulnerability testing, authentication security, and defense protocols.',
+      accentColor: '#ef4444'
     },
     {
       id: 'cp',
@@ -68,7 +88,7 @@
       categoryLabel: 'Non-Technical Wing',
       tag: 'Event Management',
       title: 'Event Management & Operations',
-      desc: 'Organizing hackathons, technical workshops, speaker sessions, and community gatherings.',
+      desc: 'Organizing hackathons, technical workshops, operations, logistics, and speaker sessions.',
       accentColor: '#f97316'
     },
     {
@@ -108,7 +128,7 @@
       categoryLabel: 'Non-Technical Wing',
       tag: 'Videography & Media',
       title: 'Videography & Media Production',
-      desc: 'Capturing event photography, producing aftermovies, recap videos, and chapter visual media.',
+      desc: 'Capturing event photography, producing aftermovies, recap videos, and managing chapter social media.',
       accentColor: '#8b5cf6'
     }
   ];
@@ -523,17 +543,19 @@
     return false;
   }
 
-    function normalizeTeamName(teamStr) {
+      function normalizeTeamName(teamStr) {
     if (!teamStr) return 'Core Team';
     const clean = teamStr.trim();
-    if (/^core/i.test(clean)) return 'Core Team';
+    if (/^(core|president|general secretary)/i.test(clean)) return 'Core Team';
     if (/^(ai|ml|ais*\/s*ml)/i.test(clean)) return 'AI / ML';
     if (/^web/i.test(clean)) return 'Web Development';
+    if (/^(devops|cloud)/i.test(clean)) return 'DevOps';
+    if (/^(cyber|security)/i.test(clean)) return 'Cyber Security';
     if (/^(ui|ux|uis*\/s*ux|design)/i.test(clean)) return 'UI / UX & Design';
-    if (/^(video|photo|media)/i.test(clean)) return 'Videography & Media';
+    if (/^(video|photo|media|social)/i.test(clean)) return 'Videography & Media';
     if (/^(sponsor|market)/i.test(clean)) return 'Sponsorship & Marketing';
     if (/^(account|finance)/i.test(clean)) return 'Accounts & Finance';
-    if (/^(event|operation|logistics)/i.test(clean)) return 'Event Management';
+    if (/^(event|operation|logistics|management)/i.test(clean)) return 'Event Management';
     if (/^(cp|competitive)/i.test(clean)) return 'CP';
     return clean;
   }
@@ -871,52 +893,33 @@
 61,Amrita Iyer,2023–24,Sponsorship & Marketing,Non-Tech,Sponsorship and Marketing Team,2023–24 Tenure,"Driving sponsor outreach, promotional media strategy, and community engagement.",assets/images/members/old_2024_amrita_iyer.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com,https://linkedin.com
 62,Indranil Kenekar,2023–24,Videography & Media,Non-Tech,Video editing and photography Team,2023–24 Tenure,"Capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.",assets/images/members/old_2024_indranil_kenekar.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com,https://www.linkedin.com/in/indranil-kenekar-490550292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
 63,Yash Somwanshi,2023–24,Videography & Media,Non-Tech,Video editing and photography Team,2023–24 Tenure,"Capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.",assets/images/members/old_2024_yash_somwanshi.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/YashSomwanshi,https://www.linkedin.com/in/yash-somwanshi-3670b2292?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app
-64,Ved Jadhav,Current Year (2025–26),Core Team,Core,President,TY CSE,"Driving strategic club vision, partnerships, and high-impact campus tech initiatives.",assets/images/members/Ved_Jadhav.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/vedjadhav,https://linkedin.com/in/vedjadhav
-65,Sharvil Patil,Current Year (2025–26),Core Team,Core,Vice President,SY ENTC,"Directing flagship BlueBit hackathons, speaker series, and technical bootcamps.",assets/images/members/Sharvil_Patil.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/sharvilpatil,https://linkedin.com/in/sharvilpatil
-66,Isha,Current Year (2025–26),Core Team,Core,General Secretary,SY ENTC,"Designing sleek wireframes, micro-interactions, and visual assets for club web portals.",assets/images/members/isha_.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/isha,https://linkedin.com/in/isha
-67,Aryan Verma,Current Year (2025–26),Core Team,Core,Member,TY IT,"Empowering student innovators, driving technical culture, and leading MLSC to new heights.",assets/images/members/aryan.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/aryanverma,https://linkedin.com/in/aryanverma
-68,Adii,Current Year (2025–26),Event Management,Non-Tech,Logistics Coordinator,SY CSE,"Managing venue logistics, equipment routing, and high-energy hackathon hospitality.",assets/images/members/Adii.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/adii,https://linkedin.com/in/adii
-69,Saksham Jagtap,Current Year (2025–26),Event Management,Non-Tech,Executive Lead,TY CSE,Spearheading flagship hackathons and community developer engagement programs.,assets/images/members/Saksham Jagtap.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/sakshamjagtap,https://linkedin.com/in/sakshamjagtap
-70,Kashvi Patki,Current Year (2025–26),AI / ML,Tech,Member,SY CSE AIML,"Orchestrating community initiatives, club operations, and inter-chapter collaborations.",assets/images/members/Kashvi_Patki .jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/kashvipatki,https://linkedin.com/in/kashvipatki
-71,Apurv Sagare,Current Year (2025–26),AI / ML,Tech,Computer Vision Specialist,TY CSE,Developing real-time neural object detection models and visual edge computing pipelines.,assets/images/members/APURV SAGARE.jpeg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/apurvsagare,https://linkedin.com/in/apurvsagare
-72,Arnav Kumar,Current Year (2025–26),AI / ML,Tech,NLP & LLM Researcher,SY CSE AIML,Exploring open-weights language model fine-tuning and retrieval-augmented generation.,assets/images/members/Arnav Kumar.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/arnavkumar,https://linkedin.com/in/arnavkumar
-73,Aryan Patel,Current Year (2025–26),AI / ML,Tech,Deep Learning Engineer,SY CSE,Building deep neural networks and automated evaluation frameworks for ML systems.,assets/images/members/Aryan Patel.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/aryanpatel,https://linkedin.com/in/aryanpatel
-74,Atindra Kumeriya,Current Year (2025–26),AI / ML,Tech,ML Systems Engineer,SY IT,Optimizing tensor computation pipelines and building end-to-end predictive models.,assets/images/members/Atindra Kumeriya.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/atindrakumeriya,https://linkedin.com/in/atindrakumeriya
-75,Avadhoot Chavan,Current Year (2025–26),AI / ML,Tech,Data Science Specialist,TY CSE DS,Extracting actionable insights from high-dimensional datasets and statistical modelling.,assets/images/members/Avadhoot Chavan.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/avadhootchavan,https://linkedin.com/in/avadhootchavan
-76,Chaitanya Jadhav,Current Year (2025–26),AI / ML,Tech,Intelligent Agents Developer,SY CSE AIML,Prototyping multi-agent coordination frameworks and automated developer tooling.,assets/images/members/Chaitanya Jadhav.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/chaitanyajadhav,https://linkedin.com/in/chaitanyajadhav
-77,Chinmay Ahire,Current Year (2025–26),AI / ML,Tech,Neural Systems Researcher,TY CSE,Designing scalable model architectures and training pipelines for competitive hackathons.,assets/images/members/Chinmay_Ahire.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/chinmayahire,https://linkedin.com/in/chinmayahire
-78,Devendra Adsure,Current Year (2025–26),AI / ML,Tech,MLOps Engineer,SY IT,Containerizing ML workloads and deploying automated inference pipelines on cloud infrastructure.,assets/images/members/Devendra Adsure.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/devendraadsure,https://linkedin.com/in/devendraadsure
-79,Madhav,Current Year (2025–26),AI / ML,Tech,Edge AI Developer,SY CSE,Building lightweight inference runtimes on microcontrollers and embedded Linux boards.,assets/images/members/Madhav.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/madhav,https://linkedin.com/in/madhav
-80,Rishabh Prabhu,Current Year (2025–26),AI / ML,Tech,Generative AI Specialist,TY CSE AIML,Crafting multimodal pipelines and exploring generative media synthesis applications.,assets/images/members/Rishabh Prabhu.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/rishabhprabhu,https://linkedin.com/in/rishabhprabhu
-81,Sanish Dalvi,Current Year (2025–26),CP,Tech,Member,TY IT,Architecting robust systems and engineering scalable developer ecosystems across the chapter.,assets/images/members/Sanish Dalvi.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/SanishDalvi,https://linkedin.com/in/sanishdalvi
-82,Shivanshi,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Public Relations Lead,TY IT,"Fostering inter-collegiate outreach, speaker invitations, and technical media PR.",assets/images/members/shivanshi.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/shivanshi,https://linkedin.com/in/shivanshi
-83,Srushti Gaikwad,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Sponsorship & Outreach Lead,TY CSE,Spearheading partnerships with industry sponsors and community developer grants.,assets/images/members/Srushti Gaikwad.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/srushtigaikwad,https://linkedin.com/in/srushtigaikwad
-84,Tanvi Jadhav,Current Year (2025–26),Event Management,Non-Tech,Hackathon Coordinator,SY ENTC,"Directing developer registration flows, mentor scheduling, and project evaluation tracks.",assets/images/members/Tanvi Jadhav.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/tanvijadhav,https://linkedin.com/in/tanvijadhav
-85,Tejal Jadhav,Current Year (2025–26),Event Management,Non-Tech,Event Strategist,SY CSE,"Curating workshop curriculums, tech talk lineups, and interactive participant engagement.",assets/images/members/Tejal Jadhav.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/tejaljadhav,https://linkedin.com/in/tejaljadhav
-86,Vaidehi Behare,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Campus Outreach Lead,SY IT,Connecting student innovators across departments and managing community ambassador tracks.,assets/images/members/Vaidehi Behare.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/vaidehibehare,https://linkedin.com/in/vaidehibehare
-87,Vaishnavi Marne,Current Year (2025–26),Event Management,Non-Tech,Delegate Relations Coordinator,SY ENTC,"Managing attendee communications, welcome kits, and post-event survey telemetry.",assets/images/members/Vaishnavi Marne .jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f25022,https://github.com/vaishnavimarne,https://linkedin.com/in/vaishnavimarne
-88,Sharvari Deshmukh,Current Year (2025–26),UI / UX & Design,Non-Tech,Design Head,SY IT,"Crafting intuitive visual design systems, interactive prototypes, and community branding.",assets/images/members/Sharvari_Deshmukh.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/sharvarideshmukh,https://linkedin.com/in/sharvarideshmukh
-89,Amrita,Current Year (2025–26),UI / UX & Design,Non-Tech,Product Designer,SY CSE,Mapping user journeys and turning complex software architectures into clean interfaces.,assets/images/members/Amrita.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/amrita,https://linkedin.com/in/amrita
-90,Amruta Thakare,Current Year (2025–26),UI / UX & Design,Non-Tech,Visual & Brand Designer,SY ENTC,"Defining visual design language, event identity kits, and typography guidelines.",assets/images/members/Amruta Thakare.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/amrutathakare,https://linkedin.com/in/amrutathakare
-91,Anannya,Current Year (2025–26),UI / UX & Design,Non-Tech,UI/UX Researcher,SY IT,"Conducting usability testing, heuristic analysis, and prototyping sleek student workflows.",assets/images/members/Anannya.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/anannya,https://linkedin.com/in/anannya
-92,Anjali Borse,Current Year (2025–26),UI / UX & Design,Non-Tech,Motion & Graphic Designer,TY CSE,"Creating dynamic motion graphics, keynote presentations, and marketing collaterals.",assets/images/members/Anjali Borse.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/anjaliborse,https://linkedin.com/in/anjaliborse
-93,Deesha,Current Year (2025–26),UI / UX & Design,Non-Tech,Design Systems Specialist,SY CSE AIML,"Building scalable Figma component libraries, auto-layout tokens, and theme palettes.",assets/images/members/Deesha.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/deesha,https://linkedin.com/in/deesha
-94,Khushi Kolhe,Current Year (2025–26),UI / UX & Design,Non-Tech,Experience Designer,TY IT,"Transforming hackathon participant workflows into intuitive, joyful user journeys.",assets/images/members/Khushi Kolhe.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/khushikolhe,https://linkedin.com/in/khushikolhe
-95,Sanika Shinde,Current Year (2025–26),UI / UX & Design,Non-Tech,Creative Lead,SY IT,"Curating aesthetic club social media branding, posters, and digital promotional media.",assets/images/members/Sanika Shinde.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/sanikashinde,https://linkedin.com/in/sanikashinde
-96,Samarth Wani,Current Year (2025–26),Event Management,Non-Tech,Strategy Lead,SY IT,Aligning technical programs with student developer needs and industry tech trends.,assets/images/members/Samarth_W.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/samarthwani,https://linkedin.com/in/samarthwani
-97,Saumyaa Gupta,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Community Lead,SY CSE,Fostering an inclusive developer ecosystem and empowering first-time hackathon builders.,assets/images/members/Saumyaa Gupta.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/saumyaagupta,https://linkedin.com/in/saumyaagupta
-98,Badal Dadwani,Current Year (2025–26),Accounts & Finance,Non-Tech,Finance & Operations Lead,SY IT,"Managing club resources, sponsor allocations, and operational logistical pipelines.",assets/images/members/Badal Dadwani.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/badaldadwani,https://linkedin.com/in/badaldadwani
-99,Pranav Narkhede,Current Year (2025–26),Web Development,Tech,Web Development Head,TY IT,Architecting high-performance web platforms and mentoring club web developers.,assets/images/members/Pranav_Narkhede.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/pranavnarkhede,https://linkedin.com/in/pranavnarkhede
-100,Aditya Deore,Current Year (2025–26),Web Development,Tech,Full-Stack Developer,TY CSE,"Building reactive web applications with Next.js, Node.js microservices, and serverless stacks.",assets/images/members/Aditya Deore.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/adityadeore,https://linkedin.com/in/adityadeore
-101,Aditya Gurav,Current Year (2025–26),Web Development,Tech,Backend Systems Developer,SY IT,Designing resilient REST and GraphQL APIs backed by distributed caching layers.,assets/images/members/AdityaGurav.jpeg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/adityagurav,https://linkedin.com/in/adityagurav
-102,Aditya Rajput,Current Year (2025–26),Web Development,Tech,Frontend Architect,SY CSE,Crafting modern responsive interfaces with sleek micro-interactions and high-FPS animations.,assets/images/members/Aditya_Rajput.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/adityarajput,https://linkedin.com/in/adityarajput
-103,Mahesh Shirame,Current Year (2025–26),Web Development,Tech,Cloud & DevOps Engineer,TY CSE,"Automating CI/CD pipelines, Dockerized deployments, and club cloud infrastructure.",assets/images/members/Mahesh_Shirame.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/maheshshirame,https://linkedin.com/in/maheshshirame
-104,Mayank Pawar,Current Year (2025–26),Web Development,Tech,Full-Stack Developer,SY IT,Building seamless frontend user flows integrated with real-time WebSocket backend services.,assets/images/members/Mayank Pawar.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/mayankpawar,https://linkedin.com/in/mayankpawar
-105,Nirav Neve,Current Year (2025–26),Web Development,Tech,Systems & API Engineer,SY CSE,Engineering low-latency database queries and scalable authentication mechanisms.,assets/images/members/Nirav_Neve.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/niravneve,https://linkedin.com/in/niravneve
-106,Palash,Current Year (2025–26),Web Development,Tech,Frontend Specialist,SY ENTC,"Crafting accessible, pixel-perfect user experiences using modern CSS and TypeScript.",assets/images/members/Palash.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/palash,https://linkedin.com/in/palash
-107,Parth Popli,Current Year (2025–26),Web Development,Tech,Next.js Developer,SY CSE,Developing server-side rendered portals and optimized static web assets for club projects.,assets/images/members/Parth_Popli.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/parthpopli,https://linkedin.com/in/parthpopli
-108,Prem Thakur,Current Year (2025–26),Web Development,Tech,Backend Developer,SY IT,"Structuring relational schemas, handling event-driven queues, and securing API endpoints.",assets/images/members/prem thakur.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/premthakur,https://linkedin.com/in/premthakur
-109,Yash Bhagodia,Current Year (2025–26),Web Development,Tech,Web3 & Full-Stack Developer,TY IT,Bridging decentralized smart contracts with progressive client-side web applications.,assets/images/members/Yash Bhagodia_.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/yashbhagodia,https://linkedin.com/in/yashbhagodia`;
+64,Ved Jadhav,Current Year (2025–26),Core Team,Core,President,TY CSE,"Driving strategic club vision, partnerships, developer community building, and high-impact campus tech initiatives.",assets/images/members/Ved_Jadhav.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/ved-jadhav-10,https://www.linkedin.com/in/vedjadhav
+65,Isha Thakur,Current Year (2025–26),Core Team,Core,General Secretary,TY CSE,"Managing club operations, internal communication, and event execution to ensure impactful tech initiatives across campus.",assets/images/members/isha_.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ffb900,https://github.com/isha1296,https://www.linkedin.com/in/isha-thakur12/
+66,Chinmay Ahire,Current Year (2025–26),DevOps,Tech,DevOps Head,TY CSE,"Designing scalable cloud architectures, CI/CD automation pipelines, and maintaining robust infrastructure for chapter projects.",assets/images/members/Chinmay_Ahire.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/THE-DEDUCTER,https://www.linkedin.com/in/chinmay-ahire
+67,Nirav Neve,Current Year (2025–26),DevOps,Tech,DevOps Engineer,SY CSE,"Engineering containerized deployment workflows, low-latency database queries, and scalable system infrastructure.",assets/images/members/Nirav_Neve.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/NotNirav,https://www.linkedin.com/in/nirav-neve-b452183a1/
+68,Khushi Kolhe,Current Year (2025–26),DevOps,Tech,DevOps Engineer,SY IT,"SY BTech IT student with a keen interest in programming, cloud tooling, and building practical projects through hands-on learning.",assets/images/members/Khushi Kolhe.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/khushikolhe,https://www.linkedin.com/in/khushi-kolhe-809a77379/
+69,Sanika Shinde,Current Year (2025–26),DevOps,Tech,DevOps Engineer,SY IT,"SY B.Tech IT student at PCCOE with strong interest in programming, DSA, development, and building reliable software systems.",assets/images/members/Sanika Shinde.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/sanika2506,https://www.linkedin.com/in/sanika-shinde-472757386/
+70,Badal Dadwani,Current Year (2025–26),AI / ML,Tech,AI / ML Lead,TY IT,"Third-year B.Tech IT student focused on building practical, scalable applications, exploring AI/ML, and solving real problems.",assets/images/members/Badal Dadwani.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/Badal023,https://www.linkedin.com/in/badaldadwani
+71,Parth Popli,Current Year (2025–26),AI / ML,Tech,AI / ML Developer,SY CSE,"SY Computer Science student exploring machine learning pipelines, deep learning models, and modern AI application development.",assets/images/members/Parth_Popli.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/Parth19102006,https://www.linkedin.com/in/parth-popli-5012b3386
+72,Aryan Patil,Current Year (2025–26),AI / ML,Tech,AI / ML Developer,SY CSE,"Building deep neural networks, computer vision models, and automated evaluation frameworks for machine learning systems.",assets/images/members/Aryan Patel.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#34d399,https://github.com/aryanpatel,https://linkedin.com/in/aryanpatel
+73,Prem Thakur,Current Year (2025–26),Cyber Security,Tech,Cyber Security Head,SY IT,"Securing cloud services, vulnerability testing, authentication security, and leading student cyber defense initiatives.",assets/images/members/prem thakur.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/prem-thakur00,https://www.linkedin.com/in/prem--thakur/
+74,Srushti Gaikwad,Current Year (2025–26),Cyber Security,Tech,Cybersecurity Analyst,SY CSE,"Exploring network defense, threat modeling, security compliance, and organizing hands-on cyber defense bootcamps.",assets/images/members/Srushti Gaikwad.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/srushtigaikwad,https://linkedin.com/in/srushtigaikwad
+75,Anjali Borse,Current Year (2025–26),CP,Tech,Competitive Programming Lead,SY IT,"Second-year IT student passionate about C programming, data structures, algorithms, and consistent daily problem solving.",assets/images/members/Anjali Borse.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#a855f7,https://github.com/anjaliborse27-ops,https://www.linkedin.com/in/anjali-borse-5936a93a1/
+76,Madhav Khobare,Current Year (2025–26),Event Management,Non-Tech,Operations Head,TY IT,"Third-year IT student at PCCOE. Passionate about building practical solutions, multi-hackathon winner, and executing impactful tech initiatives.",assets/images/members/old_2025_madhav_khobare.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/MadhavK3,https://www.linkedin.com/in/madhav-khobare
+77,Aditya Rajput,Current Year (2025–26),Event Management,Non-Tech,Management Head,TY CSE,Third-year Computer Engineering student at PCCOE. 6× national hackathon finalist focused on rapid building and workflow automation.,assets/images/members/Aditya_Rajput.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/adityarajput,https://linkedin.com/in/adityarajput
+78,Sharvari Deshmukh,Current Year (2025–26),Event Management,Non-Tech,Operations Lead,SY IT,"Coordinating event logistics, venue infrastructure, participant workflows, and operational execution for club hackathons.",assets/images/members/Sharvari_Deshmukh.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/sharvarid035,https://www.linkedin.com/in/deshmukhsharvari/
+79,Kashvi Patki,Current Year (2025–26),Event Management,Non-Tech,Management Lead,SY CSE AIML,"Orchestrating community initiatives, event operations, participant communications, and inter-chapter collaborations.",assets/images/members/Kashvi_Patki .jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/kashvipatki,https://linkedin.com/in/kashvipatki
+80,Pranav Narkhede,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Marketing Head,SY IT,"Second-year IT student focused on community outreach, developer engagement, and driving club initiatives through creative marketing.",assets/images/members/Pranav_Narkhede.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#06b6d4,https://github.com/PranavN145,https://www.linkedin.com/in/pranavnarkhede31/
+81,Apurv Sagare,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Sponsorship Head,TY CSE,"Passionate about exploring new opportunities, driving industry partnerships, corporate sponsorships, and collaborative team growth.",assets/images/members/APURV SAGARE.jpeg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#06b6d4,https://github.com/apurvsagare,https://linkedin.com/in/apurvsagare
+82,Rishabh Prabhu,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Marketing Lead,SY IT,"SY B.Tech IT student at PCCOE. Passionate about community building, creative marketing campaigns, and hackathon promotions.",assets/images/members/Rishabh Prabhu.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#06b6d4,https://github.com/Cassiopeia111,http://www.linkedin.com/in/rishabh-prabhu-o7
+83,Shivanshi Bakshi,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Marketing Executive,SY IT,"Fostering inter-collegiate outreach, technical media PR, speaker relations, and promotional campaigns across colleges.",assets/images/members/shivanshi.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#06b6d4,https://github.com/shivanshi,https://linkedin.com/in/shivanshi
+84,Akshay Pote,Current Year (2025–26),Sponsorship & Marketing,Non-Tech,Sponsorship Executive,SY,"Connecting with corporate sponsors, developer grants, and securing logistical funding for flagship chapter events.",assets/images/members/Akshay Pote.svg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#06b6d4,https://github.com,https://linkedin.com
+85,Yash Bhagodia,Current Year (2025–26),Accounts & Finance,Non-Tech,Finance Lead,SY CSE AIML,"SY B.Tech student exploring financial planning, budget allocations, telemetry, and collaborative team resource management.",assets/images/members/Yash Bhagodia_.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#10b981,https://github.com/yashbhagodia,https://linkedin.com/in/yashbhagodia
+86,Saksham Jagtap,Current Year (2025–26),UI / UX & Design,Non-Tech,Design Head,SY CSE AIML,"B.Tech CSE (AIML) student driven by creativity and problem-solving, crafting intuitive UI layouts, visual designs, and brand identities.",assets/images/members/Saksham Jagtap.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/SakshamJagtap,https://www.linkedin.com/in/saksham-jagtap-513780320
+87,Radnyee Jagtap,Current Year (2025–26),UI / UX & Design,Non-Tech,UI / UX Designer,SY IT,"Second-year IT student at PCCOE Akurdi passionate about modern UI/UX design, interactive wireframing, and user journeys.",assets/images/members/Radnyee Jagtap.svg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/radnyeesjagtap,https://www.linkedin.com/in/radnyee-jagtap-679b02423/
+88,Gaurav Dhurve,Current Year (2025–26),UI / UX & Design,Non-Tech,Graphic & Visual Designer,SY,"Designing digital assets, aesthetic event posters, visual design systems, and creative media collaterals for the chapter.",assets/images/members/Gaurav Dhurve.svg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ec4899,https://github.com/rayflixx,https://linkedin.com
+89,Mahesh Shirame,Current Year (2025–26),Videography & Media,Non-Tech,Social Media Head,SY CSE,"Driving chapter digital engagement, social media branding, content creation, and creative visual storytelling for events.",assets/images/members/Mahesh_Shirame.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com/maheshshirame,https://linkedin.com/in/maheshshirame
+90,Chaitanya Jadhav,Current Year (2025–26),Videography & Media,Non-Tech,Social Media Lead,SY CSE AIML,"Second-year tech enthusiast interested in programming, videography, and video editing, bringing creative ideas to life through visuals.",assets/images/members/Chaitanya Jadhav.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com/chaitanyajadhav-07,https://www.linkedin.com/in/chaitanya-jadhav-416424377`;
 
   let cachedParsedMembers = null;
 
