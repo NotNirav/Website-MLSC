@@ -475,7 +475,7 @@ main {
   position: relative;
   z-index: 10;
   padding: clamp(75px, 11vh, 95px) 24px 0;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
   box-sizing: border-box;
   overflow: hidden;
@@ -488,36 +488,26 @@ main {
   justify-content: center;
   text-align: center;
   width: 100%;
-  max-width: 58rem;
+  max-width: 900px;
   margin: auto 0;
   padding: 1rem;
 }
 
-.roadmap-hero-content .mono-label {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-  color: #38bdf8;
-  margin: 0 0 1rem;
-}
-
 .roadmap-title {
   margin: 0 auto;
-  max-width: 58rem;
-  font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5.5vw, 4.25rem);
-  line-height: 1.15;
+  max-width: 860px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
   color: #ffffff;
 }
 
 .events-gradient-text {
-  color: var(--ms-blue, #00a4ef);
+  color: var(--ms-green, #7fba00);
   display: inline-block;
-  text-shadow: 0 0 28px rgba(0, 164, 239, 0.35);
+  text-shadow: 0 0 28px rgba(127, 186, 0, 0.35);
 }
 
 .hero-br {
@@ -526,11 +516,13 @@ main {
 
 .roadmap-copy {
   margin: 1.25rem auto 0;
-  max-width: 38rem;
-  font-family: var(--font-sans);
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  line-height: 1.6;
-  color: var(--muted-foreground);
+  max-width: 660px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  color: #9ca3af;
+  line-height: 1.65;
+  opacity: 0.92;
 }
 
 .events-hero-section .belt {
@@ -553,7 +545,7 @@ main {
   position: relative;
   z-index: 10;
   padding: 80px 20px 120px;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: none;
   background: #000000 !important;
   box-sizing: border-box;
   overflow: hidden;
@@ -1162,10 +1154,6 @@ main {
 
   .roadmap-hero {
     padding-top: 0;
-  }
-
-  .roadmap-title {
-    font-size: 3rem;
   }
 
   .track-wrap {
