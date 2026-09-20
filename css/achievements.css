@@ -89,3 +89,68 @@ body {
   background-color: #000000 !important;
   border-bottom: none !important;
 }
+
+/* ========================================================= */
+/* ACHIEVEMENTS MASCOT (achieve.webp) ENTRANCE & POSITIONING */
+/* ========================================================= */
+.achievements-section.hero-section {
+  position: relative !important;
+  overflow: hidden !important; /* Prevents horizontal scrollbar when mascot starts off-screen */
+}
+
+.achievements-mascot-wrapper {
+  position: absolute !important;
+  left: 24px !important;
+  bottom: 0px !important;
+  width: clamp(230px, 25.5vw, 343px) !important;
+  max-width: 343px !important;
+  height: auto !important;
+  z-index: 15 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate3d(-140%, 40px, 0);
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(0 12px 32px rgba(0, 0, 0, 0.75));
+}
+
+.achievements-mascot-img {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: contain !important;
+  -webkit-mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 92% 92% at 50% 50%, #000 75%, transparent 100%);
+  border-radius: 12px;
+}
+
+.achievements-mascot-wrapper.animate-entrance {
+  animation: achieve-mascot-enter 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+@keyframes achieve-mascot-enter {
+  0% {
+    visibility: visible;
+    opacity: 0;
+    transform: translate3d(-140%, 40px, 0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) {
+  .achievements-mascot-wrapper {
+    left: 16px !important;
+    bottom: 0px !important;
+    width: clamp(170px, 44vw, 242px) !important;
+    max-width: 242px !important;
+  }
+}

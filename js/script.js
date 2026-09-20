@@ -221,20 +221,31 @@
   }
 
   // =========================================================
-  // Dual Direction Mascot Scroll Controller (Down & Up)
-  // Maps scroll progress directly to mascot transform & opacity
+  // Dual Direction Mascot Scroll Controller (Down & Up + Sleep Mascot)
+  // Liquid-smooth LERP inertia, GPU acceleration, direction hysteresis & sleep.webp transition
   // =========================================================
   function initDualMascotScrollController() {
     const heroSection = document.getElementById('hero');
     const exploreSection = document.getElementById('explore');
+    const footerSection = document.getElementById('footer') || document.querySelector('.site-footer');
     const downWrapper = document.getElementById('brie-scroll-down-wrapper');
     const upWrapper = document.getElementById('brie-scroll-up-wrapper');
+    const sleepWrapper = document.getElementById('brie-sleep-wrapper');
     const heroTitle = document.querySelector('.hero-raw-title');
 
     if (!heroSection || !exploreSection || !downWrapper || !upWrapper) return;
 
-    let lastY = window.scrollY;
+    let targetY = window.scrollY;
+    let smoothY = window.scrollY;
+    let lastDirectionY = window.scrollY;
     let scrollDirection = 'down';
+    let isTicking = false;
+
+    // Cache section layout metrics to prevent DOM reflows during scroll
+    let cachedHeroTop = 0;
+    let cachedHeroHeight = 0;
+    let cachedExploreTop = 0;
+    let cachedFooterTop = 0;
 
     function getElementDocTop(el) {
       let top = 0;
@@ -246,99 +257,162 @@
       return top;
     }
 
-    function updateMascots(currentScrollY) {
-      const y = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+    function updateMetrics() {
+      cachedHeroTop = getElementDocTop(heroSection);
+      cachedHeroHeight = heroSection.offsetHeight || window.innerHeight;
+      cachedExploreTop = getElementDocTop(exploreSection);
+      if (footerSection) {
+        cachedFooterTop = getElementDocTop(footerSection);
+      }
+    }
 
-      const diff = y - lastY;
-      if (Math.abs(diff) > 1.5) {
-        scrollDirection = diff > 0 ? 'down' : 'up';
-        lastY = y;
+    updateMetrics();
+    window.addEventListener('resize', updateMetrics, { passive: true });
+
+    function renderLoop() {
+      // Continuous LERP inertia smoothing to eliminate scroll micro-stutter
+      smoothY += (targetY - smoothY) * 0.14;
+      if (Math.abs(targetY - smoothY) < 0.05) {
+        smoothY = targetY;
       }
 
-      const heroTop = getElementDocTop(heroSection);
-      const heroHeight = heroSection.offsetHeight || window.innerHeight;
-      const exploreTop = getElementDocTop(exploreSection);
+      const y = smoothY;
 
-      const startY = heroTop + heroHeight * 0.45;
-      const endY = exploreTop + 80;
+      // Direction hysteresis (minimum 15px threshold to prevent direction flapping)
+      const dirDiff = y - lastDirectionY;
+      if (Math.abs(dirDiff) > 15) {
+        scrollDirection = dirDiff > 0 ? 'down' : 'up';
+        lastDirectionY = y;
+      }
 
-      if (y <= heroTop + 10) {
+      const startY = cachedHeroTop + cachedHeroHeight * 0.45;
+      const endY = cachedExploreTop + 80;
+
+      if (y <= cachedHeroTop + 10) {
         gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
         gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
         if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
-        return;
-      }
-
-      if (y < startY) {
-        const heroFadeProgress = (y - heroTop) / (startY - heroTop);
+      } else if (y < startY) {
+        const heroFadeProgress = (y - cachedHeroTop) / (startY - cachedHeroTop);
         if (heroTitle) {
           const titleOpacity = Math.max(0, 1 - heroFadeProgress * 1.5);
           gsap.set(heroTitle, { opacity: titleOpacity, scale: 1 - heroFadeProgress * 0.1, y: heroFadeProgress * 80 });
         }
         gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
         gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        return;
-      }
+        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+      } else if (y < endY) {
+        // Transition region between Hero and Stack Cards
+        const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
 
-      if (y >= endY) {
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
         if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
-        return;
-      }
 
-      const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
-
-      if (heroTitle) {
-        gsap.set(heroTitle, { opacity: 0 });
-      }
-
-      const mascotY = p * 62 + 'vh';
-
-      if (scrollDirection === 'down') {
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        // Calculate GPU transform distance in pixels for downward movement
+        const maxMovePx = window.innerHeight * 0.62;
+        const translateYPx = p * maxMovePx;
 
         let downOpacity = 0;
+        let sleepOpacity = 0;
+
         if (p < 0.18) {
           downOpacity = p / 0.18;
-        } else if (p <= 0.82) {
+        } else if (p <= 0.65) {
           downOpacity = 1.0;
+        } else if (p < 0.82) {
+          // Downward mascot fades out completely until opacity 0 at p = 0.82
+          downOpacity = (0.82 - p) / 0.17;
         } else {
-          downOpacity = (1 - p) / 0.18;
+          downOpacity = 0;
         }
 
-        gsap.set(downWrapper, {
-          visibility: 'visible',
-          opacity: Math.max(0, Math.min(1, downOpacity)),
-          y: mascotY
-        });
+        // sleep.webp ONLY starts fading in AFTER downward mascot is completely faded out (p >= 0.82)
+        if (p >= 0.82) {
+          sleepOpacity = (p - 0.82) / 0.18;
+        } else {
+          sleepOpacity = 0;
+        }
+
+        downOpacity = Math.max(0, Math.min(1, downOpacity));
+        sleepOpacity = Math.max(0, Math.min(1, sleepOpacity));
+
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+
+        if (downOpacity > 0) {
+          gsap.set(downWrapper, {
+            visibility: 'visible',
+            opacity: downOpacity,
+            y: translateYPx,
+            force3D: true
+          });
+        } else {
+          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        }
+
+        if (sleepWrapper) {
+          if (sleepOpacity > 0) {
+            gsap.set(sleepWrapper, {
+              visibility: 'visible',
+              opacity: sleepOpacity,
+              y: 0,
+              force3D: true
+            });
+          } else {
+            gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+          }
+        }
       } else {
+        // y >= endY: Inside Stack Cards / Explore Section & Footer
+        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+
         gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
 
-        let upOpacity = 0;
-        if (p > 0.82) {
-          upOpacity = (1 - p) / 0.18;
-        } else if (p >= 0.18) {
-          upOpacity = 1.0;
-        } else {
-          upOpacity = p / 0.18;
+        // sleep.webp remains continuously visible down through cards & footer, pinned above footer line
+        if (sleepWrapper) {
+          let sleepPinY = 0;
+          if (cachedFooterTop > 0) {
+            const sleepHeight = sleepWrapper.offsetHeight || 184;
+            const defaultScreenTop = 80 + window.innerHeight * 0.62 - (sleepHeight / 2);
+            const defaultDocBottom = y + defaultScreenTop + sleepHeight;
+            const maxDocBottom = cachedFooterTop - 12; // 12px gap strictly above footer line
+            if (defaultDocBottom > maxDocBottom) {
+              sleepPinY = -(defaultDocBottom - maxDocBottom);
+            }
+          }
+
+          gsap.set(sleepWrapper, {
+            visibility: 'visible',
+            opacity: 1.0,
+            y: sleepPinY,
+            force3D: true
+          });
         }
+      }
 
-        gsap.set(upWrapper, {
-          visibility: 'visible',
-          opacity: Math.max(0, Math.min(1, upOpacity)),
-          y: mascotY
-        });
+      if (Math.abs(targetY - smoothY) > 0.05) {
+        requestAnimationFrame(renderLoop);
+      } else {
+        isTicking = false;
+      }
+    }
+
+    function onScroll(currentScrollY) {
+      targetY = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(renderLoop);
       }
     }
 
     if (window.lenis) {
-      window.lenis.on('scroll', (e) => updateMascots(e.scroll));
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
     } else {
-      window.addEventListener('scroll', () => updateMascots(window.scrollY), { passive: true });
+      window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
     }
 
-    updateMascots(window.scrollY);
+    updateMetrics();
+    onScroll(window.scrollY);
   }
 
   // =========================================================
@@ -1414,6 +1488,69 @@
     }
   }
 
+  // =========================================================
+  // Achievements Page Mascot (achieve.webp) Entrance & Scroll Controller
+  // Triggers smooth entrance from lower-left upon page mount, smooth scroll tracking & fade-out
+  // =========================================================
+  function initAchievementsMascotController() {
+    const achievementsMascot = document.getElementById('achievements-mascot-wrapper');
+    if (!achievementsMascot) return;
+
+    // Trigger entrance animation on page mount / load
+    requestAnimationFrame(() => {
+      achievementsMascot.classList.add('animate-entrance');
+    });
+
+    const heroSection = achievementsMascot.closest('.hero-section') || document.getElementById('hero');
+    if (!heroSection) return;
+
+    let targetScrollY = window.scrollY;
+    let smoothScrollY = window.scrollY;
+    let isTicking = false;
+
+    function renderParallax() {
+      smoothScrollY += (targetScrollY - smoothScrollY) * 0.12;
+      const heroHeight = heroSection.offsetHeight || window.innerHeight;
+      const progress = Math.max(0, Math.min(1, smoothScrollY / (heroHeight * 0.65)));
+
+      // Smooth subtle parallax + fade out before hero section ends
+      const fadeOutOpacity = Math.max(0, 1 - Math.pow(progress, 1.4));
+      const translateY = progress * 40; // Gentle downward drift on scroll
+
+      if (typeof gsap !== 'undefined') {
+        gsap.set(achievementsMascot, {
+          opacity: fadeOutOpacity,
+          y: translateY,
+          force3D: true,
+          overwrite: 'auto'
+        });
+      } else {
+        achievementsMascot.style.opacity = fadeOutOpacity;
+        achievementsMascot.style.transform = `translate3d(0, ${translateY}px, 0)`;
+      }
+
+      if (Math.abs(targetScrollY - smoothScrollY) > 0.05) {
+        requestAnimationFrame(renderParallax);
+      } else {
+        isTicking = false;
+      }
+    }
+
+    function onScroll(currentScrollY) {
+      targetScrollY = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(renderParallax);
+      }
+    }
+
+    if (window.lenis) {
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
+    } else {
+      window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
+    }
+  }
+
   let isAppInitialized = false;
   function initApp() {
     if (isAppInitialized) return;
@@ -1430,6 +1567,7 @@
     initBrieNavbar();
     initHeroMascotController();
     initStackCardsRiveMascot();
+    initAchievementsMascotController();
 
     if (lenis) {
       lenis.on('scroll', onScrollHandler);
