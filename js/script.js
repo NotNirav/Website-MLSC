@@ -490,18 +490,18 @@
   // LEADERBOARD PAGE FUNCTIONALITY & DATA
   // =========================================================
   const LEADERBOARD_DATA = [
-    { rank: 1, name: "Aarav Sharma", handle: "aarav45", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
-    { rank: 2, name: "Riya Kapoor", handle: "riya_code", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
-    { rank: 3, name: "Aditya Verma", handle: "aditya_v", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
-    { rank: 4, name: "Sneha Patel", handle: "sneha_dev", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
-    { rank: 5, name: "Rahul Kulkarni", handle: "rahul_k", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
-    { rank: 6, name: "Ananya Mehta", handle: "ananya_m", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 7, name: "Kunal Joshi", handle: "kunal_t", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 8, name: "Meera Singh", handle: "meera_s", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 9, name: "Yash Patil", handle: "yash_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 10, name: "Isha Roy", handle: "isha_r", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 11, name: "Devanshu Shah", handle: "devanshu_s", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 12, name: "Tanvi Bhat", handle: "tanvi_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
+    { rank: 1, name: "Ved Jadhav", handle: "ved_j", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
+    { rank: 2, name: "Sharvil Patil", handle: "sharvil_p", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
+    { rank: 3, name: "Isha Thakur", handle: "isha_t", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
+    { rank: 4, name: "Chinmay Ahire", handle: "chinmay_a", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
+    { rank: 5, name: "Nirav Neve", handle: "nirav_n", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
+    { rank: 6, name: "Khushi Kolhe", handle: "khushi_k", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 7, name: "Sanika Shinde", handle: "sanika_s", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 8, name: "Badal Dadwani", handle: "badal_d", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 9, name: "Aryan Patil", handle: "aryan_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 10, name: "Parth Popli", handle: "parth_p", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 11, name: "Prem Thakur", handle: "prem_t", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 12, name: "Anjali Borse", handle: "anjali_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
   ];
 
   function getAvatarSvg(name, rank) {
@@ -884,7 +884,15 @@
         dots.forEach((dot, idx) => {
           if (idx === currentIndex) {
             dot.classList.add('active');
-            dot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (indicatorsWrap) {
+              const dotLeft = dot.offsetLeft;
+              const dotWidth = dot.offsetWidth;
+              const wrapWidth = indicatorsWrap.clientWidth;
+              indicatorsWrap.scrollTo({
+                left: dotLeft - (wrapWidth / 2) + (dotWidth / 2),
+                behavior: 'smooth'
+              });
+            }
           } else {
             dot.classList.remove('active');
           }
@@ -1004,7 +1012,21 @@
     stage.addEventListener('mouseleave', startAutoPlay);
 
     updatePositions();
-    startAutoPlay();
+
+    if ('IntersectionObserver' in window && stage) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAutoPlay();
+          } else {
+            stopAutoPlay();
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(stage);
+    } else {
+      startAutoPlay();
+    }
 
     return {
       updatePositions,

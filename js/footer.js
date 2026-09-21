@@ -55,6 +55,7 @@
     const homeHref = isHomePage ? '#hero' : basePrefix + 'index.html#hero';
     const aboutHref = isHomePage ? '#about' : basePrefix + 'index.html#about';
     const exploreHref = isHomePage ? '#explore' : basePrefix + 'index.html#explore';
+    const contactHref = isHomePage ? '#contact' : basePrefix + 'index.html#contact';
 
     // 4. Shared Single-Source Footer Template (exact match with index.html)
     const footerContent = `
@@ -82,6 +83,7 @@
               <a href="${homeHref}">Home</a>
               <a href="${aboutHref}">About</a>
               <a href="${exploreHref}">Explore</a>
+              <a href="${contactHref}">Contact</a>
             </div>
             <div class="footer-col">
               <span class="footer-heading">Connect With Us</span>

@@ -85,9 +85,11 @@ body {
 /* ========================================================= */
 .teams-hero-viewport {
   width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   z-index: 10;
-  padding: clamp(90px, 12vh, 120px) 24px 30px;
+  padding: clamp(90px, 14vh, 130px) 24px clamp(60px, 10vh, 90px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,6 +100,38 @@ body {
   box-sizing: border-box;
 }
 
+.teams-scroll-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  opacity: 0.75;
+  pointer-events: none;
+  animation: teams-hint-bounce 2.2s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.teams-scroll-hint svg {
+  color: var(--ms-blue, #00a4ef);
+}
+
+@keyframes teams-hint-bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
+}
+
 /* ========================================================= */
 /* 2. SECTION MAIN HEADER                                    */
 /* ========================================================= */
@@ -106,7 +140,7 @@ body {
   z-index: 10;
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 28px;
+  margin: 0 auto;
   padding: 0 16px;
 }
 
@@ -779,11 +813,12 @@ body {
 
   .teams-hero-viewport {
     height: auto;
-    min-height: auto;
+    min-height: 85vh;
+    min-height: 85dvh;
     max-height: none;
     overflow: visible;
-    padding: 100px 16px 24px;
-    justify-content: flex-start;
+    padding: 100px 16px 40px;
+    justify-content: center;
   }
 
   .teams-sections-wrapper {
@@ -875,11 +910,12 @@ body {
 
   .teams-hero-viewport {
     height: auto;
-    min-height: auto;
+    min-height: 80vh;
+    min-height: 80dvh;
     max-height: none;
     overflow: visible;
-    padding: 85px 12px 20px;
-    justify-content: flex-start;
+    padding: 85px 12px 36px;
+    justify-content: center;
   }
 
   .teams-sections-wrapper {
