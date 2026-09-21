@@ -180,11 +180,11 @@
 }
 
 .mlsc-logo-animated .logo-letters {
-  animation: lettering-reveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: lettering-reveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .mlsc-logo-animated .logo-sub {
-  animation: caption-reveal 2.8s ease both;
+  animation: caption-reveal 1.6s ease both;
 }
 
 .mlsc-lettering {
@@ -238,23 +238,23 @@
 }
 
 .mlsc-logo-animated .mlsc-lettering {
-  animation: lettering-reveal 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: lettering-reveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .mlsc-logo-animated .mlsc-tile {
-  animation: tile-assemble 2.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: tile-assemble 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .mlsc-logo-animated .mlsc-tile-green {
-  animation-delay: 0.15s;
+  animation-delay: 0.1s;
 }
 
 .mlsc-logo-animated .mlsc-tile-yellow {
-  animation-delay: 0.3s;
+  animation-delay: 0.18s;
 }
 
 .mlsc-logo-animated .mlsc-tile-blue {
-  animation-delay: 0.08s;
+  animation-delay: 0.05s;
 }
 
 .screen-caption {
@@ -264,7 +264,7 @@
   letter-spacing: 0.4em;
   text-transform: uppercase;
   white-space: nowrap;
-  animation: caption-reveal 2.8s ease both;
+  animation: caption-reveal 1.6s ease both;
   margin: 0;
   font-family: 'JetBrains Mono', monospace;
 }
@@ -498,9 +498,9 @@
 }
 
 @keyframes caption-reveal {
-  0%, 60% {
+  0%, 45% {
     opacity: 0;
-    transform: translateY(5px);
+    transform: translateY(4px);
   }
   100% {
     opacity: 0.85;

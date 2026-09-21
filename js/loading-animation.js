@@ -9,9 +9,8 @@
   if (!loadingScreen) return;
 
   let isDismissed = false;
-  // Natural pacing: allow the complete 4-tile assembly (2.7s), lettering reveal (2.8s),
-  // and settled breathing room (~1.0s) so the user can clearly appreciate the logo.
-  const MIN_DISPLAY_TIME_MS = 3800;
+  // Balanced "just right" pacing: snappy assembly (~1.5s) with ~0.7s settled visibility before zoom
+  const MIN_DISPLAY_TIME_MS = 2200;
   const startTime = Date.now();
 
   // 1. Lock scrolling during loading
@@ -31,11 +30,11 @@
   // Smoothly increment progress bar over the display duration
   progressInterval = setInterval(() => {
     if (progress < 0.88) {
-      updateProgress(progress + 0.018);
+      updateProgress(progress + 0.026);
     } else if (pageLoaded && progress < 1) {
-      updateProgress(progress + 0.035);
+      updateProgress(progress + 0.05);
     }
-  }, 60);
+  }, 50);
 
   function dismissLoadingScreen() {
     if (isDismissed) return;
@@ -100,6 +99,6 @@
         pageLoaded = true;
         tryDismiss();
       }
-    }, 5500);
+    }, 3500);
   }
 })();
