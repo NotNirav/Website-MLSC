@@ -9,8 +9,8 @@
   // =========================================================
   // 1. DOMAIN CONFIGURATION & ORDER
   // =========================================================
-    const DOMAIN_ACCENT = '#00A4EF';
-    const DOMAIN_ORDER = [
+  const DOMAIN_ACCENT = '#00A4EF';
+  const DOMAIN_ORDER = [
     // =========================================================
     // 1. CORE LEADERSHIP
     // =========================================================
@@ -615,11 +615,11 @@
     if (la.includes('2023') && lb.includes('2023')) return true;
     if (la.includes('2024') && lb.includes('2024')) return true;
     if ((la.includes('current') || la.includes('2025') || la.includes('2026')) &&
-        (lb.includes('current') || lb.includes('2025') || lb.includes('2026'))) return true;
+      (lb.includes('current') || lb.includes('2025') || lb.includes('2026'))) return true;
     return false;
   }
 
-        function normalizeTeamName(teamStr) {
+  function normalizeTeamName(teamStr) {
     if (!teamStr) return 'Core Team';
     const clean = teamStr.trim();
     if (/^(core|president|vice president|general secretary)/i.test(clean)) return 'Core Team';
@@ -680,7 +680,7 @@
   // =========================================================
   // 6. RENDER ALL DOMAIN SECTIONS SEQUENTIALLY
   // =========================================================
-    // Helper: Rank members by role authority so that Domain Heads are at index 0 (front & center),
+  // Helper: Rank members by role authority so that Domain Heads are at index 0 (front & center),
   // with Leads following and Executives/Members flanking them on the sides.
   function getRoleRank(role) {
     const r = (role || '').toLowerCase();
@@ -751,7 +751,7 @@
       const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
       const catShort = cat === 'Core' ? 'Core' : (cat === 'Tech' ? 'Tech' : 'Non-Tech');
 
-      // 1. Create Jump Nav Pill with distinct Tech / Non-Tech visual indicator
+      // 1. Create Jump Nav Pill with clean domain label
       if (jumpNavContainer) {
         const pill = document.createElement('a');
         pill.className = `teams-jump-btn ${catClass}-pill`;
@@ -759,9 +759,7 @@
         pill.setAttribute('data-domain', domain.name);
         pill.setAttribute('data-category', cat);
         pill.innerHTML = `
-          <span class="teams-jump-cat-tag ${catClass}">${catShort}</span>
           <span class="teams-jump-label">${escapeHTML(domain.name)}</span>
-          <span class="teams-jump-count">${domainMembers.length}</span>
         `;
         pill.addEventListener('click', (e) => {
           e.preventDefault();
@@ -782,46 +780,19 @@
         jumpNavContainer.appendChild(pill);
       }
 
-      // 2. Render Category Wing Divider Header before first Tech domain
-      if (cat === 'Tech' && !hasRenderedTechDivider) {
-        hasRenderedTechDivider = true;
-        const divider = document.createElement('div');
-        divider.className = 'team-wing-divider tech-wing';
-        divider.innerHTML = `
-          <div class="team-wing-badge">
-            <span class="wing-text">Technical Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
-        `;
-        sectionsWrapper.appendChild(divider);
-      }
-
-      // 3. Render Category Wing Divider Header before first Non-Tech domain
-      if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
-        hasRenderedNonTechDivider = true;
-        const divider = document.createElement('div');
-        divider.className = 'team-wing-divider nontech-wing';
-        divider.innerHTML = `
-          <div class="team-wing-badge nontech">
-            <span class="wing-text">Non-Technical & Creative Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
-        `;
-        sectionsWrapper.appendChild(divider);
-      }
-
-      // 4. Create Domain Section Block
+      // 2. Create Domain Section Block
       const block = document.createElement('section');
       block.className = `team-domain-block domain-${catClass}`;
       block.id = `domain-${domain.id}`;
       block.setAttribute('data-domain', domain.name);
       block.setAttribute('data-category', cat);
 
-      // Domain Header
+      // Domain Header (Clean title and description, without redundant circular badge)
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <h2 class="team-domain-title">${escapeHTML(domain.tag || domain.name)}</h2>
+        <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
+        <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
       `;
       block.appendChild(header);
 
@@ -1027,7 +998,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
             }
           }
         }
-      } catch (err) {}
+      } catch (err) { }
     }
 
     // 2. Secondary fetch without query parameter (for local environments that disallow query parameters on static files)
@@ -1044,7 +1015,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
             }
           }
         }
-      } catch (err) {}
+      } catch (err) { }
     }
 
     // 3. Fallback dataset (guarantees instant rendering under file:// protocol, network disconnect, or strict CORS)
@@ -1088,7 +1059,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
         const team = normalizeTeamName(entry.team || entry.teamtype || 'Core Team');
         const role = entry.role || 'Team Member';
 
-                let defaultAccent = '#38bdf8';
+        let defaultAccent = '#38bdf8';
         if (team === 'Core Team') defaultAccent = '#ffb900';
         else if (team === 'AI / ML') defaultAccent = '#34d399';
         else if (team === 'Web Development') defaultAccent = '#38bdf8';
@@ -1209,27 +1180,9 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
-    tl.fromTo('.teams-tag',
-      { opacity: 0, y: -12 },
-      { opacity: 1, y: 0, duration: 0.5, delay: 0.05 }
-    );
-
-    tl.fromTo('.teams-title',
-      { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
-    );
-
-    tl.fromTo('.teams-desc',
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.5 },
-      '-=0.35'
-    );
-
     tl.fromTo('.teams-jump-nav',
       { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
+      { opacity: 1, y: 0, duration: 0.6 }
     );
   }
 
