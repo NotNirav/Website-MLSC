@@ -791,8 +791,8 @@ main {
   color: #000000;
 }
 
-/* Responsive adjustments for mobile */
-@media (max-width: 680px) {
+/* Responsive adjustments for mobile and tablets */
+@media (max-width: 860px) {
   .hero-br {
     display: none;
   }
@@ -814,37 +814,58 @@ main {
   }
 
   .station-card {
-    width: 150px;
-    padding: 10px 12px;
+    position: absolute;
+    top: calc(100% + 10px);
+    bottom: auto;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: clamp(124px, 36vw, 150px);
+    max-width: calc(50vw - 16px);
+    padding: 8px 10px;
     border-radius: 12px;
-    text-align: left;
+    text-align: center;
+    align-items: center;
+    box-sizing: border-box;
   }
 
   .station-card-title {
-    font-size: 12px;
+    font-size: clamp(11px, 2.8vw, 12px);
     line-height: 1.25;
+    text-align: center;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
 
   .station-card-tag {
-    font-size: 9.5px;
+    font-size: clamp(9px, 2.2vw, 10px);
     line-height: 1.35;
     margin-top: 3px;
+    text-align: center;
+    word-break: normal;
+    overflow-wrap: break-word;
   }
 
   .station-card-cta {
-    font-size: 8.5px;
-    margin-top: 6px;
+    font-size: clamp(8px, 2vw, 9px);
+    margin-top: 5px;
     gap: 3px;
+    justify-content: center;
   }
 
-  .roadmap-station:nth-of-type(odd) .station-card {
-    right: calc(100% + 10px);
-    text-align: left;
-  }
-
+  .roadmap-station:nth-of-type(odd) .station-card,
   .roadmap-station:nth-of-type(even) .station-card {
-    left: calc(100% + 10px);
-    text-align: left;
+    top: calc(100% + 10px);
+    bottom: auto;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    text-align: center;
+  }
+
+  .roadmap-station:nth-of-type(odd) .station-card-cta,
+  .roadmap-station:nth-of-type(even) .station-card-cta {
+    justify-content: center;
   }
 
   .guide-mascot {

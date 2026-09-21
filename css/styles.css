@@ -832,6 +832,14 @@ body {
   .scroll-stack-end {
     height: 180px;
   }
+
+  /* Allow content-heavy sections to grow past 100vh on mobile */
+  .about-section,
+  .contact-section {
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+  }
 }
 
 /* ========================================================= */
@@ -1056,6 +1064,8 @@ body {
   width: auto;
   max-width: calc(100vw - 32px);
   box-sizing: border-box;
+  /* Must be visible so the mascot child (positioned above the pill) is never clipped */
+  overflow: visible;
 }
 
 .glass-navbar.visible {
@@ -1208,7 +1218,7 @@ body {
   z-index: -1;
 }
 
-/* Brie Mascot Styling */
+/* Brie Mascot Styling — child of .glass-navbar (outer wrapper), never clipped */
 .brie-nav-mascot {
   position: absolute;
   top: 0;
@@ -1217,9 +1227,10 @@ body {
   width: auto;
   pointer-events: none;
   user-select: none;
-  z-index: 1005;
+  z-index: 1010; /* above the pill (z-index 1000) */
   transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.2s ease;
   will-change: transform, opacity;
+  overflow: visible;
 }
 
 .brie-nav-mascot img {
@@ -1228,6 +1239,19 @@ body {
   display: block;
   pointer-events: none;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+}
+
+/* Shrink mascot on mobile so it stays proportional to the smaller pill */
+@media (max-width: 680px) {
+  .brie-nav-mascot {
+    height: 38px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brie-nav-mascot {
+    height: 32px;
+  }
 }
 
 /* Responsive adjustment for tablet and mobile */
@@ -2552,6 +2576,7 @@ body {
   width: 58px;
   height: 58px;
   border-radius: 50%;
+  object-fit: cover;
   border: 2px solid var(--accent-orange);
   box-shadow: 0 0 15px var(--accent-orange-glow);
 }

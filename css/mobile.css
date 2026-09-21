@@ -1,0 +1,845 @@
+/**
+ * MLSC PCCOE — Mobile Responsiveness Master File
+ * Fixes layout issues across ALL pages at mobile/tablet viewports
+ * Breakpoints: 860px, 768px, 640px, 480px, 380px
+ */
+
+/* ============================================================
+   GLOBAL: Prevent horizontal overflow on all pages
+   ============================================================ */
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden !important;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+/* ============================================================
+   NAVBAR: Fix floating navbar on mobile
+   ============================================================ */
+@media (max-width: 680px) {
+  .glass-navbar {
+    top: 12px;
+    max-width: calc(100vw - 16px);
+  }
+
+  .glass-nav-container {
+    padding: 5px 6px 5px 10px;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 9999px;
+  }
+
+  .glass-nav-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .glass-nav-brand {
+    padding-right: 8px;
+    flex-shrink: 0;
+  }
+
+  .nav-brand-text {
+    font-size: 0.9rem;
+  }
+
+  .glass-nav-links {
+    gap: 2px;
+    flex-shrink: 0;
+  }
+
+  .glass-nav-link {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  .glass-nav-link {
+    font-size: 0.7rem;
+    padding: 5px 7px;
+  }
+  .nav-brand-text {
+    display: none;
+  }
+}
+
+/* ============================================================
+   HOME: HERO SECTION — mascot & title
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 0 16px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-mascot-webp {
+    width: 180px;
+    top: auto;
+    bottom: 0;
+    right: -8px;
+  }
+
+  .hero-raw-title {
+    font-size: clamp(4rem, 22vw, 7rem);
+    margin-bottom: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-mascot-webp {
+    width: 140px;
+    right: -4px;
+  }
+  .hero-raw-title {
+    font-size: clamp(3.5rem, 20vw, 6rem);
+    margin-bottom: 120px;
+  }
+}
+
+/* ============================================================
+   HOME: ABOUT SECTION
+   ============================================================ */
+@media (max-width: 768px) {
+  .about-section {
+    padding: clamp(16px, 3vh, 32px) 16px;
+    /* Let section grow naturally — do NOT enforce 100vh */
+    height: auto !important;
+    max-height: none !important;
+    min-height: auto !important;
+  }
+
+  .about-container {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .about-glass-box {
+    /* Give an explicit min-height so the box never collapses.
+       The FluidGlass canvas is position:absolute and the fallback text
+       is pulled out of flow when FluidGlass mounts — without a min-height
+       the box shrinks to 0. Use a safe viewport-aware value. */
+    min-height: clamp(380px, 68vh, 560px) !important;
+    max-height: none !important;
+    height: auto !important;
+    padding: clamp(20px, 4vw, 32px) 18px;
+    gap: 12px;
+  }
+
+  .about-title {
+    font-size: clamp(1.8rem, 6vw, 2.6rem);
+  }
+
+  .about-p1,
+  .about-p2 {
+    font-size: clamp(0.92rem, 3vw, 1.1rem);
+    line-height: 1.6;
+  }
+
+  .about-quote {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+  }
+
+  .about-highlight {
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-glass-box {
+    border-radius: 18px;
+    padding: 18px 14px;
+    /* Slightly smaller on very small phones but still substantial */
+    min-height: clamp(340px, 65vh, 480px) !important;
+  }
+  .about-p1,
+  .about-p2 {
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================================================
+   HOME: EXPLORE / SCROLL STACK SECTION
+   ============================================================ */
+@media (max-width: 768px) {
+  .explore-section {
+    padding: 50px 14px 30px;
+  }
+
+  .explore-container {
+    width: 100%;
+    gap: 28px;
+  }
+
+  .compact-title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+
+  .scroll-stack-inner {
+    padding: 16px 0 0;
+  }
+
+  .scroll-stack-card {
+    height: auto;
+    min-height: 14rem;
+    padding: 1.6rem 1.25rem;
+    border-radius: 20px;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .scroll-stack-card::before {
+    font-size: clamp(7rem, 20vw, 10rem);
+    bottom: -12%;
+  }
+
+  .scroll-stack-card h2 {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
+  .scroll-stack-card p {
+    font-size: clamp(0.88rem, 3vw, 1rem);
+  }
+
+  .scroll-stack-arrow {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .scroll-stack-end {
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-stack-card {
+    min-height: 12rem;
+    padding: 1.25rem 1rem;
+    border-radius: 18px;
+  }
+
+  .scroll-stack-card h2 {
+    font-size: clamp(1.6rem, 7vw, 2rem);
+  }
+
+  .scroll-stack-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .scroll-stack-end {
+    height: 60px;
+  }
+}
+
+/* ============================================================
+   HOME: CONTACT SECTION
+   ============================================================ */
+@media (max-width: 860px) {
+  .contact-section {
+    padding: clamp(40px, 6vh, 60px) 16px clamp(30px, 5vh, 50px);
+    min-height: auto;
+    height: auto;
+    max-height: none;
+  }
+
+  .contact-container {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-input-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .contact-title {
+    font-size: clamp(1.7rem, 5.5vw, 2.4rem);
+  }
+
+  .contact-subtitle {
+    font-size: clamp(0.88rem, 3vw, 1rem);
+  }
+
+  .contact-form-wrap {
+    padding: 20px 18px;
+  }
+
+  .contact-card {
+    padding: 16px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 36px 12px 28px;
+  }
+
+  .contact-card {
+    padding: 14px 14px;
+    gap: 12px;
+  }
+
+  .contact-card-value {
+    font-size: 0.95rem;
+  }
+
+  .contact-social-links {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .contact-social-btn {
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .contact-form-wrap {
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  .contact-submit-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 20px 14px 14px;
+  }
+
+  .footer-container {
+    width: 100%;
+    gap: 14px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    max-width: 100%;
+  }
+
+  .footer-links-group {
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer-badges {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+}
+
+/* ============================================================
+   EVENTS PAGE: Hero & Roadmap
+   ============================================================ */
+@media (max-width: 768px) {
+  .events-hero-section {
+    padding: clamp(80px, 12vh, 100px) 16px 0;
+  }
+
+  .roadmap-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+
+  .roadmap-copy {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+
+  .events-roadmap-section {
+    padding: 50px 10px 80px;
+    overflow-x: hidden;
+  }
+
+  .roadmap-track-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  .events-hero-section {
+    padding: clamp(75px, 11vh, 90px) 12px 0;
+  }
+
+  .roadmap-title {
+    font-size: clamp(1.8rem, 7vw, 2.5rem);
+  }
+
+  /* Position station cards cleanly beneath hubs on mobile so they never overflow left/right */
+  .station-card {
+    position: absolute;
+    top: calc(100% + 8px) !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: clamp(120px, 35vw, 144px) !important;
+    max-width: calc(50vw - 14px) !important;
+    padding: 7px 9px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    align-items: center !important;
+  }
+
+  .station-card-title {
+    font-size: 11px;
+    line-height: 1.25;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .station-card-tag {
+    font-size: 9px;
+    line-height: 1.3;
+    margin-top: 2px;
+    text-align: center;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .station-card-cta {
+    font-size: 8px;
+    margin-top: 4px;
+    justify-content: center;
+  }
+
+  .roadmap-station:nth-of-type(odd) .station-card,
+  .roadmap-station:nth-of-type(even) .station-card {
+    top: calc(100% + 8px) !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    text-align: center !important;
+  }
+
+  .roadmap-station:nth-of-type(odd) .station-card-cta,
+  .roadmap-station:nth-of-type(even) .station-card-cta {
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   TEAMS PAGE: Hero, Carousels, Jump Navigation
+   ============================================================ */
+@media (max-width: 640px) {
+  .teams-hero-viewport {
+    padding: 90px 14px 36px;
+    min-height: 80vh;
+    min-height: 80dvh;
+  }
+
+  .teams-title {
+    font-size: clamp(1.9rem, 6.5vw, 2.5rem);
+  }
+
+  .teams-desc {
+    font-size: clamp(0.88rem, 3.2vw, 1.05rem);
+  }
+
+  .teams-jump-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    justify-content: flex-start;
+    padding: 6px 10px;
+  }
+
+  .teams-jump-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .teams-jump-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.76rem;
+    padding: 5px 11px;
+  }
+
+  .teams-jump-cat-tag {
+    font-size: 0.62rem;
+    padding: 1px 6px;
+  }
+
+  .wing-text {
+    font-size: clamp(1.8rem, 6vw, 2.4rem);
+  }
+
+  .team-domain-title {
+    font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+  }
+
+  .team-domain-block {
+    padding: clamp(40px, 7vh, 70px) 12px clamp(40px, 7vh, 70px);
+  }
+}
+
+@media (max-width: 480px) {
+  .teams-carousel-stage {
+    height: 455px;
+  }
+
+  .team-card {
+    width: 268px;
+    height: 418px;
+    padding: 11px;
+  }
+
+  .team-card-photo-box {
+    height: 186px;
+  }
+
+  .team-card-name {
+    font-size: 1.1rem;
+  }
+
+  .team-card-about {
+    font-size: 0.82rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .teams-nav-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .teams-nav-btn.prev { left: 2px; }
+  .teams-nav-btn.next { right: 2px; }
+
+  .teams-sections-wrapper {
+    gap: 0;
+  }
+}
+
+/* ============================================================
+   ACHIEVEMENTS PAGE: Hero, Timeline, Hackathon, Leaderboard
+   ============================================================ */
+@media (max-width: 768px) {
+  .achievements-section {
+    padding: clamp(20px, 4vh, 48px) 14px;
+  }
+
+  .achievements-section.hero-section {
+    padding: clamp(80px, 12vh, 110px) 14px clamp(30px, 5vh, 48px);
+  }
+
+  .achievements-hero-title {
+    font-size: clamp(2rem, 6.5vw, 3.4rem);
+  }
+
+  .achievements-hero-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+
+  .winner-carousel-stage {
+    height: 460px;
+  }
+
+  .winner-card {
+    width: 265px;
+    height: 428px;
+    padding: 12px 12px 10px;
+  }
+
+  .winner-card-image-wrap {
+    height: 138px;
+  }
+
+  .winner-nav-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hackathon-title {
+    font-size: clamp(1.8rem, 5.5vw, 2.5rem);
+  }
+
+  .leaderboard-title {
+    font-size: clamp(1.8rem, 6.5vw, 3rem);
+  }
+}
+
+@media (max-width: 580px) {
+  .leaderboard-controls-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .leaderboard-search-box {
+    max-width: 100%;
+    min-width: auto;
+  }
+
+  .timeframe-toggle {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .timeframe-btn {
+    font-size: 0.82rem;
+    padding: 7px 14px;
+  }
+
+  .podium-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .podium-card {
+    width: 100%;
+    max-width: 420px;
+    min-height: auto !important;
+    padding: 20px 16px 16px;
+  }
+
+  .podium-card.rank-1 { order: 1; }
+  .podium-card.rank-2 { order: 2; }
+  .podium-card.rank-3 { order: 3; }
+
+  .rankings-table-header { display: none; }
+
+  .ranking-row {
+    grid-template-columns: 40px 1fr auto;
+    gap: 10px;
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .col-badge,
+  .col-solved { display: none; }
+
+  .user-highlight-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 16px;
+    gap: 16px;
+  }
+
+  .user-card-stats-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .user-stat-box { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .winner-carousel-stage { height: 438px; }
+
+  .winner-card {
+    width: 252px;
+    height: 412px;
+  }
+
+  .winner-card-image-wrap { height: 128px; }
+
+  .podium-avatar {
+    width: 64px;
+    height: 64px;
+  }
+
+  .rank-1 .podium-avatar {
+    width: 78px;
+    height: 78px;
+  }
+
+  .podium-name { font-size: 1rem; }
+
+  .journey-section {
+    padding: 50px 12px 60px;
+  }
+
+  .journey-title {
+    font-size: clamp(1.7rem, 6vw, 2.2rem);
+  }
+
+  .hackathon-title {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+  }
+
+  .hackathon-subtitle,
+  .leaderboard-subtitle {
+    font-size: clamp(0.85rem, 3.5vw, 1rem);
+  }
+
+  .achievements-hero-title {
+    font-size: clamp(1.75rem, 7.5vw, 2.4rem);
+  }
+
+  .leaderboard-title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+}
+
+/* ============================================================
+   GAMES PAGE: Hero & Arcade Cabinet
+   ============================================================ */
+@media (max-width: 768px) {
+  .games-hero-viewport {
+    padding: clamp(80px, 12vh, 100px) 16px clamp(16px, 3vh, 32px);
+    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .games-title {
+    font-size: clamp(2rem, 6.5vw, 3rem);
+    margin-bottom: clamp(8px, 1.8vh, 16px);
+  }
+
+  .games-desc {
+    font-size: clamp(0.9rem, 3.2vw, 1.05rem);
+  }
+
+  .games-arcade-viewport {
+    padding: 50px 12px 60px;
+  }
+
+  .arcade-cabinet { border-radius: 12px; }
+
+  .cabinet-header {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .cabinet-title-badge { font-size: 0.7rem; }
+
+  .cabinet-actions { gap: 6px; }
+
+  .cabinet-btn {
+    font-size: 0.68rem;
+    padding: 5px 10px;
+  }
+
+  .cabinet-screen-wrapper { height: 480px; }
+
+  .cabinet-deck {
+    padding: 10px 14px;
+    justify-content: center;
+    text-align: center;
+    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cabinet-keybinds {
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-hero-viewport {
+    padding: clamp(75px, 11vh, 90px) 12px clamp(14px, 2.5vh, 28px);
+  }
+
+  .arcade-feature-pill {
+    font-size: 0.7rem;
+    padding: 6px 14px;
+  }
+
+  .arcade-launch-cta {
+    font-size: 0.85rem;
+    padding: 11px 22px;
+    gap: 10px;
+  }
+
+  .cabinet-screen-wrapper { height: 400px; }
+
+  .cabinet-storage-hint { display: none; }
+}
+
+@media (max-width: 380px) {
+  .cabinet-screen-wrapper { height: 340px; }
+
+  .cabinet-btn {
+    font-size: 0.62rem;
+    padding: 4px 7px;
+  }
+}
+
+/* ============================================================
+   TOAST: Full width on mobile
+   ============================================================ */
+@media (max-width: 640px) {
+  .toast {
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 32px);
+    max-width: none;
+    text-align: center;
+    bottom: 20px;
+    right: auto;
+  }
+}
+
+/* ============================================================
+   ULTRA-SMALL SCREENS (< 380px): Final safety net
+   ============================================================ */
+@media (max-width: 380px) {
+  .hero-raw-title {
+    font-size: clamp(3rem, 22vw, 5rem);
+  }
+
+  .glass-nav-link {
+    font-size: 0.68rem;
+    padding: 4px 6px;
+  }
+
+  .about-glass-box {
+    padding: 14px 12px;
+    border-radius: 14px;
+  }
+
+  .scroll-stack-card {
+    padding: 1rem 0.875rem;
+    border-radius: 16px;
+  }
+
+  .contact-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .footer-links-group {
+    gap: 20px;
+  }
+}
