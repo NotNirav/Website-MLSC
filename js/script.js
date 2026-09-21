@@ -306,12 +306,17 @@
       const endElement = document.querySelector('.scroll-stack-end');
       endElementTop = endElement ? getElementDocumentTop(endElement) : 0;
 
+      const lastCard = cards[cards.length - 1];
+      const lastCardTop = lastCard ? getElementDocumentTop(lastCard) : 0;
+      const lastCardPinStart = lastCardTop - stackPositionPx - itemStackDistance * (cards.length - 1);
+      const unifiedPinEnd = lastCardPinStart + 60;
+
       cachedCards = cards.map((card, i) => {
         const cardTop = getElementDocumentTop(card);
         const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
         const triggerEnd = cardTop - scaleEndPositionPx;
         const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
-        const pinEnd = endElementTop - containerHeight * 0.7;
+        const pinEnd = Math.max(pinStart + 20, unifiedPinEnd);
         const targetScale = baseScale + i * itemScale;
         const stackOffset = stackPositionPx + itemStackDistance * i;
 
@@ -490,34 +495,22 @@
   // LEADERBOARD PAGE FUNCTIONALITY & DATA
   // =========================================================
   const LEADERBOARD_DATA = [
-    { rank: 1, name: "Ved Jadhav", handle: "ved_j", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
-    { rank: 2, name: "Sharvil Patil", handle: "sharvil_p", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
-    { rank: 3, name: "Isha Thakur", handle: "isha_t", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
-    { rank: 4, name: "Chinmay Ahire", handle: "chinmay_a", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
-    { rank: 5, name: "Nirav Neve", handle: "nirav_n", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
-    { rank: 6, name: "Khushi Kolhe", handle: "khushi_k", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 7, name: "Sanika Shinde", handle: "sanika_s", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 8, name: "Badal Dadwani", handle: "badal_d", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 9, name: "Aryan Patil", handle: "aryan_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 10, name: "Parth Popli", handle: "parth_p", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 11, name: "Prem Thakur", handle: "prem_t", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 12, name: "Anjali Borse", handle: "anjali_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
+    { rank: 1, name: "Ved Jadhav", handle: "ved_j", points: 4850, solved: 412, image: "assets/images/members/Ved_Jadhav.png", isCurrentUser: false },
+    { rank: 2, name: "Sharvil Patil", handle: "sharvil_p", points: 4520, solved: 385, image: "assets/images/members/Sharvil_Patil.jpg", isCurrentUser: false },
+    { rank: 3, name: "Isha Thakur", handle: "isha_t", points: 4210, solved: 360, image: "assets/images/members/old_2025_isha_thakur.jpg", isCurrentUser: false },
+    { rank: 4, name: "Chinmay Ahire", handle: "chinmay_a", points: 3980, solved: 338, image: "assets/images/members/Chinmay_Ahire.png", isCurrentUser: true },
+    { rank: 5, name: "Nirav Neve", handle: "nirav_n", points: 3750, solved: 315, image: "assets/images/members/Nirav_Neve.png", isCurrentUser: false },
+    { rank: 6, name: "Khushi Kolhe", handle: "khushi_k", points: 3510, solved: 298, image: "assets/images/members/Khushi Kolhe.jpg", isCurrentUser: false },
+    { rank: 7, name: "Sanika Shinde", handle: "sanika_s", points: 3290, solved: 280, image: "assets/images/members/Sanika Shinde.png", isCurrentUser: false },
+    { rank: 8, name: "Badal Dadwani", handle: "badal_d", points: 3050, solved: 262, image: "assets/images/members/Badal Dadwani.png", isCurrentUser: false },
+    { rank: 9, name: "Aryan Patil", handle: "aryan_p", points: 2890, solved: 245, image: "assets/images/members/Aryan Patel.png", isCurrentUser: false },
+    { rank: 10, name: "Parth Popli", handle: "parth_p", points: 2720, solved: 230, image: "assets/images/members/Parth_Popli.png", isCurrentUser: false },
+    { rank: 11, name: "Prem Thakur", handle: "prem_t", points: 2550, solved: 215, image: "assets/images/members/prem thakur.jpg", isCurrentUser: false },
+    { rank: 12, name: "Anjali Borse", handle: "anjali_b", points: 2410, solved: 202, image: "assets/images/members/Anjali Borse.png", isCurrentUser: false }
   ];
 
-  function getAvatarSvg(name, rank) {
-    const palette = [
-      ['#ffb900', '#f59e0b'], // Gold
-      ['#cbd5e1', '#64748b'], // Silver
-      ['#f59e0b', '#b45309'], // Bronze
-      ['#38bdf8', '#0284c7'], // Sky blue
-      ['#c084fc', '#7e22ce'], // Purple
-      ['#34d399', '#059669'], // Emerald
-      ['#f43f5e', '#be123c'], // Rose
-      ['#fb923c', '#c2410c']  // Amber
-    ];
-    const colorPair = palette[(rank - 1) % palette.length];
-    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-    return `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><linearGradient id="g${rank}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${encodeURIComponent(colorPair[0])}"/><stop offset="100%" stop-color="${encodeURIComponent(colorPair[1])}"/></linearGradient></defs><circle cx="50" cy="50" r="50" fill="url(%23g${rank})"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" fill="%23ffffff" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="34">${initials}</text></svg>`;
+  function getAvatarUrl(user) {
+    return user.image || 'assets/images/branding/favicon.svg';
   }
 
   function renderPodium(topThreeData) {
@@ -533,13 +526,12 @@
       <!-- Rank 2 Card (Silver - Left) -->
       <div class="podium-card rank-2 glass-card">
         <div class="podium-avatar-outer">
-          <img src="${getAvatarSvg(rank2.name, 2)}" alt="${rank2.name}" class="podium-avatar">
+          <img src="${getAvatarUrl(rank2)}" alt="${rank2.name}" class="podium-avatar" onerror="this.onerror=null; this.src='assets/images/branding/favicon.svg';">
           <div class="podium-rank-badge">2</div>
         </div>
         <div class="podium-user-info">
           <h3 class="podium-name">${rank2.name}</h3>
           <span class="podium-handle">@${rank2.handle}</span>
-          <span class="podium-tier-tag">${rank2.tier}</span>
         </div>
         <div class="podium-pedestal-base">
           <div class="podium-stat">
@@ -561,13 +553,12 @@
           </svg>
         </div>
         <div class="podium-avatar-outer">
-          <img src="${getAvatarSvg(rank1.name, 1)}" alt="${rank1.name}" class="podium-avatar">
+          <img src="${getAvatarUrl(rank1)}" alt="${rank1.name}" class="podium-avatar" onerror="this.onerror=null; this.src='assets/images/branding/favicon.svg';">
           <div class="podium-rank-badge">1</div>
         </div>
         <div class="podium-user-info">
           <h3 class="podium-name">${rank1.name}</h3>
           <span class="podium-handle">@${rank1.handle}</span>
-          <span class="podium-tier-tag">${rank1.tier}</span>
         </div>
         <div class="podium-pedestal-base">
           <div class="podium-stat">
@@ -584,13 +575,12 @@
       <!-- Rank 3 Card (Bronze - Right) -->
       <div class="podium-card rank-3 glass-card">
         <div class="podium-avatar-outer">
-          <img src="${getAvatarSvg(rank3.name, 3)}" alt="${rank3.name}" class="podium-avatar">
+          <img src="${getAvatarUrl(rank3)}" alt="${rank3.name}" class="podium-avatar" onerror="this.onerror=null; this.src='assets/images/branding/favicon.svg';">
           <div class="podium-rank-badge">3</div>
         </div>
         <div class="podium-user-info">
           <h3 class="podium-name">${rank3.name}</h3>
           <span class="podium-handle">@${rank3.handle}</span>
-          <span class="podium-tier-tag">${rank3.tier}</span>
         </div>
         <div class="podium-pedestal-base">
           <div class="podium-stat">
@@ -615,7 +605,7 @@
     userCard.innerHTML = `
       <div class="user-card-left">
         <div class="user-card-avatar-wrap">
-          <img src="${getAvatarSvg(user.name, user.rank)}" alt="${user.name}" class="user-card-avatar">
+          <img src="${getAvatarUrl(user)}" alt="${user.name}" class="user-card-avatar" onerror="this.onerror=null; this.src='assets/images/branding/favicon.svg';">
           <span class="user-you-tag">YOU</span>
         </div>
         <div class="user-card-details">
@@ -626,7 +616,7 @@
         </div>
       </div>
 
-      <div class="user-card-stats-grid">
+      <div class="user-card-stats-grid user-card-stats-3col">
         <div class="user-stat-box">
           <span class="user-stat-lbl">Position</span>
           <span class="user-stat-val accent">#${rankFormatted}</span>
@@ -638,10 +628,6 @@
         <div class="user-stat-box">
           <span class="user-stat-lbl">Points</span>
           <span class="user-stat-val accent">${user.points.toLocaleString()} pts</span>
-        </div>
-        <div class="user-stat-box">
-          <span class="user-stat-lbl">Tier</span>
-          <span class="user-stat-val">${user.tier} ${user.badge}</span>
         </div>
       </div>
     `;
@@ -667,7 +653,6 @@
 
     listContainer.innerHTML = listData.map(item => {
       const formattedRank = String(item.rank).padStart(2, '0');
-      const tierClass = item.tier.toLowerCase().replace(/\s+/g, '-');
       const currentUserClass = item.isCurrentUser ? 'is-current-user' : '';
       const youBadge = item.isCurrentUser ? `<span class="row-you-badge">YOU</span>` : '';
 
@@ -675,7 +660,7 @@
         <div class="ranking-row ${currentUserClass} glass-card">
           <div class="col-rank">${formattedRank}</div>
           <div class="col-user">
-            <img src="${getAvatarSvg(item.name, item.rank)}" alt="${item.name}" class="row-avatar">
+            <img src="${getAvatarUrl(item)}" alt="${item.name}" class="row-avatar" onerror="this.onerror=null; this.src='assets/images/branding/favicon.svg';">
             <div class="row-user-details">
               <span class="row-name">${item.name} ${youBadge}</span>
               <span class="row-handle">@${item.handle}</span>
@@ -683,9 +668,6 @@
           </div>
           <div class="col-solved">${item.solved} solved</div>
           <div class="col-points">${item.points.toLocaleString()} pts</div>
-          <div class="col-badge">
-            <span class="tier-badge ${tierClass}">${item.tier} ${item.badge}</span>
-          </div>
         </div>
       `;
     }).join('');
@@ -728,8 +710,7 @@
 
         const filtered = currentDataSet.filter(item =>
           item.name.toLowerCase().includes(query) ||
-          item.handle.toLowerCase().includes(query) ||
-          item.tier.toLowerCase().includes(query)
+          item.handle.toLowerCase().includes(query)
         );
         renderRankingsList(filtered);
       });
