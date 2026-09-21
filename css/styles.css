@@ -275,13 +275,13 @@ body {
 }
 
 .about-container {
-  width: min(1180px, 92vw);
+  width: min(840px, 92vw);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(12px, 1.8vh, 20px);
+  gap: clamp(12px, 1.8vh, 18px);
   box-sizing: border-box;
   position: relative;
   z-index: 1;
@@ -291,7 +291,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .about-brand-indicator {
@@ -329,11 +329,11 @@ body {
 }
 
 .about-title {
-  font-size: clamp(2rem, min(4.5vw, 4.5vh), 3.2rem);
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
   font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
   margin: 0;
   text-align: center;
   width: 100%;
@@ -346,8 +346,8 @@ body {
 /* Greyish rectangular box with glassmorphism (generous and balanced) */
 .about-glass-box {
   width: 100%;
-  min-height: clamp(520px, 72vh, 640px);
-  max-height: clamp(560px, 78vh, 700px);
+  min-height: clamp(380px, 50vh, 460px);
+  max-height: clamp(440px, 60vh, 520px);
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.05) 0%,
@@ -356,7 +356,7 @@ body {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   border: 1px solid rgba(255, 255, 255, 0.13);
-  border-radius: clamp(20px, 2.5vw, 30px);
+  border-radius: clamp(18px, 2vw, 26px);
   box-shadow:
     0 30px 80px -20px rgba(0, 0, 0, 0.85),
     0 0 0 1px rgba(255, 255, 255, 0.04),
@@ -366,8 +366,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: clamp(28px, 4vw, 48px);
-  gap: clamp(12px, 1.8vh, 20px);
+  padding: clamp(24px, 3.5vw, 36px) clamp(20px, 4vw, 40px);
+  gap: clamp(10px, 1.5vh, 16px);
   text-align: center;
   overflow: hidden;
   box-sizing: border-box;
@@ -399,19 +399,21 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  max-width: 960px;
+  gap: 14px;
+  max-width: 660px;
+  width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 1;
 }
 
 .about-text {
-  font-size: clamp(0.95rem, 1.35vw, 1.15rem);
-  line-height: 1.7;
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
+  line-height: 1.65;
   color: #ffffff;
-  max-width: 960px;
-  margin: 0;
+  max-width: 660px;
+  width: 100%;
+  margin: 0 auto;
   font-weight: 400;
   opacity: 0.95;
   position: relative;
@@ -420,19 +422,23 @@ body {
 }
 
 .about-p1 {
-  font-size: clamp(0.95rem, 1.25vw, 1.12rem);
+  font-size: clamp(0.88rem, 1.1vw, 0.98rem);
   line-height: 1.65;
-  color: #ffffff;
-  margin: 0;
+  color: #f3f4f6;
+  max-width: 640px;
+  margin: 0 auto;
   font-weight: 400;
+  text-wrap: pretty;
 }
 
 .about-p2 {
-  font-size: clamp(0.92rem, 1.2vw, 1.08rem);
+  font-size: clamp(0.85rem, 1.05vw, 0.94rem);
   line-height: 1.6;
   color: #e5e7eb;
-  margin: 0;
+  max-width: 640px;
+  margin: 0 auto;
   font-weight: 400;
+  text-wrap: pretty;
 }
 
 .event-accent.blue {
@@ -451,24 +457,27 @@ body {
 }
 
 .about-quote {
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: clamp(0.92rem, 1.15vw, 1.04rem);
   line-height: 1.5;
   color: #ffb900;
   font-style: italic;
   font-weight: 600;
-  margin: 6px 0 0;
+  max-width: 580px;
+  margin: 2px auto 0;
+  text-wrap: balance;
 }
 
 .about-highlight {
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
   line-height: 1.4;
   color: #38bdf8;
   font-weight: 600;
-  max-width: 960px;
-  margin: 8px 0 0;
+  max-width: 600px;
+  margin: 4px auto 0;
   letter-spacing: -0.01em;
   position: relative;
   z-index: 1;
+  text-wrap: balance;
   transition: opacity 0.3s ease;
 }
 

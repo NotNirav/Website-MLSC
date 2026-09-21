@@ -150,40 +150,40 @@ function AboutTextContent({
   }
 
   const maxWidth = isMobile
-    ? v.width * 0.92
+    ? v.width * 0.86
     : isTablet
-    ? Math.min(v.width * 0.90, 5.4)
-    : Math.min(v.width * 0.88, 6.8);
+    ? Math.min(v.width * 0.80, 4.4)
+    : Math.min(v.width * 0.74, 5.0);
 
   const orgFontSize = isMobile
-    ? Math.min(v.width / 34, 0.082)
+    ? Math.min(v.width / 38, 0.072)
     : isTablet
-    ? Math.min(v.width / 38, 0.106)
-    : Math.min(v.width / 42, 0.120);
+    ? Math.min(v.width / 44, 0.090)
+    : Math.min(v.width / 48, 0.100);
 
   const leadFontSize = isMobile
-    ? Math.min(v.width / 44, 0.068)
+    ? Math.min(v.width / 48, 0.058)
     : isTablet
-    ? Math.min(v.width / 50, 0.084)
-    : Math.min(v.width / 54, 0.095);
+    ? Math.min(v.width / 56, 0.072)
+    : Math.min(v.width / 60, 0.082);
 
   const actFontSize = isMobile
-    ? Math.min(v.width / 46, 0.064)
+    ? Math.min(v.width / 50, 0.055)
     : isTablet
-    ? Math.min(v.width / 52, 0.080)
-    : Math.min(v.width / 56, 0.090);
+    ? Math.min(v.width / 58, 0.068)
+    : Math.min(v.width / 62, 0.078);
 
   const quoteFontSize = isMobile
-    ? Math.min(v.width / 36, 0.078)
+    ? Math.min(v.width / 42, 0.066)
     : isTablet
-    ? Math.min(v.width / 42, 0.098)
-    : Math.min(v.width / 44, 0.110);
+    ? Math.min(v.width / 48, 0.080)
+    : Math.min(v.width / 52, 0.090);
 
   const punchFontSize = isMobile
-    ? Math.min(v.width / 32, 0.086)
+    ? Math.min(v.width / 38, 0.072)
     : isTablet
-    ? Math.min(v.width / 38, 0.112)
-    : Math.min(v.width / 40, 0.126);
+    ? Math.min(v.width / 44, 0.092)
+    : Math.min(v.width / 46, 0.102);
 
   // Background solid color circles (reverted to 4 clean solid color circles)
   const bgCircles = (
@@ -309,12 +309,12 @@ function AboutTextContent({
   }, [punchlineText]);
 
   // Responsive vertical coordinates based on visible viewport height
-  const orgY = isMobile ? v.height * 0.36 : v.height * 0.33;
-  const leadY = isMobile ? v.height * 0.18 : v.height * 0.16;
-  const actY = isMobile ? -v.height * 0.05 : -v.height * 0.04;
-  const dividerY = isMobile ? -v.height * 0.18 : -v.height * 0.16;
-  const quoteY = isMobile ? -v.height * 0.25 : -v.height * 0.23;
-  const punchY = isMobile ? -v.height * 0.38 : -v.height * 0.36;
+  const orgY = isMobile ? v.height * 0.28 : v.height * 0.25;
+  const leadY = isMobile ? v.height * 0.13 : v.height * 0.11;
+  const actY = isMobile ? -v.height * 0.04 : -v.height * 0.03;
+  const dividerY = isMobile ? -v.height * 0.15 : -v.height * 0.13;
+  const quoteY = isMobile ? -v.height * 0.21 : -v.height * 0.19;
+  const punchY = isMobile ? -v.height * 0.31 : -v.height * 0.28;
 
   return (
     <group position={[0, 0, 12]}>
@@ -323,7 +323,7 @@ function AboutTextContent({
 
       {/* Sleek horizontal accent divider above the core quote */}
       <mesh position={[0, dividerY, -0.1]}>
-        <planeGeometry args={[Math.min(v.width * 0.32, 2.0), 0.003]} />
+        <planeGeometry args={[Math.min(v.width * 0.22, 1.4), 0.003]} />
         <meshBasicMaterial color="#FFB900" opacity={0.4} transparent toneMapped={false} />
       </mesh>
 
