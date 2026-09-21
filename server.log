@@ -1,0 +1,201 @@
+ INFO  Accepting connections at http://localhost:50912
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 43 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /css/styles.css
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /css/footer.css
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /css/loading-animation.css
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 10 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 10 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 9 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /assets/images/loading/cinema-room.webp
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /assets/images/loading/mlsc-letters-light.png
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /js/footer.js
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 21 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /js/fluid-glass-bundle.js
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 89 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /js/script.js
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 51 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 GET /js/loading-animation.js
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 24 ms
+ HTTP  9/21/2026 5:32:08 PM ::1 Returned 200 in 1955 ms
+ HTTP  9/21/2026 5:32:10 PM ::1 GET /assets/images/mascots/brie-navbar.svg
+ HTTP  9/21/2026 5:32:10 PM ::1 Returned 200 in 5 ms
+ HTTP  9/21/2026 5:32:11 PM ::1 GET /favicon.ico
+ HTTP  9/21/2026 5:32:11 PM ::1 Returned 404 in 3 ms
+ HTTP  9/21/2026 5:32:12 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp?t=1789992132262
+ HTTP  9/21/2026 5:32:12 PM ::1 Returned 200 in 1 ms
+ HTTP  9/21/2026 5:32:12 PM ::1 GET /assets/3d/lens.glb
+ HTTP  9/21/2026 5:32:12 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /events.html
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 301 in 1 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /events
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /css/styles.css
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /css/events.css
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /assets/images/event-mascots/Brie-flying.png
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /css/footer.css
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 200 in 11 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 304 in 5 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 GET /js/footer.js
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:32:52 PM ::1 Returned 200 in 19 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /js/events.js
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /js/script.js
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-inaugaration.png
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 6 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-Techroom.png
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-Praxis.png
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-Datathon.png
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 55 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 18 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 20 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/mascots/brie-navbar.svg
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 46 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/branding/favicon.svg
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-Codesprint.png
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 17 ms
+ HTTP  9/21/2026 5:32:53 PM ::1 GET /assets/images/event-mascots/Brie-Bluebit.png
+ HTTP  9/21/2026 5:32:53 PM ::1 Returned 200 in 38 ms
+ HTTP  9/21/2026 5:32:56 PM ::1 GET /teams.html
+ HTTP  9/21/2026 5:32:56 PM ::1 Returned 301 in 2 ms
+ HTTP  9/21/2026 5:32:56 PM ::1 GET /teams
+ HTTP  9/21/2026 5:32:56 PM ::1 Returned 200 in 3 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /css/styles.css
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /css/teams.css?v=10.0
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /css/footer.css
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /js/teams.js?v=8.0
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /js/footer.js
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /js/script.js
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 10 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 63 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /data/teams.csv?_=1789992177195
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/mascots/brie-navbar.svg
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Ved_Jadhav.png
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Sharvil_Patil.jpg
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/old_2025_isha_thakur.jpg
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Chinmay_Ahire.png
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Nirav_Neve.png
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Khushi%20Kolhe.jpg
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 5 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 8 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 GET /assets/images/members/Sanika%20Shinde.png
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 14 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 19 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 22 ms
+ HTTP  9/21/2026 5:32:57 PM ::1 Returned 200 in 15 ms
+ HTTP  9/21/2026 5:32:58 PM ::1 GET /assets/images/members/Badal%20Dadwani.png
+ HTTP  9/21/2026 5:32:58 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:32:58 PM ::1 GET /assets/images/members/Aryan%20Patel.png
+ HTTP  9/21/2026 5:32:58 PM ::1 GET /assets/images/members/Parth_Popli.png
+ HTTP  9/21/2026 5:32:58 PM ::1 Returned 200 in 12 ms
+ HTTP  9/21/2026 5:32:58 PM ::1 Returned 200 in 17 ms
+ HTTP  9/21/2026 5:33:00 PM ::1 GET /assets/images/members/prem%20thakur.jpg
+ HTTP  9/21/2026 5:33:00 PM ::1 Returned 200 in 9 ms
+ HTTP  9/21/2026 5:33:00 PM ::1 GET /assets/images/members/Srushti%20Gaikwad.png
+ HTTP  9/21/2026 5:33:00 PM ::1 Returned 200 in 8 ms
+ HTTP  9/21/2026 5:33:02 PM ::1 GET /assets/images/members/Anjali%20Borse.png
+ HTTP  9/21/2026 5:33:02 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:33:03 PM ::1 GET /assets/images/members/old_2025_madhav_khobare.jpg
+ HTTP  9/21/2026 5:33:03 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:33:03 PM ::1 GET /assets/images/members/Sharvari_Deshmukh.png
+ HTTP  9/21/2026 5:33:03 PM ::1 Returned 200 in 9 ms
+ HTTP  9/21/2026 5:33:04 PM ::1 GET /assets/images/members/Aditya_Rajput.png
+ HTTP  9/21/2026 5:33:04 PM ::1 Returned 200 in 7 ms
+ HTTP  9/21/2026 5:33:04 PM ::1 GET /assets/images/members/Kashvi_Patki%20.jpg
+ HTTP  9/21/2026 5:33:04 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:33:06 PM ::1 GET /assets/images/members/Rishabh%20Prabhu.png
+ HTTP  9/21/2026 5:33:06 PM ::1 GET /assets/images/members/Pranav_Narkhede.png
+ HTTP  9/21/2026 5:33:06 PM ::1 GET /assets/images/members/shivanshi.png
+ HTTP  9/21/2026 5:33:06 PM ::1 Returned 200 in 32 ms
+ HTTP  9/21/2026 5:33:06 PM ::1 Returned 200 in 54 ms
+ HTTP  9/21/2026 5:33:06 PM ::1 Returned 200 in 55 ms
+ HTTP  9/21/2026 5:33:07 PM ::1 GET /assets/images/members/APURV%20SAGARE.jpeg
+ HTTP  9/21/2026 5:33:07 PM ::1 Returned 200 in 5 ms
+ HTTP  9/21/2026 5:33:07 PM ::1 GET /assets/images/members/Akshay%20Pote.svg
+ HTTP  9/21/2026 5:33:07 PM ::1 Returned 200 in 6 ms
+ HTTP  9/21/2026 5:33:07 PM ::1 GET /assets/images/members/Yash%20Bhagodia_.jpg
+ HTTP  9/21/2026 5:33:07 PM ::1 Returned 200 in 3 ms
+ HTTP  9/21/2026 5:33:08 PM ::1 GET /assets/images/members/Saksham%20Jagtap.png
+ HTTP  9/21/2026 5:33:08 PM ::1 Returned 200 in 9 ms
+ HTTP  9/21/2026 5:33:08 PM ::1 GET /assets/images/members/Radnyee%20Jagtap.svg
+ HTTP  9/21/2026 5:33:08 PM ::1 GET /assets/images/members/Gaurav%20Dhurve.svg
+ HTTP  9/21/2026 5:33:08 PM ::1 Returned 200 in 27 ms
+ HTTP  9/21/2026 5:33:08 PM ::1 Returned 200 in 24 ms
+ HTTP  9/21/2026 5:33:10 PM ::1 GET /assets/images/members/Mahesh_Shirame.jpg
+ HTTP  9/21/2026 5:33:10 PM ::1 GET /assets/images/members/Chaitanya%20Jadhav.png
+ HTTP  9/21/2026 5:33:10 PM ::1 Returned 200 in 5 ms
+ HTTP  9/21/2026 5:33:10 PM ::1 Returned 200 in 4 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /index.html
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 301 in 0 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /index
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 301 in 1 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 200 in 2 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /css/styles.css
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /css/footer.css
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /assets/images/loading/cinema-room.webp
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /css/loading-animation.css
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /assets/images/loading/mlsc-letters-light.png
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 11 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 5 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 6 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 5 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /js/footer.js
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /js/fluid-glass-bundle.js
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /js/script.js
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /js/loading-animation.js
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /assets/images/mascots/brie-navbar.svg
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:33:20 PM ::1 GET /assets/3d/lens.glb
+ HTTP  9/21/2026 5:33:20 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:21 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp?t=1789992201402
+ HTTP  9/21/2026 5:33:21 PM ::1 Returned 200 in 2 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /css/styles.css
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /css/footer.css
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /css/loading-animation.css
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /assets/images/loading/cinema-room.webp
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /assets/images/loading/mlsc-letters-light.png
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 5 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /js/footer.js
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /js/fluid-glass-bundle.js
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /js/script.js
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /js/loading-animation.js
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 2 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 3 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /assets/images/mascots/brie-navbar.svg
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 1 ms
+ HTTP  9/21/2026 5:33:24 PM ::1 GET /assets/3d/lens.glb
+ HTTP  9/21/2026 5:33:24 PM ::1 Returned 304 in 4 ms
+ HTTP  9/21/2026 5:33:25 PM ::1 GET /assets/videos/mascot/praxis%20coming%20soon%20w.webp?t=1789992205366
+ HTTP  9/21/2026 5:33:25 PM ::1 Returned 200 in 1 ms
