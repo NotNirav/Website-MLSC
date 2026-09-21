@@ -528,7 +528,7 @@ body {
 .team-card-info-top {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
 }
 
@@ -539,36 +539,47 @@ body {
   letter-spacing: -0.02em;
   margin: 0 0 6px 0;
   line-height: 1.2;
+  text-align: center;
+  width: 100%;
 }
 
 .team-card-role-row {
   margin-bottom: 6px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .team-card-role-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 3px 12px;
   border-radius: 9999px;
   background: rgba(14, 18, 26, 0.85);
   color: #00a4ef;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.76rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   border: 1px solid rgba(0, 164, 239, 0.35);
+  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .team-card-academic {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-size: 0.8rem;
   color: #94a3b8;
   font-weight: 600;
   margin-bottom: 6px;
+  width: 100%;
+  text-align: center;
 }
 
 .academic-cap {
@@ -676,11 +687,11 @@ body {
 }
 
 .teams-nav-btn.prev {
-  left: 20px;
+  left: max(20px, calc(50% - 430px));
 }
 
 .teams-nav-btn.next {
-  right: 20px;
+  right: max(20px, calc(50% - 430px));
 }
 
 .teams-nav-btn:hover {
