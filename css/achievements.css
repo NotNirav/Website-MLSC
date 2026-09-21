@@ -102,8 +102,8 @@ body {
   position: absolute !important;
   left: 24px !important;
   bottom: 0px !important;
-  width: clamp(230px, 25.5vw, 343px) !important;
-  max-width: 343px !important;
+  width: clamp(288px, 31.9vw, 429px) !important;
+  max-width: 429px !important;
   height: auto !important;
   z-index: 15 !important;
   pointer-events: none !important;
@@ -150,7 +150,7 @@ body {
   .achievements-mascot-wrapper {
     left: 16px !important;
     bottom: 0px !important;
-    width: clamp(170px, 44vw, 242px) !important;
-    max-width: 242px !important;
+    width: clamp(213px, 55vw, 303px) !important;
+    max-width: 303px !important;
   }
 }

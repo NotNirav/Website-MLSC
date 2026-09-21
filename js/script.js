@@ -1222,101 +1222,17 @@
         lastDirectionY = y;
       }
 
-      const startY = cachedHeroTop + cachedHeroHeight * 0.45;
-      const endY = cachedExploreTop + 80;
+      const heroFadeEnd = cachedHeroTop + cachedHeroHeight * 0.35;
+      const exploreTop = cachedExploreTop;
 
-      if (y <= cachedHeroTop + 10) {
+      if (y <= cachedHeroTop + 5) {
         currentDownOpacity = 0;
         currentUpOpacity = 0;
         gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
         gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
         if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
         if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
-      } else if (y < startY) {
-        const heroFadeProgress = (y - cachedHeroTop) / (startY - cachedHeroTop);
-        if (heroTitle) {
-          const titleOpacity = Math.max(0, 1 - heroFadeProgress * 1.5);
-          gsap.set(heroTitle, { opacity: titleOpacity, scale: 1 - heroFadeProgress * 0.1, y: heroFadeProgress * 80 });
-        }
-        currentDownOpacity = 0;
-        currentUpOpacity = 0;
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-      } else if (y < endY) {
-        const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
-
-        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
-
-        const maxMovePx = window.innerHeight * 0.62;
-        const translateYPx = p * maxMovePx;
-
-        let baseMascotOpacity = 0;
-        let sleepOpacity = 0;
-
-        if (p < 0.18) {
-          baseMascotOpacity = p / 0.18;
-        } else if (p <= 0.65) {
-          baseMascotOpacity = 1.0;
-        } else if (p < 0.82) {
-          baseMascotOpacity = (0.82 - p) / 0.17;
-        } else {
-          baseMascotOpacity = 0;
-        }
-
-        if (p >= 0.82) {
-          sleepOpacity = (p - 0.82) / 0.18;
-        } else {
-          sleepOpacity = 0;
-        }
-
-        baseMascotOpacity = Math.max(0, Math.min(1, baseMascotOpacity));
-        sleepOpacity = Math.max(0, Math.min(1, sleepOpacity));
-
-        const targetDownOpacity = scrollDirection === 'down' ? baseMascotOpacity : 0;
-        const targetUpOpacity = scrollDirection === 'up' ? baseMascotOpacity : 0;
-
-        currentDownOpacity += (targetDownOpacity - currentDownOpacity) * 0.18;
-        currentUpOpacity += (targetUpOpacity - currentUpOpacity) * 0.18;
-
-        if (Math.abs(targetDownOpacity - currentDownOpacity) < 0.01) currentDownOpacity = targetDownOpacity;
-        if (Math.abs(targetUpOpacity - currentUpOpacity) < 0.01) currentUpOpacity = targetUpOpacity;
-
-        if (currentDownOpacity > 0.01) {
-          gsap.set(downWrapper, {
-            visibility: 'visible',
-            opacity: currentDownOpacity,
-            y: translateYPx,
-            force3D: true
-          });
-        } else {
-          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        }
-
-        if (currentUpOpacity > 0.01) {
-          gsap.set(upWrapper, {
-            visibility: 'visible',
-            opacity: currentUpOpacity,
-            y: translateYPx,
-            force3D: true
-          });
-        } else {
-          gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        }
-
-        if (sleepWrapper) {
-          if (sleepOpacity > 0.01) {
-            gsap.set(sleepWrapper, {
-              visibility: 'visible',
-              opacity: sleepOpacity,
-              y: 0,
-              force3D: true
-            });
-          } else {
-            gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-          }
-        }
-      } else {
+      } else if (y >= exploreTop) {
         if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
 
         currentDownOpacity = 0;
@@ -1328,7 +1244,7 @@
           let sleepPinY = 0;
           if (cachedFooterTop > 0) {
             const sleepHeight = sleepWrapper.offsetHeight || 184;
-            const defaultScreenTop = 80 + window.innerHeight * 0.62 - (sleepHeight / 2);
+            const defaultScreenTop = 80 + window.innerHeight * 0.65 - (sleepHeight / 2);
             const defaultDocBottom = y + defaultScreenTop + sleepHeight;
             const maxDocBottom = cachedFooterTop - 12;
             if (defaultDocBottom > maxDocBottom) {
@@ -1343,12 +1259,76 @@
             force3D: true
           });
         }
+      } else {
+        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+
+        let mascotOpacity = 0;
+        let translateYPx = 0;
+
+        const maxMovePx = window.innerHeight * 0.65;
+
+        if (y < heroFadeEnd) {
+          const heroProgress = Math.max(0, Math.min(1, (y - cachedHeroTop) / (heroFadeEnd - cachedHeroTop)));
+          if (heroTitle) {
+            gsap.set(heroTitle, {
+              opacity: 1 - heroProgress,
+              scale: 1 - heroProgress * 0.08,
+              y: heroProgress * 60
+            });
+          }
+          mascotOpacity = heroProgress;
+          translateYPx = 0;
+        } else {
+          if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+
+          const p = Math.max(0, Math.min(1, (y - heroFadeEnd) / (exploreTop - heroFadeEnd)));
+          translateYPx = p * maxMovePx;
+
+          if (p <= 0.70) {
+            mascotOpacity = 1.0;
+          } else {
+            mascotOpacity = (1.0 - p) / 0.30;
+          }
+        }
+
+        mascotOpacity = Math.max(0, Math.min(1, mascotOpacity));
+
+        const targetDownOpacity = scrollDirection === 'down' ? mascotOpacity : 0;
+        const targetUpOpacity = scrollDirection === 'up' ? mascotOpacity : 0;
+
+        currentDownOpacity += (targetDownOpacity - currentDownOpacity) * 0.18;
+        currentUpOpacity += (targetUpOpacity - currentUpOpacity) * 0.18;
+
+        if (Math.abs(targetDownOpacity - currentDownOpacity) < 0.005) currentDownOpacity = targetDownOpacity;
+        if (Math.abs(targetUpOpacity - currentUpOpacity) < 0.005) currentUpOpacity = targetUpOpacity;
+
+        if (currentDownOpacity > 0.005) {
+          gsap.set(downWrapper, {
+            visibility: 'visible',
+            opacity: currentDownOpacity,
+            y: translateYPx,
+            force3D: true
+          });
+        } else {
+          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        }
+
+        if (currentUpOpacity > 0.005) {
+          gsap.set(upWrapper, {
+            visibility: 'visible',
+            opacity: currentUpOpacity,
+            y: translateYPx,
+            force3D: true
+          });
+        } else {
+          gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        }
       }
 
       if (
         Math.abs(targetY - smoothY) > 0.05 ||
-        Math.abs((scrollDirection === 'down' ? baseMascotOpacity : 0) - currentDownOpacity) > 0.01 ||
-        Math.abs((scrollDirection === 'up' ? baseMascotOpacity : 0) - currentUpOpacity) > 0.01
+        Math.abs((scrollDirection === 'down' ? mascotOpacity : 0) - currentDownOpacity) > 0.005 ||
+        Math.abs((scrollDirection === 'up' ? mascotOpacity : 0) - currentUpOpacity) > 0.005
       ) {
         requestAnimationFrame(renderLoop);
       } else {

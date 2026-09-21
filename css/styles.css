@@ -3695,8 +3695,8 @@ a.contact-card-value:hover {
   position: absolute;
   bottom: 20px;
   left: max(20px, calc((100vw - min(1080px, 92vw)) / 2 - 140px));
-  width: 220px;
-  max-width: 22vw;
+  width: 275px;
+  max-width: 27.5vw;
   z-index: 10;
   pointer-events: none;
   opacity: 0;
@@ -3728,8 +3728,8 @@ a.contact-card-value:hover {
 
   .achievements-mascot-wrapper {
     left: 16px;
-    width: 140px;
-    max-width: 30vw;
+    width: 175px;
+    max-width: 37.5vw;
     bottom: 10px;
   }
 }
