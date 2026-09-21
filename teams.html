@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/teams.css?v=10.0">
+  <link rel="stylesheet" href="css/teams.css?v=10.4">
   <!-- GSAP & ScrollTrigger for high-performance buttery scroll & animation syncing -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
@@ -55,11 +55,11 @@
   <!-- Main Website Content -->
   <main class="site-content" style="padding: 0; min-height: 100vh;">
 
-    <!-- SECTION 1: HERO VIEWPORT (100vh Full Viewport) -->
+    <!-- SECTION 1: HERO VIEWPORT -->
     <section class="teams-hero-viewport" id="teams-hero" aria-label="Meet The Team Hero">
       <div class="event-glow" style="background: var(--ms-blue, #00a4ef);" aria-hidden="true"></div>
       <div class="teams-header">
-        <h1 class="teams-title">Meet the <span class="title-accent">Minds Behind MLSC</span></h1>
+        <h1 class="teams-title">Meet the <span class="title-gradient">Minds Behind MLSC</span></h1>
         <p class="teams-desc">
           Different roles &nbsp;•&nbsp; Same vision &nbsp;•&nbsp; One club
         </p>
@@ -67,9 +67,8 @@
         <!-- Tenure / Year Selector Switch -->
         <div class="teams-tenure-switch-wrapper">
           <div class="teams-tenure-switch" id="teams-tenure-switch" role="tablist" aria-label="Year Selector">
-            <button class="teams-tenure-btn active" data-tenure="Current Year (2025–26)" role="tab"
-              aria-selected="true">
-              <span>Current Year (2025–26)</span>
+            <button class="teams-tenure-btn active" data-tenure="2025–26" role="tab" aria-selected="true">
+              <span>2025–26</span>
             </button>
             <button class="teams-tenure-btn" data-tenure="2024–25" role="tab" aria-selected="false">
               <span>2024–25</span>
@@ -80,11 +79,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Sticky / Quick Jump Domain Navigation Bar -->
-      <nav class="teams-jump-nav" id="teams-jump-nav" aria-label="Quick jump to domain">
-        <div class="teams-jump-container" id="teams-jump-container"></div>
-      </nav>
     </section>
 
     <!-- SECTION 2: MLSC TEAMS & MEMBERS -->
@@ -108,7 +102,7 @@
 
   <!-- Script for Teams Section -->
   <script src="js/footer.js"></script>
-  <script src="js/teams.js?v=8.0"></script>
+  <script src="js/teams.js?v=8.2"></script>
   <script src="js/script.js"></script>
 </body>
 
