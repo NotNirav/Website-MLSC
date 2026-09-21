@@ -229,22 +229,22 @@
     },
     tablet: {
       0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
-      '+1': { transform: 'translate3d(calc(-50% + 185px), -50%, -40px) scale(0.86) rotateY(-14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
-      '-1': { transform: 'translate3d(calc(-50% - 185px), -50%, -40px) scale(0.86) rotateY(14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
-      '+2': { transform: 'translate3d(calc(-50% + 330px), -50%, -85px) scale(0.74) rotateY(-24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
-      '-2': { transform: 'translate3d(calc(-50% - 330px), -50%, -85px) scale(0.74) rotateY(24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
-      '+3': { transform: 'translate3d(calc(-50% + 440px), -50%, -140px) scale(0.6) rotateY(-34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
-      '-3': { transform: 'translate3d(calc(-50% - 440px), -50%, -140px) scale(0.6) rotateY(34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+1': { transform: 'translate3d(calc(-50% + 195px), -50%, -40px) scale(0.86) rotateY(-14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 195px), -50%, -40px) scale(0.86) rotateY(14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 290px), -50%, -90px) scale(0.7) rotateY(-22deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-2': { transform: 'translate3d(calc(-50% - 290px), -50%, -90px) scale(0.7) rotateY(22deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+3': { transform: 'translate3d(calc(-50% + 380px), -50%, -140px) scale(0.6) rotateY(-30deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 380px), -50%, -140px) scale(0.6) rotateY(30deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
       dormant: { transform: 'translate3d(-50%, -50%, -140px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     },
     desktop: {
       0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
-      '+1': { transform: 'translate3d(calc(-50% + 225px), -50%, -45px) scale(0.88) rotateY(-16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
-      '-1': { transform: 'translate3d(calc(-50% - 225px), -50%, -45px) scale(0.88) rotateY(16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
-      '+2': { transform: 'translate3d(calc(-50% + 415px), -50%, -90px) scale(0.77) rotateY(-28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
-      '-2': { transform: 'translate3d(calc(-50% - 415px), -50%, -90px) scale(0.77) rotateY(28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
-      '+3': { transform: 'translate3d(calc(-50% + 520px), -50%, -160px) scale(0.62) rotateY(-38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
-      '-3': { transform: 'translate3d(calc(-50% - 520px), -50%, -160px) scale(0.62) rotateY(38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+1': { transform: 'translate3d(calc(-50% + 245px), -50%, -45px) scale(0.88) rotateY(-16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 245px), -50%, -45px) scale(0.88) rotateY(16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 380px), -50%, -95px) scale(0.72) rotateY(-26deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-2': { transform: 'translate3d(calc(-50% - 380px), -50%, -95px) scale(0.72) rotateY(26deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+3': { transform: 'translate3d(calc(-50% + 480px), -50%, -160px) scale(0.62) rotateY(-36deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 480px), -50%, -160px) scale(0.62) rotateY(36deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
       dormant: { transform: 'translate3d(-50%, -50%, -160px) scale(0.62) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     }
   };
@@ -459,7 +459,7 @@
         }
 
         // Lazy load image if entering visible arc
-        if (delta !== 'dormant' && Math.abs(delta) <= 2) {
+        if (delta !== 'dormant' && Math.abs(delta) <= 1) {
           const img = card.querySelector('.team-card-image');
           if (img && img.getAttribute('data-src')) {
             img.src = img.getAttribute('data-src');
@@ -485,7 +485,7 @@
     const accent = '#00A4EF';
 
     const delta = computeCardDelta(idx, currentIdx, total);
-    const isInitiallyVisible = total === 1 || (delta !== 'dormant' && Math.abs(delta) <= 2);
+    const isInitiallyVisible = total === 1 || (delta !== 'dormant' && Math.abs(delta) <= 1);
     const initialSrc = isInitiallyVisible ? member.image : PLACEHOLDER_IMG;
     const dataSrcAttr = isInitiallyVisible ? '' : `data-src="${member.image}"`;
 
@@ -554,13 +554,13 @@
   let jumpNavContainer = null;
   let sectionsWrapper = null;
   let globalLenis = null;
-  let currentTenure = 'Current Year (2025–26)';
+  let currentTenure = '2025–26';
 
   function detectInitialTenure() {
     const hash = window.location.hash.toLowerCase();
     if (hash.includes('2023') || hash.includes('23')) return '2023–24';
     if (hash.includes('2024') || hash.includes('24')) return '2024–25';
-    if (hash.includes('current') || hash.includes('2025') || hash.includes('25') || hash.includes('26')) return 'Current Year (2025–26)';
+    if (hash.includes('current') || hash.includes('2025') || hash.includes('25') || hash.includes('26')) return '2025–26';
 
     const urlParams = new URLSearchParams(window.location.search);
     const tenureParam = urlParams.get('tenure') || urlParams.get('year');
@@ -568,9 +568,9 @@
       const p = tenureParam.toLowerCase();
       if (p.includes('2023') || p.includes('23')) return '2023–24';
       if (p.includes('2024') || p.includes('24')) return '2024–25';
-      if (p.includes('current') || p.includes('2025') || p.includes('25') || p.includes('26')) return 'Current Year (2025–26)';
+      if (p.includes('current') || p.includes('2025') || p.includes('25') || p.includes('26')) return '2025–26';
     }
-    return 'Current Year (2025–26)';
+    return '2025–26';
   }
 
   function setupTenureSwitcher() {
