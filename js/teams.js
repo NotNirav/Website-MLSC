@@ -749,45 +749,14 @@
 
       const cat = domain.category || 'Non-Tech';
       const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
-      const catShort = cat === 'Core' ? 'Core' : (cat === 'Tech' ? 'Tech' : 'Non-Tech');
 
-      // 1. Create Jump Nav Pill with distinct Tech / Non-Tech visual indicator
-      if (jumpNavContainer) {
-        const pill = document.createElement('a');
-        pill.className = `teams-jump-btn ${catClass}-pill`;
-        pill.href = `#domain-${domain.id}`;
-        pill.setAttribute('data-domain', domain.name);
-        pill.setAttribute('data-category', cat);
-        pill.innerHTML = `
-          <span class="teams-jump-cat-tag ${catClass}">${catShort}</span>
-          <span class="teams-jump-label">${escapeHTML(domain.name)}</span>
-          <span class="teams-jump-count">${domainMembers.length}</span>
-        `;
-        pill.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.getElementById(`domain-${domain.id}`);
-          if (target) {
-            const activeLenis = globalLenis || window.lenis;
-            if (activeLenis) {
-              activeLenis.scrollTo(target, {
-                offset: -20,
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-              });
-            } else {
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
-        });
-        jumpNavContainer.appendChild(pill);
-      }
-
-      // 2. Render Category Wing Divider Header before first Tech domain
+      // 1. Render Category Wing Divider Header before first Tech domain (centered in middle)
       if (cat === 'Tech' && !hasRenderedTechDivider) {
         hasRenderedTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider tech-wing';
         divider.innerHTML = `
+          <div class="team-wing-line"></div>
           <div class="team-wing-badge">
             <span class="wing-text">Technical Domains</span>
           </div>
@@ -796,14 +765,15 @@
         sectionsWrapper.appendChild(divider);
       }
 
-      // 3. Render Category Wing Divider Header before first Non-Tech domain
+      // 2. Render Category Wing Divider Header before first Non-Tech domain (centered in middle)
       if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
         hasRenderedNonTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider nontech-wing';
         divider.innerHTML = `
+          <div class="team-wing-line"></div>
           <div class="team-wing-badge nontech">
-            <span class="wing-text">Non-Technical & Creative Domains</span>
+            <span class="wing-text">Non-Technical Domains</span>
           </div>
           <div class="team-wing-line"></div>
         `;
@@ -1226,11 +1196,13 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
       '-=0.35'
     );
 
-    tl.fromTo('.teams-jump-nav',
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
-    );
+    if (document.querySelector('.teams-jump-nav')) {
+      tl.fromTo('.teams-jump-nav',
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        '-=0.3'
+      );
+    }
   }
 
   function escapeHTML(str) {
