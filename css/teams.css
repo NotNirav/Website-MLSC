@@ -595,10 +595,12 @@ body {
 .team-social-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
 .team-social-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
