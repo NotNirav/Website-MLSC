@@ -280,61 +280,51 @@ body {
   color: #ffffff;
 }
 
-/* Category Wing Dividers / Headings */
+/* Category Headings / Dividers (Clean, Minimal, Modern) */
 .team-wing-divider {
   width: 100%;
   max-width: 1100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin: 50px auto 10px;
+  margin: 40px auto 10px;
   padding: 0 16px;
   box-sizing: border-box;
   text-align: center;
+  background: transparent !important;
 }
 
 .team-wing-badge,
 .team-wing-badge.nontech {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 24px;
-  border-radius: 9999px;
-  background: rgba(0, 164, 239, 0.08) !important;
-  border: 1px solid rgba(0, 164, 239, 0.28) !important;
-  color: #00a4ef !important;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  display: inline-block;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.wing-text {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2.2rem, 4.2vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(0, 164, 239, 0.12);
+  color: #00a4ef !important;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
 }
 
-.team-wing-badge.nontech {
-  background: rgba(236, 72, 153, 0.08) !important;
-  border-color: rgba(236, 72, 153, 0.28) !important;
-  color: #ec4899 !important;
-  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.12);
-}
-
-.team-wing-badge .wing-dot {
-  display: none;
-}
-
+.team-wing-badge .wing-dot,
 .team-wing-line {
-  flex: 1;
-  height: 1px;
-}
-
-.team-wing-line:first-child {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.18));
-}
-
-.team-wing-line:last-child {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.01));
+  display: none !important;
 }
 
 /* ========================================================= */

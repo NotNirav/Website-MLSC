@@ -750,32 +750,24 @@
       const cat = domain.category || 'Non-Tech';
       const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
 
-      // 1. Render Category Wing Divider Header before first Tech domain (centered in middle)
+      // 1. Render Category Section Heading before first Tech domain
       if (cat === 'Tech' && !hasRenderedTechDivider) {
         hasRenderedTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider tech-wing';
         divider.innerHTML = `
-          <div class="team-wing-line"></div>
-          <div class="team-wing-badge">
-            <span class="wing-text">Technical Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="wing-text">TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
 
-      // 2. Render Category Wing Divider Header before first Non-Tech domain (centered in middle)
+      // 2. Render Category Section Heading before first Non-Tech domain
       if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
         hasRenderedNonTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider nontech-wing';
         divider.innerHTML = `
-          <div class="team-wing-line"></div>
-          <div class="team-wing-badge nontech">
-            <span class="wing-text">Non-Technical Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="wing-text">NON-TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
