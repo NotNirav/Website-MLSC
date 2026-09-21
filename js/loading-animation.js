@@ -8,24 +8,6 @@
   const loadingScreen = document.getElementById('mlsc-loading-screen');
   if (!loadingScreen) return;
 
-  const HAS_SEEN_LOADING_KEY = 'mlsc_has_seen_loading_screen';
-
-  // If user has already seen the intro loading screen during this session, skip it immediately
-  try {
-    if (sessionStorage.getItem(HAS_SEEN_LOADING_KEY)) {
-      loadingScreen.style.display = 'none';
-      loadingScreen.classList.add('loading-hidden');
-      loadingScreen.setAttribute('aria-hidden', 'true');
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-      window.__mlscLandingComplete = true;
-      setTimeout(() => {
-        window.dispatchEvent(new Event('mlsc-landing-complete'));
-      }, 50);
-      return;
-    }
-  } catch (e) {}
-
   let isDismissed = false;
   // Natural pacing: allow the complete 4-tile assembly (2.7s), lettering reveal (2.8s),
   // and settled breathing room (~1.0s) so the user can clearly appreciate the logo.
@@ -137,9 +119,6 @@
       loadingScreen.classList.add('loading-hidden');
       loadingScreen.setAttribute('aria-hidden', 'true');
       window.__mlscLandingComplete = true;
-      try {
-        sessionStorage.setItem(HAS_SEEN_LOADING_KEY, 'true');
-      } catch (e) {}
       window.dispatchEvent(new Event('mlsc-landing-complete'));
     }, 1600);
   }

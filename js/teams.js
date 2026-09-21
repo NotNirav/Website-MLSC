@@ -9,8 +9,8 @@
   // =========================================================
   // 1. DOMAIN CONFIGURATION & ORDER
   // =========================================================
-    const DOMAIN_ACCENT = '#00A4EF';
-    const DOMAIN_ORDER = [
+  const DOMAIN_ACCENT = '#00A4EF';
+  const DOMAIN_ORDER = [
     // =========================================================
     // 1. CORE LEADERSHIP
     // =========================================================
@@ -229,22 +229,22 @@
     },
     tablet: {
       0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
-      '+1': { transform: 'translate3d(calc(-50% + 185px), -50%, -40px) scale(0.86) rotateY(-14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
-      '-1': { transform: 'translate3d(calc(-50% - 185px), -50%, -40px) scale(0.86) rotateY(14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
-      '+2': { transform: 'translate3d(calc(-50% + 330px), -50%, -85px) scale(0.74) rotateY(-24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
-      '-2': { transform: 'translate3d(calc(-50% - 330px), -50%, -85px) scale(0.74) rotateY(24deg)', opacity: '0.78', zIndex: '6', pe: 'auto', vis: 'visible' },
-      '+3': { transform: 'translate3d(calc(-50% + 440px), -50%, -140px) scale(0.6) rotateY(-34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
-      '-3': { transform: 'translate3d(calc(-50% - 440px), -50%, -140px) scale(0.6) rotateY(34deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+1': { transform: 'translate3d(calc(-50% + 195px), -50%, -40px) scale(0.86) rotateY(-14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 195px), -50%, -40px) scale(0.86) rotateY(14deg)', opacity: '0.92', zIndex: '10', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 290px), -50%, -90px) scale(0.7) rotateY(-22deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-2': { transform: 'translate3d(calc(-50% - 290px), -50%, -90px) scale(0.7) rotateY(22deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+3': { transform: 'translate3d(calc(-50% + 380px), -50%, -140px) scale(0.6) rotateY(-30deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 380px), -50%, -140px) scale(0.6) rotateY(30deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
       dormant: { transform: 'translate3d(-50%, -50%, -140px) scale(0.6) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     },
     desktop: {
       0: { transform: 'translate3d(-50%, -50%, 0px) scale(1) rotateY(0deg)', opacity: '1', zIndex: '20', pe: 'auto', vis: 'visible' },
-      '+1': { transform: 'translate3d(calc(-50% + 225px), -50%, -45px) scale(0.88) rotateY(-16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
-      '-1': { transform: 'translate3d(calc(-50% - 225px), -50%, -45px) scale(0.88) rotateY(16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
-      '+2': { transform: 'translate3d(calc(-50% + 415px), -50%, -90px) scale(0.77) rotateY(-28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
-      '-2': { transform: 'translate3d(calc(-50% - 415px), -50%, -90px) scale(0.77) rotateY(28deg)', opacity: '0.84', zIndex: '7', pe: 'auto', vis: 'visible' },
-      '+3': { transform: 'translate3d(calc(-50% + 520px), -50%, -160px) scale(0.62) rotateY(-38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
-      '-3': { transform: 'translate3d(calc(-50% - 520px), -50%, -160px) scale(0.62) rotateY(38deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+1': { transform: 'translate3d(calc(-50% + 245px), -50%, -45px) scale(0.88) rotateY(-16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '-1': { transform: 'translate3d(calc(-50% - 245px), -50%, -45px) scale(0.88) rotateY(16deg)', opacity: '0.94', zIndex: '12', pe: 'auto', vis: 'visible' },
+      '+2': { transform: 'translate3d(calc(-50% + 380px), -50%, -95px) scale(0.72) rotateY(-26deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-2': { transform: 'translate3d(calc(-50% - 380px), -50%, -95px) scale(0.72) rotateY(26deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '+3': { transform: 'translate3d(calc(-50% + 480px), -50%, -160px) scale(0.62) rotateY(-36deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
+      '-3': { transform: 'translate3d(calc(-50% - 480px), -50%, -160px) scale(0.62) rotateY(36deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' },
       dormant: { transform: 'translate3d(-50%, -50%, -160px) scale(0.62) rotateY(0deg)', opacity: '0', zIndex: '1', pe: 'none', vis: 'hidden' }
     }
   };
@@ -459,7 +459,7 @@
         }
 
         // Lazy load image if entering visible arc
-        if (delta !== 'dormant' && Math.abs(delta) <= 2) {
+        if (delta !== 'dormant' && Math.abs(delta) <= 1) {
           const img = card.querySelector('.team-card-image');
           if (img && img.getAttribute('data-src')) {
             img.src = img.getAttribute('data-src');
@@ -485,7 +485,7 @@
     const accent = '#00A4EF';
 
     const delta = computeCardDelta(idx, currentIdx, total);
-    const isInitiallyVisible = total === 1 || (delta !== 'dormant' && Math.abs(delta) <= 2);
+    const isInitiallyVisible = total === 1 || (delta !== 'dormant' && Math.abs(delta) <= 1);
     const initialSrc = isInitiallyVisible ? member.image : PLACEHOLDER_IMG;
     const dataSrcAttr = isInitiallyVisible ? '' : `data-src="${member.image}"`;
 
@@ -554,13 +554,13 @@
   let jumpNavContainer = null;
   let sectionsWrapper = null;
   let globalLenis = null;
-  let currentTenure = 'Current Year (2025–26)';
+  let currentTenure = '2025–26';
 
   function detectInitialTenure() {
     const hash = window.location.hash.toLowerCase();
     if (hash.includes('2023') || hash.includes('23')) return '2023–24';
     if (hash.includes('2024') || hash.includes('24')) return '2024–25';
-    if (hash.includes('current') || hash.includes('2025') || hash.includes('25') || hash.includes('26')) return 'Current Year (2025–26)';
+    if (hash.includes('current') || hash.includes('2025') || hash.includes('25') || hash.includes('26')) return '2025–26';
 
     const urlParams = new URLSearchParams(window.location.search);
     const tenureParam = urlParams.get('tenure') || urlParams.get('year');
@@ -568,9 +568,9 @@
       const p = tenureParam.toLowerCase();
       if (p.includes('2023') || p.includes('23')) return '2023–24';
       if (p.includes('2024') || p.includes('24')) return '2024–25';
-      if (p.includes('current') || p.includes('2025') || p.includes('25') || p.includes('26')) return 'Current Year (2025–26)';
+      if (p.includes('current') || p.includes('2025') || p.includes('25') || p.includes('26')) return '2025–26';
     }
-    return 'Current Year (2025–26)';
+    return '2025–26';
   }
 
   function setupTenureSwitcher() {
@@ -615,11 +615,11 @@
     if (la.includes('2023') && lb.includes('2023')) return true;
     if (la.includes('2024') && lb.includes('2024')) return true;
     if ((la.includes('current') || la.includes('2025') || la.includes('2026')) &&
-        (lb.includes('current') || lb.includes('2025') || lb.includes('2026'))) return true;
+      (lb.includes('current') || lb.includes('2025') || lb.includes('2026'))) return true;
     return false;
   }
 
-        function normalizeTeamName(teamStr) {
+  function normalizeTeamName(teamStr) {
     if (!teamStr) return 'Core Team';
     const clean = teamStr.trim();
     if (/^(core|president|vice president|general secretary)/i.test(clean)) return 'Core Team';
@@ -680,7 +680,7 @@
   // =========================================================
   // 6. RENDER ALL DOMAIN SECTIONS SEQUENTIALLY
   // =========================================================
-    // Helper: Rank members by role authority so that Domain Heads are at index 0 (front & center),
+  // Helper: Rank members by role authority so that Domain Heads are at index 0 (front & center),
   // with Leads following and Executives/Members flanking them on the sides.
   function getRoleRank(role) {
     const r = (role || '').toLowerCase();
@@ -749,79 +749,40 @@
 
       const cat = domain.category || 'Non-Tech';
       const catClass = cat === 'Core' ? 'core' : (cat === 'Tech' ? 'tech' : 'nontech');
-      const catShort = cat === 'Core' ? 'Core' : (cat === 'Tech' ? 'Tech' : 'Non-Tech');
 
-      // 1. Create Jump Nav Pill with distinct Tech / Non-Tech visual indicator
-      if (jumpNavContainer) {
-        const pill = document.createElement('a');
-        pill.className = `teams-jump-btn ${catClass}-pill`;
-        pill.href = `#domain-${domain.id}`;
-        pill.setAttribute('data-domain', domain.name);
-        pill.setAttribute('data-category', cat);
-        pill.innerHTML = `
-          <span class="teams-jump-cat-tag ${catClass}">${catShort}</span>
-          <span class="teams-jump-label">${escapeHTML(domain.name)}</span>
-          <span class="teams-jump-count">${domainMembers.length}</span>
-        `;
-        pill.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.getElementById(`domain-${domain.id}`);
-          if (target) {
-            const activeLenis = globalLenis || window.lenis;
-            if (activeLenis) {
-              activeLenis.scrollTo(target, {
-                offset: -20,
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
-              });
-            } else {
-              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }
-        });
-        jumpNavContainer.appendChild(pill);
-      }
-
-      // 2. Render Category Wing Divider Header before first Tech domain
+      // 1. Render Category Section Heading before first Tech domain
       if (cat === 'Tech' && !hasRenderedTechDivider) {
         hasRenderedTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider tech-wing';
         divider.innerHTML = `
-          <div class="team-wing-badge">
-            <span class="wing-text">Technical Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="wing-text">TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
 
-      // 3. Render Category Wing Divider Header before first Non-Tech domain
+      // 2. Render Category Section Heading before first Non-Tech domain
       if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
         hasRenderedNonTechDivider = true;
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider nontech-wing';
         divider.innerHTML = `
-          <div class="team-wing-badge nontech">
-            <span class="wing-text">Non-Technical & Creative Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="wing-text">NON-TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
-
-      // 4. Create Domain Section Block
       const block = document.createElement('section');
       block.className = `team-domain-block domain-${catClass}`;
       block.id = `domain-${domain.id}`;
       block.setAttribute('data-domain', domain.name);
       block.setAttribute('data-category', cat);
 
-      // Domain Header
+      // Domain Header (Clean title and description, without redundant circular badge)
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <h2 class="team-domain-title">${escapeHTML(domain.tag || domain.name)}</h2>
+        <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
+        <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
       `;
       block.appendChild(header);
 
@@ -1027,7 +988,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
             }
           }
         }
-      } catch (err) {}
+      } catch (err) { }
     }
 
     // 2. Secondary fetch without query parameter (for local environments that disallow query parameters on static files)
@@ -1044,7 +1005,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
             }
           }
         }
-      } catch (err) {}
+      } catch (err) { }
     }
 
     // 3. Fallback dataset (guarantees instant rendering under file:// protocol, network disconnect, or strict CORS)
@@ -1088,7 +1049,7 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
         const team = normalizeTeamName(entry.team || entry.teamtype || 'Core Team');
         const role = entry.role || 'Team Member';
 
-                let defaultAccent = '#38bdf8';
+        let defaultAccent = '#38bdf8';
         if (team === 'Core Team') defaultAccent = '#ffb900';
         else if (team === 'AI / ML') defaultAccent = '#34d399';
         else if (team === 'Web Development') defaultAccent = '#38bdf8';
@@ -1226,11 +1187,13 @@ id,name,tenure,team,teamType,role,subtext,bio,achievements,image,bgVideo,accentC
       '-=0.35'
     );
 
-    tl.fromTo('.teams-jump-nav',
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
-    );
+    if (document.querySelector('.teams-jump-nav')) {
+      tl.fromTo('.teams-jump-nav',
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.6 },
+        '-=0.3'
+      );
+    }
   }
 
   function escapeHTML(str) {

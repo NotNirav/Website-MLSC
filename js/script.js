@@ -174,7 +174,26 @@
   function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    // 3. About Us Section: Silky Elevation & Reveal
+    // 1. Hero Title: Cinematic Parallax & Scale-down on scroll
+    const heroTitle = document.querySelector('.hero-raw-title');
+    const heroSection = document.getElementById('hero');
+    if (heroTitle && heroSection) {
+      gsap.to(heroTitle, {
+        scrollTrigger: {
+          trigger: heroSection,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
+          invalidateOnRefresh: true
+        },
+        y: 110,
+        scale: 0.86,
+        opacity: 0.08,
+        ease: 'power1.out'
+      });
+    }
+
+    // 2. About Us Section: Silky Elevation & Reveal
     const aboutContainer = document.querySelector('.about-container');
     const aboutSection = document.getElementById('about');
     if (aboutContainer && aboutSection) {
@@ -197,7 +216,7 @@
       );
     }
 
-    // 4. Explore Header: Gentle Slide & Focus
+    // 3. Explore Header: Gentle Slide & Focus
     const exploreHeader = document.querySelector('.explore-header-row');
     const exploreSection = document.getElementById('explore');
     if (exploreHeader && exploreSection) {
@@ -218,201 +237,6 @@
         }
       );
     }
-  }
-
-  // =========================================================
-  // Dual Direction Mascot Scroll Controller (Down & Up + Sleep Mascot)
-  // Liquid-smooth LERP inertia, GPU acceleration, direction hysteresis & sleep.webp transition
-  // =========================================================
-  function initDualMascotScrollController() {
-    const heroSection = document.getElementById('hero');
-    const exploreSection = document.getElementById('explore');
-    const footerSection = document.getElementById('footer') || document.querySelector('.site-footer');
-    const downWrapper = document.getElementById('brie-scroll-down-wrapper');
-    const upWrapper = document.getElementById('brie-scroll-up-wrapper');
-    const sleepWrapper = document.getElementById('brie-sleep-wrapper');
-    const heroTitle = document.querySelector('.hero-raw-title');
-
-    if (!heroSection || !exploreSection || !downWrapper || !upWrapper) return;
-
-    let targetY = window.scrollY;
-    let smoothY = window.scrollY;
-    let lastDirectionY = window.scrollY;
-    let scrollDirection = 'down';
-    let isTicking = false;
-
-    // Cache section layout metrics to prevent DOM reflows during scroll
-    let cachedHeroTop = 0;
-    let cachedHeroHeight = 0;
-    let cachedExploreTop = 0;
-    let cachedFooterTop = 0;
-
-    function getElementDocTop(el) {
-      let top = 0;
-      let curr = el;
-      while (curr) {
-        top += curr.offsetTop || 0;
-        curr = curr.offsetParent;
-      }
-      return top;
-    }
-
-    function updateMetrics() {
-      cachedHeroTop = getElementDocTop(heroSection);
-      cachedHeroHeight = heroSection.offsetHeight || window.innerHeight;
-      cachedExploreTop = getElementDocTop(exploreSection);
-      if (footerSection) {
-        cachedFooterTop = getElementDocTop(footerSection);
-      }
-    }
-
-    updateMetrics();
-    window.addEventListener('resize', updateMetrics, { passive: true });
-
-    function renderLoop() {
-      // Continuous LERP inertia smoothing to eliminate scroll micro-stutter
-      smoothY += (targetY - smoothY) * 0.14;
-      if (Math.abs(targetY - smoothY) < 0.05) {
-        smoothY = targetY;
-      }
-
-      const y = smoothY;
-
-      // Direction hysteresis (minimum 15px threshold to prevent direction flapping)
-      const dirDiff = y - lastDirectionY;
-      if (Math.abs(dirDiff) > 15) {
-        scrollDirection = dirDiff > 0 ? 'down' : 'up';
-        lastDirectionY = y;
-      }
-
-      const startY = cachedHeroTop + cachedHeroHeight * 0.45;
-      const endY = cachedExploreTop + 80;
-
-      if (y <= cachedHeroTop + 10) {
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-        if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
-      } else if (y < startY) {
-        const heroFadeProgress = (y - cachedHeroTop) / (startY - cachedHeroTop);
-        if (heroTitle) {
-          const titleOpacity = Math.max(0, 1 - heroFadeProgress * 1.5);
-          gsap.set(heroTitle, { opacity: titleOpacity, scale: 1 - heroFadeProgress * 0.1, y: heroFadeProgress * 80 });
-        }
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-      } else if (y < endY) {
-        // Transition region between Hero and Stack Cards
-        const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
-
-        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
-
-        // Calculate GPU transform distance in pixels for downward movement
-        const maxMovePx = window.innerHeight * 0.62;
-        const translateYPx = p * maxMovePx;
-
-        let downOpacity = 0;
-        let sleepOpacity = 0;
-
-        if (p < 0.18) {
-          downOpacity = p / 0.18;
-        } else if (p <= 0.65) {
-          downOpacity = 1.0;
-        } else if (p < 0.82) {
-          // Downward mascot fades out completely until opacity 0 at p = 0.82
-          downOpacity = (0.82 - p) / 0.17;
-        } else {
-          downOpacity = 0;
-        }
-
-        // sleep.webp ONLY starts fading in AFTER downward mascot is completely faded out (p >= 0.82)
-        if (p >= 0.82) {
-          sleepOpacity = (p - 0.82) / 0.18;
-        } else {
-          sleepOpacity = 0;
-        }
-
-        downOpacity = Math.max(0, Math.min(1, downOpacity));
-        sleepOpacity = Math.max(0, Math.min(1, sleepOpacity));
-
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-
-        if (downOpacity > 0) {
-          gsap.set(downWrapper, {
-            visibility: 'visible',
-            opacity: downOpacity,
-            y: translateYPx,
-            force3D: true
-          });
-        } else {
-          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        }
-
-        if (sleepWrapper) {
-          if (sleepOpacity > 0) {
-            gsap.set(sleepWrapper, {
-              visibility: 'visible',
-              opacity: sleepOpacity,
-              y: 0,
-              force3D: true
-            });
-          } else {
-            gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-          }
-        }
-      } else {
-        // y >= endY: Inside Stack Cards / Explore Section & Footer
-        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
-
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-
-        // sleep.webp remains continuously visible down through cards & footer, pinned above footer line
-        if (sleepWrapper) {
-          let sleepPinY = 0;
-          if (cachedFooterTop > 0) {
-            const sleepHeight = sleepWrapper.offsetHeight || 184;
-            const defaultScreenTop = 80 + window.innerHeight * 0.62 - (sleepHeight / 2);
-            const defaultDocBottom = y + defaultScreenTop + sleepHeight;
-            const maxDocBottom = cachedFooterTop - 12; // 12px gap strictly above footer line
-            if (defaultDocBottom > maxDocBottom) {
-              sleepPinY = -(defaultDocBottom - maxDocBottom);
-            }
-          }
-
-          gsap.set(sleepWrapper, {
-            visibility: 'visible',
-            opacity: 1.0,
-            y: sleepPinY,
-            force3D: true
-          });
-        }
-      }
-
-      if (Math.abs(targetY - smoothY) > 0.05) {
-        requestAnimationFrame(renderLoop);
-      } else {
-        isTicking = false;
-      }
-    }
-
-    function onScroll(currentScrollY) {
-      targetY = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
-      if (!isTicking) {
-        isTicking = true;
-        requestAnimationFrame(renderLoop);
-      }
-    }
-
-    if (window.lenis) {
-      window.lenis.on('scroll', (e) => onScroll(e.scroll));
-    } else {
-      window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
-    }
-
-    updateMetrics();
-    onScroll(window.scrollY);
   }
 
   // =========================================================
@@ -666,18 +490,18 @@
   // LEADERBOARD PAGE FUNCTIONALITY & DATA
   // =========================================================
   const LEADERBOARD_DATA = [
-    { rank: 1, name: "Aarav Sharma", handle: "aarav45", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
-    { rank: 2, name: "Riya Kapoor", handle: "riya_code", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
-    { rank: 3, name: "Aditya Verma", handle: "aditya_v", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
-    { rank: 4, name: "Sneha Patel", handle: "sneha_dev", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
-    { rank: 5, name: "Rahul Kulkarni", handle: "rahul_k", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
-    { rank: 6, name: "Ananya Mehta", handle: "ananya_m", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 7, name: "Kunal Joshi", handle: "kunal_t", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 8, name: "Meera Singh", handle: "meera_s", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
-    { rank: 9, name: "Yash Patil", handle: "yash_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 10, name: "Isha Roy", handle: "isha_r", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 11, name: "Devanshu Shah", handle: "devanshu_s", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
-    { rank: 12, name: "Tanvi Bhat", handle: "tanvi_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
+    { rank: 1, name: "Ved Jadhav", handle: "ved_j", points: 4850, solved: 412, tier: "Grandmaster", badge: "🥇", isCurrentUser: false },
+    { rank: 2, name: "Sharvil Patil", handle: "sharvil_p", points: 4520, solved: 385, tier: "Master", badge: "🥈", isCurrentUser: false },
+    { rank: 3, name: "Isha Thakur", handle: "isha_t", points: 4210, solved: 360, tier: "Candidate Master", badge: "🥉", isCurrentUser: false },
+    { rank: 4, name: "Chinmay Ahire", handle: "chinmay_a", points: 3980, solved: 338, tier: "Knight", badge: "⚔️", isCurrentUser: true },
+    { rank: 5, name: "Nirav Neve", handle: "nirav_n", points: 3750, solved: 315, tier: "Knight", badge: "⚔️", isCurrentUser: false },
+    { rank: 6, name: "Khushi Kolhe", handle: "khushi_k", points: 3510, solved: 298, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 7, name: "Sanika Shinde", handle: "sanika_s", points: 3290, solved: 280, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 8, name: "Badal Dadwani", handle: "badal_d", points: 3050, solved: 262, tier: "Specialist", badge: "⚡", isCurrentUser: false },
+    { rank: 9, name: "Aryan Patil", handle: "aryan_p", points: 2890, solved: 245, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 10, name: "Parth Popli", handle: "parth_p", points: 2720, solved: 230, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 11, name: "Prem Thakur", handle: "prem_t", points: 2550, solved: 215, tier: "Pupil", badge: "🌱", isCurrentUser: false },
+    { rank: 12, name: "Anjali Borse", handle: "anjali_b", points: 2410, solved: 202, tier: "Newbie", badge: "⭐", isCurrentUser: false }
   ];
 
   function getAvatarSvg(name, rank) {
@@ -1060,7 +884,15 @@
         dots.forEach((dot, idx) => {
           if (idx === currentIndex) {
             dot.classList.add('active');
-            dot.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            if (indicatorsWrap) {
+              const dotLeft = dot.offsetLeft;
+              const dotWidth = dot.offsetWidth;
+              const wrapWidth = indicatorsWrap.clientWidth;
+              indicatorsWrap.scrollTo({
+                left: dotLeft - (wrapWidth / 2) + (dotWidth / 2),
+                behavior: 'smooth'
+              });
+            }
           } else {
             dot.classList.remove('active');
           }
@@ -1180,7 +1012,21 @@
     stage.addEventListener('mouseleave', startAutoPlay);
 
     updatePositions();
-    startAutoPlay();
+
+    if ('IntersectionObserver' in window && stage) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            startAutoPlay();
+          } else {
+            stopAutoPlay();
+          }
+        });
+      }, { threshold: 0.15 });
+      observer.observe(stage);
+    } else {
+      startAutoPlay();
+    }
 
     return {
       updatePositions,
@@ -1331,161 +1177,220 @@
   }
 
   // =========================================================
-  // Praxis Mascot One-Time Announcement Playback Controller
-  // Triggers AFTER the landing loading animation completes & Hero opens.
+  // Dual Direction Mascot Scroll Controller (Down & Up + Sleep Mascot)
+  // Liquid-smooth LERP inertia, GPU acceleration, direction hysteresis & sleep.webp transition
   // =========================================================
-  function initHeroMascotController() {
-    const heroMascot = document.querySelector('.hero-mascot-webp');
-    if (!heroMascot) return;
-
-    let baseSrc = heroMascot.getAttribute('data-src');
-    if (!baseSrc) {
-      baseSrc = heroMascot.getAttribute('src').split('?')[0];
-      heroMascot.setAttribute('data-src', baseSrc);
-    }
-
-    const WEBP_SINGLE_PLAY_DURATION = 10000; // Exact 10.0s WebP sequence
-    let isTriggered = false;
-
-    // 1. Initially hidden while landing loading animation plays
-    heroMascot.classList.add('hero-mascot-delayed');
-    heroMascot.style.visibility = 'hidden';
-    heroMascot.style.opacity = '0';
-    heroMascot.setAttribute('src', '');
-
-    function startSequence() {
-      if (isTriggered) return;
-      isTriggered = true;
-
-      // 2. Wait 1 second (1000ms) after Hero page opens
-      setTimeout(() => {
-        // 3. Attach fresh timestamp URL to play WebP animation from frame 1
-        const freshSrc = baseSrc + '?t=' + Date.now();
-        heroMascot.setAttribute('src', freshSrc);
-
-        // 4. Mascot comes out
-        heroMascot.classList.remove('hero-mascot-delayed');
-        heroMascot.style.visibility = 'visible';
-        heroMascot.style.opacity = '1';
-
-        // 5. After WebP animation finishes (10 seconds), hide immediately
-        setTimeout(() => {
-          heroMascot.classList.add('hero-mascot-delayed');
-          heroMascot.style.visibility = 'hidden';
-          heroMascot.style.opacity = '0';
-          heroMascot.setAttribute('src', '');
-        }, WEBP_SINGLE_PLAY_DURATION);
-      }, 1000);
-    }
-
-    const loadingScreen = document.getElementById('mlsc-loading-screen');
-    if (loadingScreen && !window.__mlscLandingComplete && !loadingScreen.classList.contains('loading-hidden')) {
-      // Wait for landing loading animation to complete and hero page to open
-      window.addEventListener('mlsc-landing-complete', startSequence, { once: true });
-    } else {
-      // If no loading screen or already completed, start sequence
-      startSequence();
-    }
-  }
-
-  // =========================================================
-  // Stack Cards Rive Mascot State Controller (brie_animation.riv)
-  // Active only during the Stack Cards section & bounded above footer.
-  // =========================================================
-  let riveInstance = null;
-  let isRiveInitialized = false;
-
-  function initStackCardsRiveMascot() {
-    const riveCanvas = document.getElementById('brie-rive-canvas');
-    const riveWrapper = document.getElementById('brie-rive-wrapper');
+  function initDualMascotScrollController() {
+    const heroSection = document.getElementById('hero');
     const exploreSection = document.getElementById('explore');
-    const footerElement = document.getElementById('footer');
+    const footerSection = document.getElementById('footer') || document.querySelector('.site-footer');
+    const downWrapper = document.getElementById('brie-scroll-down-wrapper');
+    const upWrapper = document.getElementById('brie-scroll-up-wrapper');
+    const sleepWrapper = document.getElementById('brie-sleep-wrapper');
+    const heroTitle = document.querySelector('.hero-raw-title');
 
-    if (!riveCanvas || !riveWrapper || !exploreSection) return;
+    if (!heroSection || !exploreSection || !downWrapper || !upWrapper) return;
 
-    // Load Rive Animation Asset with explicit Artboard & State Machine
-    if (typeof rive !== 'undefined' && !isRiveInitialized) {
-      isRiveInitialized = true;
-      try {
-        riveInstance = new rive.Rive({
-          src: 'assets/animation/brie_animation.riv',
-          canvas: riveCanvas,
-          artboard: 'Artboard 1',
-          stateMachines: 'State Machine 1',
-          autoplay: true,
-          layout: new rive.Layout({
-            fit: rive.Fit.Contain,
-            alignment: rive.Alignment.Center
-          }),
-          onLoad: () => {
-            if (riveInstance) {
-              riveInstance.resizeDrawingSurfaceToCanvas();
-            }
-          },
-          onLoadError: (err) => {
-            console.error('Rive animation load error:', err);
-            try {
-              riveInstance = new rive.Rive({
-                src: 'assets/animation/brie_animation.riv',
-                canvas: riveCanvas,
-                artboard: 'Artboard 1',
-                animations: 'Timeline 1',
-                autoplay: true,
-                onLoad: () => {
-                  if (riveInstance) riveInstance.resizeDrawingSurfaceToCanvas();
-                }
-              });
-            } catch (fallbackErr) {
-              console.error('Rive fallback load error:', fallbackErr);
-            }
-          }
-        });
-      } catch (err) {
-        console.error('Rive initialization exception:', err);
+    let targetY = window.scrollY;
+    let smoothY = window.scrollY;
+    let lastDirectionY = window.scrollY;
+    let scrollDirection = 'down';
+    let isTicking = false;
+
+    let cachedHeroTop = 0;
+    let cachedHeroHeight = 0;
+    let cachedExploreTop = 0;
+    let cachedFooterTop = 0;
+
+    function getElementDocTop(el) {
+      let top = 0;
+      let curr = el;
+      while (curr) {
+        top += curr.offsetTop || 0;
+        curr = curr.offsetParent;
+      }
+      return top;
+    }
+
+    function updateMetrics() {
+      cachedHeroTop = getElementDocTop(heroSection);
+      cachedHeroHeight = heroSection.offsetHeight || window.innerHeight;
+      cachedExploreTop = getElementDocTop(exploreSection);
+      if (footerSection) {
+        cachedFooterTop = getElementDocTop(footerSection);
       }
     }
 
-    // ScrollTrigger Controller for Stack Cards Rive Mascot
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.create({
-        trigger: exploreSection,
-        start: 'top 25%',
-        endTrigger: footerElement || exploreSection,
-        end: 'top 90%',
-        onEnter: () => {
-          gsap.to(riveWrapper, {
-            opacity: 1,
-            duration: 0.4,
-            overwrite: 'auto',
-            onStart: () => gsap.set(riveWrapper, { visibility: 'visible' })
+    updateMetrics();
+    window.addEventListener('resize', updateMetrics, { passive: true });
+
+    let currentDownOpacity = 0;
+    let currentUpOpacity = 0;
+
+    function renderLoop() {
+      smoothY += (targetY - smoothY) * 0.14;
+      if (Math.abs(targetY - smoothY) < 0.05) {
+        smoothY = targetY;
+      }
+
+      const y = smoothY;
+
+      const dirDiff = y - lastDirectionY;
+      if (Math.abs(dirDiff) > 8) {
+        scrollDirection = dirDiff > 0 ? 'down' : 'up';
+        lastDirectionY = y;
+      }
+
+      const startY = cachedHeroTop + cachedHeroHeight * 0.45;
+      const endY = cachedExploreTop + 80;
+
+      if (y <= cachedHeroTop + 10) {
+        currentDownOpacity = 0;
+        currentUpOpacity = 0;
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+        if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
+      } else if (y < startY) {
+        const heroFadeProgress = (y - cachedHeroTop) / (startY - cachedHeroTop);
+        if (heroTitle) {
+          const titleOpacity = Math.max(0, 1 - heroFadeProgress * 1.5);
+          gsap.set(heroTitle, { opacity: titleOpacity, scale: 1 - heroFadeProgress * 0.1, y: heroFadeProgress * 80 });
+        }
+        currentDownOpacity = 0;
+        currentUpOpacity = 0;
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+      } else if (y < endY) {
+        const p = Math.max(0, Math.min(1, (y - startY) / (endY - startY)));
+
+        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+
+        const maxMovePx = window.innerHeight * 0.62;
+        const translateYPx = p * maxMovePx;
+
+        let baseMascotOpacity = 0;
+        let sleepOpacity = 0;
+
+        if (p < 0.18) {
+          baseMascotOpacity = p / 0.18;
+        } else if (p <= 0.65) {
+          baseMascotOpacity = 1.0;
+        } else if (p < 0.82) {
+          baseMascotOpacity = (0.82 - p) / 0.17;
+        } else {
+          baseMascotOpacity = 0;
+        }
+
+        if (p >= 0.82) {
+          sleepOpacity = (p - 0.82) / 0.18;
+        } else {
+          sleepOpacity = 0;
+        }
+
+        baseMascotOpacity = Math.max(0, Math.min(1, baseMascotOpacity));
+        sleepOpacity = Math.max(0, Math.min(1, sleepOpacity));
+
+        const targetDownOpacity = scrollDirection === 'down' ? baseMascotOpacity : 0;
+        const targetUpOpacity = scrollDirection === 'up' ? baseMascotOpacity : 0;
+
+        currentDownOpacity += (targetDownOpacity - currentDownOpacity) * 0.18;
+        currentUpOpacity += (targetUpOpacity - currentUpOpacity) * 0.18;
+
+        if (Math.abs(targetDownOpacity - currentDownOpacity) < 0.01) currentDownOpacity = targetDownOpacity;
+        if (Math.abs(targetUpOpacity - currentUpOpacity) < 0.01) currentUpOpacity = targetUpOpacity;
+
+        if (currentDownOpacity > 0.01) {
+          gsap.set(downWrapper, {
+            visibility: 'visible',
+            opacity: currentDownOpacity,
+            y: translateYPx,
+            force3D: true
           });
-        },
-        onLeave: () => {
-          gsap.to(riveWrapper, {
-            opacity: 0,
-            duration: 0.3,
-            overwrite: 'auto',
-            onComplete: () => gsap.set(riveWrapper, { visibility: 'hidden' })
+        } else {
+          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        }
+
+        if (currentUpOpacity > 0.01) {
+          gsap.set(upWrapper, {
+            visibility: 'visible',
+            opacity: currentUpOpacity,
+            y: translateYPx,
+            force3D: true
           });
-        },
-        onEnterBack: () => {
-          gsap.to(riveWrapper, {
-            opacity: 1,
-            duration: 0.4,
-            overwrite: 'auto',
-            onStart: () => gsap.set(riveWrapper, { visibility: 'visible' })
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(riveWrapper, {
-            opacity: 0,
-            duration: 0.3,
-            overwrite: 'auto',
-            onComplete: () => gsap.set(riveWrapper, { visibility: 'hidden' })
+        } else {
+          gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+        }
+
+        if (sleepWrapper) {
+          if (sleepOpacity > 0.01) {
+            gsap.set(sleepWrapper, {
+              visibility: 'visible',
+              opacity: sleepOpacity,
+              y: 0,
+              force3D: true
+            });
+          } else {
+            gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+          }
+        }
+      } else {
+        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+
+        currentDownOpacity = 0;
+        currentUpOpacity = 0;
+        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
+        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+
+        if (sleepWrapper) {
+          let sleepPinY = 0;
+          if (cachedFooterTop > 0) {
+            const sleepHeight = sleepWrapper.offsetHeight || 184;
+            const defaultScreenTop = 80 + window.innerHeight * 0.62 - (sleepHeight / 2);
+            const defaultDocBottom = y + defaultScreenTop + sleepHeight;
+            const maxDocBottom = cachedFooterTop - 12;
+            if (defaultDocBottom > maxDocBottom) {
+              sleepPinY = -(defaultDocBottom - maxDocBottom);
+            }
+          }
+
+          gsap.set(sleepWrapper, {
+            visibility: 'visible',
+            opacity: 1.0,
+            y: sleepPinY,
+            force3D: true
           });
         }
-      });
+      }
+
+      if (
+        Math.abs(targetY - smoothY) > 0.05 ||
+        Math.abs((scrollDirection === 'down' ? baseMascotOpacity : 0) - currentDownOpacity) > 0.01 ||
+        Math.abs((scrollDirection === 'up' ? baseMascotOpacity : 0) - currentUpOpacity) > 0.01
+      ) {
+        requestAnimationFrame(renderLoop);
+      } else {
+        isTicking = false;
+      }
     }
+
+    function onScroll(currentScrollY) {
+      targetY = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+      if (!isTicking) {
+        isTicking = true;
+        requestAnimationFrame(renderLoop);
+      }
+    }
+
+    if (window.lenis) {
+      window.lenis.on('scroll', (e) => onScroll(e.scroll));
+    } else {
+      window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
+    }
+
+    updateMetrics();
+    onScroll(window.scrollY);
   }
 
   // =========================================================
@@ -1496,7 +1401,6 @@
     const achievementsMascot = document.getElementById('achievements-mascot-wrapper');
     if (!achievementsMascot) return;
 
-    // Trigger entrance animation on page mount / load
     requestAnimationFrame(() => {
       achievementsMascot.classList.add('animate-entrance');
     });
@@ -1513,9 +1417,8 @@
       const heroHeight = heroSection.offsetHeight || window.innerHeight;
       const progress = Math.max(0, Math.min(1, smoothScrollY / (heroHeight * 0.65)));
 
-      // Smooth subtle parallax + fade out before hero section ends
       const fadeOutOpacity = Math.max(0, 1 - Math.pow(progress, 1.4));
-      const translateY = progress * 40; // Gentle downward drift on scroll
+      const translateY = progress * 40;
 
       if (typeof gsap !== 'undefined') {
         gsap.set(achievementsMascot, {
@@ -1551,6 +1454,64 @@
     }
   }
 
+  // =========================================================
+  // Praxis Mascot One-Time Announcement Playback Controller
+  // Triggers AFTER the landing loading animation completes & Hero opens.
+  // =========================================================
+  function initHeroMascotController() {
+    const heroMascot = document.querySelector('.hero-mascot-webp');
+    if (!heroMascot) return;
+
+    let baseSrc = heroMascot.getAttribute('data-src');
+    if (!baseSrc) {
+      baseSrc = heroMascot.getAttribute('src').split('?')[0];
+      heroMascot.setAttribute('data-src', baseSrc);
+    }
+
+    const WEBP_SINGLE_PLAY_DURATION = 10000; // Exact 10.0s WebP sequence
+    let isTriggered = false;
+
+    // 1. Initially hidden while landing loading animation plays
+    heroMascot.classList.add('hero-mascot-delayed');
+    heroMascot.style.visibility = 'hidden';
+    heroMascot.style.opacity = '0';
+    heroMascot.setAttribute('src', '');
+
+    function startSequence() {
+      if (isTriggered) return;
+      isTriggered = true;
+
+      // 2. Wait exactly 1 second (1000ms) AFTER landing loading animation gets over
+      setTimeout(() => {
+        // 3. Attach cache-busting timestamp URL to play WebP animation from frame 1
+        const freshSrc = baseSrc + '?t=' + Date.now();
+        heroMascot.setAttribute('src', freshSrc);
+
+        // 4. Make mascot visible
+        heroMascot.classList.remove('hero-mascot-delayed');
+        heroMascot.style.visibility = 'visible';
+        heroMascot.style.opacity = '1';
+
+        // 5. After exactly 10 seconds (single WebP loop duration), hide mascot immediately
+        setTimeout(() => {
+          heroMascot.classList.add('hero-mascot-delayed');
+          heroMascot.style.visibility = 'hidden';
+          heroMascot.style.opacity = '0';
+          heroMascot.setAttribute('src', '');
+        }, WEBP_SINGLE_PLAY_DURATION);
+      }, 1000);
+    }
+
+    const loadingScreen = document.getElementById('mlsc-loading-screen');
+    if (loadingScreen && !window.__mlscLandingComplete && !loadingScreen.classList.contains('loading-hidden')) {
+      // Wait for landing loading animation to complete
+      window.addEventListener('mlsc-landing-complete', startSequence, { once: true });
+    } else {
+      // If no loading screen or already completed, start sequence
+      startSequence();
+    }
+  }
+
   let isAppInitialized = false;
   function initApp() {
     if (isAppInitialized) return;
@@ -1561,13 +1522,12 @@
     const lenis = initGlobalLenis();
     scrollStackInstance = initScrollStack();
     initScrollAnimations();
-    initDualMascotScrollController();
     journeyTimelineInstance = initJourneyTimeline();
     hackathonCarouselInstance = initHackathonWinnersCarousel();
     initLeaderboard();
     initBrieNavbar();
     initHeroMascotController();
-    initStackCardsRiveMascot();
+    initDualMascotScrollController();
     initAchievementsMascotController();
 
     if (lenis) {

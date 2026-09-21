@@ -6,6 +6,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
 
+:root {
+  --ms-blue: #00a4ef;
+}
+
+.event-glow {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ========================================================= */
 /* 0. PURE BLACK THEME & LENIS SMOOTH SCROLL INTEGRATION     */
 /* ========================================================= */
@@ -49,7 +68,7 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 85px 16px 80px;
+  padding: 0 16px 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,15 +85,11 @@ body {
 /* ========================================================= */
 .teams-hero-viewport {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
   min-height: 100vh;
   min-height: 100dvh;
-  max-height: 100vh;
-  max-height: 100dvh;
   position: relative;
   z-index: 10;
-  padding: clamp(80px, 12vh, 120px) 24px clamp(30px, 5vh, 50px);
+  padding: clamp(90px, 14vh, 130px) 24px clamp(60px, 10vh, 90px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,7 +98,38 @@ body {
   background: #000000 !important;
   background-color: #000000 !important;
   box-sizing: border-box;
-  overflow: hidden;
+}
+
+.teams-scroll-hint {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: #94a3b8;
+  text-transform: uppercase;
+  opacity: 0.75;
+  pointer-events: none;
+  animation: teams-hint-bounce 2.2s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.teams-scroll-hint svg {
+  color: var(--ms-blue, #00a4ef);
+}
+
+@keyframes teams-hint-bounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, 6px);
+  }
 }
 
 /* ========================================================= */
@@ -94,23 +140,46 @@ body {
   z-index: 10;
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 28px;
+  margin: 0 auto;
   padding: 0 16px;
 }
 
 .teams-title {
-  font-size: clamp(2.4rem, 4.4vw, 3.4rem);
+  position: relative;
+  z-index: 2;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
   color: #ffffff;
-  margin-bottom: 0;
+  margin: 0 auto clamp(10px, 1.8vh, 18px);
+  max-width: 860px;
 }
 
-.teams-title .title-gradient {
-  background: linear-gradient(135deg, #ffffff 40%, #00a4ef 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Solid MLSC Blue accent - No gradient, matches other pages */
+.teams-title .title-accent,
+.teams-title .title-gradient,
+.teams-title .teams-gradient-text {
+  color: var(--ms-blue, #00a4ef);
+  display: inline-block;
+  text-shadow: 0 0 28px rgba(0, 164, 239, 0.35);
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: var(--ms-blue, #00a4ef) !important;
+}
+
+.teams-desc {
+  position: relative;
+  z-index: 2;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  color: #9ca3af;
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 0 auto;
+  opacity: 0.92;
 }
 
 /* ========================================================= */
@@ -159,12 +228,10 @@ body {
 }
 
 .teams-tenure-btn.active {
-  background: rgba(26, 28, 36, 0.9) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.28) !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  background: linear-gradient(135deg, rgba(0, 164, 239, 0.25), rgba(0, 164, 239, 0.15));
+  color: var(--ms-blue, #00a4ef);
+  border-color: rgba(0, 164, 239, 0.55);
+  box-shadow: 0 0 16px rgba(0, 164, 239, 0.3);
 }
 
 @media (max-width: 640px) {
@@ -172,6 +239,7 @@ body {
     gap: 4px;
     padding: 4px 6px;
   }
+
   .teams-tenure-btn {
     padding: 6px 12px;
     font-size: 0.78rem;
@@ -287,42 +355,51 @@ body {
   color: #ffffff;
 }
 
-/* Category Wing Dividers */
+/* Category Headings / Dividers (Clean, Minimal, Modern) */
 .team-wing-divider {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1100px;
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
   margin: 40px auto 10px;
   padding: 0 16px;
   box-sizing: border-box;
+  text-align: center;
+  background: transparent !important;
 }
 
 .team-wing-badge,
 .team-wing-badge.nontech {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 16px;
-  border-radius: 9999px;
-  background: rgba(0, 164, 239, 0.08) !important;
-  border: 1px solid rgba(0, 164, 239, 0.25) !important;
-  color: #00a4ef !important;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
+  display: inline-block;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.wing-text {
+  display: inline-block;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(2.2rem, 4.2vw, 3.1rem);
+  font-weight: 800;
   letter-spacing: -0.01em;
-  white-space: nowrap;
+  text-transform: uppercase;
+  color: #00a4ef !important;
+  line-height: 1.15;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
 }
 
-.team-wing-badge .wing-dot {
-  display: none;
-}
-
+.team-wing-badge .wing-dot,
 .team-wing-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.02));
+  display: none !important;
 }
 
 /* ========================================================= */
@@ -454,7 +531,7 @@ body {
   -webkit-backface-visibility: hidden;
   transform-style: flat;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7);
-  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease, visibility 0.35s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -516,7 +593,7 @@ body {
 .team-card-info-top {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
 }
 
@@ -527,36 +604,47 @@ body {
   letter-spacing: -0.02em;
   margin: 0 0 6px 0;
   line-height: 1.2;
+  text-align: center;
+  width: 100%;
 }
 
 .team-card-role-row {
   margin-bottom: 6px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .team-card-role-badge {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   padding: 3px 12px;
   border-radius: 9999px;
   background: rgba(14, 18, 26, 0.85);
   color: #00a4ef;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.76rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   border: 1px solid rgba(0, 164, 239, 0.35);
+  white-space: nowrap;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .team-card-academic {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   font-size: 0.8rem;
   color: #94a3b8;
   font-weight: 600;
   margin-bottom: 6px;
+  width: 100%;
+  text-align: center;
 }
 
 .academic-cap {
@@ -595,10 +683,12 @@ body {
 .team-social-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
 .team-social-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 38px;
@@ -662,11 +752,11 @@ body {
 }
 
 .teams-nav-btn.prev {
-  left: 20px;
+  left: max(20px, calc(50% - 430px));
 }
 
 .teams-nav-btn.next {
-  right: 20px;
+  right: max(20px, calc(50% - 430px));
 }
 
 .teams-nav-btn:hover {
@@ -685,7 +775,7 @@ body {
 /* ========================================================= */
 @media (max-width: 1024px) {
   .teams-section {
-    padding: 75px 16px 60px;
+    padding: 0 16px 60px;
   }
 
   .teams-sections-wrapper {
@@ -708,17 +798,17 @@ body {
 
 @media (max-width: 768px) {
   .teams-section {
-    padding: 65px 12px 50px;
+    padding: 0 12px 50px;
   }
 
   .teams-hero-viewport {
     height: auto;
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 85vh;
+    min-height: 85dvh;
     max-height: none;
     overflow: visible;
-    padding: 100px 16px 36px;
-    justify-content: flex-start;
+    padding: 100px 16px 40px;
+    justify-content: center;
   }
 
   .teams-sections-wrapper {
@@ -764,7 +854,7 @@ body {
   }
 
   .teams-title {
-    font-size: 2rem;
+    font-size: clamp(2.1rem, 5.4vw, 2.6rem);
   }
 
   .team-domain-title {
@@ -810,12 +900,12 @@ body {
 
   .teams-hero-viewport {
     height: auto;
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: 80vh;
+    min-height: 80dvh;
     max-height: none;
     overflow: visible;
-    padding: 85px 12px 28px;
-    justify-content: flex-start;
+    padding: 85px 12px 36px;
+    justify-content: center;
   }
 
   .teams-sections-wrapper {
@@ -860,8 +950,13 @@ body {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Ensure Site Footer is Pure Black on Teams page */
@@ -875,6 +970,7 @@ body {
 /* 9. ACCESSIBILITY & PREFERS-REDUCED-MOTION                 */
 /* ========================================================= */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {

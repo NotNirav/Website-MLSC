@@ -156,34 +156,34 @@ function AboutTextContent({
     : Math.min(v.width * 0.88, 6.8);
 
   const orgFontSize = isMobile
-    ? Math.min(v.width / 34, 0.082)
+    ? Math.min(v.width / 30, 0.094)
     : isTablet
-    ? Math.min(v.width / 38, 0.106)
-    : Math.min(v.width / 42, 0.120);
+    ? Math.min(v.width / 33, 0.122)
+    : Math.min(v.width / 37, 0.138);
 
   const leadFontSize = isMobile
-    ? Math.min(v.width / 44, 0.068)
+    ? Math.min(v.width / 38, 0.078)
     : isTablet
-    ? Math.min(v.width / 50, 0.084)
-    : Math.min(v.width / 54, 0.095);
+    ? Math.min(v.width / 44, 0.097)
+    : Math.min(v.width / 47, 0.109);
 
   const actFontSize = isMobile
-    ? Math.min(v.width / 46, 0.064)
+    ? Math.min(v.width / 40, 0.074)
     : isTablet
-    ? Math.min(v.width / 52, 0.080)
-    : Math.min(v.width / 56, 0.090);
+    ? Math.min(v.width / 45, 0.092)
+    : Math.min(v.width / 49, 0.104);
 
   const quoteFontSize = isMobile
-    ? Math.min(v.width / 36, 0.078)
+    ? Math.min(v.width / 31, 0.090)
     : isTablet
-    ? Math.min(v.width / 42, 0.098)
-    : Math.min(v.width / 44, 0.110);
+    ? Math.min(v.width / 36, 0.113)
+    : Math.min(v.width / 38, 0.127);
 
   const punchFontSize = isMobile
-    ? Math.min(v.width / 32, 0.086)
+    ? Math.min(v.width / 28, 0.099)
     : isTablet
-    ? Math.min(v.width / 38, 0.112)
-    : Math.min(v.width / 40, 0.126);
+    ? Math.min(v.width / 33, 0.129)
+    : Math.min(v.width / 35, 0.145);
 
   // Background solid color circles (reverted to 4 clean solid color circles)
   const bgCircles = (
@@ -511,7 +511,8 @@ const ModeWrapper = memo(function ModeWrapper({
     const maxWorld = v.width * 0.9;
     const desired = maxWorld / geoWidthRef.current;
     const baseScale = modeProps.scale ?? Math.min(0.18, desired);
-    const targetScale = isHovered ? baseScale : 0;
+    // Lens bubble disabled — it overlapped the text. Background circles and text remain.
+    const targetScale = 0;
 
     // Smoothly animate scale up on enter, and quickly collapse to 0 on exit
     const dampTime = isHovered ? 0.12 : 0.08;
