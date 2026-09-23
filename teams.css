@@ -9,6 +9,10 @@
 /* ========================================================= */
 /* 0. PURE BLACK THEME & LENIS SMOOTH SCROLL INTEGRATION     */
 /* ========================================================= */
+:root {
+  --ms-blue: #00a4ef;
+}
+
 html {
   scroll-behavior: auto;
   background-color: #000000 !important;
@@ -49,7 +53,7 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  padding: 85px 16px 80px;
+  padding: 0 0 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,7 +78,7 @@ body {
   max-height: 100dvh;
   position: relative;
   z-index: 10;
-  padding: clamp(80px, 12vh, 120px) 24px clamp(30px, 5vh, 50px);
+  padding: clamp(75px, 11vh, 100px) 24px clamp(30px, 5vh, 50px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,6 +90,21 @@ body {
   overflow: hidden;
 }
 
+.event-glow {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  height: clamp(24rem, 36vw, 32rem);
+  width: clamp(24rem, 36vw, 32rem);
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  filter: blur(72px);
+  -webkit-filter: blur(72px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ========================================================= */
 /* 2. SECTION MAIN HEADER                                    */
 /* ========================================================= */
@@ -93,51 +112,51 @@ body {
   position: relative;
   z-index: 10;
   text-align: center;
-  max-width: 860px;
-  margin: 0 auto 24px;
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
   padding: 0 16px;
 }
 
 .teams-tag {
-  display: inline-flex;
-  align-items: center;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: #38bdf8;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  padding: 5px 16px;
-  border-radius: 9999px;
-  margin-bottom: 12px;
+  display: none !important;
 }
 
 .teams-tag-dot {
-  display: none;
+  display: none !important;
 }
 
 .teams-title {
-  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  margin: 0 auto;
+  max-width: 860px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
   color: #ffffff;
-  margin-bottom: 8px;
 }
 
+/* Solid MLSC Blue accent - No gradient */
+.teams-title .title-accent,
 .teams-title .title-gradient {
-  background: linear-gradient(135deg, #ffffff 40%, #7dd3fc 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ms-blue, #00a4ef);
+  display: inline-block;
+  text-shadow: 0 0 28px rgba(0, 164, 239, 0.35);
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  -webkit-text-fill-color: var(--ms-blue, #00a4ef) !important;
 }
 
 .teams-desc {
-  font-size: clamp(0.92rem, 1.4vw, 1.05rem);
-  color: #9ca3af;
-  line-height: 1.6;
-  max-width: 640px;
-  margin: 0 auto;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  color: var(--text-muted, #9ca3af);
+  line-height: 1.65;
+  max-width: 660px;
+  margin: 1.25rem auto 0;
+  opacity: 0.92;
 }
 
 /* ========================================================= */
@@ -851,7 +870,7 @@ body {
 /* ========================================================= */
 @media (max-width: 1024px) {
   .teams-section {
-    padding: 75px 16px 60px;
+    padding: 0 0 60px;
   }
 
   .teams-sections-wrapper {
@@ -874,7 +893,7 @@ body {
 
 @media (max-width: 768px) {
   .teams-section {
-    padding: 65px 12px 50px;
+    padding: 0 0 50px;
   }
 
   .teams-hero-viewport {
@@ -883,8 +902,8 @@ body {
     min-height: 100dvh;
     max-height: none;
     overflow: visible;
-    padding: 100px 16px 36px;
-    justify-content: flex-start;
+    padding: clamp(80px, 12vh, 100px) 18px clamp(36px, 5vh, 48px);
+    justify-content: center;
   }
 
   .teams-sections-wrapper {
