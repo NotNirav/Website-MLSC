@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 215" width="280" height="215">
+  <defs>
+    <linearGradient id="bgGradGD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e131f" />
+      <stop offset="50%" stop-color="#141a29" />
+      <stop offset="100%" stop-color="#1e293b" />
+    </linearGradient>
+    <linearGradient id="circleGradGD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </linearGradient>
+    <filter id="glowGD" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect width="280" height="215" fill="url(#bgGradGD)" />
+  <circle cx="140" cy="95" r="48" fill="rgba(168, 85, 247, 0.15)" filter="url(#glowGD)" />
+  <circle cx="140" cy="95" r="42" fill="url(#circleGradGD)" stroke="rgba(255, 255, 255, 0.25)" stroke-width="2" />
+  <text x="140" y="103" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="24" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="1">GD</text>
+  <text x="140" y="162" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="14" font-weight="700" fill="#f8fafc" text-anchor="middle">Gaurav Dhurve</text>
+  <text x="140" y="180" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="11" font-weight="600" fill="#c084fc" text-anchor="middle" letter-spacing="0.5">Visual Design</text>
+</svg>
