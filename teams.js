@@ -840,7 +840,6 @@
       header.className = 'team-domain-header';
       header.innerHTML = `
         <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
-        <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
       `;
       block.appendChild(header);
 

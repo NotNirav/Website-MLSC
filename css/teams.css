@@ -535,18 +535,12 @@ body {
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 0;
   text-align: center;
 }
 
 .team-domain-desc {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
-  color: #ffffff;
-  opacity: 0.95;
-  line-height: 1.5;
-  margin: 0 auto;
-  text-align: center;
+  display: none !important;
 }
 
 /* ========================================================= */
