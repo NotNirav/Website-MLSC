@@ -11,7 +11,7 @@
   // =========================================================
         const DOMAIN_ORDER = [
     // =========================================================
-    // 1. CORE LEADERSHIP
+    // 1. CORE
     // =========================================================
     {
       id: 'core-team',
@@ -19,13 +19,13 @@
       category: 'Core',
       categoryLabel: 'Core Leadership',
       tag: 'Core Leadership',
-      title: 'Executive Board & Core Leadership',
+      title: 'Core Members',
       desc: 'Steering chapter vision, campus initiatives, and institutional collaborations.',
       accentColor: '#ffb900'
     },
 
     // =========================================================
-    // 2. TECHNICAL WING
+    // 2. TECHNICAL
     // =========================================================
     {
       id: 'tech-heads',
@@ -33,29 +33,9 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'Technical Leadership',
-      title: 'Technical Heads & Engineering Leadership',
+      title: 'Technical Heads',
       desc: 'Overseeing chapter technical architecture, cross-domain engineering standards, and innovation.',
       accentColor: '#00a4ef'
-    },
-    {
-      id: 'it',
-      name: 'IT',
-      category: 'Tech',
-      categoryLabel: 'Technical Wing',
-      tag: 'Information Technology',
-      title: 'Information Technology & Systems',
-      desc: 'Designing robust software solutions, systems architecture, and technical innovation.',
-      accentColor: '#38bdf8'
-    },
-    {
-      id: 'web-development',
-      name: 'Web Development',
-      category: 'Tech',
-      categoryLabel: 'Technical Wing',
-      tag: 'Web Development',
-      title: 'Web & Platform Engineering',
-      desc: 'Developing responsive web portals, interactive applications, and chapter digital tools.',
-      accentColor: '#38bdf8'
     },
     {
       id: 'devops',
@@ -63,7 +43,7 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'DevOps & Cloud',
-      title: 'DevOps & Cloud Infrastructure',
+      title: 'DevOps',
       desc: 'Containerizing workloads, orchestrating CI/CD pipelines, and maintaining resilient cloud infrastructure.',
       accentColor: '#0ea5e9'
     },
@@ -83,7 +63,7 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'Cyber Security',
-      title: 'Cyber Security & Systems',
+      title: 'Cyber Security',
       desc: 'Securing cloud services, vulnerability testing, authentication security, and defense protocols.',
       accentColor: '#ef4444'
     },
@@ -93,13 +73,33 @@
       category: 'Tech',
       categoryLabel: 'Technical Wing',
       tag: 'Competitive Programming',
-      title: 'Competitive Programming & DSA',
+      title: 'Competitive Programming',
       desc: 'Fostering algorithmic problem solving, data structures, and competitive coding contests.',
       accentColor: '#a855f7'
     },
+    {
+      id: 'it',
+      name: 'IT',
+      category: 'Tech',
+      categoryLabel: 'Technical Wing',
+      tag: 'Information Technology',
+      title: 'Information Technology',
+      desc: 'Designing robust software solutions, systems architecture, and technical innovation.',
+      accentColor: '#38bdf8'
+    },
+    {
+      id: 'web-development',
+      name: 'Web Development',
+      category: 'Tech',
+      categoryLabel: 'Technical Wing',
+      tag: 'Web Development',
+      title: 'Web Development',
+      desc: 'Developing responsive web portals, interactive applications, and chapter digital tools.',
+      accentColor: '#38bdf8'
+    },
 
     // =========================================================
-    // 3. NON-TECHNICAL & CREATIVE WING
+    // 3. NON-TECHNICAL
     // =========================================================
     {
       id: 'operations',
@@ -117,7 +117,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Management',
-      title: 'Event Management & Strategy',
+      title: 'Event Management',
       desc: 'Directing flagship hackathons, technical speaker series, and participant experience.',
       accentColor: '#fb923c'
     },
@@ -127,7 +127,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Event Management',
-      title: 'Event Management & Operations',
+      title: 'Event Management',
       desc: 'Organizing hackathons, technical workshops, operations, logistics, and speaker sessions.',
       accentColor: '#f97316'
     },
@@ -137,7 +137,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Marketing',
-      title: 'Marketing & Public Relations',
+      title: 'Marketing',
       desc: 'Driving campus marketing campaigns, student engagement, and brand promotions.',
       accentColor: '#06b6d4'
     },
@@ -147,7 +147,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Sponsorship',
-      title: 'Corporate Sponsorship & Grants',
+      title: 'Sponsorship',
       desc: 'Forging industry partnerships, securing corporate sponsorships, and developer grants.',
       accentColor: '#f59e0b'
     },
@@ -157,7 +157,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Sponsorship & Marketing',
-      title: 'Sponsorship, Marketing & Outreach',
+      title: 'Sponsorship',
       desc: 'Securing corporate sponsorships, managing partnerships, and driving community outreach.',
       accentColor: '#06b6d4'
     },
@@ -167,7 +167,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Finance',
-      title: 'Financial Planning & Accounts',
+      title: 'Finance',
       desc: 'Managing budget allocations, event logistics funding, financial audits, and sponsor fund disbursement.',
       accentColor: '#10b981'
     },
@@ -177,7 +177,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Accounts & Finance',
-      title: 'Accounts & Financial Management',
+      title: 'Finance',
       desc: 'Managing financial planning, budget allocations, event logistics funding, and accounts.',
       accentColor: '#10b981'
     },
@@ -187,7 +187,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Design',
-      title: 'UI / UX & Creative Design',
+      title: 'Design',
       desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and graphics.',
       accentColor: '#ec4899'
     },
@@ -197,7 +197,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'UI / UX Design',
-      title: 'UI / UX & Creative Design',
+      title: 'Design',
       desc: 'Designing intuitive user interfaces, visual design systems, brand identities, and graphics.',
       accentColor: '#ec4899'
     },
@@ -207,7 +207,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Social Media',
-      title: 'Social Media & Content',
+      title: 'Media',
       desc: 'Curating social branding, video reels, interactive posts, and digital promotional media.',
       accentColor: '#8b5cf6'
     },
@@ -217,7 +217,7 @@
       category: 'Non-Tech',
       categoryLabel: 'Non-Technical Wing',
       tag: 'Videography & Media',
-      title: 'Videography & Media Production',
+      title: 'Media',
       desc: 'Capturing event photography, producing aftermovies, recap videos, and managing chapter visual media.',
       accentColor: '#8b5cf6'
     }
@@ -757,10 +757,6 @@
       }
     });
 
-    // Track when we transition into Tech or Non-Tech wings to render sleek Wing Dividers
-    let hasRenderedTechDivider = false;
-    let hasRenderedNonTechDivider = false;
-
     // Render Jump Pills & Team Blocks
     domainsToRender.forEach(domain => {
       const domainMembers = membersByDomain[domain.name] || [];
@@ -781,9 +777,10 @@
         pill.href = `#domain-${domain.id}`;
         pill.setAttribute('data-domain', domain.name);
         pill.setAttribute('data-category', cat);
+        const jumpLabel = domain.name === 'AI / ML' ? 'AI / ML' : (domain.name === 'CP' ? 'CP' : domain.title);
         pill.innerHTML = `
           <span class="teams-jump-cat-tag ${catClass}">${catShort}</span>
-          <span class="teams-jump-label">${escapeHTML(domain.name)}</span>
+          <span class="teams-jump-label">${escapeHTML(jumpLabel)}</span>
           <span class="teams-jump-count">${domainMembers.length}</span>
         `;
         pill.addEventListener('click', (e) => {
@@ -805,29 +802,7 @@
         jumpNavContainer.appendChild(pill);
       }
 
-      // 2. Render Category Wing Divider Header before first Tech domain
-      if (cat === 'Tech' && !hasRenderedTechDivider) {
-        hasRenderedTechDivider = true;
-        const divider = document.createElement('div');
-        divider.className = 'team-wing-divider tech-wing';
-        divider.innerHTML = `
-          <h2 class="team-wing-title">TECHNICAL DOMAINS</h2>
-        `;
-        sectionsWrapper.appendChild(divider);
-      }
-
-      // 3. Render Category Wing Divider Header before first Non-Tech domain
-      if (cat === 'Non-Tech' && !hasRenderedNonTechDivider) {
-        hasRenderedNonTechDivider = true;
-        const divider = document.createElement('div');
-        divider.className = 'team-wing-divider nontech-wing';
-        divider.innerHTML = `
-          <h2 class="team-wing-title">NON-TECHNICAL DOMAINS</h2>
-        `;
-        sectionsWrapper.appendChild(divider);
-      }
-
-      // 4. Create Domain Section Block
+      // 2. Create Domain Section Block
       const block = document.createElement('section');
       block.className = `team-domain-block domain-${catClass}`;
       block.id = `domain-${domain.id}`;

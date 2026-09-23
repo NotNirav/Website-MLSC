@@ -468,27 +468,11 @@ body {
 
 /* Category Wing Dividers */
 .team-wing-divider {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 90px auto 30px;
-  padding: 0 20px;
-  box-sizing: border-box;
-  text-align: center;
+  display: none !important;
 }
 
 .team-wing-title {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  line-height: 1.2;
-  margin: 0;
-  text-align: center;
-  text-transform: uppercase;
-  color: #00a4ef;
+  display: none !important;
 }
 
 .team-wing-line {
