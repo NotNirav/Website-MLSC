@@ -746,6 +746,7 @@ body {
   width: 100%;
   text-align: left;
   letter-spacing: -0.005em;
+  min-height: calc(0.88rem * 1.46 * 3);
 }
 
 /* Card Footer: GitHub & LinkedIn Logo Links */
