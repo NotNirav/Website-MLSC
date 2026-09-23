@@ -845,8 +845,8 @@
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <div class="team-domain-badge" style="color: ${domain.accentColor}; background: ${domain.accentColor}12; border-color: ${domain.accentColor}33;">
-          <span>${escapeHTML(domain.tag)}</span>
+        <div class="team-domain-badge" style="color: #ffffff; background: ${domain.accentColor}18; border-color: ${domain.accentColor}55;">
+          <span style="color: #ffffff;">${escapeHTML(domain.tag)}</span>
         </div>
         <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
         <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
@@ -1284,12 +1284,6 @@
       { opacity: 0, y: 12 },
       { opacity: 1, y: 0, duration: 0.5 },
       '-=0.35'
-    );
-
-    tl.fromTo('.teams-jump-nav',
-      { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
     );
   }
 
