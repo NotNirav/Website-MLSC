@@ -812,10 +812,7 @@
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider tech-wing';
         divider.innerHTML = `
-          <div class="team-wing-badge">
-            <span class="wing-text">Technical Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="team-wing-title">TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
@@ -826,10 +823,7 @@
         const divider = document.createElement('div');
         divider.className = 'team-wing-divider nontech-wing';
         divider.innerHTML = `
-          <div class="team-wing-badge nontech">
-            <span class="wing-text">Non-Technical & Creative Domains</span>
-          </div>
-          <div class="team-wing-line"></div>
+          <h2 class="team-wing-title">NON-TECHNICAL DOMAINS</h2>
         `;
         sectionsWrapper.appendChild(divider);
       }
@@ -845,9 +839,6 @@
       const header = document.createElement('div');
       header.className = 'team-domain-header';
       header.innerHTML = `
-        <div class="team-domain-badge" style="color: #ffffff; background: ${domain.accentColor}18; border-color: ${domain.accentColor}55;">
-          <span style="color: #ffffff;">${escapeHTML(domain.tag)}</span>
-        </div>
         <h2 class="team-domain-title">${escapeHTML(domain.title)}</h2>
         <p class="team-domain-desc">${escapeHTML(domain.desc)}</p>
       `;
@@ -1016,12 +1007,12 @@
 76,Nirav Neve,Current Year (2025–26),DevOps,Tech,DevOps Executive,SY,"Second-year engineering student building automated deployment pipelines, database architectures, containerized services, and resilient backend systems.",,assets/images/members/Nirav_Neve.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/NotNirav,https://www.linkedin.com/in/nirav-neve-b452183a1/
 77,Khushi Kolhe,Current Year (2025–26),DevOps,Tech,DevOps Executive,SY,"I’m a SY BTech IT student with a keen interest in programming and project development. I like turning ideas into practical projects and learning through building, experimenting, and solving problems.",,assets/images/members/Khushi Kolhe.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/khushikolhe,https://www.linkedin.com/in/khushi-kolhe-809a77379/
 78,Sanika Shinde,Current Year (2025–26),DevOps,Tech,DevOps Executive,SY,"I am SY B.Tech Information Technology student at PCCOE with a strong interest in programming, problem-solving, and technology. I enjoy learning by building projects, experimenting with new ideas, and understanding how different concepts work in real-world situations.",,assets/images/members/Sanika Shinde.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/sanika2506,https://www.linkedin.com/in/sanika-shinde-472757386/
-79,Aditya Deore,Current Year (2025–26),Cyber Security,Tech,Cyber Security Lead,TY,"Hi, I’m Aditya Deore, a B.Tech IT student and AI/ML developer passionate about cybersecurity, ethical hacking, and defending critical systems.",First Rank – Eureka Idea Pitching Competition 2025 held at PCCOE Akurdi.,assets/images/members/Aditya Deore.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/AdityaxDeore,https://www.linkedin.com/in/aditya-deore-3a725a263/
+79,Aditya Deore,Current Year (2025–26),Cyber Security,Tech,Cyber Security Head,TY,"Hi, I’m Aditya Deore, a B.Tech IT student and AI/ML developer passionate about cybersecurity, ethical hacking, and defending critical systems.",First Rank – Eureka Idea Pitching Competition 2025 held at PCCOE Akurdi.,assets/images/members/Aditya_Deore.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/AdityaxDeore,https://www.linkedin.com/in/aditya-deore-3a725a263/
 80,Prem Thakur,Current Year (2025–26),Cyber Security,Tech,Cyber Security Lead,SY,"I’m Prem Thakur, a B.Tech IT student at PCCOE and a tech enthusiast specializing in network security, authentication systems, vulnerability analysis, and student cyber defense practices.",,assets/images/members/prem thakur.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/prem-thakur00,https://www.linkedin.com/in/prem--thakur/
 81,Srushti Gaikwad,Current Year (2025–26),Cyber Security,Tech,Cyber Security Executive,SY,"I’m Srushti Gaikwad a Computer Engineering student with a keen interest in cybersecurity principles, threat defense models, security audits, and systems security protocols.",,assets/images/members/Srushti Gaikwad.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#ef4444,https://github.com/MourningShadow97,https://www.linkedin.com/in/srushti-gaikwad-370776389
 82,MAYANK PAWAR,Current Year (2025–26),CP,Tech,CP Lead,TY,"I’m Mayank Pawar, an IT student passionate about competitive programming, data structures, algorithms, and solving complex algorithmic challenges.","New Horizon International Hackathon – 3rd Prize, Healthcare track.",assets/images/members/Mayank Pawar.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#a855f7,https://github.com/MAYnk111,https://www.linkedin.com/in/mayank-pawar-615b562a3
 83,Anjali Borse,Current Year (2025–26),CP,Tech,CP Lead,SY,"I’m Anjali, a second-year B.Tech Information Technology student at PCCOE with a strong interest in programming, logical thinking, and problem-solving. I have a particular interest in C programming and enjoy solving challenging programming and logical problems.",,assets/images/members/Anjali Borse.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#a855f7,https://github.com/anjaliborse27-ops,https://www.linkedin.com/in/anjali-borse-5936a93a1/
-84,Samarth Waghrulkar,Current Year (2025–26),IT,Tech,IT Lead,TY,"I’m Samarth, an IT student who enjoys looking at problems from a different angle and turning ideas into practical, optimal solutions. A constant learner, and someone fascinated by the cosmos and the unknown.",Central India Hackathon 3.0 National Winner (1st Prize) | GDG on Campus #TECH2026 1st Prize | Stellar 21-Day Build Station Special Prize | Smart Horizon Hackathon 3rd Prize | SmartEarth 2026 Kazakhstan International Finalist.,assets/images/members/Samarth_W.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#38bdf8,https://github.com/Samarth-06,https://www.linkedin.com/in/samarth-waghrulkar-46b854323/
+84,Samarth Waghrulkar,Current Year (2025–26),DevOps,Tech,DevOps Head,TY,"I’m Samarth, an IT student who enjoys looking at problems from a different angle and turning ideas into practical, optimal solutions. A constant learner, and someone fascinated by the cosmos and the unknown.",Central India Hackathon 3.0 National Winner (1st Prize) | GDG on Campus #TECH2026 1st Prize | Stellar 21-Day Build Station Special Prize | Smart Horizon Hackathon 3rd Prize | SmartEarth 2026 Kazakhstan International Finalist.,assets/images/members/Samarth_W.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#0ea5e9,https://github.com/Samarth-06,https://www.linkedin.com/in/samarth-waghrulkar-46b854323/
 85,Madhav Khobare,Current Year (2025–26),Operations,Non-Tech,Operations Lead,TY,"Third-year IT student at PCCOE passionate about building practical, real-world tech solutions, solving problems, and driving innovation through hackathons and projects.","1st Prize - Alphabyte 3.0 (24-Hour Hackathon) | 3rd Prize - IEEE R10 ACEI INV.ENT Pitch Competition 2026 | 2x IEEE Competition Winner - 2025 & 2026 | AUD $750 Innovation Grant Recipient - La Trobe University, Australia | Top Innovator - AI for Bharat National Level Hackathon (by AWS) | IT Department Topper Medalist.",assets/images/members/Madhav.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/MadhavK3,https://www.linkedin.com/in/madhav-khobare
 86,Sharvari Deshmukh,Current Year (2025–26),Operations,Non-Tech,Operations Executive,SY,"Second-year IT student coordinating chapter operations, logistics infrastructure, equipment routing, and participant workflows.",,assets/images/members/Sharvari_Deshmukh.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com/sharvarid035,https://www.linkedin.com/in/deshmukhsharvari/
 87,Devendra Adsure,Current Year (2025–26),Operations,Non-Tech,Operations Executive,SY,"Second-year engineering student managing hardware logistics, campus venue arrangements, and club operational support.",,assets/images/members/Devendra Adsure.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#f97316,https://github.com,https://linkedin.com
@@ -1049,8 +1040,7 @@
 109,Mahesh Shirame,Current Year (2025–26),Social Media,Non-Tech,Social Media Lead,SY,"Second-year engineering student driving social media outreach, digital engagement, visual creative branding, and chapter event coverage.",,assets/images/members/Mahesh_Shirame.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com,https://linkedin.com
 110,Chaitanya Jadhav,Current Year (2025–26),Social Media,Non-Tech,Social Media Executive,SY,"I’m a second-year student at PCCOE and a curious tech enthusiast who enjoys learning and trying new things. Beyond technology, I’m also interested in videography and video editing, where I enjoy bringing creative ideas to life through visuals.",,assets/images/members/Chaitanya Jadhav.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com/chaitanyajadhav-07,https://www.linkedin.com/in/chaitanya-jadhav-416424377
 111,Palash Kurkute,Current Year (2025–26),Videography & Media,Non-Tech,Media Lead,TY,"Third-year Computer Engineering student directing media coverage, cinematic storytelling, aftermovies, and chapter visual archives.","Samartha 2025 Domain Winner, MBU Tirupathi.",assets/images/members/Palash.png,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com/PalashKurkute,https://www.linkedin.com/in/palash-kurkute/
-112,Vaidehi Behare,Current Year (2025–26),Videography & Media,Non-Tech,Media Lead,TY,"Third-year engineering student capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.",,assets/images/members/Vaidehi Behare.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com,https://linkedin.com
-`;
+112,Vaidehi Behare,Current Year (2025–26),Videography & Media,Non-Tech,Media Lead,TY,"Third-year engineering student capturing high-energy chapter moments, keynote recaps, and producing cinematic event trailers.",,assets/images/members/Vaidehi Behare.jpg,assets/videos/10405281-hd_3840_2160_30fps.mp4,#8b5cf6,https://github.com,https://linkedin.com`;
 
   let cachedParsedMembers = null;
 
