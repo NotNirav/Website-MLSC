@@ -677,7 +677,6 @@
     currentTenure = detectInitialTenure();
     setupTenureSwitcher();
     setupLenisScroll();
-    setupHeroAnimations();
 
     // Fetch static CSV data dynamically (cached in memory)
     const members = await loadMembersCSV();
@@ -1253,27 +1252,7 @@
   }
 
   function setupHeroAnimations() {
-    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || typeof gsap === 'undefined') return;
-
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    tl.fromTo('.teams-tag',
-      { opacity: 0, y: -12 },
-      { opacity: 1, y: 0, duration: 0.5, delay: 0.05 }
-    );
-
-    tl.fromTo('.teams-title',
-      { opacity: 0, y: 16 },
-      { opacity: 1, y: 0, duration: 0.6 },
-      '-=0.3'
-    );
-
-    tl.fromTo('.teams-desc',
-      { opacity: 0, y: 12 },
-      { opacity: 1, y: 0, duration: 0.5 },
-      '-=0.35'
-    );
+    // Hero title and subtitle remain static with no entrance animation, matching Events & Achievements pages.
   }
 
   function escapeHTML(str) {
