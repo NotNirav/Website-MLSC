@@ -156,34 +156,34 @@ function AboutTextContent({
     : Math.min(v.width * 0.88, 6.8);
 
   const orgFontSize = isMobile
-    ? Math.min(v.width / 30, 0.094)
-    : isTablet
-    ? Math.min(v.width / 33, 0.122)
-    : Math.min(v.width / 37, 0.138);
-
-  const leadFontSize = isMobile
-    ? Math.min(v.width / 38, 0.078)
-    : isTablet
-    ? Math.min(v.width / 44, 0.097)
-    : Math.min(v.width / 47, 0.109);
-
-  const actFontSize = isMobile
-    ? Math.min(v.width / 40, 0.074)
-    : isTablet
-    ? Math.min(v.width / 45, 0.092)
-    : Math.min(v.width / 49, 0.104);
-
-  const quoteFontSize = isMobile
     ? Math.min(v.width / 31, 0.090)
     : isTablet
-    ? Math.min(v.width / 36, 0.113)
-    : Math.min(v.width / 38, 0.127);
+    ? Math.min(v.width / 34, 0.115)
+    : Math.min(v.width / 38, 0.126);
+
+  const leadFontSize = isMobile
+    ? Math.min(v.width / 39, 0.075)
+    : isTablet
+    ? Math.min(v.width / 45, 0.092)
+    : Math.min(v.width / 49, 0.098);
+
+  const actFontSize = isMobile
+    ? Math.min(v.width / 41, 0.070)
+    : isTablet
+    ? Math.min(v.width / 46, 0.088)
+    : Math.min(v.width / 51, 0.093);
+
+  const quoteFontSize = isMobile
+    ? Math.min(v.width / 32, 0.086)
+    : isTablet
+    ? Math.min(v.width / 37, 0.106)
+    : Math.min(v.width / 41, 0.114);
 
   const punchFontSize = isMobile
-    ? Math.min(v.width / 28, 0.099)
+    ? Math.min(v.width / 29, 0.094)
     : isTablet
-    ? Math.min(v.width / 33, 0.129)
-    : Math.min(v.width / 35, 0.145);
+    ? Math.min(v.width / 34, 0.120)
+    : Math.min(v.width / 37, 0.128);
 
   // Background solid color circles (reverted to 4 clean solid color circles)
   const bgCircles = (
@@ -223,7 +223,7 @@ function AboutTextContent({
           <Text
             position={[0, 0.22, 0]}
             fontSize={leadFontSize}
-            lineHeight={1.55}
+            lineHeight={1.34}
             maxWidth={maxWidth}
             textAlign="center"
             color={textColor}
@@ -241,7 +241,7 @@ function AboutTextContent({
           <Text
             position={[0, -0.68, 0]}
             fontSize={punchFontSize}
-            lineHeight={1.3}
+            lineHeight={1.22}
             maxWidth={maxWidth}
             textAlign="center"
             color={highlightColor}
@@ -308,31 +308,24 @@ function AboutTextContent({
     return ranges;
   }, [punchlineText]);
 
-  // Responsive vertical coordinates based on visible viewport height
-  const orgY = isMobile ? v.height * 0.36 : v.height * 0.33;
-  const leadY = isMobile ? v.height * 0.18 : v.height * 0.16;
-  const actY = isMobile ? -v.height * 0.05 : -v.height * 0.04;
-  const dividerY = isMobile ? -v.height * 0.18 : -v.height * 0.16;
-  const quoteY = isMobile ? -v.height * 0.25 : -v.height * 0.23;
-  const punchY = isMobile ? -v.height * 0.38 : -v.height * 0.36;
+  // Responsive vertical coordinates based on visible viewport height (tight & compact layout)
+  const orgY = isMobile ? v.height * 0.31 : v.height * 0.27;
+  const leadY = isMobile ? v.height * 0.14 : v.height * 0.12;
+  const actY = isMobile ? -v.height * 0.03 : -v.height * 0.03;
+  const quoteY = isMobile ? -v.height * 0.18 : -v.height * 0.17;
+  const punchY = isMobile ? -v.height * 0.30 : -v.height * 0.28;
 
   return (
     <group position={[0, 0, 12]}>
       {/* Static solid color circles in the background */}
       {bgCircles}
 
-      {/* Sleek horizontal accent divider above the core quote */}
-      <mesh position={[0, dividerY, -0.1]}>
-        <planeGeometry args={[Math.min(v.width * 0.32, 2.0), 0.003]} />
-        <meshBasicMaterial color="#FFB900" opacity={0.4} transparent toneMapped={false} />
-      </mesh>
-
       {/* Tier 1: Prominent Organization Header */}
       {orgTitle && (
         <Text
           position={[0, orgY, 0]}
           fontSize={orgFontSize}
-          lineHeight={1.2}
+          lineHeight={1.15}
           letterSpacing={-0.01}
           maxWidth={maxWidth}
           textAlign="center"
@@ -353,7 +346,7 @@ function AboutTextContent({
         <Text
           position={[0, leadY, 0]}
           fontSize={leadFontSize}
-          lineHeight={1.55}
+          lineHeight={1.34}
           maxWidth={maxWidth}
           textAlign="center"
           color="#f1f5f9"
@@ -373,7 +366,7 @@ function AboutTextContent({
         <Text
           position={[0, actY, 0]}
           fontSize={actFontSize}
-          lineHeight={1.5}
+          lineHeight={1.32}
           maxWidth={maxWidth}
           textAlign="center"
           color="#e2e8f0"
@@ -394,7 +387,7 @@ function AboutTextContent({
         <Text
           position={[0, quoteY, 0]}
           fontSize={quoteFontSize}
-          lineHeight={1.35}
+          lineHeight={1.22}
           maxWidth={maxWidth}
           textAlign="center"
           color="#FFB900"
@@ -414,7 +407,7 @@ function AboutTextContent({
         <Text
           position={[0, punchY, 0]}
           fontSize={punchFontSize}
-          lineHeight={1.3}
+          lineHeight={1.22}
           letterSpacing={0.02}
           maxWidth={maxWidth}
           textAlign="center"
