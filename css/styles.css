@@ -281,7 +281,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(8px, 1.2vh, 14px);
+  gap: clamp(16px, 2.4vh, 26px);
   box-sizing: border-box;
   position: relative;
   z-index: 1;
@@ -292,7 +292,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin-bottom: 2px;
+  margin-bottom: clamp(4px, 0.8vh, 8px);
 }
 
 .about-brand-indicator {
@@ -480,7 +480,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 2.4vh, 26px);
+  gap: clamp(26px, 3.6vh, 38px);
 }
 
 .section-header-wrap {
@@ -488,7 +488,8 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 10px;
+  gap: 12px;
+  margin-bottom: clamp(6px, 1vh, 14px);
 }
 
 .section-brand-indicator {
@@ -915,7 +916,7 @@ body {
 .explore-section {
   width: 100%;
   position: relative;
-  padding: clamp(24px, 3.2vh, 38px) 24px clamp(36px, 4.5vh, 56px);
+  padding: clamp(24px, 3.2vh, 38px) 24px clamp(14px, 2vh, 24px);
   border-bottom: none;
   box-sizing: border-box;
 }
@@ -925,7 +926,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2.2vh, 26px);
+  gap: clamp(24px, 3.4vh, 36px);
 }
 
 .explore-header-row {
@@ -934,6 +935,9 @@ body {
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: clamp(6px, 1vh, 12px);
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 .compact-tag {
@@ -950,6 +954,8 @@ body {
   letter-spacing: -0.02em;
   color: #ffffff;
   margin-top: 2px;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 
@@ -1224,10 +1230,10 @@ body {
   transform: scale(0.95);
 }
 
-/* Seamless exit spacer into Contact section to ensure clean separation without overlap */
+/* Seamless exit spacer into Contact section to ensure clean separation without excessive gap */
 .scroll-stack-end {
   width: 100%;
-  height: clamp(180px, 26vh, 280px);
+  height: clamp(75px, 11vh, 110px);
   pointer-events: none;
 }
 
@@ -3319,8 +3325,8 @@ body {
 .contact-section {
   position: relative;
   width: 100%;
-  margin-top: clamp(40px, 6vh, 80px);
-  padding: clamp(32px, 5vh, 50px) 24px clamp(40px, 6vh, 60px);
+  margin-top: clamp(14px, 2.2vh, 26px);
+  padding: clamp(28px, 4.2vh, 46px) 24px clamp(36px, 5.5vh, 56px);
   box-sizing: border-box;
   background:
     radial-gradient(circle at 15% 30%, rgba(0, 164, 239, 0.07) 0%, transparent 45%),
@@ -3337,13 +3343,14 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: clamp(24px, 3.4vh, 34px);
 }
 
 .contact-header-wrap {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  margin-bottom: clamp(6px, 1vh, 12px);
 }
 
 .contact-brand-indicator {
@@ -3655,7 +3662,11 @@ a.contact-card-value:hover {
   }
 
   .about-container {
-    gap: clamp(8px, 1vh, 12px);
+    gap: clamp(14px, 2vh, 22px);
+  }
+
+  .about-header-wrap {
+    margin-bottom: clamp(4px, 0.8vh, 8px);
   }
 
   .about-title {
@@ -3702,7 +3713,12 @@ a.contact-card-value:hover {
   }
 
   .proud-container {
-    gap: clamp(14px, 1.8vh, 22px);
+    gap: clamp(22px, 3vh, 32px);
+  }
+
+  .section-header-wrap {
+    margin-bottom: clamp(6px, 1vh, 12px);
+    gap: 10px;
   }
 
   .section-heading {
@@ -3747,7 +3763,7 @@ a.contact-card-value:hover {
   }
 
   .programs-container {
-    gap: clamp(14px, 1.8vh, 22px);
+    gap: clamp(22px, 3vh, 32px);
   }
 
   .programs-grid {
@@ -3780,15 +3796,23 @@ a.contact-card-value:hover {
 
   /* Explore ScrollStack on Laptops */
   .explore-section {
-    padding: clamp(20px, 2.6vh, 32px) 24px clamp(28px, 3.5vh, 44px);
+    padding: clamp(20px, 2.6vh, 32px) 24px clamp(12px, 1.8vh, 20px);
   }
 
   .explore-container {
-    gap: clamp(14px, 1.8vh, 22px);
+    gap: clamp(20px, 2.8vh, 30px);
+  }
+
+  .explore-header-row {
+    margin-bottom: clamp(6px, 1vh, 10px);
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .compact-title {
     font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   .scroll-stack-card {
@@ -3816,17 +3840,21 @@ a.contact-card-value:hover {
   }
 
   .scroll-stack-end {
-    height: clamp(160px, 24vh, 240px);
+    height: clamp(65px, 9vh, 95px);
   }
 
   /* Contact Section on Laptops */
   .contact-section {
-    margin-top: clamp(32px, 4.5vh, 60px);
+    margin-top: clamp(12px, 1.8vh, 22px);
     padding: clamp(24px, 3.2vh, 36px) 24px clamp(28px, 4vh, 42px);
   }
 
   .contact-container {
-    gap: clamp(16px, 2vh, 22px);
+    gap: clamp(20px, 2.6vh, 28px);
+  }
+
+  .contact-header-wrap {
+    margin-bottom: clamp(6px, 1vh, 10px);
   }
 
   .contact-title {
