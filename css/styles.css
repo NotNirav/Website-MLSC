@@ -505,7 +505,8 @@ body {
   letter-spacing: -0.03em;
   color: #ffffff;
   margin: 0;
-  line-height: 1.15;
+  line-height: 1.28;
+  padding-bottom: 6px;
   background: linear-gradient(180deg, #ffffff 40%, #cbd5e1 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -633,11 +634,19 @@ body {
   line-height: 1.45;
 }
 
-.proud-cta-row,
-.programs-cta-row {
+.proud-cta-row {
   display: flex;
   justify-content: center;
   margin-top: 6px;
+}
+
+.programs-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(14px, 2vh, 24px);
+  position: relative;
+  z-index: 5;
+  width: 100%;
 }
 
 .proud-view-all-btn,
@@ -681,8 +690,15 @@ body {
 .programs-section {
   width: 100%;
   position: relative;
-  padding: clamp(20px, 2.8vh, 34px) 24px clamp(22px, 3vh, 36px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(32px, 4vh, 48px) 24px clamp(40px, 5vh, 60px);
   box-sizing: border-box;
+  overflow: visible;
 }
 
 .programs-grid {
@@ -3718,11 +3734,13 @@ a.contact-card-value:hover {
 
   .section-header-wrap {
     margin-bottom: clamp(6px, 1vh, 12px);
-    gap: 10px;
+    gap: 12px;
   }
 
   .section-heading {
     font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    line-height: 1.28;
+    padding-bottom: 6px;
   }
 
   .section-subheading {
@@ -3759,7 +3777,9 @@ a.contact-card-value:hover {
 
   /* Programs & Initiatives on Laptops */
   .programs-section {
-    padding: clamp(18px, 2.2vh, 28px) 24px clamp(18px, 2.4vh, 30px);
+    padding: clamp(24px, 3vh, 36px) 24px clamp(32px, 4.2vh, 50px);
+    min-height: auto;
+    overflow: visible;
   }
 
   .programs-container {
