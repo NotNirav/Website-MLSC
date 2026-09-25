@@ -1321,13 +1321,13 @@ body {
   gap: 14px;
   text-decoration: none;
   color: #ffffff;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease;
   width: fit-content;
 }
 
 .footer-brand-header:hover {
   opacity: 0.95;
-  transform: translateX(2px);
+  transform: none;
 }
 
 .mlsc-logo-icon {
@@ -1399,13 +1399,13 @@ body {
   font-size: 14px;
   color: var(--text-muted);
   text-decoration: none;
-  transition: var(--transition-smooth);
+  transition: color 0.2s ease;
   width: fit-content;
 }
 
 .footer-col a:hover {
   color: #ffffff;
-  transform: translateX(4px);
+  transform: none;
 }
 
 .footer-social-link .footer-social-icon {
@@ -1413,12 +1413,12 @@ body {
   height: 15px;
   flex-shrink: 0;
   opacity: 0.85;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .footer-social-link:hover .footer-social-icon {
   opacity: 1;
-  transform: scale(1.1);
+  transform: none;
 }
 
 .footer-social-link[aria-label*="LinkedIn"]:hover {

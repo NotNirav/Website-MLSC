@@ -49,13 +49,37 @@
       pathname === '' ||
       pathname === '/' ||
       pathname.endsWith('/index.html') ||
-      pathname.endsWith('\\index.html');
+      pathname.endsWith('\\index.html') ||
+      Boolean(document.getElementById('home-contact-form'));
 
     const brandHref = isHomePage ? '#hero' : basePrefix + 'index.html#hero';
     const homeHref = isHomePage ? '#hero' : basePrefix + 'index.html#hero';
     const aboutHref = isHomePage ? '#about' : basePrefix + 'index.html#about';
     const exploreHref = isHomePage ? '#explore' : basePrefix + 'index.html#explore';
     const contactHref = isHomePage ? '#contact' : basePrefix + 'index.html#contact';
+
+    // Shared email & address elements across all site pages
+    const emailLinkHtml = `
+              <a href="mailto:mlsc@pccoe.org" class="footer-social-link footer-email-link" aria-label="Email mlsc@pccoe.org">
+                <svg class="footer-social-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+                <span>mlsc@pccoe.org</span>
+              </a>`;
+
+    const addressColHtml = `
+          <div class="footer-col footer-address-col">
+            <a href="https://maps.google.com/?q=Pimpri+Chinchwad+College+of+Engineering,+Sector+26,+Pradhikaran,+Nigdi,+Pune+411044"
+              target="_blank" rel="noopener noreferrer" class="footer-address" aria-label="PCCOE Campus Address (opens Google Maps)">
+              <svg class="footer-address-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span class="footer-address-text">Pimpri Chinchwad College of Engineering, Sector 26, Pradhikaran. Nigdi, Pune 411044</span>
+            </a>
+          </div>`;
 
     // 4. Shared Single-Source Footer Template (exact match with index.html)
     const footerContent = `
@@ -76,6 +100,8 @@
             </a>
             <p class="footer-tagline">Building a community of tech enthusiasts, creators, and innovators.</p>
           </div>
+
+          ${addressColHtml}
 
           <div class="footer-links-group">
             <div class="footer-col">
@@ -105,6 +131,7 @@
                 </svg>
                 <span>Instagram</span>
               </a>
+              ${emailLinkHtml}
             </div>
           </div>
         </div>
