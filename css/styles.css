@@ -1487,9 +1487,9 @@ body {
 /* ========================================================= */
 .glass-navbar {
   position: fixed;
-  top: 24px;
+  top: 48px;
   left: 50%;
-  transform: translate(-50%, -24px);
+  transform: translate(-50%, -48px);
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
@@ -1675,7 +1675,7 @@ body {
 /* Responsive adjustment for tablet and mobile */
 @media (max-width: 680px) {
   .glass-navbar {
-    top: 14px;
+    top: 44px;
     max-width: calc(100vw - 20px);
   }
 
@@ -3588,7 +3588,7 @@ body {
 @media (max-width: 1440px), (max-height: 900px) and (min-width: 901px) {
   /* Glass Navbar on Laptops */
   .glass-navbar {
-    top: clamp(14px, 2vh, 20px);
+    top: clamp(42px, 5vh, 48px);
   }
 
   .glass-nav-container {
