@@ -174,25 +174,6 @@
   function initScrollAnimations() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    // 1. Hero Title: Cinematic Parallax & Scale-down on scroll
-    const heroTitle = document.querySelector('.hero-raw-title');
-    const heroSection = document.getElementById('hero');
-    if (heroTitle && heroSection) {
-      gsap.to(heroTitle, {
-        scrollTrigger: {
-          trigger: heroSection,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.2,
-          invalidateOnRefresh: true
-        },
-        y: 110,
-        scale: 0.86,
-        opacity: 0.08,
-        ease: 'power1.out'
-      });
-    }
-
     // 2. About Us Section: Silky Elevation & Reveal
     const aboutContainer = document.querySelector('.about-container');
     const aboutSection = document.getElementById('about');
@@ -1141,25 +1122,36 @@
   // =========================================================
   function initDualMascotScrollController() {
     const heroSection = document.getElementById('hero');
+    const aboutSection = document.getElementById('about');
     const exploreSection = document.getElementById('explore');
     const footerSection = document.getElementById('footer') || document.querySelector('.site-footer');
     const downWrapper = document.getElementById('brie-scroll-down-wrapper');
     const upWrapper = document.getElementById('brie-scroll-up-wrapper');
     const sleepWrapper = document.getElementById('brie-sleep-wrapper');
-    const heroTitle = document.querySelector('.hero-raw-title');
 
-    if (!heroSection || !exploreSection || !downWrapper || !upWrapper) return;
+    if (!heroSection || !aboutSection || !downWrapper) return;
+
+    // Keep sleep wrapper hidden
+    if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+
+    // Initial state: hide downWrapper & upWrapper
+    downWrapper.style.opacity = '0';
+    downWrapper.style.visibility = 'hidden';
+    if (upWrapper) {
+      upWrapper.style.opacity = '0';
+      upWrapper.style.visibility = 'hidden';
+    }
 
     let targetY = window.scrollY;
     let smoothY = window.scrollY;
-    let lastDirectionY = window.scrollY;
-    let scrollDirection = 'down';
     let isTicking = false;
 
-    let cachedHeroTop = 0;
-    let cachedHeroHeight = 0;
-    let cachedExploreTop = 0;
-    let cachedFooterTop = 0;
+    let activeDirection = 'DOWN'; // 'DOWN' or 'UP'
+    let currentBlend = 0;          // 0 = 100% DOWN mascot, 1 = 100% UP mascot
+    let rawPrevY = window.scrollY;
+
+    let cachedAboutTop = 0;
+    let cachedContactTop = 0;
 
     function getElementDocTop(el) {
       let top = 0;
@@ -1171,20 +1163,51 @@
       return top;
     }
 
-    function updateMetrics() {
-      cachedHeroTop = getElementDocTop(heroSection);
-      cachedHeroHeight = heroSection.offsetHeight || window.innerHeight;
-      cachedExploreTop = getElementDocTop(exploreSection);
-      if (footerSection) {
-        cachedFooterTop = getElementDocTop(footerSection);
+    // Stable horizontal positioning using the fixed main section container for both wrappers
+    function positionMascotsInEmptyRightSpace() {
+      const mainContainer = document.querySelector('.about-container') || document.querySelector('.proud-container') || document.querySelector('.programs-container');
+      if (!mainContainer) return;
+
+      const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+      const containerRect = mainContainer.getBoundingClientRect();
+      const containerRight = containerRect.right;
+
+      const emptyRightSpace = viewportWidth - containerRight;
+      const centerOfEmptyRightSpace = containerRight + (emptyRightSpace / 2);
+
+      let mascotWidth = 423;
+      if (emptyRightSpace < 430) {
+        mascotWidth = Math.max(160, emptyRightSpace - 10);
+      }
+      if (downWrapper) downWrapper.style.width = `${mascotWidth}px`;
+      if (upWrapper) upWrapper.style.width = `${mascotWidth}px`;
+
+      // Centered in empty space and shifted 5% to the left
+      const shiftLeftPx = Math.round(viewportWidth * 0.05);
+      const targetLeft = centerOfEmptyRightSpace - (mascotWidth / 2) - shiftLeftPx;
+      const leftPxStr = `${Math.round(targetLeft)}px`;
+
+      if (downWrapper) {
+        downWrapper.style.left = leftPxStr;
+        downWrapper.style.right = 'auto';
+      }
+      if (upWrapper) {
+        upWrapper.style.left = leftPxStr;
+        upWrapper.style.right = 'auto';
       }
     }
 
-    updateMetrics();
-    window.addEventListener('resize', updateMetrics, { passive: true });
-
-    let currentDownOpacity = 0;
-    let currentUpOpacity = 0;
+    function updateMetrics() {
+      cachedAboutTop = getElementDocTop(aboutSection);
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        cachedContactTop = getElementDocTop(contactSection);
+      } else {
+        cachedContactTop = cachedAboutTop + 3500;
+      }
+      positionMascotsInEmptyRightSpace();
+      onScroll(window.scrollY);
+    }
 
     function renderLoop() {
       smoothY += (targetY - smoothY) * 0.14;
@@ -1194,119 +1217,79 @@
 
       const y = smoothY;
 
-      const dirDiff = y - lastDirectionY;
-      if (Math.abs(dirDiff) > 8) {
-        scrollDirection = dirDiff > 0 ? 'down' : 'up';
-        lastDirectionY = y;
+      // Snappy, silky LERP for direction blend (0 = 100% DOWN, 1 = 100% UP)
+      const targetBlend = activeDirection === 'UP' ? 1.0 : 0.0;
+      currentBlend += (targetBlend - currentBlend) * 0.35;
+      if (Math.abs(targetBlend - currentBlend) < 0.005) {
+        currentBlend = targetBlend;
       }
 
-      const heroFadeEnd = cachedHeroTop + cachedHeroHeight * 0.35;
-      const exploreTop = cachedExploreTop;
+      // Keep mascot horizontally aligned without shifting left
+      positionMascotsInEmptyRightSpace();
 
-      if (y <= cachedHeroTop + 5) {
-        currentDownOpacity = 0;
-        currentUpOpacity = 0;
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
-        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
-        if (heroTitle) gsap.set(heroTitle, { opacity: 1, scale: 1, y: 0 });
-      } else if (y >= exploreTop) {
-        if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
+      const fadeStart = cachedAboutTop - 320;     // Starts appearing when About Us page starts
+      const fadeFull = cachedAboutTop;           // Fully visible when About Us section settles
+      const fadeOutEnd = cachedContactTop - 600; // Disappears early before Get in Touch
+      const fadeOutStart = fadeOutEnd - 300;     // Starts fading out earlier in scroll
 
-        currentDownOpacity = 0;
-        currentUpOpacity = 0;
-        gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+      let overallOpacity = 0;
+      let translateYPx = 0;
 
-        if (sleepWrapper) {
-          let sleepPinY = 0;
-          if (cachedFooterTop > 0) {
-            const sleepHeight = sleepWrapper.offsetHeight || 184;
-            const defaultScreenTop = 80 + window.innerHeight * 0.65 - (sleepHeight / 2);
-            const defaultDocBottom = y + defaultScreenTop + sleepHeight;
-            const maxDocBottom = cachedFooterTop - 12;
-            if (defaultDocBottom > maxDocBottom) {
-              sleepPinY = -(defaultDocBottom - maxDocBottom);
-            }
-          }
-
-          gsap.set(sleepWrapper, {
-            visibility: 'visible',
-            opacity: 1.0,
-            y: sleepPinY,
-            force3D: true
-          });
-        }
+      if (y < fadeStart) {
+        overallOpacity = 0;
+        translateYPx = 0;
+      } else if (y < fadeFull) {
+        overallOpacity = Math.max(0, Math.min(1, (y - fadeStart) / (fadeFull - fadeStart)));
+        translateYPx = 0;
+      } else if (y < fadeOutStart) {
+        overallOpacity = 1.0;
+        const travelDist = Math.max(0, Math.min(1, (y - fadeFull) / (fadeOutStart - fadeFull)));
+        const maxMovePx = window.innerHeight * 0.45;
+        translateYPx = travelDist * maxMovePx;
+      } else if (y < fadeOutEnd) {
+        const progress = Math.max(0, Math.min(1, (y - fadeOutStart) / (fadeOutEnd - fadeOutStart)));
+        overallOpacity = Math.max(0, 1 - progress);
+        const maxMovePx = window.innerHeight * 0.45;
+        translateYPx = maxMovePx;
       } else {
-        if (sleepWrapper) gsap.set(sleepWrapper, { opacity: 0, visibility: 'hidden' });
+        overallOpacity = 0;
+        translateYPx = window.innerHeight * 0.45;
+      }
 
-        let mascotOpacity = 0;
-        let translateYPx = 0;
+      // Compute individual opacity for DOWN and UP wrappers using strict crossfade conservation
+      const downOpacity = overallOpacity * (1.0 - currentBlend);
+      const upOpacity = overallOpacity * currentBlend;
 
-        const maxMovePx = window.innerHeight * 0.65;
+      // Apply shared Y translation transform to both wrappers so they match position instantly
+      gsap.set(downWrapper, { y: translateYPx, force3D: true });
+      if (upWrapper) {
+        gsap.set(upWrapper, { y: translateYPx, force3D: true });
+      }
 
-        if (y < heroFadeEnd) {
-          const heroProgress = Math.max(0, Math.min(1, (y - cachedHeroTop) / (heroFadeEnd - cachedHeroTop)));
-          if (heroTitle) {
-            gsap.set(heroTitle, {
-              opacity: 1 - heroProgress,
-              scale: 1 - heroProgress * 0.08,
-              y: heroProgress * 60
-            });
-          }
-          mascotOpacity = heroProgress;
-          translateYPx = 0;
+      // Update opacity & visibility for downWrapper
+      if (downOpacity > 0.005) {
+        downWrapper.style.visibility = 'visible';
+        downWrapper.style.opacity = downOpacity.toFixed(4);
+      } else {
+        downWrapper.style.opacity = '0';
+        downWrapper.style.visibility = 'hidden';
+      }
+
+      // Update opacity & visibility for upWrapper
+      if (upWrapper) {
+        if (upOpacity > 0.005) {
+          upWrapper.style.visibility = 'visible';
+          upWrapper.style.opacity = upOpacity.toFixed(4);
         } else {
-          if (heroTitle) gsap.set(heroTitle, { opacity: 0 });
-
-          const p = Math.max(0, Math.min(1, (y - heroFadeEnd) / (exploreTop - heroFadeEnd)));
-          translateYPx = p * maxMovePx;
-
-          if (p <= 0.70) {
-            mascotOpacity = 1.0;
-          } else {
-            mascotOpacity = (1.0 - p) / 0.30;
-          }
-        }
-
-        mascotOpacity = Math.max(0, Math.min(1, mascotOpacity));
-
-        const targetDownOpacity = scrollDirection === 'down' ? mascotOpacity : 0;
-        const targetUpOpacity = scrollDirection === 'up' ? mascotOpacity : 0;
-
-        currentDownOpacity += (targetDownOpacity - currentDownOpacity) * 0.18;
-        currentUpOpacity += (targetUpOpacity - currentUpOpacity) * 0.18;
-
-        if (Math.abs(targetDownOpacity - currentDownOpacity) < 0.005) currentDownOpacity = targetDownOpacity;
-        if (Math.abs(targetUpOpacity - currentUpOpacity) < 0.005) currentUpOpacity = targetUpOpacity;
-
-        if (currentDownOpacity > 0.005) {
-          gsap.set(downWrapper, {
-            visibility: 'visible',
-            opacity: currentDownOpacity,
-            y: translateYPx,
-            force3D: true
-          });
-        } else {
-          gsap.set(downWrapper, { opacity: 0, visibility: 'hidden' });
-        }
-
-        if (currentUpOpacity > 0.005) {
-          gsap.set(upWrapper, {
-            visibility: 'visible',
-            opacity: currentUpOpacity,
-            y: translateYPx,
-            force3D: true
-          });
-        } else {
-          gsap.set(upWrapper, { opacity: 0, visibility: 'hidden' });
+          upWrapper.style.opacity = '0';
+          upWrapper.style.visibility = 'hidden';
         }
       }
 
+      // Continue ticking if scrolling or direction blend is still crossfading
       if (
         Math.abs(targetY - smoothY) > 0.05 ||
-        Math.abs((scrollDirection === 'down' ? mascotOpacity : 0) - currentDownOpacity) > 0.005 ||
-        Math.abs((scrollDirection === 'up' ? mascotOpacity : 0) - currentUpOpacity) > 0.005
+        Math.abs(targetBlend - currentBlend) > 0.005
       ) {
         requestAnimationFrame(renderLoop);
       } else {
@@ -1316,6 +1299,16 @@
 
     function onScroll(currentScrollY) {
       targetY = typeof currentScrollY === 'number' ? currentScrollY : window.scrollY;
+
+      // Instantaneous direction detection from raw scroll delta (Frame 1 response)
+      const rawDelta = targetY - rawPrevY;
+      if (rawDelta > 0.8) {
+        activeDirection = 'DOWN';
+      } else if (rawDelta < -0.8) {
+        activeDirection = 'UP';
+      }
+      rawPrevY = targetY;
+
       if (!isTicking) {
         isTicking = true;
         requestAnimationFrame(renderLoop);
@@ -1324,9 +1317,12 @@
 
     if (window.lenis) {
       window.lenis.on('scroll', (e) => onScroll(e.scroll));
-    } else {
-      window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
     }
+    window.addEventListener('scroll', () => onScroll(window.scrollY), { passive: true });
+
+    window.addEventListener('resize', updateMetrics, { passive: true });
+    window.addEventListener('load', updateMetrics, { passive: true });
+    window.addEventListener('mlsc-landing-complete', updateMetrics, { passive: true });
 
     updateMetrics();
     onScroll(window.scrollY);

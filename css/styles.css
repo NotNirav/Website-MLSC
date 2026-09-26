@@ -185,12 +185,13 @@ body {
   position: absolute;
   top: 34px;
   right: 0;
-  width: 445px;
-  max-width: 45vw;
+  width: 741px;
+  max-width: 74.7vw;
   height: auto;
   pointer-events: none;
   user-select: none;
   z-index: 5;
+  transform: translate(10%, 5%);
 }
 
 .hero-mascot-webp.hero-mascot-delayed {
@@ -199,7 +200,7 @@ body {
 }
 
 .hero-raw-title {
-  font-size: clamp(4.2rem, min(28.8vw, 28.8vh), 21.6rem);
+  font-size: clamp(4.83rem, min(33.12vw, 33.12vh), 24.84rem);
   font-weight: 800;
   letter-spacing: -0.05em;
   color: #ffffff;
@@ -1559,6 +1560,8 @@ body {
 .nav-logo-icon {
   display: block;
   flex-shrink: 0;
+  width: 31px;
+  height: 20px;
   transition: transform 0.25s ease;
 }
 
@@ -3603,14 +3606,15 @@ body {
 
   /* Hero Section on Laptops */
   .hero-raw-title {
-    font-size: clamp(3.2rem, min(20vw, 22vh), 16rem);
+    font-size: clamp(3.68rem, min(23vw, 25.3vh), 18.4rem);
   }
 
   .hero-mascot-webp {
     top: clamp(14px, 2.5vh, 28px);
     right: clamp(0px, 1.5vw, 20px);
-    width: clamp(190px, 17vw, 280px);
-    max-height: 44vh;
+    width: clamp(317px, 28.3vw, 466px);
+    max-height: 73.4vh;
+    transform: translate(10%, 5%);
   }
 
   /* About Us Section on Laptops */
@@ -3902,8 +3906,8 @@ body {
   position: fixed;
   top: 80px;
   right: max(20px, calc((100vw - min(940px, 92vw)) / 4 - 99px));
-  width: 198px;
-  max-width: 20vw;
+  width: 420px;
+  max-width: 42vw;
   z-index: 85;
   pointer-events: none;
   opacity: 0;
