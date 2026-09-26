@@ -59,13 +59,13 @@
   gap: 14px;
   text-decoration: none;
   color: #ffffff;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity 0.25s ease;
   width: fit-content;
 }
 
 .footer-brand-header:hover {
   opacity: 0.95;
-  transform: translateX(2px);
+  transform: none !important;
 }
 
 .mlsc-logo-icon {
@@ -75,7 +75,7 @@
 }
 
 .mlsc-sq {
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+  transition: filter 0.25s ease;
 }
 
 .footer-brand-header:hover .mlsc-sq-orange {
@@ -122,6 +122,10 @@
   gap: 12px;
 }
 
+.footer-address-col {
+  max-width: 320px;
+}
+
 .footer-heading {
   font-size: 11px;
   font-weight: 700;
@@ -138,13 +142,13 @@
   font-size: 14px;
   color: var(--text-muted);
   text-decoration: none;
-  transition: var(--transition-smooth);
+  transition: color 0.2s ease;
   width: fit-content;
 }
 
 .footer-col a:hover {
   color: #ffffff;
-  transform: translateX(4px);
+  transform: none !important;
 }
 
 .footer-social-link .footer-social-icon {
@@ -152,12 +156,12 @@
   height: 15px;
   flex-shrink: 0;
   opacity: 0.85;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 .footer-social-link:hover .footer-social-icon {
   opacity: 1;
-  transform: scale(1.1);
+  transform: none !important;
 }
 
 .footer-social-link[aria-label*="LinkedIn"]:hover {
@@ -166,6 +170,46 @@
 
 .footer-social-link[aria-label*="Instagram"]:hover {
   color: #f472b6;
+}
+
+.footer-social-link.footer-email-link:hover {
+  color: #38bdf8;
+}
+
+.footer-address {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+  width: fit-content;
+}
+
+.footer-address:hover {
+  color: #ffffff;
+  transform: none !important;
+}
+
+.footer-address-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #f25022;
+  opacity: 0.9;
+  transition: color 0.2s ease;
+}
+
+.footer-address:hover .footer-address-icon {
+  color: #ff3b30;
+  transform: none !important;
+}
+
+.footer-address-text {
+  font-style: normal;
 }
 
 .footer-bottom {

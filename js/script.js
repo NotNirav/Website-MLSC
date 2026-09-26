@@ -215,28 +215,6 @@
         }
       );
     }
-
-    // 3. Explore Header: Gentle Slide & Focus
-    const exploreHeader = document.querySelector('.explore-header-row');
-    const exploreSection = document.getElementById('explore');
-    if (exploreHeader && exploreSection) {
-      gsap.fromTo(
-        exploreHeader,
-        { opacity: 0.6, y: 30 },
-        {
-          scrollTrigger: {
-            trigger: exploreSection,
-            start: 'top 82%',
-            end: 'top 48%',
-            scrub: 1,
-            invalidateOnRefresh: true
-          },
-          opacity: 1,
-          y: 0,
-          ease: 'power2.out'
-        }
-      );
-    }
   }
 
   // =========================================================

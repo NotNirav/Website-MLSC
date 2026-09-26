@@ -182,14 +182,47 @@ function initRoadmap() {
     onScrollFallback();
   }
 }
-// ===== Duplicate belt items so the marquee loops seamlessly =====
+// ===== True Infinite Scroll Velocity Marquee for all Event Pages =====
 
 function initBelts() {
   document.querySelectorAll("[data-belt]").forEach((belt) => {
     const track = belt.querySelector(".belt-track, .belt-track-reverse");
     if (!track || track.getAttribute("data-doubled")) return;
-    track.innerHTML += track.innerHTML;
+
+    // True infinite marquee:
+    // Ensure one half of the track is wider than the viewport (+ safety buffer),
+    // then duplicate that half so translating -50% produces an exact, seamless loop with zero gap.
+    const originalHTML = track.innerHTML;
+    const initialWidth = track.scrollWidth;
+
+    // Target half width: spans larger than ultrawide displays
+    const targetHalfWidth = Math.max(window.innerWidth || 1920, 1920) + 600;
+    let repeatCount = 1;
+
+    if (initialWidth > 0) {
+      repeatCount = Math.max(3, Math.ceil(targetHalfWidth / initialWidth));
+    } else {
+      repeatCount = 6;
+    }
+
+    let halfHTML = "";
+    for (let i = 0; i < repeatCount; i++) {
+      halfHTML += originalHTML;
+    }
+
+    // Two identical halves for a mathematically seamless -50% CSS loop
+    track.innerHTML = halfHTML + halfHTML;
     track.setAttribute("data-doubled", "true");
+
+    // Uniform comfortable scroll velocity (~45px per second)
+    requestAnimationFrame(() => {
+      const totalWidth = track.scrollWidth;
+      const halfWidth = totalWidth / 2;
+      if (halfWidth > 0) {
+        const duration = Math.max(20, Math.round(halfWidth / 45));
+        track.style.animationDuration = `${duration}s`;
+      }
+    });
   });
 }
 
