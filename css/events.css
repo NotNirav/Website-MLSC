@@ -652,12 +652,31 @@ main {
   height: 100%;
   object-fit: contain;
   pointer-events: none;
+  animation: webp-loop-soften 3.36s linear infinite;
+}
+
+@keyframes webp-loop-soften {
+  0%, 96.5% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  98.2% {
+    opacity: 0.88;
+    transform: scale(0.97);
+    filter: brightness(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 
 /* Milestone Stations */
 .roadmap-station {
   position: absolute;
-  z-index: 15;
+  z-index: 30;
   width: 106px;
   height: 106px;
   transform: translate(-50%, -50%);
