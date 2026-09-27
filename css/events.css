@@ -623,17 +623,19 @@ main {
   animation: dash-flow 18s linear infinite;
 }
 
-/* Flying Mascot (The Dragon / Guide) */
+/* Flying Mascot (The Dragon / Guide) - Smooth Hardware Acceleration */
 .guide-mascot {
   position: absolute;
   top: 8.75%;
   left: 25%;
   width: 104px;
   height: 104px;
-  transform: translate(-50%, -50%);
+  transform: translate3d(-50%, -50%, 0);
   pointer-events: none;
   z-index: 25;
-  will-change: left, top, transform;
+  will-change: left, top;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .mascot-flight-inner {
@@ -643,8 +645,10 @@ main {
   align-items: center;
   justify-content: center;
   filter: drop-shadow(0 8px 18px rgba(0, 164, 239, 0.5));
-  animation: float-soft 3.6s ease-in-out infinite;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .mascot-flight-inner img {
@@ -652,25 +656,9 @@ main {
   height: 100%;
   object-fit: contain;
   pointer-events: none;
-  animation: webp-loop-soften 3.36s linear infinite;
-}
-
-@keyframes webp-loop-soften {
-  0%, 96.5% {
-    opacity: 1;
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  98.2% {
-    opacity: 0.88;
-    transform: scale(0.97);
-    filter: brightness(0.96);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-    filter: brightness(1);
-  }
+  animation: float-soft 3.6s ease-in-out infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 /* Milestone Stations */

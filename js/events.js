@@ -112,15 +112,15 @@ function initRoadmap() {
     const dx = ptAhead.x - ptBehind.x;
     const bank = Math.max(-14, Math.min(14, dx * 0.3));
 
-    // Convert SVG viewBox (1000 x 1600) to percentage
+    // Convert SVG viewBox (1000 x 1600) to percentage with subpixel precision
     const pctX = (pt.x / 1000) * 100;
     const pctY = (pt.y / 1600) * 100;
 
-    mascot.style.left = `${pctX.toFixed(2)}%`;
-    mascot.style.top = `${pctY.toFixed(2)}%`;
+    mascot.style.left = `${pctX.toFixed(4)}%`;
+    mascot.style.top = `${pctY.toFixed(4)}%`;
 
     if (mascotInner) {
-      mascotInner.style.transform = `rotate(${bank.toFixed(1)}deg)`;
+      mascotInner.style.transform = `rotate(${bank.toFixed(2)}deg) translateZ(0)`;
     }
 
     // Activate stations as dragon arrives at them (illuminates border smoothly when mascot is on the left edge of the box)
