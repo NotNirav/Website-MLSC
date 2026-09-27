@@ -84,6 +84,58 @@ body {
   z-index: 0;
 }
 
+/* Decorative Animated Games Mascot (game.webp) */
+.games-hero-mascot {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: 350px;
+  max-width: 28vw;
+  height: auto;
+  object-fit: contain;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  animation: games-mascot-fade-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+@keyframes games-mascot-fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1024px) {
+  .games-hero-mascot {
+    width: 260px;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    max-width: 32vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .games-hero-mascot {
+    width: 180px;
+    bottom: 1rem;
+    right: 1rem;
+    max-width: 38vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .games-hero-mascot {
+    width: 140px;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    max-width: 40vw;
+  }
+}
+
 .games-title {
   position: relative;
   z-index: 2;
