@@ -105,6 +105,38 @@ body {
   z-index: 0;
 }
 
+/* Teams Hero Mascot - Bottom-Left Decorative Positioning */
+.teams-hero-mascot {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 400px;
+  max-width: 33vw;
+  height: auto;
+  object-fit: contain;
+  z-index: 5;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 1024px) {
+  .teams-hero-mascot {
+    width: 308px;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    max-width: 42vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .teams-hero-mascot {
+    width: 215px;
+    bottom: 1rem;
+    left: 1rem;
+    max-width: 50vw;
+  }
+}
+
 /* ========================================================= */
 /* 2. SECTION MAIN HEADER                                    */
 /* ========================================================= */
